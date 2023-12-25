@@ -27,7 +27,7 @@ export const usersTable = pgTable("users",{
       .default("credentials"),
   },
   (table) => ({
-    displayIdIndex: index("display_id_index").on(table.displayId),
+    displayIdIndexOfUsers: index("display_id_index_of_users").on(table.displayId),
     emailIndex: index("email_index").on(table.email),
   }),
 );
@@ -37,26 +37,28 @@ export const usersRelations = relations(usersTable, ({ many }) => ({
 //posts=賣家po的prodects
 export const posts = pgTable('posts', {
   id: serial('id').primaryKey(),
+  displayId: uuid("display_id").defaultRandom().notNull().unique(),
   title: varchar('title').notNull(),
   description: text('description'),
-  authorId: integer('author_Id')
-    .references(() => usersTable.id, {
-      onDelete: 'cascade'
+  authorId: uuid('author_Id::uuid')
+    .references(() => usersTable.displayId,{
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
     })
     .notNull(),
   price: integer('price').notNull(),
   left: integer('left').notNull(),
   sold: integer('sold').notNull().default(0),
-  likes: integer('likes').default(0).notNull(),
+  likes: integer('likes').notNull().default(0),
   },
   (table)=>({
-
+    displayIdIndexOfPosts: index("display_id_index_of_posts").on(table.displayId),
   })
 );
 export const postsRelations = relations(posts, ({ one, many }) => ({
   author: one(usersTable, {
     fields: [posts.authorId],
-    references: [usersTable.id],
+    references: [usersTable.displayId],
   }),
   comments: many(comments)
 }));
@@ -64,14 +66,25 @@ export const postsRelations = relations(posts, ({ one, many }) => ({
 export const comments = pgTable('comments', {
   id: serial('id').primaryKey(),
   text: text('text'),
-  authorId: integer('author_id'),
-  postId: integer('post_id'),
+  authorId: uuid('author_Id::uuid')
+    .references(() => usersTable.displayId,{
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    })
+    .notNull(),
+  postId: uuid('post_Id::uuid')
+    .references(()=>posts.displayId,{
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    })
+    .notNull(),
+  stars:integer('stars').notNull(),
   },(table)=>({
     
 }));
 export const commentsRelations = relations(comments, ({ one }) => ({
   post: one(posts, {
     fields: [comments.postId],
-    references: [posts.id],
+    references: [posts.displayId],
   }),
 }));

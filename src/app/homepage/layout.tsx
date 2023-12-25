@@ -3,7 +3,7 @@ type Props = {
   children: React.ReactNode;
 };
 
-function DocsLayout({ children }: Props) {
+function HomepageLayout({ children }: Props) {
   return (
     // overflow-hidden for parent to hide scrollbar
     <main className="flex-rows fixed top-0 flex h-screen w-full overflow-hidden">
@@ -17,4 +17,4 @@ function DocsLayout({ children }: Props) {
   );
 }
 
-export default DocsLayout;
+export default HomepageLayout;

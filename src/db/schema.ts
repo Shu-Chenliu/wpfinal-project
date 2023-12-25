@@ -12,7 +12,8 @@ import {
   integer,
 } from "drizzle-orm/pg-core";
 //使用者可以是買家兼賣家
-export const users = pgTable("users",{
+//使用者需要
+export const usersTable = pgTable("users",{
     id: serial("id").primaryKey(),
     displayId: uuid("display_id").defaultRandom().notNull().unique(),
     username: varchar("username", { length: 100 }).notNull().unique(),
@@ -30,19 +31,32 @@ export const users = pgTable("users",{
     emailIndex: index("email_index").on(table.email),
   }),
 );
-export const usersRelations = relations(users, ({ many }) => ({
+export const usersRelations = relations(usersTable, ({ many }) => ({
   posts: many(posts),
 }));
 //posts=賣家po的prodects
 export const posts = pgTable('posts', {
   id: serial('id').primaryKey(),
-  content: text('content'),
-  authorId: integer('author_id'),
-});
+  title: varchar('title').notNull(),
+  description: text('description'),
+  authorId: integer('author_Id')
+    .references(() => usersTable.id, {
+      onDelete: 'cascade'
+    })
+    .notNull(),
+  price: integer('price').notNull(),
+  left: integer('left').notNull(),
+  sold: integer('sold').notNull().default(0),
+  likes: integer('likes').default(0).notNull(),
+  },
+  (table)=>({
+
+  })
+);
 export const postsRelations = relations(posts, ({ one, many }) => ({
-  author: one(users, {
+  author: one(usersTable, {
     fields: [posts.authorId],
-    references: [users.id],
+    references: [usersTable.id],
   }),
   comments: many(comments)
 }));
@@ -52,7 +66,9 @@ export const comments = pgTable('comments', {
   text: text('text'),
   authorId: integer('author_id'),
   postId: integer('post_id'),
-});
+  },(table)=>({
+    
+}));
 export const commentsRelations = relations(comments, ({ one }) => ({
   post: one(posts, {
     fields: [comments.postId],

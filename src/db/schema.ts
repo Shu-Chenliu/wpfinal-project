@@ -33,8 +33,9 @@ export const usersTable = pgTable("users",{
 );
 export const usersRelations = relations(usersTable, ({ many }) => ({
   posts: many(posts),
+  shoppingCart:many(posts),
 }));
-//posts=賣家po的prodects
+//posts=賣家po的products
 export const posts = pgTable('posts', {
   id: serial('id').primaryKey(),
   displayId: uuid("display_id").defaultRandom().notNull().unique(),
@@ -61,6 +62,7 @@ export const postsRelations = relations(posts, ({ one, many }) => ({
     fields: [posts.authorId],
     references: [usersTable.displayId],
   }),
+  shoppingCart:many(usersTable),
   comments: many(comments)
 }));
 //對商品的評論

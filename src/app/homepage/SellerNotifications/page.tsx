@@ -11,29 +11,28 @@ function Notification() {
   const [openNewCheckDialog, setOpenNewCheckDialog] = useState(false);
   return (
     <>
-    <div className="border border-black p-4 flex justify-top">
-      <div>
-        {/* <img src="/image.jpg" className="w-32 h-auto" /> */}
-      </div>
-      <div className="flex-grow px-4">
-        <div className="mb-4">
-          <span>product name: {"product name"}</span>
-          <span>product number: {"product number"}</span>
-        </div>
-        <div>
-          <span>buyer: {"buyer"}</span>
-          <span>address: {"address"}</span>
-        </div>
-      </div>
 
-
-      <Button
-        className="w-full bg-black hover:bg-orange-500 text-white font-bold py-2 px-4 rounded-md transition duration-300"
-        onClick={() => setOpenNewCheckDialog(true)}
-      >
-        Check Order
-      </Button>
+  <div className="border border-black border-4 w-full mr-4 p-4 flex h-40">
+  <div>
+    <img src="/image.jpg" alt="Product" className="w-44 h-auto" />
+  </div>
+  <div className="px-4">
+    <div className="mb-4 border">
+      <p>product name: {"product name"}</p>
+      <p>product number: {"product number"}</p>
+      <p>buyer: {"buyer"}</p>
+      <p>address: {"address"}</p>
     </div>
+  </div>
+  <Button
+    className="bg-black hover:bg-orange-500 text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100"
+    onClick={() => setOpenNewCheckDialog(true)}
+  >
+    Check Order
+  </Button>
+</div>
+
+
 
     <Dialog open={openNewCheckDialog}>
 

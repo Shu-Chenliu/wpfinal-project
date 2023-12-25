@@ -7,6 +7,7 @@ export const getProduct=async (postId:string)=>{
     columns: {
       title:true,
       description:true,
+      category:true,
       price:true,
       left:true,
       sold:true,

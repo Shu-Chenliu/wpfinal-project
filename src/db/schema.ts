@@ -10,6 +10,7 @@ import {
   unique,
   timestamp,
   integer,
+  primaryKey,
 } from "drizzle-orm/pg-core";
 //使用者可以是買家兼賣家
 //使用者需要
@@ -33,7 +34,7 @@ export const usersTable = pgTable("users",{
 );
 export const usersRelations = relations(usersTable, ({ many }) => ({
   posts: many(posts),
-  shoppingCart:many(posts),
+  usersToCart: many(usersToCart),
 }));
 //posts=賣家po的products
 export const posts = pgTable('posts', {
@@ -62,8 +63,25 @@ export const postsRelations = relations(posts, ({ one, many }) => ({
     fields: [posts.authorId],
     references: [usersTable.displayId],
   }),
-  shoppingCart:many(usersTable),
+  usersToCart: many(usersToCart),
   comments: many(comments)
+}));
+export const usersToCart = pgTable('users_to_cart', {
+  userId: uuid('user_id').notNull().references(() => usersTable.displayId),
+  postId: uuid('group_id').notNull().references(() => posts.displayId),
+}, (t) => ({
+  
+}),
+);
+export const usersToCartRelations = relations(usersToCart, ({ one }) => ({
+  posts: one(posts, {
+    fields: [usersToCart.postId],
+    references: [posts.displayId],
+  }),
+  user: one(usersTable, {
+    fields: [usersToCart.userId],
+    references: [usersTable.displayId],
+  }),
 }));
 //對商品的評論
 export const comments = pgTable('comments', {

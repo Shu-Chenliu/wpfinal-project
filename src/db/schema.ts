@@ -46,6 +46,7 @@ export const posts = pgTable('posts', {
       onUpdate: 'cascade'
     })
     .notNull(),
+  category: varchar('category').notNull(),
   price: integer('price').notNull(),
   left: integer('left').notNull(),
   sold: integer('sold').notNull().default(0),

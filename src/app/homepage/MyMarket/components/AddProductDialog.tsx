@@ -13,15 +13,16 @@ import {
 import { Input } from "@/components/ui/input";
 
 type Props = {
-
+  userDisplayId:string;
 };
-function AddProductDialog() {
+function AddProductDialog({userDisplayId}:Props ) {
   const {postProduct}=usePost();
   const handlePostProduct = async()=>{
     await postProduct({
       title:"Product",
       description:"ProductDESCRIPTION",
-      authorId:"88e2d757-ac60-4be7-bd4f-ef6c0cc4fce7",
+      authorId:userDisplayId,
+      category:"idk",
       price:300,
       left:300,
     });

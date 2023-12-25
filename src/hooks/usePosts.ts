@@ -9,12 +9,14 @@ export default function usePosts() {
     title,
     description,
     authorId,
+    category,
     price,
     left,
   }: {
     title: string;
     description?: string;
     authorId: string;
+    category: string;
     price: number;
     left: number;
   }) => {
@@ -26,6 +28,7 @@ export default function usePosts() {
         title,
         description,
         authorId,
+        category,
         price,
         left,
       }),

@@ -30,7 +30,7 @@ export default function ProductButton({id, displayId,title, category, price,like
         // onClick={handleClickOpen} 
         // className="text-start block" 
         // id={id}
-        className="flex flex-col gap-4 w-1/4 border rounded-md p-2 mx-2 my-2"
+        className="flex flex-col gap-4 border rounded-md p-2 mx-2 my-2"
         // width="500px"
       >
         <p className="flex w-full font-semibold text-slate-900" >

@@ -7,8 +7,15 @@ import AddCommentDialog from "./AddCommentDialog";
 type ConfirmDialogProps={
   open: boolean,
   onClose: ()=>void,
+  id:string,
+  title:string,
+  left:number,
+  author:string,
+  sold:number,
+  likes:number,
+  userId:string
 }
-export default function ConfirmDialog({open,onClose}:ConfirmDialogProps){
+export default function ConfirmDialog({open,onClose,id,title,left,author,sold,likes,userId}:ConfirmDialogProps){
   const [openNewCommentDialog, setOpenNewCommentDialog] = useState(false);
   return(
     <>
@@ -16,6 +23,7 @@ export default function ConfirmDialog({open,onClose}:ConfirmDialogProps){
         <DialogContent
           className="flex flex-col gap-4 w-3/4"
           style={{ width: "500px" }}
+          onInteractOutside={()=>{onClose()}}
         >
           <DialogHeader>
             <DialogTitle>Receive Order</DialogTitle>
@@ -93,7 +101,15 @@ export default function ConfirmDialog({open,onClose}:ConfirmDialogProps){
           </div>      
         </DialogContent>
       </Dialog>
-      <AddCommentDialog open={openNewCommentDialog} onClose={()=>setOpenNewCommentDialog(false)}/>
+      <AddCommentDialog 
+        open={openNewCommentDialog} 
+        onClose={()=>setOpenNewCommentDialog(false)}
+        id={id}
+        left={left}
+        sold={sold}
+        likes={likes}
+        userId={userId}
+      />
     </>
   );
 }

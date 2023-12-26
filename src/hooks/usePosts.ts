@@ -84,6 +84,7 @@ export default function usePosts() {
 
   return {
     postProduct,
+    updateProduct,
     loading,
   };
 }

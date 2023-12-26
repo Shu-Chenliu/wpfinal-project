@@ -21,13 +21,14 @@ type BuyerNotiBarProps = {
   address:string,
   buyerNumber:number,
   category:string,
+  read:boolean,
 };
 
 
 // note that the Tweet component is also a server component
 // all client side things are abstracted away in other components
 export default function BuyerNotiBar({
-  id, postId,title, left, author,sold,likes,userId,username,number,address,buyerNumber,category
+  id, postId,title, left, author,sold,likes,userId,username,number,address,buyerNumber,category,read
 }: BuyerNotiBarProps) {
   const [openNewCheckDialog, setOpenNewCheckDialog] = useState(false);
   const [openNewReceiveDialog, setOpenNewReceiveDialog] = useState(false);

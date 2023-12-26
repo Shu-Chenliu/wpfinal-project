@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 import {getUserProfile} from "./components/actions"
+import Coupon from "./components/Coupon";
 async function HomePage() {
   const session = await auth();
   if (!session || !session?.user?.id) {
@@ -37,12 +38,11 @@ async function HomePage() {
         
       </div>
       <div>
-        <p className="text-sm font-semibold text-slate-700">My post</p>
-        {userProfile?.posts.map((post) =>(
-          <div key={post.id}>
-            {post.title}
-          </div>
-        ))}
+         <p className="text-lg font-semibold text-slate-700">My Coupon</p>
+        
+        <Coupon percent={10}/>
+        <Coupon percent={5}/>
+        <Coupon percent={20}/>
       </div>
 
     </div>

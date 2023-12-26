@@ -11,13 +11,14 @@ type SellerNotiBarProps = {
   money:number,
   address:string,
   category:string,
+  read:boolean,
 };
 
 
 // note that the Tweet component is also a server component
 // all client side things are abstracted away in other components
 export default function SellerNotiBar({
-  id,text,buyer,money,address,category
+  id,text,buyer,money,address,category,read
 }: SellerNotiBarProps) {
   const [openNewCheckDialog, setOpenNewCheckDialog] = useState(false);
   const {updateNotification}=useNotifications();

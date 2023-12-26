@@ -3,6 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import BuyNowDialog from "./BuyNowDialog";
+import { Trash2 } from 'lucide-react';
+import useCart from "@/hooks/useCart";
 export type CartProductProps = {
   id: number;
   displayId:string;
@@ -26,6 +28,13 @@ export default function CartProduct(
  
   const viewProduct=()=>{
     // router.push(`/homepage/${displayId}`);
+  }
+  const {deleteCart}=useCart();
+  const handleDelete=async()=>{
+    await deleteCart({
+      userId,
+      postId:displayId,
+    });
   }
   let imageSrc;
 
@@ -71,6 +80,11 @@ export default function CartProduct(
               userId={userId}
             />
           </div>
+          <Button
+            onClick={handleDelete}
+          >
+            <Trash2 />
+          </Button>
         </div>
       </div>
     </>

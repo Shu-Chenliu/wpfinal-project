@@ -11,6 +11,7 @@ export const getAllNotificationsOfSeller = async(username:string) =>{
       buyer:true,
       money:true,
       address:true,
+      readBySeller:true,
     },
     with:{
       post:{

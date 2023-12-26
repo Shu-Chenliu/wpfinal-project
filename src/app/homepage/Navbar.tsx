@@ -12,25 +12,24 @@ import { Store } from 'lucide-react';
 import { BellPlus } from 'lucide-react';
     
 import { Eye } from 'lucide-react';
-    
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { publicEnv } from "@/lib/env/public";
 async function Navbar() {
-
+  const session = await auth();
+  if (!session || !session?.user?.id) {
+    redirect(publicEnv.NEXT_PUBLIC_BASE_URL);
+  }
+  const username=session.user.username;
   return (
     <nav className="flex w-full flex-col bg-slate-100 pb-10 bg-slate-900">
       <nav className="sticky top-0 flex flex-col items-center justify-between border-b bg-slate-800 pb-2">
         <div className="flex w-full items-center justify-between px-3 py-1">
           <div className="flex items-center gap-2">
-            <RxAvatar />
+            {/* <RxAvatar  /> */}
+            <p className="text-slate-100 font-semibold m-2 p-2">Welcome to shopEE, {username}.</p>
           </div>
-          <Link href={`/auth/signout`}>
-            <Button
-              // variant={"ghost"}
-              type={"submit"}
-              className="hover:bg-orange-500"
-            >
-              Sign Out
-            </Button>
-          </Link>
+          
         </div>
 
       </nav>
@@ -38,45 +37,61 @@ async function Navbar() {
         
           <Link href={"/homepage"}>
             <Button
-              className=" w-full my-2  hover:bg-orange-500 m-2"
+              className=" w-full my-2 hover:bg-orange-500 m-2"
             >
-              <Eye className="m-2" /> View All products
+              <Eye /> View All products
             </Button>
           </Link>
 
           <Link href={"/homepage/ShoppingCart"}>
             <Button
             className="flex my-2 w-full hover:bg-orange-500 m-2">
-              <ShoppingCart className="m-2" /> Shopping Cart
+              <ShoppingCart /> Shopping Cart
             </Button>
           </Link>
 
           <Link href={"/homepage/MyMarket"}>
             <Button
             className="flex my-2 w-full hover:bg-orange-500 m-2">
-              <Store className="m-2" /> My market
+              <Store /> My market
             </Button>
           </Link>
           <Link href={"/homepage/SellerNotifications"}>
             <Button
             className="flex w-full my-2 hover:bg-orange-500 m-2"
-            ><BellPlus className="m-2" />Market Notifications</Button>
+            ><BellPlus />Notifications for Seller</Button>
           </Link>
         
 
           <Link href={"/homepage/BuyerNotifications"}>
             <Button
             className="flex w-full my-2 hover:bg-orange-500 m-2"
-            ><BellRing className="m-2" />Buying Notifications</Button>
+            ><BellRing />Notifications for buyer</Button>
           </Link>
 
-          <Link href={"/homepage/MyAccount"}>
-            
+          <Link href={"/homepage/Chat"}>
             <Button
             className="flex w-full my-2 hover:bg-orange-500 m-2"
-            ><UserRound className="m-2"  />My account</Button>
-          </Link>     
+            ><UserRound />Chat</Button>
+          </Link> 
+
+          <Link href={"/homepage/MyAccount"}>
+            <Button
+            className="flex w-full my-2 hover:bg-orange-500 m-2"
+            ><UserRound />My account</Button>
+          </Link> 
+             
+          <Link href={`/auth/signout`}>
+            <Button
+              // variant={"ghost"}
+              type={"submit"}
+              className="w-full hover:bg-orange-500 m-2"
+            >
+              Sign Out
+            </Button>
+          </Link>
       </section>
+      
     </nav>
   );
 }

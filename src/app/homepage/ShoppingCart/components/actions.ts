@@ -13,6 +13,13 @@ export const getMyShoppingCart = async(userId:string) => {
           price:true,
           left:true,
           likes:true,
+        },
+        with:{
+          author:{
+            columns:{
+              username:true,
+            }
+          }
         }
       }
     }

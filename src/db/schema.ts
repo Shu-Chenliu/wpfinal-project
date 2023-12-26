@@ -12,6 +12,7 @@ import {
   timestamp,
   integer,
   doublePrecision,
+  boolean,
   primaryKey,
 } from "drizzle-orm/pg-core";
 //使用者可以是買家兼賣家
@@ -110,4 +111,26 @@ export const commentsRelations = relations(comments, ({ one }) => ({
     fields: [comments.postId],
     references: [posts.displayId],
   }),
+}));
+export const notifications = pgTable('notifications', {
+  id: serial('id').primaryKey(),
+  text: text('text').notNull(),
+  buyer: varchar('buyer')
+    .references(() => usersTable.username,{
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    })
+    .notNull(),
+  seller: varchar('seller')
+    .references(()=>usersTable.username,{
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    })
+    .notNull(),
+  money:integer('money').notNull(),
+  address:varchar('address').notNull(),
+  shipped:boolean('shipped').notNull().default(false),
+  received:boolean('received').notNull().default(false),
+  },(table)=>({
+    
 }));

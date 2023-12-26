@@ -9,10 +9,12 @@ export type CartProductProps = {
   title: string;
   category: string;
   price: number;
+  username: string;
+  seller:string;
 };
 
 export default function CartProduct(
-  {id, displayId,title, category, price}:CartProductProps
+  {id, displayId,title, category, price,username,seller}:CartProductProps
   ) {
   // const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -23,43 +25,50 @@ export default function CartProduct(
   const viewProduct=()=>{
     // router.push(`/homepage/${displayId}`);
   }
+  let imageSrc;
 
+  switch (category) {
+    case "Clothing":
+      imageSrc = "../../Clothing.jpg";
+      break;
+    case "Food":
+      imageSrc = "../../Food.jpg";
+      break;
+    case "Electronics":
+      imageSrc = "../../Electronics.jpg";
+      break;
+    case "EE related":
+      imageSrc = "../../EE_related.jpg";
+      break;
+    case "Others":
+      imageSrc = "../../Others.jpg";
+      break;
+  }
   return (
     <>
-    <div className="w-full flex gap-4  border rounded-md p-2 mx-2 my-2" >
-    <div      
-        // className="w-full flex flex-col gap-4  border rounded-md p-2 mx-2 my-2"
-      >
-        <p className="flex  font-semibold text-slate-900" >
-          Want to buy: 
-          {title}
-        </p>
-        {/* <p>{displayId}</p> */}
-        <p className="flex font-semibold text-slate-900" >
-          (Image)
-          {/* {image} */}
-        </p>
-       
-        <p className="flex font-semibold text-slate-900" >
-          Price:
-          {price}
-        </p>
-        
-      </div>
-      <div>
-      {/* <Button 
-        className="flex font-semibold hover:bg-orange-700 hover:text-black "
-        onClick={viewProduct}>
-          Buy Now
-      </Button> */}
-      <BuyNowDialog/>
-      </div>
-    </div>
-      
-      {/* <ViewProductDialog
-        onClose={() => setOpen(false)}        
-      /> */}
+      <div className="w-full flex flex-row gap-4  border rounded-md p-2 mx-2 my-2" >
+        <div className=" w-full mr-4 p-4 flex h-[1/4]">
+          <div>
+            <img src="../../Food.jpg" alt="Product" className="w-48 h-auto" />
+          </div>
 
+          <div className="px-4">
+            <div>
+              <p className="flex font-semibold text-slate-900">
+                Want to buy: {title}
+              </p>
+
+              <p className="flex font-semibold text-slate-900">
+                Price: {price}
+              </p>
+            </div>
+          </div>
+
+          <div className="ml-auto">
+            <BuyNowDialog title={title} username={username} seller={seller} money={price}/>
+          </div>
+        </div>
+      </div>
     </>
   );
 }

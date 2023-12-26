@@ -53,7 +53,7 @@ export default function ProductButton({id, displayId,title, category, price,like
         // id={id}
         className="flex flex-col gap-4 border border-black rounded-md p-2 mx-2 my-2 w-1/3"
       >
-        <p className="flex  font-semibold text-slate-900" > Product Name: {title} </p>
+        <p className="flex text-lg font-semibold text-yellow-500" > {title} </p>
         <p>{displayId}</p>
         {/* <p className="flex w-full font-semibold text-slate-900 w-20vw" >
           <img src={imageSrc} alt="Product" />        
@@ -63,14 +63,8 @@ export default function ProductButton({id, displayId,title, category, price,like
           <img src={imageSrc} alt="Product" className="w-50 h-auto"/>
         </p>
 
-        <p className="flex w-full font-semibold text-slate-900" >
-          Category:
-          {category}
-        </p>
-        <p className="flex w-full font-semibold text-slate-900" >
-          Price:
-          {price}
-        </p>
+        <p className="flex w-full font-semibold text-slate-900" > Category: {category}</p>
+        <p className="flex w-full font-semibold text-slate-900" >Price: {price}</p>
         <div className="flex">
           <button className="flex">
             {likes >= 0.75 ? (

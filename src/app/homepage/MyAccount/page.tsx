@@ -19,7 +19,7 @@ async function HomePage() {
           Please select a document to edit
         </p>
       </div> */}
-      <h1 className="text-sm font-semibold text-slate-700">
+      <h1 className="text-2xl font-semibold text-slate-700">
           My Account
         </h1>
       <div className="flex items-center justify-top">
@@ -31,7 +31,7 @@ async function HomePage() {
             className="w-40 h-40  border-2 my-2 my-2 "
             
           /> */}
-          <Ghost className="w-full h-full" />
+          <Ghost className="w-40 h-40" />
         </div>
         <div className="my-2 my-2 p-3">
           <p>Username: {userProfile?.username}</p>
@@ -40,6 +40,8 @@ async function HomePage() {
         
         
       </div>
+      <br />
+      <br />
       <div>
          <p className="text-lg font-semibold text-slate-700">My Coupon</p>
         

@@ -49,12 +49,13 @@ function AddProductDialog({userDisplayId}:Props) {
       price:price,
       left:left,
     });
+    setOpenAddProductDialog(false);
   }
   
   return (
     <>
       <Button 
-          className="text-sm font-semibold text-slate-100 bg-slate-900 "
+          className="ml-auto font-semibold text-slate-100 bg-slate-900 "
           variant={"outline"}
           onClick={() => setOpenAddProductDialog(true)}
           >add product

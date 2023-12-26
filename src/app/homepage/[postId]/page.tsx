@@ -69,7 +69,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
       </div>
       
       <div className="flex gap-4">
-        <p className="flex w-full font-semibold text-orange-700 p-2 text-4xl">{Product?.title}</p>
+        <p className="flex w-full font-semibold text-yellow-500 p-2 text-4xl">{Product?.title}</p>
       </div>
 
       <div className="flex">
@@ -78,18 +78,24 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
           {/* <div className="w-full rounded-md p-2 hover:bg-white/10 ">
             {Product?.description}
           </div> */}
+          <div className="block">
+            <p className="flex w-full font-semibold text-slate-900 mx-10">Seller: {Product?.author.username}</p>
+            <p className="flex w-full font-semibold text-slate-900 mx-10">Price: {Product?.price}</p>
+            <p className="flex w-full font-semibold text-slate-900 mx-10">Category: {Product?.category}</p>
+            <p className="flex w-full font-semibold text-slate-900 mx-10">Number left: {Product?.left}</p>
 
-          <p className="w-full rounded-md p-2 hover:bg-white/10 overflow-wrap-normal">
-            {Product?.description}
-          </p>
+          </div>
+          
+
+          
 
       </div>
 
       <div className="p-2">
-        <p className="flex w-full font-semibold text-slate-900">Seller: {Product?.author.username}</p>
-        <p className="flex w-full font-semibold text-slate-900">Price: {Product?.price}</p>
-        <p className="flex w-full font-semibold text-slate-900">Category: {Product?.category}</p>
-        <p className="flex w-full font-semibold text-slate-900">Number left: {Product?.left}</p>
+        <p className="w-full rounded-md p-2 hover:bg-white/10 overflow-wrap-normal mx-3">
+          {Product?.description}
+        </p>
+        
 
       </div>
       {comments.map((comment)=>(

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { UserRound } from 'lucide-react';
     
-import { BellRing } from 'lucide-react';
+import { BellRing, Ticket, LogOut, MessageCircle, MessagesSquare } from 'lucide-react';
     
 import { ShoppingCart } from 'lucide-react';
     
@@ -68,11 +68,17 @@ async function Navbar() {
             className="flex w-full my-2 hover:bg-orange-500 m-2"
             ><BellRing className="m-2" />Buying Notifications</Button>
           </Link>
+          <Link href={"/homepage/getCoupon"}>
+            <Button
+            className="flex w-full my-2 hover:bg-orange-500 m-2"
+            ><Ticket className="m-2"/>
+              Get Coupon</Button>
+          </Link> 
 
           <Link href={"/homepage/Chat"}>
             <Button
             className="flex w-full my-2 hover:bg-orange-500 m-2"
-            ><UserRound className="m-2" />Chat</Button>
+            ><MessagesSquare className="m-2" />Chatroom</Button>
           </Link> 
 
           <Link href={"/homepage/MyAccount"}>
@@ -80,17 +86,14 @@ async function Navbar() {
             className="flex w-full my-2 hover:bg-orange-500 m-2"
             ><UserRound className="m-2" />My account</Button>
           </Link> 
-          <Link href={"/homepage/getCoupon"}>
-            <Button
-            className="flex w-full my-2 hover:bg-orange-500 m-2"
-            >Get Coupon</Button>
-          </Link> 
+          
           <Link href={`/auth/signout`}>
             <Button
               // variant={"ghost"}
               type={"submit"}
               className="w-full hover:bg-orange-500 m-2"
             >
+              <LogOut className="m-2"/>
               Sign Out
             </Button>
           </Link>

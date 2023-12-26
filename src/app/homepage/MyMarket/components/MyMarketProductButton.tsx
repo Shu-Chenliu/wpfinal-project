@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import type { EventHandler, MouseEvent } from "react";
 import { Star, StarHalf } from "lucide-react";
-export type ProductButtonProps = {
+export type MyMarketProductButtonProps = {
   id: number;
   displayId:string;
   title: string;
@@ -14,7 +14,7 @@ export type ProductButtonProps = {
   likes:number;
 };
 
-export default function ProductButton({id, displayId,title, category, price,likes}:ProductButtonProps) {
+export default function MyMarketProductButton({id, displayId,title, category, price,likes}:MyMarketProductButtonProps) {
   // const [open, setOpen] = useState(false);
   const router = useRouter();
   // const handleClickOpen = () => {
@@ -28,22 +28,21 @@ export default function ProductButton({id, displayId,title, category, price,like
 
   switch (category) {
     case "Clothing":
-      imageSrc = "./Clothing.jpg";
+      imageSrc = "../../Clothing.jpg";
       break;
     case "Food":
-      imageSrc = "./Food.jpg";
+      imageSrc = "../../Food.jpg";
       break;
     case "Electronics":
-      imageSrc = "./Electronics.jpg";
+      imageSrc = "../../Electronics.jpg";
       break;
     case "EE related":
-      imageSrc = "./EE_related.jpg";
+      imageSrc = "../../EE_related.jpg";
       break;
     case "Others":
-      imageSrc = "./Others.jpg";
+      imageSrc = "../../Others.jpg";
       break;
   }
-    
 
   return (
     <>
@@ -60,7 +59,9 @@ export default function ProductButton({id, displayId,title, category, price,like
         </p>
         <p>{displayId}</p>
         <p className="flex w-full font-semibold text-slate-900" >
+
           <img src={imageSrc} alt="Product" />
+
         </p>
        
         <p className="flex w-full font-semibold text-slate-900" >

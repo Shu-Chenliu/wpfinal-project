@@ -10,6 +10,8 @@ export const getAllProductsPostedByUser = async(userId:string) =>{
       price:true,
       left:true,
       category:true,
+      displayId:true,
+      likes:true,
     },
     with:{
       author: {

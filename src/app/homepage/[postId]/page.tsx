@@ -6,8 +6,8 @@ import { revalidatePath } from "next/cache";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import AddToCartButton from "./components/AddToCartButton";
-
-
+import CommentBar from "./components/CommentBar";
+import { getComments } from "./components/actions";
 type ProductPageProps = {
   params: {
     postId: string;
@@ -17,6 +17,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
   const session = await auth();
   const userId = session?.user?.id;
   const Product= await getProduct(postId);
+  const comments=await getComments(postId);
   const liked = false;
   const handleAddToCart = async (userId:string,postId:string)=>{
     "use server";
@@ -78,6 +79,11 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
         <p className="flex w-full font-semibold text-slate-900">Number left: {Product?.left}</p>
 
       </div>
+      {comments.map((comment)=>(
+        <div key={comment.id}>
+          <CommentBar text={comment.text} stars={comment.stars} author={comment.author}/>
+        </div>
+      ))}
     </div>
   );
 }

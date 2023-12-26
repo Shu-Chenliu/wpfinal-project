@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { usersTable,posts,postsRelations,usersToCart } from "@/db/schema";
+import { usersTable,posts,postsRelations,usersToCart,comments} from "@/db/schema";
 
 export const getProduct=async (postId:string)=>{
   const Product=await db.query.posts.findFirst({
@@ -33,4 +33,17 @@ export const addToCart=async(userId:string,postId:string)=>{
       postId:postId
     })
     .execute();
+}
+export const getComments=async(postId:string)=>{
+  "use server";
+  const comments=await db.query.comments.findMany({
+    where:(comments, { eq }) => eq(comments.postId, postId),
+      columns:{
+        id:true,
+        text:true,
+        author:true,
+        stars:true,
+      }
+  });
+  return comments;
 }

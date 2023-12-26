@@ -89,8 +89,8 @@ export const usersToCartRelations = relations(usersToCart, ({ one }) => ({
 export const comments = pgTable('comments', {
   id: serial('id').primaryKey(),
   text: text('text'),
-  authorId: uuid('author_Id::uuid')
-    .references(() => usersTable.displayId,{
+  author: varchar('author_Id')
+    .references(() => usersTable.username,{
       onDelete: 'cascade',
       onUpdate: 'cascade'
     })

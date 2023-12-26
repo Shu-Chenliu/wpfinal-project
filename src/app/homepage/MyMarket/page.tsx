@@ -3,6 +3,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 import {getAllProductsPostedByUser} from "./components/actions"
+import MyMarketProductButton from "./components/MyMarketProductButton";
 async function HomePage() {
   const session = await auth();
   if (!session || !session?.user?.id) {
@@ -12,21 +13,29 @@ async function HomePage() {
   const ProductsPostedByUser = await getAllProductsPostedByUser(userDisplayId);
   return (
     <div className="flex h-[90vh] w-full ">
-      {/* <div className="flex flex-col items-center justify-center">
-        <BiError className="text-yellow-500" size={80} />
-        <p className="text-sm font-semibold text-slate-700">
-          Please select a document to edit
-        </p>
-      </div> */}
-      <div className="flex flex-col items-center justify-top">
+
+      <div className="block items-center justify-top">
         <p className="text-sm font-semibold text-slate-700">
           Welcome to My Market
         </p>
 
         <AddProductDialog userDisplayId={userDisplayId}/>
+        <div className="flex flex-col h-[90vh] w-full mg-2 pd-2 flex-wrap">
         {ProductsPostedByUser.map((product)=>(
-          <div key={product.id}>{product.title}</div>
+          <div key={product.id}>
+            <MyMarketProductButton
+              id={product.id} 
+              displayId={product.displayId} 
+              title={product.title}
+              category={product.category}
+              price={product.price}
+              likes={product.likes}
+            />
+          </div>
         ))}
+
+        </div>
+
       </div>
     </div>
   );

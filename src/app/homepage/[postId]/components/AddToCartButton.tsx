@@ -15,7 +15,7 @@ export default function AddToCartButton({addToCart,userId,postId}: AddToCartButt
   }
   return(
     <Button
-      className="flex font-semibold hover:bg-orange-700 hover:text-black ml-auto"
+      className="flex font-semibold bg-slate-800  hover:bg-orange-700 hover:text-slate-900 ml-auto"
       onClick={()=>handleAddToCart(userId,postId)}
     >
       Add to cart

@@ -12,7 +12,7 @@ async function HomePage() {
   return (
     <div className="block h-[90vh] w-full p-3">
       {/* <div className="flex flex-col items-center justify-center">
-        <BiError className="text-yellow-500" size={80} />
+        <BiError className="text-orange-500" size={80} />
         <p className="text-sm font-semibold text-slate-700">
           Please select a document to edit
         </p>

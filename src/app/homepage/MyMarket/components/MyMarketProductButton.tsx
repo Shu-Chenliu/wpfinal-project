@@ -74,45 +74,45 @@ export default function MyMarketProductButton({id, displayId,title, category, pr
         <div className="flex">
           <button className="flex">
             {likes >= 0.75 ? (
-              <Star fill="yellow" strokeWidth={0} />
+              <Star fill="orange" strokeWidth={0} />
             ) : likes >= 0.25 ? (
-              <StarHalf fill="yellow" strokeWidth={0} />
+              <StarHalf fill="orange" strokeWidth={0} />
             ) : (
               <Star fill="black" strokeWidth={0} />
             )}
           </button>
           <button className="flex">
             {likes >= 1.75 ? (
-              <Star fill="yellow" strokeWidth={0} />
+              <Star fill="orange" strokeWidth={0} />
             ) : likes >= 1.25 ? (
-              <StarHalf fill="yellow" strokeWidth={0} />
+              <StarHalf fill="orange" strokeWidth={0} />
             ) : (
               <Star fill="black" strokeWidth={0} />
             )}
           </button>
           <button className="flex">
             {likes >= 2.75 ? (
-              <Star fill="yellow" strokeWidth={0} />
+              <Star fill="orange" strokeWidth={0} />
             ) : likes >= 2.25 ? (
-              <StarHalf fill="yellow" strokeWidth={0} />
+              <StarHalf fill="orange" strokeWidth={0} />
             ) : (
               <Star fill="black" strokeWidth={0} />
             )}
           </button>
           <button className="flex">
             {likes >= 3.75 ? (
-              <Star fill="yellow" strokeWidth={0} />
+              <Star fill="orange" strokeWidth={0} />
             ) : likes >= 3.25 ? (
-              <StarHalf fill="yellow" strokeWidth={0} />
+              <StarHalf fill="orange" strokeWidth={0} />
             ) : (
               <Star fill="black" strokeWidth={0} />
             )}
           </button>
           <button className="flex">
             {likes >= 4.75 ? (
-              <Star fill="yellow" strokeWidth={0} />
+              <Star fill="orange" strokeWidth={0} />
             ) : likes >= 4.25 ? (
-              <StarHalf fill="yellow" strokeWidth={0} />
+              <StarHalf fill="orange" strokeWidth={0} />
             ) : (
               <Star fill="black" strokeWidth={0} />
             )}

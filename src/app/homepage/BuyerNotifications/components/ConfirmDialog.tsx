@@ -39,8 +39,8 @@ export default function ConfirmDialog({open,onClose,id,postId,title,left,author,
           style={{ width: "500px" }}
         >
           <DialogHeader>
-            <DialogTitle>Package Delivered!</DialogTitle>
-            <DialogDescription>Have you recieved your package? </DialogDescription>
+            <DialogTitle>Have you recieved your package? </DialogTitle>
+            {/* <DialogDescription>Have you recieved your package? </DialogDescription> */}
           </DialogHeader>
           <div className="flex w-full flex-col gap-1">
           <div className="flex items-center">

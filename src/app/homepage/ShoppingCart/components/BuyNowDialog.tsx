@@ -27,6 +27,7 @@ function BuyNowDialog({ title,username,seller,money,postId}:Props) {
   
   const handleBuy=async()=>{
     if(!inputRefProductNumber.current||!inputRefAddress.current){
+      alert("Please enter");
       return;
     }
     await postNotification({

@@ -1,6 +1,18 @@
 import { RxAvatar } from "react-icons/rx";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { UserRound } from 'lucide-react';
+    
+import { BellRing } from 'lucide-react';
+    
+import { ShoppingCart } from 'lucide-react';
+    
+import { Store } from 'lucide-react';
+    
+import { BellPlus } from 'lucide-react';
+    
+import { Eye } from 'lucide-react';
+    
 async function Navbar() {
 
   return (
@@ -26,42 +38,43 @@ async function Navbar() {
         
           <Link href={"/homepage"}>
             <Button
-              className=" w-full my-2  hover:bg-orange-500"
+              className=" w-full my-2  hover:bg-orange-500 m-2"
             >
-              View All products
+              <Eye /> View All products
             </Button>
           </Link>
 
           <Link href={"/homepage/ShoppingCart"}>
             <Button
-            className="flex my-2 w-full hover:bg-orange-500">
-              Shopping Cart
+            className="flex my-2 w-full hover:bg-orange-500 m-2">
+              <ShoppingCart /> Shopping Cart
             </Button>
           </Link>
 
           <Link href={"/homepage/MyMarket"}>
             <Button
-            className="flex my-2 w-full hover:bg-orange-500">
-              My market
+            className="flex my-2 w-full hover:bg-orange-500 m-2">
+              <Store /> My market
             </Button>
           </Link>
           <Link href={"/homepage/SellerNotifications"}>
             <Button
-            className="flex w-full my-2 hover:bg-orange-500"
-            >Notifications for Seller</Button>
+            className="flex w-full my-2 hover:bg-orange-500 m-2"
+            ><BellPlus />Notifications for Seller</Button>
           </Link>
         
 
           <Link href={"/homepage/BuyerNotifications"}>
             <Button
-            className="flex w-full my-2 hover:bg-orange-500"
-            >Notifications for buyer</Button>
+            className="flex w-full my-2 hover:bg-orange-500 m-2"
+            ><BellRing />Notifications for buyer</Button>
           </Link>
 
           <Link href={"/homepage/MyAccount"}>
+            
             <Button
-            className="flex w-full my-2 hover:bg-orange-500"
-            >My account</Button>
+            className="flex w-full my-2 hover:bg-orange-500 m-2"
+            ><UserRound />My account</Button>
           </Link>     
       </section>
     </nav>

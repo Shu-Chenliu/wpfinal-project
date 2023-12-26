@@ -47,7 +47,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
       <div className="flex">
         <Link href={"/homepage"}>
           <Button
-            className="flex font-semibold hover:bg-orange-700 hover:text-black "
+            className="flex font-semibold bg-slate-800 hover:bg-orange-700 hover:text-slate-900 "
           >Back to homepage
           </Button>
         </Link>

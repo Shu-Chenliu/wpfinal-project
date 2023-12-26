@@ -20,7 +20,7 @@ export default function CommentBar({
     // id={id.toString()}
     className="flex flex-col gap-4 border rounded-md p-2 mx-2 my-2 mg-2"
     >
-      <p className="font-bold">(Name){author}</p>     
+      <p className="font-bold">{author}</p>     
       <article className="mx-6 whitespace-pre-wrap break-all">{text}</article>
     </div>
   );

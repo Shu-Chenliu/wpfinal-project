@@ -53,10 +53,7 @@ export default function ProductButton({id, displayId,title, category, price,like
         // id={id}
         className="flex flex-col gap-4 border border-black rounded-md p-2 mx-2 my-2 w-1/3"
       >
-        <p className="flex  font-semibold text-slate-900" >
-          Product Name: 
-          {title}
-        </p>
+        <p className="flex  font-semibold text-slate-900" > Product Name: {title} </p>
         <p>{displayId}</p>
         {/* <p className="flex w-full font-semibold text-slate-900 w-20vw" >
           <img src={imageSrc} alt="Product" />        
@@ -77,45 +74,45 @@ export default function ProductButton({id, displayId,title, category, price,like
         <div className="flex">
           <button className="flex">
             {likes >= 0.75 ? (
-              <Star fill="yellow" strokeWidth={0} />
+              <Star fill="orange" strokeWidth={0} />
             ) : likes >= 0.25 ? (
-              <StarHalf fill="yellow-800" strokeWidth={0} />
+              <StarHalf fill="orange-800" strokeWidth={0} />
             ) : (
               <Star fill="black" strokeWidth={0} />
             )}
           </button>
           <button className="flex">
             {likes >= 1.75 ? (
-              <Star fill="yellow" strokeWidth={0} />
+              <Star fill="orange" strokeWidth={0} />
             ) : likes >= 1.25 ? (
-              <StarHalf fill="yellow" strokeWidth={0} />
+              <StarHalf fill="orange" strokeWidth={0} />
             ) : (
               <Star fill="black" strokeWidth={0} />
             )}
           </button>
           <button className="flex">
             {likes >= 2.75 ? (
-              <Star fill="yellow" strokeWidth={0} />
+              <Star fill="orange" strokeWidth={0} />
             ) : likes >= 2.25 ? (
-              <StarHalf fill="yellow" strokeWidth={0} />
+              <StarHalf fill="orange" strokeWidth={0} />
             ) : (
               <Star fill="black" strokeWidth={0} />
             )}
           </button>
           <button className="flex">
             {likes >= 3.75 ? (
-              <Star fill="yellow" strokeWidth={0} />
+              <Star fill="orange" strokeWidth={0} />
             ) : likes >= 3.25 ? (
-              <StarHalf fill="yellow" strokeWidth={0} />
+              <StarHalf fill="orange" strokeWidth={0} />
             ) : (
               <Star fill="black" strokeWidth={0} />
             )}
           </button>
           <button className="flex">
             {likes >= 4.75 ? (
-              <Star fill="yellow" strokeWidth={0} />
+              <Star fill="orange" strokeWidth={0} />
             ) : likes >= 4.25 ? (
-              <StarHalf fill="yellow" strokeWidth={0} />
+              <StarHalf fill="orange" strokeWidth={0} />
             ) : (
               <Star fill="black" strokeWidth={0} />
             )}

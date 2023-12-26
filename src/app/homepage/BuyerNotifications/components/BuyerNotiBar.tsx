@@ -23,8 +23,6 @@ type BuyerNotiBarProps = {
   category:string,
   read:boolean,
 };
-
-
 // note that the Tweet component is also a server component
 // all client side things are abstracted away in other components
 export default function BuyerNotiBar({

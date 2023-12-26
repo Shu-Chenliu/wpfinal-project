@@ -39,46 +39,46 @@ async function Navbar() {
             <Button
               className=" w-full my-2 hover:bg-orange-500 m-2"
             >
-              <Eye /> View All products
+              <Eye className="m-2" /> View All products
             </Button>
           </Link>
 
           <Link href={"/homepage/ShoppingCart"}>
             <Button
             className="flex my-2 w-full hover:bg-orange-500 m-2">
-              <ShoppingCart /> Shopping Cart
+              <ShoppingCart className="m-2" /> Shopping Cart
             </Button>
           </Link>
 
           <Link href={"/homepage/MyMarket"}>
             <Button
             className="flex my-2 w-full hover:bg-orange-500 m-2">
-              <Store /> My market
+              <Store className="m-2" /> My market
             </Button>
           </Link>
           <Link href={"/homepage/SellerNotifications"}>
             <Button
             className="flex w-full my-2 hover:bg-orange-500 m-2"
-            ><BellPlus />Notifications for Seller</Button>
+            ><BellPlus className="m-2" />Market Notifications </Button>
           </Link>
         
 
           <Link href={"/homepage/BuyerNotifications"}>
             <Button
             className="flex w-full my-2 hover:bg-orange-500 m-2"
-            ><BellRing />Notifications for buyer</Button>
+            ><BellRing className="m-2" />Buying Notifications</Button>
           </Link>
 
           <Link href={"/homepage/Chat"}>
             <Button
             className="flex w-full my-2 hover:bg-orange-500 m-2"
-            ><UserRound />Chat</Button>
+            ><UserRound className="m-2" />Chat</Button>
           </Link> 
 
           <Link href={"/homepage/MyAccount"}>
             <Button
             className="flex w-full my-2 hover:bg-orange-500 m-2"
-            ><UserRound />My account</Button>
+            ><UserRound className="m-2" />My account</Button>
           </Link> 
              
           <Link href={`/auth/signout`}>

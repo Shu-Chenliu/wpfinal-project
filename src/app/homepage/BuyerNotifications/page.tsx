@@ -38,6 +38,7 @@ async function NotificationPage() {
             number={notification.money/notification.post.price}
             address={notification.address}
             buyerNumber={notification.post.buyerNumber}
+            category={notification.post.category}
           />
         </div>
       ))}

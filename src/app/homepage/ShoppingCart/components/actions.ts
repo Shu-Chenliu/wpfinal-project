@@ -21,7 +21,7 @@ export const getMyShoppingCart = async(userId:string) => {
             }
           }
         }
-      }
+      },
     }
   })
   return Cart;

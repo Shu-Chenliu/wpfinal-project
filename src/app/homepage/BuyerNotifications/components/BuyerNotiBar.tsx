@@ -20,13 +20,14 @@ type BuyerNotiBarProps = {
   number:number,
   address:string,
   buyerNumber:number,
+  category:string,
 };
 
 
 // note that the Tweet component is also a server component
 // all client side things are abstracted away in other components
 export default function BuyerNotiBar({
-  id, postId,title, left, author,sold,likes,userId,username,number,address,buyerNumber
+  id, postId,title, left, author,sold,likes,userId,username,number,address,buyerNumber,category
 }: BuyerNotiBarProps) {
   const [openNewCheckDialog, setOpenNewCheckDialog] = useState(false);
   const [openNewReceiveDialog, setOpenNewReceiveDialog] = useState(false);
@@ -37,12 +38,30 @@ export default function BuyerNotiBar({
   const handleAddComment = async()=>{
     setOpenNewCommentDialog(false);
   }
+  let imageSrc;
 
+  switch (category) {
+    case "Clothing":
+      imageSrc = "../../Clothing.jpg";
+      break;
+    case "Food":
+      imageSrc = "../../Food.jpg";
+      break;
+    case "Electronics":
+      imageSrc = "../../Electronics.jpg";
+      break;
+    case "EE related":
+      imageSrc = "../../EE_related.jpg";
+      break;
+    case "Others":
+      imageSrc = "../../Others.jpg";
+      break;
+  }
   return (
     <>
       <div className="border w-full mr-4 p-4 flex h-40 ">
         <div>
-          <img src="/image.jpg" alt="Product" className="w-44 h-auto" />
+          <img src={imageSrc} alt="Product" className="w-32 h-auto" />
         </div>
         <div className="px-4">
           <div className="mb-4 ">

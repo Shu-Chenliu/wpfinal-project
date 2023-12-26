@@ -17,8 +17,9 @@ type Props = {
   seller:string,
   money:number,
   postId:string,
+  left:number,
 };
-function BuyNowDialog({ title,username,seller,money,postId}:Props) {
+function BuyNowDialog({ title,username,seller,money,postId,left}:Props) {
   const [openBuyNowDialog,setOpenBuyNowDialog]=useState(false);
   const [totalPrice,setTotalPrice]=useState(money);
   const {postNotification}=useNotifications();
@@ -27,7 +28,11 @@ function BuyNowDialog({ title,username,seller,money,postId}:Props) {
   
   const handleBuy=async()=>{
     if(!inputRefProductNumber.current||!inputRefAddress.current){
-      alert("Please enter");
+      alert("Please enter something");
+      return;
+    }
+    if(left<parseInt(inputRefProductNumber.current.value)){
+      alert("you buy too many");
       return;
     }
     await postNotification({
@@ -78,7 +83,7 @@ function BuyNowDialog({ title,username,seller,money,postId}:Props) {
         </div>
         <div className="flex items-center">
             <p className="flex w-full font-semibold text-slate-900 " >Price (for each): </p>
-            <p>{"price"}</p>
+            <p>{money}</p>
         </div>
 
         <div className="flex items-center">
@@ -88,6 +93,7 @@ function BuyNowDialog({ title,username,seller,money,postId}:Props) {
               className="grow"
               placeholder="Product number"
               type="number"
+              defaultValue={1}
               ref={inputRefProductNumber}
               onChange={(e)=>setTotalPrice(money*parseInt(e.target.value))}
             />

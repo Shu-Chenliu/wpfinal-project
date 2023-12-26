@@ -24,6 +24,7 @@ async function ShoppingCartPage() {
             price={product.posts.price}
             username={username}
             seller={product.posts.author.username} 
+            left={product.posts.left} 
           />
         </div>
       ))}

@@ -11,10 +11,11 @@ export type CartProductProps = {
   price: number;
   username: string;
   seller:string;
+  left: number,
 };
 
 export default function CartProduct(
-  {id, displayId,title, category, price,username,seller}:CartProductProps
+  {id, displayId,title, category, price,username,seller,left}:CartProductProps
   ) {
   // const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -49,7 +50,7 @@ export default function CartProduct(
       <div className="w-full flex flex-row gap-4  border rounded-md p-2 mx-2 my-2" >
         <div className=" w-full mr-4 p-4 flex h-[1/4]">
           <div>
-            <img src="../../Food.jpg" alt="Product" className="w-48 h-auto" />
+          <img src={imageSrc} alt="Product" className="w-48 h-auto" />
           </div>
 
           <div className="px-4">
@@ -59,7 +60,14 @@ export default function CartProduct(
           </div>
 
           <div className="ml-auto">
-            <BuyNowDialog title={title} username={username} seller={seller} money={price} postId={displayId}/>
+            <BuyNowDialog 
+              title={title} 
+              username={username} 
+              seller={seller} 
+              money={price} 
+              postId={displayId}
+              left={left}
+            />
           </div>
         </div>
       </div>

@@ -55,6 +55,7 @@ export const posts = pgTable('posts', {
   price: integer('price').notNull(),
   left: integer('left').notNull(),
   sold: integer('sold').notNull().default(0),
+  buyerNumber: integer('buyerNumber').notNull().default(0),
   likes: doublePrecision('likes').notNull().default(0.00),
   },
   (table)=>({
@@ -134,10 +135,13 @@ export const notifications = pgTable('notifications', {
       onUpdate: 'cascade'
     })
     .notNull(),
+  number:integer('number').notNull(),
   money:integer('money').notNull(),
   address:varchar('address').notNull(),
   shipped:boolean('shipped').notNull().default(false),
   received:boolean('received').notNull().default(false),
+  readBySeller:boolean('readBySeller').notNull().default(false),
+  readByBuyer:boolean('readByBuyer').notNull().default(false),
   },(table)=>({
     
 }));

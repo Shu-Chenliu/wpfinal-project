@@ -37,6 +37,7 @@ function BuyNowDialog({ title,username,seller,money,postId}:Props) {
       money:totalPrice,
       address:inputRefAddress.current.value,
       postId,
+      number:parseInt(inputRefProductNumber.current.value),
     });
     setOpenBuyNowDialog(false)
   }

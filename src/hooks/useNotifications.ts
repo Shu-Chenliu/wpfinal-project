@@ -12,13 +12,15 @@ export default function useNotifications() {
     money,
     address,
     postId,
+    number,
   }: {
     text:string,
     buyer:string,
     seller:string,
     money:number,
     address:string,
-    postId:string
+    postId:string,
+    number:number,
   }) => {
     setLoading(true);
 
@@ -31,6 +33,7 @@ export default function useNotifications() {
         money,
         address,
         postId,
+        number,
       }),
     });
 

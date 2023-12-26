@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Star } from "lucide-react";
 import AddCommentDialog from "./AddCommentDialog";
 import useNotifications from "@/hooks/useNotifications";
+import  usePost from "@/hooks/usePosts";
 type ConfirmDialogProps={
   open: boolean,
   onClose: ()=>void,
@@ -19,16 +20,24 @@ type ConfirmDialogProps={
   username:string,
   number:number,
   address:string,
+  buyerNumber:number,
 }
-export default function ConfirmDialog({open,onClose,id,postId,title,left,author,sold,likes,userId,username,number,address}:ConfirmDialogProps){
+export default function ConfirmDialog({open,onClose,id,postId,title,left,author,sold,likes,userId,username,number,address,buyerNumber}:ConfirmDialogProps){
   const [openNewCommentDialog, setOpenNewCommentDialog] = useState(false);
   const {updateNotification}=useNotifications();
+  const {updateProduct}=usePost();
   const handleReceive=async()=>{
-    onClose();
+    await updateProduct({
+      id:postId,
+      left:left-number,
+      sold:sold+number,
+      buyerNumber:buyerNumber+1,
+    })
     await updateNotification({
       id,
       received:true,
     });
+    onClose();
     setOpenNewCommentDialog(true);
   }
   return(
@@ -77,6 +86,7 @@ export default function ConfirmDialog({open,onClose,id,postId,title,left,author,
         likes={likes}
         userId={userId}
         username={username}
+        buyerNumber={buyerNumber}
       />
     </>
   );

@@ -5,6 +5,7 @@ import { useState,useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Star } from "lucide-react";
 import ConfirmDialog from "./ConfirmDialog";
+import AddCommentDialog from "./AddCommentDialog"
 
 type BuyerNotiBarProps = {
   id:number,
@@ -18,13 +19,14 @@ type BuyerNotiBarProps = {
   username:string,
   number:number,
   address:string,
+  buyerNumber:number,
 };
 
 
 // note that the Tweet component is also a server component
 // all client side things are abstracted away in other components
 export default function BuyerNotiBar({
-  id, postId,title, left, author,sold,likes,userId,username,number,address
+  id, postId,title, left, author,sold,likes,userId,username,number,address,buyerNumber
 }: BuyerNotiBarProps) {
   const [openNewCheckDialog, setOpenNewCheckDialog] = useState(false);
   const [openNewReceiveDialog, setOpenNewReceiveDialog] = useState(false);
@@ -50,12 +52,23 @@ export default function BuyerNotiBar({
             <p className="flex w-full text-slate-900"> Product Seller: {author} </p>
           </div>
         </div>
-        <Button
-          className="ml-auto text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100 text-white bg-slate-700 hover:bg-orange-700 hover:text-slate-900"
-          onClick={() => setOpenNewReceiveDialog(true)}
-        >
-          Receive Product
-        </Button>
+        <div className="flex flex-col ml-auto">
+          <Button
+            className="ml-auto text-sm my-2 font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
+            onClick={() => setOpenNewReceiveDialog(true)}
+          >
+            Receive Product
+          </Button>
+          <Button
+            className="ml-auto text-sm my-2 font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
+            onClick={()=>{setOpenNewCommentDialog(true);}}
+          >
+            Comment
+          </Button>
+
+        </div>
+        
+
       </div>
 
       <ConfirmDialog 
@@ -72,7 +85,22 @@ export default function BuyerNotiBar({
         username={username}
         number={number}
         address={address}
+        buyerNumber={buyerNumber}
+      />
+      <AddCommentDialog 
+        open={openNewCommentDialog} 
+        onClose={()=>setOpenNewCommentDialog(false)}
+        id={id}
+        postId={postId}
+        left={left}
+        sold={sold}
+        likes={likes}
+        userId={userId}
+        username={username}
+        buyerNumber={buyerNumber}
       />
     </>
   );
 }
+
+

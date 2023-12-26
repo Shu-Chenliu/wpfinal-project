@@ -14,6 +14,7 @@ const postNotificationSchema = z.object({
   text: z.string().min(1).max(100),
   buyer: z.string().min(1).max(50),
   seller: z.string().min(1).max(50),
+  number:z.number().positive(),
   postId:z.string(),
   money:z.number().positive(),
   address:z.string().min(1).max(100),
@@ -32,13 +33,14 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
-  const { text,buyer,seller,money,address,postId} = data as PostNotificationRequest;
+  const { text,buyer,seller,number,money,address,postId} = data as PostNotificationRequest;
   await db
     .insert(notifications)
     .values({
       text,
       buyer,
       seller,
+      number,
       money,
       address,
       postId,

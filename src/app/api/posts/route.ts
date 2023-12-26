@@ -21,9 +21,10 @@ const postProductSchema = z.object({
 });
 const updateProductSchema=z.object({
   id:z.string(),
-  left:z.number().nonnegative(),
-  sold:z.number().nonnegative(),
-  likes:z.number(),
+  left:z.number().nonnegative().optional(),
+  sold:z.number().nonnegative().optional(),
+  likes:z.number().optional(),
+  buyerNumber:z.number().nonnegative().optional(),
 });
 type PostProductRequest = z.infer<typeof postProductSchema>;
 type updateProductRequest = z.infer<typeof updateProductSchema>;
@@ -55,10 +56,10 @@ export async function PUT(request: NextRequest) {
   } catch (error) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
-  const { id,left,sold,likes } = data as updateProductRequest;
+  const { id,left,sold,likes,buyerNumber } = data as updateProductRequest;
   await db
     .update(posts)
-    .set({left,sold,likes})
+    .set({left,sold,likes,buyerNumber})
     .where(eq(posts.displayId, id))
   return new NextResponse("OK", { status: 200 });
 }

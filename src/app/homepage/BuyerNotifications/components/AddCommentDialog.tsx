@@ -15,8 +15,9 @@ type ConfirmDialogProps={
   likes: number,
   userId: string,
   username: string,
+  buyerNumber: number,
 }
-export default function ConfirmDialog({open,onClose,id,postId,left,sold,likes,userId,username}:ConfirmDialogProps){
+export default function ConfirmDialog({open,onClose,id,postId,left,sold,likes,userId,username,buyerNumber}:ConfirmDialogProps){
   const inputRefProductComment = useRef<HTMLTextAreaElement>(null);
   const [liked,setLiked]=useState(0);
   const {updateProduct}=usePost();
@@ -24,10 +25,7 @@ export default function ConfirmDialog({open,onClose,id,postId,left,sold,likes,us
   const handleAddComment = async()=>{
     await updateProduct({
       id:postId,
-      left,
-      sold,
-      likes,
-      commentlike:liked,
+      likes:(likes*buyerNumber+liked)/(buyerNumber+1),
     });
     await postComment({
       text:inputRefProductComment.current?.value,

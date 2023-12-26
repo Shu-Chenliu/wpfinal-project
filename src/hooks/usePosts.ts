@@ -50,13 +50,13 @@ export default function usePosts() {
     left,
     sold,
     likes,
-    commentlike,
+    buyerNumber,
   }: {
     id: string,
-    left: number,
-    sold: number,
-    likes: number,
-    commentlike: number,
+    left?: number,
+    sold?: number,
+    likes?: number,
+    buyerNumber?: number,
   }) => {
     setLoading(true);
 
@@ -64,9 +64,10 @@ export default function usePosts() {
       method: "PUT",
       body: JSON.stringify({
         id,
-        left:left-1,
-        sold:sold+1,
-        likes:(likes*sold+commentlike)/(sold+1),
+        left:left,
+        sold:sold,
+        likes:likes,
+        buyerNumber:buyerNumber,
       }),
     });
 

@@ -30,13 +30,14 @@ async function NotificationPage() {
             postId={notification.post.displayId} 
             title={notification.post.title} 
             left={notification.post.left} 
-            author={notification.post.authorId}
+            author={notification.seller}
             sold={notification.post.sold}
             likes={notification.post.likes}
             userId={userId}
             username={username}
             number={notification.money/notification.post.price}
             address={notification.address}
+            buyerNumber={notification.post.buyerNumber}
           />
         </div>
       ))}

@@ -21,6 +21,7 @@ export const getAllNotificationsOfBuyer = async(username:string) =>{
           left:true,
           sold:true,
           likes:true,
+          buyerNumber:true,
         }
       }
     }

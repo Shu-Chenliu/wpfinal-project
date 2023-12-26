@@ -80,7 +80,11 @@ async function Navbar() {
             className="flex w-full my-2 hover:bg-orange-500 m-2"
             ><UserRound className="m-2" />My account</Button>
           </Link> 
-             
+          <Link href={"/homepage/getCoupon"}>
+            <Button
+            className="flex w-full my-2 hover:bg-orange-500 m-2"
+            >Get Coupon</Button>
+          </Link> 
           <Link href={`/auth/signout`}>
             <Button
               // variant={"ghost"}

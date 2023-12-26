@@ -25,7 +25,7 @@ export default function ConfirmDialog({open,onClose,id,postId,left,sold,likes,us
   const handleAddComment = async()=>{
     await updateProduct({
       id:postId,
-      likes:(likes*buyerNumber+liked)/(buyerNumber+1),
+      likes:(likes*(buyerNumber-1)+liked)/(buyerNumber),
     });
     await postComment({
       text:inputRefProductComment.current?.value,

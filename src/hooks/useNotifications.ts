@@ -52,10 +52,14 @@ export default function useNotifications() {
     id,
     shipped,
     received,
+    readBySeller,
+    readByBuyer
   }: {
     id: number,
     shipped?: boolean,
     received?: boolean,
+    readBySeller?: boolean,
+    readByBuyer?: boolean,
   }) => {
     setLoading(true);
 
@@ -65,6 +69,8 @@ export default function useNotifications() {
         id,
         shipped,
         received,
+        readBySeller,
+        readByBuyer,
       }),
     });
 

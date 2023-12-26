@@ -23,6 +23,8 @@ const updateNotificationSchema = z.object({
   id:z.number(),
   shipped:z.boolean().optional(),
   received:z.boolean().optional(),
+  readBySeller:z.boolean().optional(),
+  readByBuyer:z.boolean().optional(),
 });
 type PostNotificationRequest = z.infer<typeof postNotificationSchema>;
 type updateNotificationRequest = z.infer<typeof updateNotificationSchema>;
@@ -54,10 +56,10 @@ export async function PUT(request: NextRequest) {
   } catch (error) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
-  const { id,shipped,received } = data as updateNotificationRequest;
+  const { id,shipped,received,readBySeller,readByBuyer } = data as updateNotificationRequest;
   await db
     .update(notifications)
-    .set({shipped,received})
+    .set({shipped,received,readBySeller,readByBuyer})
     .where(eq(notifications.id, id))
   return new NextResponse("OK", { status: 200 });
 }

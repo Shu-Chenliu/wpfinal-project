@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 import {getUserProfile} from "./components/actions"
 import Coupon from "./components/Coupon";
+import { Ghost } from 'lucide-react';
 async function HomePage() {
   const session = await auth();
   if (!session || !session?.user?.id) {
@@ -24,11 +25,13 @@ async function HomePage() {
       <div className="flex items-center justify-top">
         
         <div>
-          <img
+          {/* <img
             // src={userProfile?.avatar}
             // alt="avatar"
             className="w-40 h-40  border-2 my-2 my-2 "
-          />
+            
+          /> */}
+          <Ghost className="w-full h-full" />
         </div>
         <div className="my-2 my-2 p-3">
           <p>Username: {userProfile?.username}</p>

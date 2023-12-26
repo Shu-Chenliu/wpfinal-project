@@ -23,9 +23,11 @@ export default function SellerNotiBar({
   const [openNewCheckDialog, setOpenNewCheckDialog] = useState(false);
   const {updateNotification}=useNotifications();
   const handleCheckOrder = async()=>{
+    
     await updateNotification({
       id,
       shipped:true,
+      readBySeller:true,
     });
     setOpenNewCheckDialog(false);
   }
@@ -48,10 +50,53 @@ export default function SellerNotiBar({
       imageSrc = "../../Others.jpg";
       break;
   }
+  const contentToRender = (
+    <>
+      <div>
+        <img src={imageSrc} alt="Product" className="w-32 h-auto" />
+      </div>
+      <div className="px-4">
+        <div className="mb-4 ">
+          <p className="flex w-full font-semibold text-slate-900"> Product Name: {text} </p>
+          <p className="flex w-full font-semibold text-slate-900"> Buyer: {buyer}</p>
+          <p className="flex w-full font-semibold text-slate-900"> Buyer Address: {address}</p>
+          <p className="flex w-full font-semibold text-slate-900"> Payment recieve: {money}</p>
+        </div>
+      </div>
+
+      <Button
+        className={!read?"ml-auto bg-slate-700 hover:bg-orange-500 text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100":"ml-auto bg-slate-200 hover:bg-slate-200 text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100"}
+        onClick={() => {
+          if(read){
+            return;
+          }
+          setOpenNewCheckDialog(true);
+        }}
+      >
+        Check Order
+      </Button>
+ 
+    </>
+
+  );
+
   return (
     <>
-      <div className="border rounded my-2 w-full mr-4 p-4 flex h-40">
-        <div>
+    {read?
+    (<div className="border rounded my-2 w-full mr-4 p-4 flex h-40 bg-slate-200">
+      {contentToRender}
+    </div>)
+    :
+    (<div className="border rounded my-2 w-full mr-4 p-4 flex h-40">
+      {contentToRender}
+    </div>
+
+    )
+
+      
+    }
+      {/* <div className="border rounded my-2 w-full mr-4 p-4 flex h-40"> */}
+        {/* <div>
           <img src={imageSrc} alt="Product" className="w-32 h-auto" />
         </div>
         <div className="px-4">
@@ -68,8 +113,8 @@ export default function SellerNotiBar({
           onClick={() => setOpenNewCheckDialog(true)}
         >
           Check Order
-        </Button>
-      </div>
+        </Button> */}
+      {/* </div> */}
       <Dialog open={openNewCheckDialog}>
 
         <DialogContent
@@ -81,17 +126,7 @@ export default function SellerNotiBar({
             <DialogTitle className="text-orange-600">Check Order</DialogTitle>
             <DialogDescription>Are you sure to ship your product?</DialogDescription>
           </DialogHeader>
-          {/* <div className="flex w-full flex-col gap-1">
-    
-            <p className="flex w-full font-semibold text-slate-900"> Product Name: {"title"} </p>
-            <p className="flex w-full font-semibold text-slate-900 " > Product number: {"orderNumber"}</p>
-            <p className="flex w-full font-semibold text-slate-900"> Buyer: {"buyer"}</p>
-            <p className="flex w-full font-semibold text-slate-900"> Buyer Address: {"address"}</p>
-            <p className="flex w-full font-semibold text-slate-900"> Payment recieve: {"price"}</p>
-              
-          </div> */}
-
-
+       
           <div className="flex w-full justify-end ">
           <Button
             className="text-sm font-semibold text-slate-900 border bg-slate-200 hover:bg-slate-100 mx-2"

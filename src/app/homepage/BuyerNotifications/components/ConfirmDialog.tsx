@@ -38,6 +38,7 @@ export default function ConfirmDialog({open,onClose,id,postId,title,left,author,
     await updateNotification({
       id,
       received:true,
+      readByBuyer:true,
     });
     onClose();
     setOpenNewCommentDialog(true);

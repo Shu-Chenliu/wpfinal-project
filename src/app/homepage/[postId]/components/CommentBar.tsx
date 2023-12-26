@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Star, StarHalf } from "lucide-react";
 
 import { MessageCircle } from "lucide-react";
 
@@ -18,9 +19,62 @@ export default function CommentBar({
   return (
     <div 
     // id={id.toString()}
-    className="flex flex-col gap-4 border rounded-md p-2 mx-2 my-2 mg-2"
+    className="block gap-4 border rounded-md p-2 mx-2 my-2 mg-2"
     >
-      <p className="font-bold">{author}</p>     
+      <div className="flex">
+      <p className="font-bold">{author}</p>   
+      <div className="flex mx-3">
+          <button className="flex">
+            {stars >= 0.75 ? (
+              <Star fill="orange" strokeWidth={0} />
+            ) : stars >= 0.25 ? (
+              <StarHalf fill="orange-800" strokeWidth={0} />
+            ) : (
+              <Star fill="black" strokeWidth={0} />
+            )}
+          </button>
+          <button className="flex">
+            {stars >= 1.75 ? (
+              <Star fill="orange" strokeWidth={0} />
+            ) : stars >= 1.25 ? (
+              <StarHalf fill="orange" strokeWidth={0} />
+            ) : (
+              <Star fill="black" strokeWidth={0} />
+            )}
+          </button>
+          <button className="flex">
+            {stars >= 2.75 ? (
+              <Star fill="orange" strokeWidth={0} />
+            ) : stars >= 2.25 ? (
+              <StarHalf fill="orange" strokeWidth={0} />
+            ) : (
+              <Star fill="black" strokeWidth={0} />
+            )}
+          </button>
+          <button className="flex">
+            {stars >= 3.75 ? (
+              <Star fill="orange" strokeWidth={0} />
+            ) : stars >= 3.25 ? (
+              <StarHalf fill="orange" strokeWidth={0} />
+            ) : (
+              <Star fill="black" strokeWidth={0} />
+            )}
+          </button>
+          <button className="flex">
+            {stars >= 4.75 ? (
+              <Star fill="orange" strokeWidth={0} />
+            ) : stars >= 4.25 ? (
+              <StarHalf fill="orange" strokeWidth={0} />
+            ) : (
+              <Star fill="black" strokeWidth={0} />
+            )}
+          </button>
+
+      </div>
+      
+    </div>
+      
+
       <article className="mx-6 whitespace-pre-wrap break-all">{text}</article>
     </div>
   );

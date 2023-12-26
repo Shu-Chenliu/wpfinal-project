@@ -9,6 +9,7 @@ import AddToCartButton from "./components/AddToCartButton";
 import CommentBar from "./components/CommentBar";
 import { getComments,getMyShoppingCart } from "./components/actions";
 import { publicEnv } from "@/lib/env/public";
+import { ArrowLeft } from 'lucide-react';
 type ProductPageProps = {
   params: {
     postId: string;
@@ -54,8 +55,8 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
       <div className="flex">
         <Link href={"/homepage"}>
           <Button
-            className="flex font-semibold bg-slate-800 hover:bg-orange-700 hover:text-slate-900 "
-          >Back to homepage
+            className="flex font-semibold bg-slate-100 hover:bg-slate-200 text-slate-900 hover:text-slate-100"
+          ><ArrowLeft />
           </Button>
         </Link>
         <AddToCartButton 

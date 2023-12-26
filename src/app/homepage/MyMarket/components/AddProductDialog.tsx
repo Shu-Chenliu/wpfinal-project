@@ -149,11 +149,14 @@ function AddProductDialog({userDisplayId}:Props) {
           </div>
 
           <div className="flex w-full justify-end ">
+          <Button
+            className="text-sm font-semibold text-slate-900 border bg-slate-200 hover:bg-slate-100 mx-2"
+            onClick={async() => {setOpenAddProductDialog(false)}} 
+          >
+            Close
+          </Button>
             <Button className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-orange-400"
-              onClick={async () => {
-              await handlePostProduct();
-              setOpenAddProductDialog(false);
-              }}
+              onClick={handlePostProduct}
             >
               Post
             </Button>

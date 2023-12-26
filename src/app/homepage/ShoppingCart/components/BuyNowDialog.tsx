@@ -28,10 +28,12 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId}:Props) {
   const {deleteCart}=useCart();
   const inputRefProductNumber = useRef<HTMLInputElement>(null); 
   const inputRefAddress = useRef<HTMLInputElement>(null);
-  
   const handleBuy=async()=>{
     if(!inputRefProductNumber.current||!inputRefAddress.current){
-      alert("Please enter something");
+      return;
+    }
+    if(inputRefAddress.current.value===""){
+      alert("enter something");
       return;
     }
     if(left<parseInt(inputRefProductNumber.current.value)){

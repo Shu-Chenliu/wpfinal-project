@@ -4,15 +4,15 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import BuyNowDialog from "./BuyNowDialog";
 export type CartProductProps = {
-  // id: number;
-  // displayId:string;
-  // title: string;
-  // category: string;
-  // price: number;
+  id: number;
+  displayId:string;
+  title: string;
+  category: string;
+  price: number;
 };
 
 export default function CartProduct(
-  // {id, displayId,title, category, price}:CartProductProps
+  {id, displayId,title, category, price}:CartProductProps
   ) {
   // const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -32,7 +32,7 @@ export default function CartProduct(
       >
         <p className="flex  font-semibold text-slate-900" >
           Want to buy: 
-          {/* {title} */}
+          {title}
         </p>
         {/* <p>{displayId}</p> */}
         <p className="flex font-semibold text-slate-900" >
@@ -42,7 +42,7 @@ export default function CartProduct(
        
         <p className="flex font-semibold text-slate-900" >
           Price:
-          {/* {price} */}
+          {price}
         </p>
         
       </div>

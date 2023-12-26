@@ -8,20 +8,22 @@ import useComments from "@/hooks/useComments";
 type ConfirmDialogProps={
   open: boolean,
   onClose: ()=>void,
-  id: string,
+  id: number,
+  postId:string,
   left: number,
   sold: number,
   likes: number,
   userId: string,
+  username: string,
 }
-export default function ConfirmDialog({open,onClose,id,left,sold,likes,userId}:ConfirmDialogProps){
+export default function ConfirmDialog({open,onClose,id,postId,left,sold,likes,userId,username}:ConfirmDialogProps){
   const inputRefProductComment = useRef<HTMLTextAreaElement>(null);
   const [liked,setLiked]=useState(0);
   const {updateProduct}=usePost();
   const {postComment}=useComments();
   const handleAddComment = async()=>{
     await updateProduct({
-      id:"a3d95d31-b266-46d4-b8af-366a94aac7be",
+      id:postId,
       left,
       sold,
       likes,
@@ -29,8 +31,8 @@ export default function ConfirmDialog({open,onClose,id,left,sold,likes,userId}:C
     });
     await postComment({
       text:inputRefProductComment.current?.value,
-      authorId:userId,
-      postId:"a3d95d31-b266-46d4-b8af-366a94aac7be",
+      author:username,
+      postId,
       stars:liked,
     })
     onClose();
@@ -42,62 +44,55 @@ export default function ConfirmDialog({open,onClose,id,left,sold,likes,userId}:C
         style={{ width: "500px" }}
       >
         <DialogHeader>
-          <DialogTitle>Comment Product</DialogTitle>
-          <DialogDescription>Please comment the product you receive</DialogDescription>
+          <DialogTitle>Comment Product (optional)</DialogTitle>
+          <DialogDescription>Woud you like to leave a comment?</DialogDescription>
         </DialogHeader>
         <div className="flex w-full flex-col gap-1">
         <div className="flex items-center">
           <p className="flex w-full font-semibold text-slate-900">
-            Product Name:{"title"}
+            What you've bought: {"title"}
           </p>
         </div>
 
         <div className="flex">
         <button className="flex" onClick={()=>{setLiked(1)}}>
-          {(liked>=1)?<Star fill="yellow" strokeWidth={0} />:<Star fill="black" strokeWidth={0} />}
+          {(liked>=1)?<Star fill="orange" strokeWidth={0} />:<Star fill="black" strokeWidth={0} />}
         </button>
         <button className="flex" onClick={()=>{setLiked(2)}}>
-          {(liked>=2)?<Star fill="yellow" strokeWidth={0} />:<Star fill="black" strokeWidth={0} />}
+          {(liked>=2)?<Star fill="orange" strokeWidth={0} />:<Star fill="black" strokeWidth={0} />}
         </button>
         <button className="flex" onClick={()=>{setLiked(3)}}>
-          {(liked>=3)?<Star fill="yellow" strokeWidth={0} />:<Star fill="black" strokeWidth={0} />}
+          {(liked>=3)?<Star fill="orange" strokeWidth={0} />:<Star fill="black" strokeWidth={0} />}
         </button>
         <button className="flex" onClick={()=>{setLiked(4)}}>
-          {(liked>=4)?<Star fill="yellow" strokeWidth={0} />:<Star fill="black" strokeWidth={0} />}
+          {(liked>=4)?<Star fill="orange" strokeWidth={0} />:<Star fill="black" strokeWidth={0} />}
         </button>
         <button className="flex" onClick={()=>{setLiked(5)}}>
-          {(liked>=5)?<Star fill="yellow" strokeWidth={0} />:<Star fill="black" strokeWidth={0} />}
+          {(liked>=5)?<Star fill="orange" strokeWidth={0} />:<Star fill="black" strokeWidth={0} />}
         </button>
       </div>
 
         <div className="flex items-center">
-
-          <p className="flex w-full font-semibold text-slate-900">Product description</p>
+          <p className="flex w-full font-semibold text-slate-900">Your comment</p>
           <textarea
             className="bg-white/0 p-2 w-full outer-glow border border-slate-500 rounded-md"
             autoFocus
-            placeholder="Product comment"
+            placeholder="comment......"
             ref={inputRefProductComment}
           />
         </div>
-
-        {/* <div className="flex items-center"> */}
-
-          {/* <p className="flex w-full font-semibold text-slate-900">Product Image</p> */}
-          {/* <input
-            className="flex w-full rounded-md border border-slate-900"
-            type="text" //TODO: change to image
-            placeholder="Product Image"
-          /> */}
-
-        {/* </div> */}
-        {/* upload image here */}
 
         </div>
 
         <div className="flex w-full justify-end ">
         <Button
-          className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-orange-400"
+          className="text-sm font-semibold text-slate-900 border bg-slate-200 hover:bg-slate-100 mx-2"
+          onClick={async() => {onClose(); }} 
+        >
+          Close
+        </Button>
+        <Button
+          className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
           onClick={handleAddComment}
         >
           Comment

@@ -23,6 +23,25 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
     "use server";
     await addToCart(userId,postId);
   }
+  let imageSrc;
+
+  switch (Product?.category) {
+    case "Clothing":
+      imageSrc = "../../Clothing.jpg";
+      break;
+    case "Food":
+      imageSrc = "../../Food.jpg";
+      break;
+    case "Electronics":
+      imageSrc = "../../Electronics.jpg";
+      break;
+    case "EE related":
+      imageSrc = "../../EE_related.jpg";
+      break;
+    case "Others":
+      imageSrc = "../../Others.jpg";
+      break;
+  }
   return (
     <div className="w-full">
       <div className="flex">
@@ -34,45 +53,26 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
         </Link>
         <AddToCartButton addToCart={handleAddToCart} userId={userId?userId:""} postId={postId}/>
 
-        {/* <button
-          style={{
-            backgroundColor: liked ? 'limegreen  ' : 'gray',
-            color: 'white',
-            border: 'none',
-            padding: '5px 5px',
-            textAlign: 'center',
-            width: '200px',
-            cursor: liked ? 'default' : 'pointer',
-          }}
-          className="flex items-center gap-1 hover:text-brand rounded "
-          
-          // onClick={handleClick}
-          // disabled={loading}
-        >
-          <div
-            className="flex items-center gap-1 rounded-full p-1.5 transition-colors duration-300 hover:bg-brand/10"
-          >
-            <CheckSquare size={18} />
-            {liked ? "Added" : "Add to Cart?"}       
-          </div>
-        </button> */}
-
-
-
       </div>
       
       <div className="flex gap-4">
-        <p className="flex w-full font-semibold text-orange-700">{Product?.title}</p>
+        <p className="flex w-full font-semibold text-orange-700 p-2 text-4xl">{Product?.title}</p>
       </div>
+
       <div className="flex">
-          <img 
-          // src="/image/microphone.jpg"
-           className="w-1/4 border"/>          
-          <p className="w-full rounded-md p-2 hover:bg-white/10">
+          <img src={imageSrc} alt="Product" className="w-1/4 h-auto" />
+
+          {/* <div className="w-full rounded-md p-2 hover:bg-white/10 ">
+            {Product?.description}
+          </div> */}
+
+          <p className="w-full rounded-md p-2 hover:bg-white/10 overflow-wrap-normal">
             {Product?.description}
           </p>
-        </div>
-      <div>
+
+      </div>
+
+      <div className="p-2">
         <p className="flex w-full font-semibold text-slate-900">Seller: {Product?.author.username}</p>
         <p className="flex w-full font-semibold text-slate-900">Price: {Product?.price}</p>
         <p className="flex w-full font-semibold text-slate-900">Category: {Product?.category}</p>
@@ -81,7 +81,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
       </div>
       {comments.map((comment)=>(
         <div key={comment.id}>
-          <CommentBar text={comment.text} stars={comment.stars} author={comment.author}/>
+          <CommentBar text={comment.text!} stars={comment.stars} author={comment.author}/>
         </div>
       ))}
     </div>

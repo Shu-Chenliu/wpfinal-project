@@ -13,7 +13,7 @@ import { z } from "zod";
 
 const postCommentSchema = z.object({
   text: z.string().min(1).max(280).optional(),
-  authorId: z.string().min(1).max(50),
+  author: z.string().min(1).max(50),
   postId: z.string(),
   stars:z.number().min(0).max(5),
 });
@@ -25,12 +25,12 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
-  const { text,authorId,postId,stars} = data as PostCommentRequest;
+  const { text,author,postId,stars} = data as PostCommentRequest;
   await db
     .insert(comments)
     .values({
       text,
-      authorId: authorId,
+      author: author,
       postId: postId,
       stars: stars,
     })

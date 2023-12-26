@@ -50,7 +50,7 @@ export default function MyMarketProductButton({id, displayId,title, category, pr
         // onClick={handleClickOpen} 
         // className="text-start block" 
         // id={id}
-        className="flex flex-col gap-4  border rounded-md p-2 mx-2 my-2"
+        className="flex flex-col gap-4  border rounded-md p-2 mx-2 my-2 w-1/5"
         // width="500px"
       >
         <p className="flex w-full font-semibold text-slate-900" >
@@ -58,10 +58,9 @@ export default function MyMarketProductButton({id, displayId,title, category, pr
           {title}
         </p>
         <p>{displayId}</p>
+
         <p className="flex w-full font-semibold text-slate-900" >
-
-          <img src={imageSrc} alt="Product" />
-
+          <img src={imageSrc} alt="Product" className="w-50 h-auto"/>
         </p>
        
         <p className="flex w-full font-semibold text-slate-900" >

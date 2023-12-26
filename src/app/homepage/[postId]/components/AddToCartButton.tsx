@@ -7,7 +7,6 @@ type AddToCartButtonProps={
 }
 export default function AddToCartButton({addToCart,userId,postId}: AddToCartButtonProps){
   const handleAddToCart=async(userId:string,postId:string)=>{
-    console.log("handleAddToCart");
     if(userId===""){
       console.log("sign in");
       return;
@@ -16,7 +15,7 @@ export default function AddToCartButton({addToCart,userId,postId}: AddToCartButt
   }
   return(
     <Button
-      className="flex font-semibold hover:bg-orange-700 hover:text-black"
+      className="flex font-semibold hover:bg-orange-700 hover:text-black ml-auto"
       onClick={()=>handleAddToCart(userId,postId)}
     >
       Add to cart

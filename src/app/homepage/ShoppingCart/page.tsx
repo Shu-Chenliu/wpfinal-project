@@ -12,7 +12,8 @@ async function ShoppingCartPage() {
   const userId = session.user.id;
   const Cart=await getMyShoppingCart(userId);
   return (
-    <div>
+    <div className="h-[100vh]">
+      <p className="flex font-semibold text-slate-900 text-2xl p-3">What to buy</p>
       {Cart.map((product) =>(
         <div key={product.postId}>
           <CartProduct 

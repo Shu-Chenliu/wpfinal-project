@@ -4,97 +4,63 @@ import { useState,useRef } from "react";
 import { Input } from "@/components/ui/input";
 import { Star } from "lucide-react";
 import AddCommentDialog from "./AddCommentDialog";
+import useNotifications from "@/hooks/useNotifications";
 type ConfirmDialogProps={
   open: boolean,
   onClose: ()=>void,
-  id:string,
+  id:number,
+  postId:string,
   title:string,
   left:number,
   author:string,
   sold:number,
   likes:number,
-  userId:string
+  userId:string,
+  username:string,
+  number:number,
+  address:string,
 }
-export default function ConfirmDialog({open,onClose,id,title,left,author,sold,likes,userId}:ConfirmDialogProps){
+export default function ConfirmDialog({open,onClose,id,postId,title,left,author,sold,likes,userId,username,number,address}:ConfirmDialogProps){
   const [openNewCommentDialog, setOpenNewCommentDialog] = useState(false);
+  const {updateNotification}=useNotifications();
+  const handleReceive=async()=>{
+    onClose();
+    await updateNotification({
+      id,
+      received:true,
+    });
+    setOpenNewCommentDialog(true);
+  }
   return(
     <>
       <Dialog open={open}>
         <DialogContent
           className="flex flex-col gap-4 w-3/4"
           style={{ width: "500px" }}
-          onInteractOutside={()=>{onClose()}}
         >
           <DialogHeader>
-            <DialogTitle>Receive Order</DialogTitle>
-            <DialogDescription>Please receive your package</DialogDescription>
+            <DialogTitle>Package Delivered!</DialogTitle>
+            <DialogDescription>Have you recieved your package? </DialogDescription>
           </DialogHeader>
           <div className="flex w-full flex-col gap-1">
           <div className="flex items-center">
-            <p className="flex w-full font-semibold text-slate-900">
-              Product Name:{"title"}
-            </p>
-          </div>
-
-          <div className="flex items-center">
-
-            <p className="flex w-full font-semibold text-slate-900">
-              Product Description:{"description"}
-            </p>
-
-          </div>
-
-          <div className="flex items-center">
-
-            <p className="flex w-full font-semibold text-slate-900">
-              Product Category:{"category"}
-            </p>
-
-          </div>
-
-          <div className="flex items-center">
-
-            <p className="flex w-full font-semibold text-slate-900">
-              Product Price:{"price"}
-            </p>
-
-          </div>
-
-          <div className="flex items-center">
-
-            <p className="flex w-full font-semibold text-slate-900 " >
-              Product number:{"orderNumber"}
-            </p>
-
-          </div>
-
-          <div className="flex items-center">
-
-            <p className="flex w-full font-semibold text-slate-900 " >
-              Product Seller:{"seller"}
-            </p>
-
-          </div>
-
-          <div className="flex items-center">
-
-            <p className="flex w-full font-semibold text-slate-900">Product Image</p>
-            {/* <input
-              className="flex w-full rounded-md border border-slate-900"
-              type="text" //TODO: change to image
-              placeholder="Product Image"
-            /> */}
-
+            {/* <p className="flex w-full font-semibold text-slate-900"> Product Name:{"title"}</p>   
+            <p className="flex w-full font-semibold text-slate-900"> Product number:{"orderNumber"}</p>
+            <p className="flex w-full font-semibold text-slate-900"> Product Seller:{"seller"} </p> */}
+            <p className="flex w-full  text-slate-900"> {author} has delivered {number} {title}(s) to {address}</p>
           </div>
           </div>
 
           <div className="flex w-full justify-end ">
           <Button
-            className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-orange-400"
-            onClick={async() => {
-              onClose();
-              setOpenNewCommentDialog(true);
-            }}
+          className="text-sm font-semibold text-slate-900 border bg-slate-200 hover:bg-slate-100 mx-2"
+          onClick={async() => {onClose();}} 
+        >
+          Close
+        </Button>
+          <Button
+            className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
+            onClick={handleReceive}
           >
             Receive
           </Button>
@@ -105,10 +71,12 @@ export default function ConfirmDialog({open,onClose,id,title,left,author,sold,li
         open={openNewCommentDialog} 
         onClose={()=>setOpenNewCommentDialog(false)}
         id={id}
+        postId={postId}
         left={left}
         sold={sold}
         likes={likes}
         userId={userId}
+        username={username}
       />
     </>
   );

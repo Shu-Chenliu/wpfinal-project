@@ -16,8 +16,9 @@ type Props = {
   username:string,
   seller:string,
   money:number,
+  postId:string,
 };
-function BuyNowDialog({ title,username,seller,money}:Props) {
+function BuyNowDialog({ title,username,seller,money,postId}:Props) {
   const [openBuyNowDialog,setOpenBuyNowDialog]=useState(false);
   const [totalPrice,setTotalPrice]=useState(money);
   const {postNotification}=useNotifications();
@@ -34,6 +35,7 @@ function BuyNowDialog({ title,username,seller,money}:Props) {
       seller,
       money:totalPrice,
       address:inputRefAddress.current.value,
+      postId,
     });
     setOpenBuyNowDialog(false)
   }
@@ -45,7 +47,7 @@ function BuyNowDialog({ title,username,seller,money}:Props) {
         onClick={() => setOpenBuyNowDialog(true)}
         >Buy Now
         </Button>
-    <Dialog open={openBuyNowDialog}>
+      <Dialog open={openBuyNowDialog}>
       
       {/* <DialogTrigger asChild>
         
@@ -60,9 +62,7 @@ function BuyNowDialog({ title,username,seller,money}:Props) {
         </DialogHeader>
         <div className="flex w-full flex-col gap-1">
         <div className="flex items-center">
-          <p className="flex w-full font-semibold text-slate-900">Product Name{title}</p>
-
-          
+          <p className="flex w-full font-semibold text-slate-900 text-2xl"> {title}</p>
         </div>
         <div className="flex items-center">
 
@@ -74,7 +74,10 @@ function BuyNowDialog({ title,username,seller,money}:Props) {
           /> */}
 
         </div>
-        
+        <div className="flex items-center">
+            <p className="flex w-full font-semibold text-slate-900 " >Price (for each): </p>
+            <p>{"price"}</p>
+        </div>
 
         <div className="flex items-center">
             <p className="flex w-full font-semibold text-slate-900 " >Number to buy</p>
@@ -105,6 +108,12 @@ function BuyNowDialog({ title,username,seller,money}:Props) {
         </div>
 
         <div className="flex w-full justify-end ">
+        <Button
+            className="text-sm font-semibold text-slate-900 border bg-slate-200 hover:bg-slate-100 mx-2"
+            onClick={async() => {setOpenBuyNowDialog(false)}} 
+          >
+            Close
+          </Button>
           <Button 
           className="flex font-semibold hover:bg-orange-700 hover:text-black "
           onClick={handleBuy}

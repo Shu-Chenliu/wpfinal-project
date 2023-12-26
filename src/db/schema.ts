@@ -67,7 +67,8 @@ export const postsRelations = relations(posts, ({ one, many }) => ({
     references: [usersTable.displayId],
   }),
   usersToCart: many(usersToCart),
-  comments: many(comments)
+  comments: many(comments),
+  notifications: many(notifications),
 }));
 export const usersToCart = pgTable('users_to_cart', {
   userId: uuid('user_id').notNull().references(() => usersTable.displayId),
@@ -127,10 +128,22 @@ export const notifications = pgTable('notifications', {
       onUpdate: 'cascade'
     })
     .notNull(),
+  postId: uuid('post_Id::uuid')
+    .references(()=>posts.displayId,{
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    })
+    .notNull(),
   money:integer('money').notNull(),
   address:varchar('address').notNull(),
   shipped:boolean('shipped').notNull().default(false),
   received:boolean('received').notNull().default(false),
   },(table)=>({
     
+}));
+export const notificationsRelations = relations(notifications, ({ one }) => ({
+  post: one(posts, {
+    fields: [notifications.postId],
+    references: [posts.displayId],
+  }),
 }));

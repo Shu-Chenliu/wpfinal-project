@@ -53,19 +53,13 @@ export default function CartProduct(
           </div>
 
           <div className="px-4">
-            <div>
-              <p className="flex font-semibold text-slate-900">
-                Want to buy: {title}
-              </p>
-
-              <p className="flex font-semibold text-slate-900">
-                Price: {price}
-              </p>
-            </div>
+            <p className="flex font-semibold text-slate-900 ">{title}</p>
+            <p className="flex text-slate-900">Price: {price}</p>
+            <p className="flex text-slate-900">Number left: {"left"}</p>
           </div>
 
           <div className="ml-auto">
-            <BuyNowDialog title={title} username={username} seller={seller} money={price}/>
+            <BuyNowDialog title={title} username={username} seller={seller} money={price} postId={displayId}/>
           </div>
         </div>
       </div>

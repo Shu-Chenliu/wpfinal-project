@@ -10,25 +10,41 @@ async function HomePage() {
   const userDisplayId = session?.user?.id;
   const userProfile=await getUserProfile(userDisplayId);
   return (
-    <div className="flex h-[90vh] w-full ">
+    <div className="block h-[90vh] w-full p-3">
       {/* <div className="flex flex-col items-center justify-center">
         <BiError className="text-yellow-500" size={80} />
         <p className="text-sm font-semibold text-slate-700">
           Please select a document to edit
         </p>
       </div> */}
-      <div className="flex flex-col items-center justify-top">
-        <p className="text-sm font-semibold text-slate-700">
+      <h1 className="text-sm font-semibold text-slate-700">
           My Account
-        </p>
-        <p>{userProfile?.username}</p>
-        <p>{userProfile?.email}</p>
+        </h1>
+      <div className="flex items-center justify-top">
+        
+        <div>
+          <img
+            // src={userProfile?.avatar}
+            // alt="avatar"
+            className="w-40 h-40  border-2 my-2 my-2 "
+          />
+        </div>
+        <div className="my-2 my-2 p-3">
+          <p>Username: {userProfile?.username}</p>
+          <p>User email: {userProfile?.email}</p>
+        </div>
+        
+        
+      </div>
+      <div>
+        <p className="text-sm font-semibold text-slate-700">My post</p>
         {userProfile?.posts.map((post) =>(
           <div key={post.id}>
             {post.title}
           </div>
         ))}
       </div>
+
     </div>
   );
 }

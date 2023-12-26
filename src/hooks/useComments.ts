@@ -7,12 +7,12 @@ export default function useComments() {
 
   const postComment = async ({
     text,
-    authorId,
+    author,
     postId,
     stars,
   }: {
     text?: string,
-    authorId: string,
+    author: string,
     postId:string,
     stars:number,
   }) => {
@@ -22,7 +22,7 @@ export default function useComments() {
       method: "POST",
       body: JSON.stringify({
         text,
-        authorId,
+        author,
         postId,
         stars,
       }),

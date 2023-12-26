@@ -1,17 +1,29 @@
 import { db } from "@/db";
 import { notifications } from "@/db/schema";
-export const getAllNotificationsOfBuyer = async(userId:string) =>{
+export const getAllNotificationsOfBuyer = async(username:string) =>{
   "use server";
   const notifications= await db.query.notifications.findMany({
-    where:(notifications, { eq }) => eq(notifications.buyer, userId),
+    where:(notifications, { eq }) => (eq(notifications.buyer, username), eq(notifications.shipped,true)),
     columns:{
       id:true,
       text:true,
-      buyer:true,
       seller:true,
       money:true,
       address:true,
     },
+    with:{
+      post:{
+        columns:{
+          displayId:true,
+          title:true,
+          authorId:true,
+          price:true,
+          left:true,
+          sold:true,
+          likes:true,
+        }
+      }
+    }
   })
   return notifications;
 }

@@ -6,6 +6,7 @@ import { Star } from "lucide-react";
 import AddCommentDialog from "./AddCommentDialog";
 import useNotifications from "@/hooks/useNotifications";
 import  usePost from "@/hooks/usePosts";
+import ImpossibleDialog from "./ImpossibleDialog";
 type ConfirmDialogProps={
   open: boolean,
   onClose: ()=>void,
@@ -24,6 +25,7 @@ type ConfirmDialogProps={
 }
 export default function ConfirmDialog({open,onClose,id,postId,title,left,author,sold,likes,userId,username,number,address,buyerNumber}:ConfirmDialogProps){
   const [openNewCommentDialog, setOpenNewCommentDialog] = useState(false);
+  const [openImpossibleDialog, setOpenImpossibleDialog] = useState(false);
   const {updateNotification}=useNotifications();
   const {updateProduct}=usePost();
   const handleReceive=async()=>{
@@ -39,6 +41,9 @@ export default function ConfirmDialog({open,onClose,id,postId,title,left,author,
     });
     onClose();
     setOpenNewCommentDialog(true);
+  }
+  const handleHaventReceive=async()=>{
+    setOpenImpossibleDialog(true);
   }
   return(
     <>
@@ -67,11 +72,18 @@ export default function ConfirmDialog({open,onClose,id,postId,title,left,author,
         >
           Close
         </Button>
+        <Button
+          className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-red-400 mx-2 hover:text-slate-900"
+          // onClick={async() => {onClose();}} 
+          onClick={handleHaventReceive}
+        >
+          Haven't Receive?
+        </Button>
           <Button
-            className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
+            className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-green-300 mx-2 hover:text-slate-900"
             onClick={handleReceive}
           >
-            Receive
+            Received
           </Button>
           </div>      
         </DialogContent>
@@ -87,6 +99,11 @@ export default function ConfirmDialog({open,onClose,id,postId,title,left,author,
         userId={userId}
         username={username}
         buyerNumber={buyerNumber}
+      />
+      <ImpossibleDialog 
+        open={openImpossibleDialog} 
+        onClose={()=>setOpenImpossibleDialog(false)}
+        
       />
     </>
   );

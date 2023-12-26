@@ -12,10 +12,11 @@ export type CartProductProps = {
   username: string;
   seller:string;
   left: number,
+  userId: string,
 };
 
 export default function CartProduct(
-  {id, displayId,title, category, price,username,seller,left}:CartProductProps
+  {id, displayId,title, category, price,username,seller,left,userId}:CartProductProps
   ) {
   // const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -67,6 +68,7 @@ export default function CartProduct(
               money={price} 
               postId={displayId}
               left={left}
+              userId={userId}
             />
           </div>
         </div>

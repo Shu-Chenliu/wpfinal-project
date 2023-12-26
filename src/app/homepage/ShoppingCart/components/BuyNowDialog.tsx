@@ -11,6 +11,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useRef,useState} from "react";
 import useNotifications from "@/hooks/useNotifications"
+import useCart from "@/hooks/useCart";
 type Props = {
   title:string,
   username:string,
@@ -18,11 +19,13 @@ type Props = {
   money:number,
   postId:string,
   left:number,
+  userId:string,
 };
-function BuyNowDialog({ title,username,seller,money,postId,left}:Props) {
+function BuyNowDialog({ title,username,seller,money,postId,left,userId}:Props) {
   const [openBuyNowDialog,setOpenBuyNowDialog]=useState(false);
   const [totalPrice,setTotalPrice]=useState(money);
   const {postNotification}=useNotifications();
+  const {deleteCart}=useCart();
   const inputRefProductNumber = useRef<HTMLInputElement>(null); 
   const inputRefAddress = useRef<HTMLInputElement>(null);
   
@@ -43,6 +46,10 @@ function BuyNowDialog({ title,username,seller,money,postId,left}:Props) {
       address:inputRefAddress.current.value,
       postId,
       number:parseInt(inputRefProductNumber.current.value),
+    });
+    await deleteCart({
+      userId,
+      postId,
     });
     setOpenBuyNowDialog(false)
   }

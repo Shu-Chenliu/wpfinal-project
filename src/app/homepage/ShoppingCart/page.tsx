@@ -23,6 +23,7 @@ async function ShoppingCartPage() {
             title={product.posts.title} 
             price={product.posts.price}
             username={username}
+            userId={userId}
             seller={product.posts.author.username} 
             left={product.posts.left} 
           />

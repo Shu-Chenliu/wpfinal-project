@@ -27,6 +27,8 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
   const handleAddToCart = async (userId:string,postId:string)=>{
     "use server";
     await addToCart(userId,postId);
+    revalidatePath("/homepage");
+    redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/ShoppingCart`);
   }
   let imageSrc;
 

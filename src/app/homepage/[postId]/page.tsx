@@ -1,11 +1,11 @@
-import { getProduct } from "./components/actions";
+import { getProduct,addToCart } from "./components/actions";
 import {db}from "@/db";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-
+import AddToCartButton from "./components/AddToCartButton";
 
 
 type ProductPageProps = {
@@ -15,25 +15,23 @@ type ProductPageProps = {
 };
 async function ProductPage({params:{postId}}: ProductPageProps) {
   const session = await auth();
-  const username = session?.user?.username;
+  const userId = session?.user?.id;
   const Product= await getProduct(postId);
   const liked = false;
-
-
+  const handleAddToCart = async (userId:string,postId:string)=>{
+    "use server";
+    await addToCart(userId,postId);
+  }
   return (
     <div className="w-full">
       <div className="flex">
         <Link href={"/homepage"}>
-              <Button
-                className="flex font-semibold hover:bg-orange-700 hover:text-black "
-              >Back to homepage
-              </Button>
+          <Button
+            className="flex font-semibold hover:bg-orange-700 hover:text-black "
+          >Back to homepage
+          </Button>
         </Link>
-        <Button
-        className="flex font-semibold hover:bg-orange-700 hover:text-black "
-        >
-          Add to cart
-        </Button>
+        <AddToCartButton addToCart={handleAddToCart} userId={userId?userId:""} postId={postId}/>
 
         {/* <button
           style={{
@@ -80,8 +78,6 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
         <p className="flex w-full font-semibold text-slate-900">Number left: {Product?.left}</p>
 
       </div>
-      
-      
     </div>
   );
 }

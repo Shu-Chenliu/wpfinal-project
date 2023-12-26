@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { posts,postsRelations } from "@/db/schema";
+import { usersTable,posts,postsRelations,usersToCart } from "@/db/schema";
 
 export const getProduct=async (postId:string)=>{
   const Product=await db.query.posts.findFirst({
@@ -23,4 +23,14 @@ export const getProduct=async (postId:string)=>{
     }
   });
   return Product;
+}
+export const addToCart=async(userId:string,postId:string)=>{
+  "use server";
+  await db
+    .insert(usersToCart)
+    .values({
+      userId:userId,
+      postId:postId
+    })
+    .execute();
 }

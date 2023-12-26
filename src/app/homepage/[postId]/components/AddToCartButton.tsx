@@ -4,12 +4,20 @@ type AddToCartButtonProps={
   addToCart:(userId:string,postId:string)=>void,
   userId:string,
   postId:string,
+  cartpostId:string[],
 }
-export default function AddToCartButton({addToCart,userId,postId}: AddToCartButtonProps){
+export default function AddToCartButton({addToCart,userId,postId,cartpostId}: AddToCartButtonProps){
   const handleAddToCart=async(userId:string,postId:string)=>{
     if(userId===""){
       console.log("sign in");
       return;
+    }
+    for(const id of cartpostId){
+      console.log(id);
+      if(id===postId){
+        alert("this item is already in the cart");
+        return;
+      }
     }
     addToCart(userId,postId);
   }

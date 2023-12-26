@@ -47,3 +47,9 @@ export const getComments=async(postId:string)=>{
   });
   return comments;
 }
+export const getMyShoppingCart = async(userId:string) => {
+  const Cart=await db.query.usersToCart.findMany({
+    where:(usersToCart, { eq }) => eq(usersToCart.userId, userId),
+  })
+  return Cart;
+}

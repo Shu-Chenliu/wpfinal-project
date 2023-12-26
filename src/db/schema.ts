@@ -72,6 +72,7 @@ export const postsRelations = relations(posts, ({ one, many }) => ({
   notifications: many(notifications),
 }));
 export const usersToCart = pgTable('users_to_cart', {
+  id: serial('id').primaryKey(),
   userId: uuid('user_id').notNull().references(() => usersTable.displayId),
   postId: uuid('group_id').notNull().references(() => posts.displayId),
 }, (t) => ({

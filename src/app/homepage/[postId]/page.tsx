@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import AddToCartButton from "./components/AddToCartButton";
 import CommentBar from "./components/CommentBar";
-import { getComments } from "./components/actions";
+import { getComments,getMyShoppingCart } from "./components/actions";
+import { publicEnv } from "@/lib/env/public";
 type ProductPageProps = {
   params: {
     postId: string;
@@ -15,9 +16,13 @@ type ProductPageProps = {
 };
 async function ProductPage({params:{postId}}: ProductPageProps) {
   const session = await auth();
+  if (!session || !session?.user?.id) {
+    redirect(publicEnv.NEXT_PUBLIC_BASE_URL);
+  }
   const userId = session?.user?.id;
   const Product= await getProduct(postId);
   const comments=await getComments(postId);
+  const shoppingCart=await getMyShoppingCart(userId);
   const liked = false;
   const handleAddToCart = async (userId:string,postId:string)=>{
     "use server";
@@ -51,7 +56,12 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
           >Back to homepage
           </Button>
         </Link>
-        <AddToCartButton addToCart={handleAddToCart} userId={userId?userId:""} postId={postId}/>
+        <AddToCartButton 
+          addToCart={handleAddToCart} 
+          userId={userId?userId:""} 
+          postId={postId}
+          cartpostId={shoppingCart.map((cart)=>(cart.postId))}
+        />
 
       </div>
       

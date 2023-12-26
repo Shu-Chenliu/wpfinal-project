@@ -1,5 +1,6 @@
 import { relations } from "drizzle-orm";
 import { sql } from "drizzle-orm";
+import { float } from "drizzle-orm/mysql-core";
 import {
   index,
   text,
@@ -10,6 +11,7 @@ import {
   unique,
   timestamp,
   integer,
+  doublePrecision,
   primaryKey,
 } from "drizzle-orm/pg-core";
 //使用者可以是買家兼賣家
@@ -52,7 +54,7 @@ export const posts = pgTable('posts', {
   price: integer('price').notNull(),
   left: integer('left').notNull(),
   sold: integer('sold').notNull().default(0),
-  likes: integer('likes').notNull().default(0),
+  likes: doublePrecision('likes').notNull().default(0.00),
   },
   (table)=>({
     displayIdIndexOfPosts: index("display_id_index_of_posts").on(table.displayId),

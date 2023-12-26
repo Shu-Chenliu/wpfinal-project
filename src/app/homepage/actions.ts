@@ -10,6 +10,7 @@ export const getAllProducts = async() =>{
       price:true,
       left:true,
       category:true,
+      likes:true,
     },
     with:{
       author: {

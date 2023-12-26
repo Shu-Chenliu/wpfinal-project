@@ -3002,6 +3002,11 @@ lru-queue@^0.1.0:
   dependencies:
     es5-ext "~0.10.2"
 
+lucide-react@^0.302.0:
+  version "0.302.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.302.0.tgz#ba5d1f90d2348cf564991fb06966560ee2edc54b"
+  integrity sha512-JZX+1fjpqxvQmEgItvPOAwRlqf0Eg9dSZMxljA2/V2M6dluOhQCPBhewIlSJWgkNu0M36kViOgmTAMnDaAMOFw==
+
 magic-string@^0.25.3:
   version "0.25.9"
   resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.25.9.tgz#de7f9faf91ef8a1c91d02c2e5314c8277dbcdd1c"

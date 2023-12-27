@@ -54,6 +54,7 @@ export default CredentialsProvider({
           email: email.toLowerCase(),
           hashedPassword,
           provider: "credentials",
+          sellername:username,
         })
         .returning();
       return {

@@ -38,7 +38,7 @@ async function DocPage({params: {chatRoomId}}: DocPageProps) {
         ))}
 
       </div>
-      <InputBar />
+      <InputBar userId={userId} chatRoomId={chatRoomId}/>
 
       
     </div>

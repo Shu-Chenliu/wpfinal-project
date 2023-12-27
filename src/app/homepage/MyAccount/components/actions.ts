@@ -9,6 +9,9 @@ export const getUserProfile = async(userDisplayId:string) =>{
       username:true,
       email:true,
       imageURL:true,
+      address:true,
+      sellername:true,
+      selleraddress:true,
     },
     with:{
       posts:{

@@ -61,6 +61,7 @@ export const {
         username: name,
         email: email.toLowerCase(),
         provider,
+        sellername: name,
       });
 
       return token;

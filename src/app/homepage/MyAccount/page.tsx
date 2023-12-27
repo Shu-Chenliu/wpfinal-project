@@ -42,8 +42,10 @@ async function HomePage() {
         </div> */}
         <EditProfile
           variant="edit"
+          userId={userId}
           title={userProfile?.username}
           description={userProfile?.email}
+          address={userProfile?.address!}
         />
       </div>
       <br/><br/>
@@ -64,6 +66,7 @@ async function HomePage() {
           <Store className="w-40 h-40" />
           <EditProfile
               variant="edit"
+              userId={userId}
               title={userProfile?.username}
               description={userProfile?.email}
             />

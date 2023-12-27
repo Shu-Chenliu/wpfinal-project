@@ -30,8 +30,8 @@ export default function Message({
     <>
     {/* {content} */}
       <div
-        className={`my-2 mx-2 flex flex-row items-end gap-2 ${
-          isSender && "justify-end"
+        className={`mx-2 flex flex-row items-end gap-2 ${
+          isSender && "ml-auto mx-4"
         }`}
       >
         <div

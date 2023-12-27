@@ -8,10 +8,14 @@ export default function useUsers() {
     id,
     address,
     imageURL,
+    username,
+    email,
   }: {
     id: string,
     address?: string,
     imageURL?: string,
+    username?:string,
+    email?:string,
   }) => {
     setLoading(true);
 
@@ -21,6 +25,8 @@ export default function useUsers() {
         id,
         address,
         imageURL,
+        username,
+        email,
       }),
     });
 

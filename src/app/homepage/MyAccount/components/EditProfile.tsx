@@ -7,47 +7,52 @@ import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import { Pencil } from 'lucide-react';
 
-
+import useUsers from "@/hooks/userUsers";
 
 // this pattern is called discriminated type unions
 // you can read more about it here: https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions
 // or see it in action: https://www.typescriptlang.org/play#example/discriminate-types
 type NewCardDialogProps = {
   variant: "new";
+  userId:string,
   // listId: string;
 };
 
 type EditCardDialogProps = {
   variant: "edit";
+  userId:string,
   // listId: string;
   title?: string; //user name
   description?: string; 
   address?:string;
-  
 };
 
 type CardDialogProps = NewCardDialogProps | EditCardDialogProps;
 
 export default function EditProfile(props: CardDialogProps) {
   const { variant} = props;
+  const userId=props.userId;
   const title = variant === "edit" ? props.title : "";
   const description = variant === "edit" ? props.description : "";
   const address = variant === "edit" ? props.address : "";
-
+  const {updateUser}=useUsers();
   const [edittingTitle, setEdittingTitle] = useState(variant === "new");
   const [edittingDescription, setEdittingDescription] = useState(variant === "new");
   const [edittingAddress, setEdittingAddress] = useState(variant === "new");
- 
-  
-
-
   // using a state variable to store the value of the input, and update it on change is another way to get the value of a input
   // however, this method is not recommended for large forms, as it will cause a re-render on every change
   // you can read more about it here: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
   const [newTitle, setNewTitle] = useState(title);
   const [newDescription, setNewDescription] = useState(description);
   const [newAddress, setNewAddress] = useState(address);
-
+  const handleClickAway=async()=>{
+    await updateUser({
+      id:userId,
+      username:newTitle,
+      email:newDescription,
+      address:newAddress,
+    });
+  }
   return (
     <>
     <div className="block items-center justify-top my-2 my-2 p-3 ">
@@ -56,9 +61,10 @@ export default function EditProfile(props: CardDialogProps) {
         {edittingTitle ? (
           <>
         <ClickAwayListener
-          onClickAway={() => {
+          onClickAway={async() => {
             if (variant === "edit") {
               setEdittingTitle(false);
+              handleClickAway();
             }
           }}
         >
@@ -92,6 +98,7 @@ export default function EditProfile(props: CardDialogProps) {
           onClickAway={() => {
             if (variant === "edit") {
               setEdittingDescription(false);
+              handleClickAway();
             }
           }}
         >
@@ -126,6 +133,7 @@ export default function EditProfile(props: CardDialogProps) {
           onClickAway={() => {
             if (variant === "edit") {
               setEdittingAddress(false);
+              handleClickAway();
             }
           }}
         >
@@ -151,15 +159,7 @@ export default function EditProfile(props: CardDialogProps) {
         </button>
       )}
       </div>
-    
-
-      
-
-
     </div>
-
-      
-
     </>
     
 

@@ -14,6 +14,9 @@ import { z } from "zod";
 const updateUserSchema=z.object({
   id:z.string(),
   address:z.string().optional(),
+  username:z.string().optional(),
+  email:z.string().optional(),
+
   imageURL:z.string().optional(),
 });
 
@@ -26,10 +29,10 @@ export async function PUT(request: NextRequest) {
   } catch (error) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
-  const { id,address,imageURL } = data as updateUserRequest;
+  const { id,address,imageURL,username,email } = data as updateUserRequest;
   await db
     .update(usersTable)
-    .set({address,imageURL})
+    .set({address,imageURL,username,email})
     .where(eq(usersTable.displayId, id))
   return new NextResponse("OK", { status: 200 });
 }

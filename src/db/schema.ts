@@ -22,6 +22,8 @@ export const usersTable = pgTable("users",{
     displayId: uuid("display_id").defaultRandom().notNull().unique(),
     username: varchar("username", { length: 100 }).notNull().unique(),
     address:varchar('address', { length: 280 }),
+    sellername: varchar("username", { length: 100 }).notNull(),
+    selleraddress:varchar('address', { length: 280 }),
     imageURL: varchar('imageURL'),
     email: varchar("email", { length: 100 }).notNull().unique(),
     hashedPassword: varchar("hashed_password", { length: 100 }),

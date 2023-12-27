@@ -30,17 +30,18 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
   const liked = false;
   const handleAddToCart = async (userId:string,postId:string)=>{
     "use server";
-    for(const chatRoom of chatRooms){
-      if(chatRoom.buyerName===username){
-        
-      }
-    }
     await addToCart(userId,postId);
     revalidatePath("/homepage");
     redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/ShoppingCart`);
   }
   const handleAddChatRoom =async(userId:string,sellerId:string)=>{
     "use server";
+    for(const chatRoom of chatRooms){
+      if(chatRoom.buyerName===username&&chatRoom.sellerName===Product?.author.sellername){
+        revalidatePath("/homepage");
+        redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/Chat/${chatRoom.displayId}`);
+      }
+    }
     const newChatRoomId = await createChatRoom(userId,sellerId,Product?.author.username!,username);
     revalidatePath("/homepage/Chat");
     redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/Chat/${newChatRoomId}`);

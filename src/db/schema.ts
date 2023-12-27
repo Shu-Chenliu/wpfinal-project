@@ -22,7 +22,7 @@ export const usersTable = pgTable("users",{
     displayId: uuid("display_id").defaultRandom().notNull().unique(),
     username: varchar("username", { length: 100 }).notNull().unique(),
     address:varchar('address', { length: 280 }),
-    sellername: varchar("username", { length: 100 }).notNull().unique(),
+    sellername: varchar("sellername", { length: 100 }).notNull().unique(),
     selleraddress:varchar('address', { length: 280 }),
     imageURL: varchar('imageURL'),
     email: varchar("email", { length: 100 }).notNull().unique(),

@@ -18,6 +18,7 @@ export const getProduct=async (postId:string)=>{
         columns:{
           displayId:true,
           username:true,
+          sellername:true,
         }
       }
     }

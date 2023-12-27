@@ -8,6 +8,7 @@ export const getUserProfile = async(userDisplayId:string) =>{
     columns:{
       username:true,
       email:true,
+      imageURL:true,
     },
     with:{
       posts:{

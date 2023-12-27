@@ -67,17 +67,35 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
           ><ArrowLeft />
           </Button>
         </Link>
+        {Product?.left!==0 ? (
+        <>
         <AddToCartButton 
           addToCart={handleAddToCart} 
           userId={userId?userId:""} 
           postId={postId}
           cartpostId={shoppingCart.map((cart)=>(cart.postId))}
         />
+        
+        </>
+          
+        ):(
+          <Button
+            className="flex font-semibold bg-slate-200 text-slate-100 hover:bg-slate-200 hover:text-slate-100 ml-auto"
+    
+          >
+            Add to cart
+          </Button>
+
+        ) 
+        }
+        
+        
 
       </div>
       
       <div className="flex gap-4">
-        <p className="flex w-full font-semibold text-yellow-500 p-2 text-4xl">{Product?.title}</p>
+        <p className="flex font-semibold text-yellow-500 p-2 text-4xl">{Product?.title}</p>
+        {Product?.left ===0 && <p className="flex text-4xl font-bold text-red-700" > Sold out!!! </p>}
       </div>
 
       <div className="flex">
@@ -87,11 +105,14 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
             {Product?.description}
           </div> */}
           <div className="block">
+            
             <p className="flex w-full font-semibold text-slate-900 mx-10">Seller: {Product?.author.username}</p>
             <p className="flex w-full font-semibold text-slate-900 mx-10">Price: {Product?.price}</p>
             <p className="flex w-full font-semibold text-slate-900 mx-10">Category: {Product?.category}</p>
             <p className="flex w-full font-semibold text-slate-900 mx-10">Number left: {Product?.left}</p>
-
+            <br />
+            <br />
+            <AddChatRoomButton userId={userId} seller={Product?.author.displayId!} addChatRoom={handleAddChatRoom}/>
           </div>
           
 
@@ -111,7 +132,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
           <CommentBar text={comment.text!} stars={comment.stars} author={comment.author}/>
         </div>
       ))}
-      <AddChatRoomButton userId={userId} seller={Product?.author.displayId!} addChatRoom={handleAddChatRoom}/>
+      
     </div>
   );
 }

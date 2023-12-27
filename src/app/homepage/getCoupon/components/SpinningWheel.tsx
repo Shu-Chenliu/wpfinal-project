@@ -1,4 +1,4 @@
-// components/SpinningWheel.js
+//SpinningWheel.js
 "use client"
 import React, { useState } from 'react';
 import styles from './SpinningWheel.module.css';
@@ -6,6 +6,9 @@ import { Button } from '@/components/ui/button';
 import { useToast } from "@/components/ui/use-toast"
 import Coupon from '../../MyAccount/components/Coupon';
 import useCoupons from '@/hooks/useCoupon';
+import CouponDrawRule from './CouponDrawRule';
+import { ArrowBigDown } from 'lucide-react';
+
 type SpinningWheelProps={
   userId: string,
 }
@@ -83,28 +86,35 @@ const SpinningWheel = ({userId}:SpinningWheelProps) => {
   };
 
   return (
+    <>
     <div className={styles.container}>
-      <div className={styles.arrow}>↓</div>
-      <div id="wheel" className={`${styles.wheel} ${spinning ? styles.spin : ''}`} />
-        
-      <Button onClick={handleSpin} disabled={spinning} className='my-2 hover:bg-orange-500'>
-        Spin
-      </Button>
+      <div className='flex flex-row'>
+        <div className='flex flex-col'>      
+          <CouponDrawRule/>
+          <div className="m-4">
+            <Button onClick={handleSpin} disabled={spinning} className='hover:bg-orange-500'>
+              Spin
+            </Button>
+          </div>
+        </div>
+
+        <div className=" my-2 items-center flex flex-col">
+            <ArrowBigDown size={50}/>
+          <div id="wheel" className={`${styles.wheel} ${spinning ? styles.spin : ''}`} />
+        </div>
+      </div>
 
       <div className="my-2  flex flex-col">
-        {/* <div className="text-white my-2 ml-auto" style={{ background: '#1f3b4e', display: 'inline-block', width: '70px'}}>5%OFF</div>
-        <div className="text-white my-2 ml-auto" style={{ background: '#e39d1a', display: 'inline-block', width: '70px'}}>10%OFF</div>
-        <div className="text-white my-2 ml-auto" style={{ background: '#269a9a',display: 'inline-block', width: '70px' }}>20%OFF</div> */}
         <Coupon percent={5}/>
         <br/>
         <Coupon percent={10}/>
         <br/>
         <Coupon percent={20}/>
         <br/>
-
       </div>
 
-    </div>
+      </div>
+    </>
   );
 };
 

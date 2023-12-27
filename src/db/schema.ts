@@ -1,6 +1,5 @@
 import { relations } from "drizzle-orm";
 import { sql } from "drizzle-orm";
-import { float } from "drizzle-orm/mysql-core";
 import {
   index,
   text,
@@ -14,6 +13,7 @@ import {
   doublePrecision,
   boolean,
   primaryKey,
+
 } from "drizzle-orm/pg-core";
 //使用者可以是買家兼賣家
 //使用者需要
@@ -21,6 +21,8 @@ export const usersTable = pgTable("users",{
     id: serial("id").primaryKey(),
     displayId: uuid("display_id").defaultRandom().notNull().unique(),
     username: varchar("username", { length: 100 }).notNull().unique(),
+    address:varchar('address', { length: 280 }),
+    imageURL: varchar('imageURL'),
     email: varchar("email", { length: 100 }).notNull().unique(),
     hashedPassword: varchar("hashed_password", { length: 100 }),
     provider: varchar("provider", {

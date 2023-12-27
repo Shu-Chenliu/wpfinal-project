@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import useChatrooms from "@/hooks/useChatroom";
+import { MessagesSquare } from "lucide-react";
 type AddChatRoomButtonProps = {
   userId:string,
   seller:string,
@@ -20,8 +21,9 @@ export default function AddChatRoomButton({
     <div>
       <Button
         onClick={handleAddChatRoom}
-      >
-        talk to seller
+        className="flex font-semibold bg-slate-600  hover:bg-yellow-500 hover:text-slate-700 mx-10"
+      ><MessagesSquare className="m-2" />
+        Chat with seller
       </Button>
     </div>
   );

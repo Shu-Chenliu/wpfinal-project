@@ -12,9 +12,10 @@ export type ProductButtonProps = {
   category: string;
   price: number;
   likes:number;
+  left: number;
 };
 
-export default function ProductButton({id, displayId,title, category, price,likes}:ProductButtonProps) {
+export default function ProductButton({id, displayId,title, category, price,likes, left}:ProductButtonProps) {
   // const [open, setOpen] = useState(false);
   const router = useRouter();
   // const handleClickOpen = () => {
@@ -43,18 +44,17 @@ export default function ProductButton({id, displayId,title, category, price,like
       imageSrc = "./Others.jpg";
       break;
   }
-    
+  
 
   return (
     <>
       <div 
-        // onClick={handleClickOpen} 
-        // className="text-start block" 
-        // id={id}
-        className="flex flex-col gap-4 border border-black rounded-md p-2 mx-2 my-2 w-1/3"
-      >
+      className={`flex gap-2 flex-col border border-black rounded-md p-2 mx-2 my-2 w-1/3 ${left === 0 ? 'bg-slate-200' : ''}`} >
+        {left ===0 && <p className="font-bold flex text-lg text-red-700" > Sold out!!! </p>}
         <p className="flex text-lg font-semibold text-yellow-500" > {title} </p>
-        <p>{displayId}</p>
+        
+        {/* <p className="flex text-lg font-semibold text-yellow-500"></p> */}
+        {/* <p>{displayId}</p> */}
         {/* <p className="flex w-full font-semibold text-slate-900 w-20vw" >
           <img src={imageSrc} alt="Product" />        
         </p> */}
@@ -65,6 +65,7 @@ export default function ProductButton({id, displayId,title, category, price,like
 
         <p className="flex w-full font-semibold text-slate-900" > Category: {category}</p>
         <p className="flex w-full font-semibold text-slate-900" >Price: {price}</p>
+        <p className="flex w-full font-semibold text-slate-900" >left: {left}</p>
         <div className="flex">
           <button className="flex">
             {likes >= 0.75 ? (

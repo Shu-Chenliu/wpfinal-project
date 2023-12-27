@@ -35,7 +35,7 @@ async function NotificationPage() {
             likes={notification.post.likes}
             userId={userId}
             username={username}
-            number={notification.money/notification.post.price}
+            number={notification.number}
             address={notification.address}
             buyerNumber={notification.post.buyerNumber}
             category={notification.post.category}

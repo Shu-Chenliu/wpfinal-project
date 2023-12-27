@@ -15,6 +15,7 @@ async function HomePage() {
             category={product.category}
             price={product.price}
             likes={product.likes}
+            left={product.left}
           />
         </div>
       ))}

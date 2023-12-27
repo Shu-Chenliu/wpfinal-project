@@ -3,10 +3,14 @@
 import React, { useState } from 'react';
 import styles from './SpinningWheel.module.css';
 import { Button } from '@/components/ui/button';
-const SpinningWheel = () => {
+import useCoupons from '@/hooks/useCoupon';
+type SpinningWheelProps={
+  userId: string,
+}
+const SpinningWheel = ({userId}:SpinningWheelProps) => {
   const [spinning, setSpinning] = useState(false);
-
-  const handleSpin = () => {
+  const {postCoupon}=useCoupons()
+  const handleSpin = async() => {
     if (!spinning) {
       // Generate a random angle for spinning
       const randomAngle = Math.floor(Math.random() * 360) + 720; // Spins 2 times
@@ -26,6 +30,10 @@ const SpinningWheel = () => {
         wheel.style.transform = 'rotate(0deg)';
         }
       }, 3000);
+      await postCoupon({
+        owner:userId,
+        percent:10,//TODO:getpercent
+      });
     }
   };
 

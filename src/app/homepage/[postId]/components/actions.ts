@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { usersTable,posts,postsRelations,usersToCart,comments} from "@/db/schema";
+import { usersTable,posts,postsRelations,usersToCart,comments,chatRoom,usersToChatofSeller,usersToChatofBuyer} from "@/db/schema";
 
 export const getProduct=async (postId:string)=>{
   const Product=await db.query.posts.findFirst({
@@ -53,3 +53,24 @@ export const getMyShoppingCart = async(userId:string) => {
   })
   return Cart;
 }
+export const createChatRoom = async (userId: string,sellerId:string) => {
+  "use server";
+
+  const newChatroomId = await db.transaction(async (tx) => {
+    const [newChatroom] = await tx
+      .insert(chatRoom)
+      .values({
+      })
+      .returning();
+    await tx.insert(usersToChatofSeller).values({
+      sellerId,
+      chatRoomId: newChatroom.displayId,
+    });
+    await tx.insert(usersToChatofBuyer).values({
+      buyerId:userId,
+      chatRoomId:newChatroom.displayId,
+    });
+    return newChatroom.displayId;
+  });
+  return newChatroomId;
+};

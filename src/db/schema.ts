@@ -38,6 +38,9 @@ export const usersTable = pgTable("users",{
 export const usersRelations = relations(usersTable, ({ many }) => ({
   posts: many(posts),
   usersToCart: many(usersToCart),
+  coupons: many(coupons),
+  chatRoomsOfSeller: many(usersToChatofSeller),
+  chatRoomOfBuyer: many(usersToChatofBuyer),
 }));
 //posts=賣家po的products
 export const posts = pgTable('posts', {
@@ -150,5 +153,120 @@ export const notificationsRelations = relations(notifications, ({ one }) => ({
   post: one(posts, {
     fields: [notifications.postId],
     references: [posts.displayId],
+  }),
+}));
+export const coupons = pgTable('coupons', {
+  id: serial('id').primaryKey(),
+  owner: uuid('owner')
+  .references(() => usersTable.displayId,{
+    onDelete: 'cascade',
+    onUpdate: 'cascade'
+  })
+  .notNull(),
+  percent:integer('percent').notNull(),
+  },(table)=>({
+    
+}));
+export const couponsRelations = relations(coupons, ({ one }) => ({
+  owner: one(usersTable, {
+    fields: [coupons.owner],
+    references: [usersTable.displayId],
+  }),
+}));
+export const chatRoom = pgTable('chatRoom', {
+  id: serial('id').primaryKey(),
+  displayId: uuid("display_id").defaultRandom().notNull().unique(),  
+}, (t) => ({
+  
+}));
+export const chatroomRelations = relations(chatRoom, ({ many }) => ({
+  sellerId:many(usersToChatofSeller),
+  buyerId:many(usersToChatofBuyer),
+}));
+export const usersToChatofSeller = pgTable('users_to_chat_of_seller', {
+  id: serial('id').primaryKey(),
+  sellerId: uuid('seller_id').notNull().references(() => usersTable.displayId,{
+    onDelete: 'cascade',
+    onUpdate: 'cascade'
+  }),
+  chatRoomId:uuid('chat_room_id').notNull().references(()=>chatRoom.displayId,{
+    onDelete: 'cascade',
+    onUpdate: 'cascade'
+  }),
+}, (table) => ({
+  userAndsellerIndex: index("user_and_chatroom_of_seller_index").on(
+    table.sellerId,
+    table.chatRoomId,
+  ),
+  uniqCombination: unique().on(table.chatRoomId, table.sellerId),
+}),
+);
+export const usersToChatofSellerRelations = relations(usersToChatofSeller, ({ one }) => ({
+  seller: one(usersTable, {
+    fields: [usersToChatofSeller.sellerId],
+    references: [usersTable.displayId],
+  }),
+  chatRoomId: one(chatRoom, {
+    fields: [usersToChatofSeller.chatRoomId],
+    references: [chatRoom.displayId],
+  }),
+}));
+export const usersToChatofBuyer = pgTable('users_to_chat_of_buyer', {
+  id: serial('id').primaryKey(),
+  buyerId: uuid('buyer_id').notNull().references(() => usersTable.displayId,{
+    onDelete: 'cascade',
+    onUpdate: 'cascade'
+  }),
+  chatRoomId:uuid('chat_room_id').notNull().references(()=>chatRoom.displayId,{
+    onDelete: 'cascade',
+    onUpdate: 'cascade'
+  }),
+}, (table) => ({
+  userAndbuyerIndex: index("user_and_chatroom_of_buyer_index").on(
+    table.buyerId,
+    table.chatRoomId,
+  ),
+  uniqCombination: unique().on(table.chatRoomId, table.buyerId),
+}),
+);
+export const usersToChatofBuyerRelations = relations(usersToChatofBuyer, ({ one }) => ({
+  buyer: one(usersTable, {
+    fields: [usersToChatofBuyer.buyerId],
+    references: [usersTable.displayId],
+  }),
+  chatRoomId: one(chatRoom, {
+    fields: [usersToChatofBuyer.chatRoomId],
+    references: [chatRoom.displayId],
+  }),
+}));
+export const messagesTable = pgTable(
+  "messages",
+  {
+    id: serial("id").primaryKey(),
+    text: varchar("text", { length: 100 }).notNull(),
+    authorId: uuid("author_id")
+      .notNull()
+      .references(() => usersTable.displayId, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
+    sendAt: timestamp("sendAt").default(sql`now()`),
+    chatRoomId: uuid("chatroom_id")
+      .notNull()
+      .references(() => chatRoom.displayId, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
+  },
+  (table) => ({
+    authorIndex: index("author_index").on(table.authorId),
+    chatRoomIndex: index("chatroom_id_index").on(table.chatRoomId),
+    sendAtIndex: index("sendAt_index").on(table.sendAt),
+  }),
+);
+export const messagesReletions=relations(messagesTable,({one})=>({
+  chatRoom: one(chatRoom, {
+    fields: [messagesTable.chatRoomId],
+    references: [chatRoom.displayId],
   }),
 }));

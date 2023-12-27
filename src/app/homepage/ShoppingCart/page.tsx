@@ -2,7 +2,7 @@ import CartProduct from "./components/CartProduct";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
-import { getMyShoppingCart }from "./components/actions"
+import { getMyShoppingCart,getMyCoupon }from "./components/actions"
 async function ShoppingCartPage() {
   const session = await auth();
   if (!session || !session?.user?.id) {
@@ -11,6 +11,7 @@ async function ShoppingCartPage() {
   const username = session.user.username;
   const userId = session.user.id;
   const Cart=await getMyShoppingCart(userId);
+  const Coupons=await getMyCoupon(userId);
   return (
     <div className="h-[100vh]">
       <p className="flex font-semibold text-slate-900 text-2xl p-3">What to buy</p>

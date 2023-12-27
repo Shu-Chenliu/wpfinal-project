@@ -1,4 +1,4 @@
-import { getProduct,addToCart } from "./components/actions";
+import { getProduct,addToCart,createChatRoom } from "./components/actions";
 import {db}from "@/db";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
@@ -10,6 +10,7 @@ import CommentBar from "./components/CommentBar";
 import { getComments,getMyShoppingCart } from "./components/actions";
 import { publicEnv } from "@/lib/env/public";
 import { ArrowLeft } from 'lucide-react';
+import AddChatRoomButton from "./components/AddChatRoomButton";
 type ProductPageProps = {
   params: {
     postId: string;
@@ -30,6 +31,12 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
     await addToCart(userId,postId);
     revalidatePath("/homepage");
     redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/ShoppingCart`);
+  }
+  const handleAddChatRoom =async(userId:string,sellerId:string)=>{
+    "use server";
+    const newChatRoomId = await createChatRoom(userId,sellerId);
+    revalidatePath("/homepage");
+    redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/Chat/${newChatRoomId}`);
   }
   let imageSrc;
 
@@ -103,6 +110,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
           <CommentBar text={comment.text!} stars={comment.stars} author={comment.author}/>
         </div>
       ))}
+      <AddChatRoomButton userId={userId} seller={Product?.author.displayId!} addChatRoom={handleAddChatRoom}/>
     </div>
   );
 }

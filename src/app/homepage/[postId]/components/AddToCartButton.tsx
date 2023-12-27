@@ -31,7 +31,7 @@ export default function AddToCartButton({addToCart,userId,postId,cartpostId}: Ad
   }
   return(
     <Button
-      className="flex font-semibold bg-slate-800  hover:bg-orange-700 hover:text-slate-900 ml-auto"
+      className="flex font-semibold bg-slate-600  hover:bg-yellow-500 hover:text-slate-700 ml-auto"
       onClick={()=>handleAddToCart(userId,postId)}
     >
       Add to cart

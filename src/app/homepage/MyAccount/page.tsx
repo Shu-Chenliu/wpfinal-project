@@ -27,13 +27,25 @@ async function HomePage() {
       <div className="flex items-center justify-top">
         
       <div>
-          <img
+          {/* <img
             src={userProfile?.imageURL!}
-            // alt="avatar"
-            className="w-40 h-40  border-2 my-2 my-2 "
-            
+            className="w-40 h-40  border-2 my-2 my-2 "           
           />
-          <Ghost className="w-40 h-40" />
+          <Ghost className="w-40 h-40" /> */}
+
+          {userProfile?.imageURL ?(
+            <div className="flex">
+              <img
+                src={userProfile?.imageURL!}
+                className="w-40 h-40  border-2 my-2 my-2 "           
+              />
+            </div>
+          ):(
+            <><Ghost className="w-40 h-40" /></>
+          )}
+
+
+
           <AddImageButton userId={userId}/>
         </div>
         {/* <div className="my-2 my-2 p-3">
@@ -42,10 +54,9 @@ async function HomePage() {
         </div> */}
         <EditProfile
           variant="edit"
-          userId={userId}
+          status="personal"
           title={userProfile?.username}
           description={userProfile?.email}
-          address={userProfile?.address!}
         />
       </div>
       <br/><br/>
@@ -66,9 +77,12 @@ async function HomePage() {
           <Store className="w-40 h-40" />
           <EditProfile
               variant="edit"
-              userId={userId}
-              title={userProfile?.username}
-              description={userProfile?.email}
+              status="market"
+              // marketName={userProfile?.marketName}
+              // marketDescription={userProfile?.marketDescription}
+              // marketAddress={userProfile?.marketAddress}
+              // marketMessage={userProfile?.marketMessage}
+
             />
         </div>     
       </div>

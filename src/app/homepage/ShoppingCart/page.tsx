@@ -3,11 +3,19 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 import { getMyShoppingCart,getMyCoupon }from "./components/actions"
+import { revalidatePath } from "next/cache";
+
 async function ShoppingCartPage() {
   const session = await auth();
   if (!session || !session?.user?.id) {
     redirect(publicEnv.NEXT_PUBLIC_BASE_URL);
   }
+  const handleGetCoupon = async()=>{
+    "use server";
+    revalidatePath("/homepage");
+    redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/getCoupon`);
+  }
+
   const username = session.user.username;
   const userId = session.user.id;
   const Cart=await getMyShoppingCart(userId);
@@ -28,6 +36,7 @@ async function ShoppingCartPage() {
             seller={product.posts.author.username} 
             left={product.posts.left} 
             coupons={Coupons}
+            getCoupon={handleGetCoupon}
           />
         </div>
       ))}

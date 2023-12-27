@@ -66,7 +66,7 @@ export default function SellerNotiBar({
       </div>
 
       <Button
-        className={!read?"ml-auto bg-slate-700 hover:bg-orange-500 text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100":"ml-auto bg-slate-200 hover:bg-slate-200 text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100"}
+        className={!read?"ml-auto bg-slate-700 hover:text-yellow-400 text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100":"ml-auto bg-slate-200 hover:bg-slate-200 text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100"}
         onClick={() => {
           if(read){
             return;
@@ -137,7 +137,7 @@ export default function SellerNotiBar({
           </Button>
 
           <Button
-            className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-orange-600 mx-2 hover:text-slate-900"
+            className="text-sm font-semibold bg-slate-600  hover:text-yellow-500 hover:bg-slate-700"
             onClick={handleCheckOrder}
           >
             Check

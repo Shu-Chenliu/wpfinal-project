@@ -76,3 +76,14 @@ export const createChatRoom = async (userId: string,sellerId:string,sellerName:s
   });
   return newChatroomId;
 };
+export const getChatRoom=async()=>{
+  "use server";
+  const chatRooms=await db.query.chatRoom.findMany({
+    columns:{
+      displayId:true,
+      sellerName:true,
+      buyerName:true,
+    }
+  });
+  return chatRooms;
+}

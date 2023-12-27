@@ -5,7 +5,7 @@
 .wheel {
   width: 300px;
   height: 300px;
-  background: conic-gradient(#1f3b4e 0% 30%, #e39d1a 30% 70%, #269a9a 70% 100%);
+  background: conic-gradient(#1f3b4e 0% 45%, #e39d1a 45% 85%, #269a9a 85% 100%);
   border-radius: 50%;
   margin: 20px auto;
   position: relative;

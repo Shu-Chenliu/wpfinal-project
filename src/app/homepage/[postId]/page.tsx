@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import AddToCartButton from "./components/AddToCartButton";
 import CommentBar from "./components/CommentBar";
-import { getComments,getMyShoppingCart } from "./components/actions";
+import { getComments,getMyShoppingCart,getChatRoom } from "./components/actions";
 import { publicEnv } from "@/lib/env/public";
 import { ArrowLeft } from 'lucide-react';
 import AddChatRoomButton from "./components/AddChatRoomButton";
@@ -26,9 +26,15 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
   const Product= await getProduct(postId);
   const comments=await getComments(postId);
   const shoppingCart=await getMyShoppingCart(userId);
+  const chatRooms=await getChatRoom();
   const liked = false;
   const handleAddToCart = async (userId:string,postId:string)=>{
     "use server";
+    for(const chatRoom of chatRooms){
+      if(chatRoom.buyerName===username){
+        
+      }
+    }
     await addToCart(userId,postId);
     revalidatePath("/homepage");
     redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/ShoppingCart`);
@@ -63,7 +69,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
       <div className="flex">
         <Link href={"/homepage"}>
           <Button
-            className="flex font-semibold bg-slate-100 hover:bg-slate-200 text-slate-900 hover:text-slate-100"
+            className="flex font-semibold bg-slate-100 hover:bg-slate-200 text-slate-900 hover:text-slate-900"
           ><ArrowLeft />
           </Button>
         </Link>

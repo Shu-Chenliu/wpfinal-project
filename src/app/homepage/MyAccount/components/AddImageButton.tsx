@@ -23,7 +23,7 @@ export default function AddImageButton({userId}:Props) {
     let imageSrc="";
     try {
       if (imageRef.current.files[0].size/1024 > 70) {
-        alert("圖片大小不可超過70KB");
+        alert("Image size must be less than 70KB");
         throw new Error();
       }
       reader.onload = async function (e) {
@@ -41,7 +41,7 @@ export default function AddImageButton({userId}:Props) {
       reader.readAsDataURL(imageRef.current.files[0]);
     }
     catch {
-      alert("無法上傳圖片");
+      alert("Failed to upload image");
       imageRef.current.value = "";
       return;
     }
@@ -58,11 +58,19 @@ export default function AddImageButton({userId}:Props) {
             accept="image/*"
             id="upload-image"
             ref={imageRef}
+
+    
           />
         </div>
-      <Button
+      {/* <Button
         onClick={handleUploadImage}
       >
+      </Button> */}
+      <Button
+        onClick={handleUploadImage}
+        className="flex font-semibold bg-slate-600  hover:bg-yellow-500 hover:text-slate-700"
+      >
+        Press to upload image
       </Button>
     </div>
     </>

@@ -39,7 +39,7 @@ const SpinningWheel = ({userId}:SpinningWheelProps) => {
         }
         
         if(wheel!==null){ 
-          if((0<=randomAngle && randomAngle<108)){
+          if((0<=randomAngle && randomAngle<54)){
             toast({
               variant:"success",
               title: "Congratulations!",
@@ -52,7 +52,7 @@ const SpinningWheel = ({userId}:SpinningWheelProps) => {
             });
           wheel.style.transform = 'rotate(0deg)';
         }
-        if((108<=randomAngle && randomAngle<252)){
+        if((54<=randomAngle && randomAngle<198)){
 
           toast({
             variant:"success",
@@ -66,7 +66,7 @@ const SpinningWheel = ({userId}:SpinningWheelProps) => {
           });
           wheel.style.transform = 'rotate(0deg)';
         }
-        if((252<=randomAngle && randomAngle<=360)){
+        if((198<=randomAngle && randomAngle<=360)){
           toast({
             variant:"success",
             title: "Congratulations!",

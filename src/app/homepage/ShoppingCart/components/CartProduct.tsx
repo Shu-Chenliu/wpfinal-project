@@ -16,10 +16,11 @@ export type CartProductProps = {
   left: number,
   userId: string,
   coupons:{id:number,percent:number}[],
+  getCoupon:()=>void,
 };
 
 export default function CartProduct(
-  {id, displayId,title, category, price,username,seller,left,userId,coupons}:CartProductProps
+  {id, displayId,title, category, price,username,seller,left,userId,coupons,getCoupon}:CartProductProps
   ) {
   // const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -37,8 +38,10 @@ export default function CartProduct(
       postId:displayId,
     });
   }
+  const GetCoupon=()=>{
+    getCoupon();
+  }
   let imageSrc;
-
   switch (category) {
     case "Clothing":
       imageSrc = "../../Clothing.jpg";
@@ -67,7 +70,7 @@ export default function CartProduct(
           <div className="px-4">
             <p className="flex font-semibold text-yellow-500 text-xl">{title}</p>
             <p className="flex text-slate-900 mx-1 my-1">Price: ${price} /each</p>
-            <p className="flex text-slate-900 mx-1 my-1">Number left: {left}</p> 
+            <p className="flex text-slate-900 mx-1 my-1">Number left: {"left"}</p> //TODO
           </div>
 
           <div className="ml-auto">
@@ -80,6 +83,7 @@ export default function CartProduct(
               left={left}
               userId={userId}
               coupons={coupons}
+              handleGetCoupon={getCoupon}
             />
           </div>
           <Button

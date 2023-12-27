@@ -72,9 +72,11 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons}:
       userId,
       postId,
     });
-    await deleteCoupons({
-      id:selectedId,
-    });
+    if(finalSelectedCoupon!==0){
+      await deleteCoupons({
+        id:selectedId,
+      });
+    }
     setOpenBuyNowDialog(false)
   }
 

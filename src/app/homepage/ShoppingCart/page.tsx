@@ -14,7 +14,7 @@ async function ShoppingCartPage() {
   const Coupons=await getMyCoupon(userId);
   return (
     <div className="h-[100vh]">
-      <p className="flex font-semibold text-slate-900 text-2xl p-3">What to buy</p>
+      <p className="flex font-semibold text-slate-900 text-2xl p-3">My Shopping Cart</p>
       {Cart.map((product) =>(
         <div key={product.postId}>
           <CartProduct 

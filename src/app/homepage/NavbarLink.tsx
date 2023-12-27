@@ -14,16 +14,17 @@ import { BellPlus } from 'lucide-react';
 import { Eye } from 'lucide-react';
 
 import { useState } from 'react';
-
-function NavbarLink() {
-
-const unread=12;//傳入參數
-
-const[nowPage,setNowPage]=useState("View All product");
-const handleChangeNowPage=(page:string)=>{
-    setNowPage(page);
-    console.log(nowPage);
+type NavbarLinkProp={
+  sellerUnread:number,
+  buyerUnread:number,
 }
+function NavbarLink({sellerUnread,buyerUnread}:NavbarLinkProp) {
+
+  const[nowPage,setNowPage]=useState("View All product");
+  const handleChangeNowPage=(page:string)=>{
+      setNowPage(page);
+      console.log(nowPage);
+  }
 
   return (
     <>
@@ -63,7 +64,7 @@ const handleChangeNowPage=(page:string)=>{
             onClick={() => {handleChangeNowPage("Market Notifications")}}
 
             ><BellPlus className="m-2" />Market Notifications 
-            <span className="border border-red-600 border-2 m-2 px-1 rounded-full">{unread}</span>
+            <span className="border border-red-600 border-2 m-2 px-1 rounded-full">{sellerUnread}</span>
             </Button>
           </Link>
         
@@ -73,7 +74,7 @@ const handleChangeNowPage=(page:string)=>{
             className={`my-2 hover:bg-orange-500 m-2 ${nowPage === "Buying Notifications" ? 'bg-orange-500' : ''}`}
             onClick={() => {handleChangeNowPage("Buying Notifications")}}
             ><BellRing className="m-2" />Buying Notifications
-            <span className="border border-red-600 border-2 m-2 px-1 rounded-full">{unread}</span>
+            <span className="border border-red-600 border-2 m-2 px-1 rounded-full">{buyerUnread}</span>
             </Button>
           </Link>
 

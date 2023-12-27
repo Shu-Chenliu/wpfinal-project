@@ -15,13 +15,13 @@ function DocsLayout({ children }: Props) {
         <FiltChatNavbar />
  
       </nav>
-      <nav className="bg-slate-700 flex w-1/4 flex-col  pb-10 no-scrollbar">
+      <nav className="bg-slate-700 flex w-full flex-col  pb-10 no-scrollbar">
         {/* <Title/> */}
         <ChatRoomNavbar />
       </nav>
       
       {/* overflow-y-scroll for child to show scrollbar */}
-      <div className="w-full overflow-y-scroll">{children}</div>
+      <div className="w-full ">{children}</div>
     </main>
   );
 }

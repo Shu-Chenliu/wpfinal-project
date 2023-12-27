@@ -22,3 +22,17 @@ export const getAllProducts = async() =>{
   })
   return Products;
 }
+export const getUnreadNotificationsOfSeller = async(userId:string) =>{
+  "use server";
+  const unreadNotifications= await db.query.notifications.findMany({
+    where:(notifications, { eq }) => (eq(notifications.seller, userId), eq(notifications.readBySeller,false)),
+  })
+  return unreadNotifications;
+}
+export const getUnreadNotificationsOfBuyer = async(userId:string) =>{
+  "use server";
+  const unreadNotifications= await db.query.notifications.findMany({
+    where:(notifications, { eq }) => (eq(notifications.buyer, userId), eq(notifications.readByBuyer,false)),
+  })
+  return unreadNotifications;
+}

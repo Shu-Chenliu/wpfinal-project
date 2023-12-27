@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import styles from './SpinningWheel.module.css';
 import { Button } from '@/components/ui/button';
 import { useToast } from "@/components/ui/use-toast"
-
+import Coupon from '../../MyAccount/components/Coupon';
 import useCoupons from '@/hooks/useCoupon';
 type SpinningWheelProps={
   userId: string,
@@ -87,14 +87,21 @@ const SpinningWheel = ({userId}:SpinningWheelProps) => {
       <div className={styles.arrow}>↓</div>
       <div id="wheel" className={`${styles.wheel} ${spinning ? styles.spin : ''}`} />
         
-      <Button onClick={handleSpin} disabled={spinning} className='my-2'>
+      <Button onClick={handleSpin} disabled={spinning} className='my-2 hover:bg-orange-500'>
         Spin
       </Button>
 
-      <div className="my-2 flex flex-col">
-        <div className="text-white my-2 ml-auto" style={{ background: '#1f3b4e', display: 'inline-block', width: '70px'}}>5%OFF</div>
-        <div className="text-black my-2 ml-auto" style={{ background: '#ffaa0d', display: 'inline-block', width: '70px'}}>10%OFF</div>
-        <div className="text-white my-2 ml-auto" style={{ background: 'rgb(26, 70, 230)',display: 'inline-block', width: '70px' }}>20%OFF</div>
+      <div className="my-2  flex flex-col">
+        {/* <div className="text-white my-2 ml-auto" style={{ background: '#1f3b4e', display: 'inline-block', width: '70px'}}>5%OFF</div>
+        <div className="text-white my-2 ml-auto" style={{ background: '#e39d1a', display: 'inline-block', width: '70px'}}>10%OFF</div>
+        <div className="text-white my-2 ml-auto" style={{ background: '#269a9a',display: 'inline-block', width: '70px' }}>20%OFF</div> */}
+        <Coupon percent={5}/>
+        <br/>
+        <Coupon percent={10}/>
+        <br/>
+        <Coupon percent={20}/>
+        <br/>
+
       </div>
 
     </div>

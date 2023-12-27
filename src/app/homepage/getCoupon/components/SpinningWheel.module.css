@@ -1,4 +1,3 @@
-/* styles/SpinningWheel.module.css */
 .container {
   position: relative;
 }
@@ -6,7 +5,7 @@
 .wheel {
   width: 200px;
   height: 200px;
-  background: conic-gradient(#1f3b4e 0% 30%, #ffaa0d 30% 70%, rgb(26, 70, 230) 70% 100%);
+  background: conic-gradient(#1f3b4e 0% 30%, #e39d1a 30% 70%, #269a9a 70% 100%);
   border-radius: 50%;
   margin: 20px auto;
   position: relative;

@@ -65,9 +65,9 @@ export default function CartProduct(
           </div>
 
           <div className="px-4">
-            <p className="flex font-semibold text-slate-900 ">{title}</p>
-            <p className="flex text-slate-900">Price: {price}</p>
-            <p className="flex text-slate-900">Number left: {"left"}</p>
+            <p className="flex font-semibold text-yellow-500 text-xl">{title}</p>
+            <p className="flex text-slate-900 mx-1 my-1">Price: ${price} /each</p>
+            <p className="flex text-slate-900 mx-1 my-1">Number left: {"left"}</p> //TODO
           </div>
 
           <div className="ml-auto">

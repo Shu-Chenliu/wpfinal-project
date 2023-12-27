@@ -57,7 +57,8 @@ export default function SellerNotiBar({
       </div>
       <div className="px-4">
         <div className="mb-4 ">
-          <p className="flex w-full font-semibold text-slate-900"> Product Name: {text} </p>
+          {/* <p className="flex w-full font-semibold text-slate-900"> Product Name: {text} </p> */}
+          <p className="flex font-semibold text-orange-700 text-xl">{text}</p>
           <p className="flex w-full font-semibold text-slate-900"> Buyer: {buyer}</p>
           <p className="flex w-full font-semibold text-slate-900"> Buyer Address: {address}</p>
           <p className="flex w-full font-semibold text-slate-900"> Payment recieve: {money}</p>

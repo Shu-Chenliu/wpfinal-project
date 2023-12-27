@@ -8,8 +8,9 @@ export const getAllChatOfSeller = async(userId:string) =>{
       chatRoomId:{
         columns:{
           displayId:true,
-        }
-      }
+          buyerName:true,
+        },
+      },
     }
   })
   return ChatOfSeller;
@@ -22,6 +23,7 @@ export const getAllChatOfBuyer = async(userId:string) =>{
       chatRoomId:{
         columns:{
           displayId:true,
+          sellerName:true,
         }
       }
     }

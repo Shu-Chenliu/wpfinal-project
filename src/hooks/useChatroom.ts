@@ -6,7 +6,6 @@ export default function useChatrooms() {
   const router = useRouter();
 
   const postChatroom = async ({
-
   }: {
   }) => {
     setLoading(true);

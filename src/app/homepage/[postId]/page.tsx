@@ -21,7 +21,8 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
   if (!session || !session?.user?.id) {
     redirect(publicEnv.NEXT_PUBLIC_BASE_URL);
   }
-  const userId = session?.user?.id;
+  const userId = session.user.id;
+  const username=session.user.username;
   const Product= await getProduct(postId);
   const comments=await getComments(postId);
   const shoppingCart=await getMyShoppingCart(userId);
@@ -34,8 +35,8 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
   }
   const handleAddChatRoom =async(userId:string,sellerId:string)=>{
     "use server";
-    const newChatRoomId = await createChatRoom(userId,sellerId);
-    revalidatePath("/homepage");
+    const newChatRoomId = await createChatRoom(userId,sellerId,Product?.author.username!,username);
+    revalidatePath("/homepage/Chat");
     redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/Chat/${newChatRoomId}`);
   }
   let imageSrc;

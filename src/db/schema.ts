@@ -175,7 +175,17 @@ export const couponsRelations = relations(coupons, ({ one }) => ({
 }));
 export const chatRoom = pgTable('chatRoom', {
   id: serial('id').primaryKey(),
-  displayId: uuid("display_id").defaultRandom().notNull().unique(),  
+  displayId: uuid("display_id").defaultRandom().notNull().unique(),
+  sellerName:varchar('seller_name').notNull()
+    .references(() => usersTable.username,{
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    }),
+  buyerName:varchar('buyer_name').notNull()
+    .references(() => usersTable.username,{
+      onDelete: 'cascade',
+      onUpdate: 'cascade'
+    }),  
 }, (t) => ({
   
 }));
@@ -250,7 +260,7 @@ export const messagesTable = pgTable(
         onDelete: "cascade",
         onUpdate: "cascade",
       }),
-    sendAt: timestamp("sendAt").default(sql`now()`),
+    sendAt: timestamp("sendAt").default(sql`now()`).notNull(),
     chatRoomId: uuid("chatroom_id")
       .notNull()
       .references(() => chatRoom.displayId, {

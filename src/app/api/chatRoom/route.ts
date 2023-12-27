@@ -11,7 +11,8 @@ import { publicEnv } from "@/lib/env/public";
 
 import { z } from "zod";
 const postChatSchema = z.object({
-  
+  sellerName:z.string().max(100),
+  buyerName:z.string().max(100),
 });
 const deleteChatSchema = z.object({
   id:z.string(),
@@ -25,7 +26,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
-  const { } = data as PostChatRequest;
+  const {sellerName,buyerName } = data as PostChatRequest;
   await db
     .insert(chatRoom)
   return new NextResponse("OK", { status: 200 });

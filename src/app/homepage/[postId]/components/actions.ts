@@ -53,13 +53,15 @@ export const getMyShoppingCart = async(userId:string) => {
   })
   return Cart;
 }
-export const createChatRoom = async (userId: string,sellerId:string) => {
+export const createChatRoom = async (userId: string,sellerId:string,sellerName:string,buyerName:string) => {
   "use server";
 
   const newChatroomId = await db.transaction(async (tx) => {
     const [newChatroom] = await tx
       .insert(chatRoom)
       .values({
+        sellerName,
+        buyerName
       })
       .returning();
     await tx.insert(usersToChatofSeller).values({

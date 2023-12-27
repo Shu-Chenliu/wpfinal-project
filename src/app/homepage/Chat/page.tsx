@@ -6,24 +6,22 @@ import { Star } from "lucide-react";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
-import {getAllChatOfSeller,getAllChatOfBuyer}from "./components/actions"
-type Props = {
 
+type Props = {
+  params: {
+    chatRoomId: string;
+  };
 };
-async function NotificationPage() {
+async function NotificationPage({params:{chatRoomId}}: Props) {
   const session = await auth();
   if (!session || !session?.user?.id) {
     redirect(publicEnv.NEXT_PUBLIC_BASE_URL);
   }
-  const username=session.user.username;
-  
   const userId=session.user.id;
-  const chatOfSeller=await getAllChatOfSeller(userId);
-  const chatOfBuyer=await getAllChatOfBuyer(userId);
   return (
-    <>
+    <div className="w-full">
       
-    </>
+    </div>
   );
 }
 export default NotificationPage;

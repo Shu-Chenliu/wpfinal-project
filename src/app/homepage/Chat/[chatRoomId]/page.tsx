@@ -1,30 +1,48 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Star } from "lucide-react";
-
 import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
+import Message from "./components/Message";
+import InputBar from "./components/InputBar";
+import { getMessages } from "./components/actions";
 import { publicEnv } from "@/lib/env/public";
-
-type Props = {
+import { redirect } from "next/navigation";
+type DocPageProps = {
   params: {
-    chatroomId: string;
+    chatRoomId: string;
   };
 };
-async function NotificationPage({params:{chatroomId}}: Props) {
+
+async function DocPage({params: {chatRoomId}}: DocPageProps) {
   const session = await auth();
   if (!session || !session?.user?.id) {
     redirect(publicEnv.NEXT_PUBLIC_BASE_URL);
   }
-  const username=session.user.username;
-  
-  const userId=session.user.id;
+  const username = session.user.username;
+  const userId = session.user.id;
+  const messages=await getMessages(chatRoomId);
 
   return (
-    <>
-      <p>{chatroomId}</p>
-    </>
+    <div className="w-full">
+      <p className="font-bold py-2 mg-2 flex w-full justify-between p-2 shadow-sm px-2 py-1 border-b text-cyan-700">{"username"}</p>
+
+      
+      <div 
+        id="messages container"
+        className="h-[80vh] overflow-y-auto w-[110vh]">
+        {messages.map((message) => (
+          <div key={message.id} className="flex w-full justify-between p-2 ">
+           <Message
+              id={message.id}
+              isSender={message.authorId === userId}
+              content={message.text}
+           />
+          </div>
+        ))}
+
+      </div>
+      <InputBar />
+
+      
+    </div>
   );
 }
-export default NotificationPage;
+
+export default DocPage;

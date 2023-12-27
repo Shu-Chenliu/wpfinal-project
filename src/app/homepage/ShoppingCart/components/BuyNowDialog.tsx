@@ -46,8 +46,19 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
 
 
   const handleCouponChange = (percentValue:number,id:number) => {
-    setSelectedCoupon(percentValue);
-    setSelectedId(id);
+
+    if (selectedCoupon === percentValue) {
+      // 如果当前已选中，则取消选择
+      setSelectedCoupon(0);
+      setSelectedId(id);
+    } else {
+      // 否则，选择当前项
+      setSelectedCoupon(percentValue);
+    }
+  };
+  const handleCancelSelection = () => {
+    // 点击 "取消选择" 时清除选择
+    setSelectedCoupon(0);
   };
   const handleCouponSelect = () => {
     setFinalSelectedCoupon(selectedCoupon);
@@ -101,8 +112,6 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
 
     const uniqueCoupons = Array.from(new Set(coupons.map((coupon) => coupon.percent)))
     .map((percent) => coupons.find((coupon) => coupon.percent === percent));
-
-
 
   return (
     <>
@@ -186,7 +195,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
       
         <div className="flex items-center">
           <p className="flex w-full font-semibold text-slate-900">Total Payment</p>
-          <p>{totalPrice*(100-finalSelectedCoupon)/100}</p>
+          <p>{Math.round(totalPrice*(100-finalSelectedCoupon)/100)}</p>
         </div>
 
         </div>
@@ -232,6 +241,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
           </div>
         ))} */}
 
+        
         {uniqueCoupons.map((coupon) => (
           <div className="flex" key={coupon?.id}>
             {coupon && (
@@ -245,8 +255,22 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
                 <Coupon percent={coupon.percent} />
               </>
             )}
+
           </div>
         ))}
+
+        {uniqueCoupons && (
+          <>
+            <input 
+              type="radio" 
+              name="selectCoupon" 
+              onChange={handleCancelSelection}
+              checked={selectedCoupon === 0}
+            />
+            <span className="text-slate-900 m-4">Cancel selection</span>
+          </>
+        )}
+
 
         { uniqueCoupons.length===0 &&(        
         <div className="text-red-500 font-bold text-2xl">

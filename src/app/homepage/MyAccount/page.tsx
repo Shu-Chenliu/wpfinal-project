@@ -74,7 +74,20 @@ async function HomePage() {
       <div className="block items-center justify-top">
         <p className="text-xl font-semibold text-slate-700">My Market</p>
         <div className="flex">
-          <Store className="w-40 h-40" />
+          <div className="block">
+            {userProfile?.imageURL ?(
+              <div className="flex">
+                <img
+                  src={userProfile?.imageURL!}
+                  className="w-40 h-40  border-2 my-2 my-2 "           
+                />
+              </div>
+            ):(
+              <><Store className="w-40 h-40" /></>
+            )}
+            <AddImageButton userId={userId}/>
+          </div>
+          
           <EditProfile
               variant="edit"
               status="market"
@@ -84,7 +97,8 @@ async function HomePage() {
               // marketMessage={userProfile?.marketMessage}
 
             />
-        </div>     
+        </div>   
+          
       </div>
 
     </div>

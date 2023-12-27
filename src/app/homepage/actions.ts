@@ -32,7 +32,7 @@ export const getUnreadNotificationsOfSeller = async(userId:string) =>{
 export const getUnreadNotificationsOfBuyer = async(userId:string) =>{
   "use server";
   const unreadNotifications= await db.query.notifications.findMany({
-    where:(notifications, { eq }) => (eq(notifications.buyer, userId), eq(notifications.readByBuyer,false)),
+    where:(notifications, { eq }) => (eq(notifications.buyer, userId), eq(notifications.readByBuyer,false),eq(notifications.shipped,true)),
   })
   return unreadNotifications;
 }

@@ -12,6 +12,8 @@ import { Input } from "@/components/ui/input";
 import { useRef,useState} from "react";
 import useNotifications from "@/hooks/useNotifications"
 import useCart from "@/hooks/useCart";
+import Coupon from "@/app/homepage/MyAccount/components/Coupon";
+import useCoupons from "@/hooks/useCoupon";
 type Props = {
   title:string,
   username:string,
@@ -20,14 +22,31 @@ type Props = {
   postId:string,
   left:number,
   userId:string,
+  coupons:{id:number,percent:number}[],
 };
-function BuyNowDialog({ title,username,seller,money,postId,left,userId}:Props) {
+function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons}:Props) {
   const [openBuyNowDialog,setOpenBuyNowDialog]=useState(false);
   const [totalPrice,setTotalPrice]=useState(money);
   const {postNotification}=useNotifications();
   const {deleteCart}=useCart();
+  const {deleteCoupons}=useCoupons();
   const inputRefProductNumber = useRef<HTMLInputElement>(null); 
   const inputRefAddress = useRef<HTMLInputElement>(null);
+  const [showCouponDialog,setShowCouponDialog]=useState(false);
+
+  const [selectedCoupon, setSelectedCoupon] = useState(0);
+  const [finalSelectedCoupon, setFinalSelectedCoupon] = useState(0);
+  const [selectedId,setSelectedId]=useState(0);
+
+  const handleCouponChange = (percentValue:number,id:number) => {
+    setSelectedCoupon(percentValue);
+    setSelectedId(id);
+  };
+  const handleCouponSelect = () => {
+    setFinalSelectedCoupon(selectedCoupon);
+    setShowCouponDialog(false);
+  }
+
   const handleBuy=async()=>{
     if(!inputRefProductNumber.current||!inputRefAddress.current){
       return;
@@ -44,7 +63,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId}:Props) {
       text:title,
       buyer:username,
       seller,
-      money:totalPrice,
+      money:totalPrice*(100-finalSelectedCoupon)/100,
       address:inputRefAddress.current.value,
       postId,
       number:parseInt(inputRefProductNumber.current.value),
@@ -53,8 +72,13 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId}:Props) {
       userId,
       postId,
     });
+    await deleteCoupons({
+      id:selectedId,
+    });
     setOpenBuyNowDialog(false)
   }
+
+
   return (
     <>
     <Button 
@@ -62,7 +86,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId}:Props) {
         variant={"outline"}
         onClick={() => setOpenBuyNowDialog(true)}
         >Buy Now
-        </Button>
+    </Button>
       <Dialog open={openBuyNowDialog}>
       
       {/* <DialogTrigger asChild>
@@ -116,12 +140,29 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId}:Props) {
             ref={inputRefAddress}
           />
         </div>
+        
+        <div className="flex items-center">
+          <p className="flex w-full font-semibold text-slate-900 " >Coupon</p>
+          <Button
+            onClick={() => {setShowCouponDialog(true);}}
+            className="flex bg-white hover:bg-white text-orange-700 hover:text-orange-500 "
+          
+          >
+
+            {finalSelectedCoupon?(
+              <p className="flex w-full font-semibold text-orange-500 ">{finalSelectedCoupon}% off</p>
+              ):(
+              <p className="flex w-full font-semibold text-orange-700 hover:text-orange-500 ">Select your coupon</p> )
+            }
+
+          </Button>
+        </div>
+      
         <div className="flex items-center">
           <p className="flex w-full font-semibold text-slate-900">Total Payment</p>
-          <p>{totalPrice}</p>
+          <p>{totalPrice*(100-finalSelectedCoupon)/100}</p>
         </div>
 
-        
         </div>
 
         <div className="flex w-full justify-end ">
@@ -138,6 +179,46 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId}:Props) {
             Place order
           </Button>
         </div>      
+      </DialogContent>
+    </Dialog>
+    <Dialog open={showCouponDialog}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Select shopEE Coupon</DialogTitle>
+        </DialogHeader>
+       
+        
+        <div className="block m-2 ">
+        {coupons.map((coupon) =>(
+          <div className="flex" >
+            <input 
+              type="radio" 
+              name="selectCoupon" 
+              onChange={() => handleCouponChange(coupon.percent,coupon.id)}
+              checked={selectedCoupon === coupon.percent}
+            />
+            <Coupon percent={coupon.percent} />
+          </div>
+        ))}
+
+        {selectedCoupon!==0  && ( <p>Selected Coupon: {selectedCoupon}% off</p> )}
+        
+          
+        </div>
+
+        <div className="flex justify-end ml-auto">
+          <Button
+            className="text-sm font-semibold text-slate-900 border bg-slate-200 hover:bg-slate-100 mx-2"
+            onClick={async() => {setShowCouponDialog(false)}} 
+          >Close</Button>
+
+          <Button
+            className="flex font-semibold hover:bg-orange-700 hover:text-black "
+            onClick={() => {handleCouponSelect()}} 
+          >Select</Button>
+
+        </div>
+        
       </DialogContent>
     </Dialog>
     </>

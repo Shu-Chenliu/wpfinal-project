@@ -6,15 +6,25 @@
 .wheel {
   width: 200px;
   height: 200px;
-  background: conic-gradient(#3498db 0% 16.66%, #e74c3c 16.66% 60%, #2ecc71 60% 100%);
+  background: conic-gradient(#1f3b4e 0% 30%, #ffaa0d 30% 70%, rgb(26, 70, 230) 70% 100%);
   border-radius: 50%;
   margin: 20px auto;
   position: relative;
   transform-origin: center;
 }
 
+.arrow {
+  position: absolute;
+  top: -8px; 
+ 
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 24px;
+  color: #333;
+}
+
 .spin {
-  animation: spin 3s ease-out;
+  animation: spin 4s ease-out;
 }
 
 @keyframes spin {

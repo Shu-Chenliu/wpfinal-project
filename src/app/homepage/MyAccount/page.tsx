@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
-import {getUserProfile} from "./components/actions"
+import {getUserProfile,getMyCoupon} from "./components/actions"
 import Coupon from "./components/Coupon";
 import { Ghost } from 'lucide-react';
 async function HomePage() {
@@ -11,6 +11,8 @@ async function HomePage() {
   }
   const userDisplayId = session?.user?.id;
   const userProfile=await getUserProfile(userDisplayId);
+  const userId=session.user.id;
+  const coupons=await getMyCoupon(userId);
   return (
     <div className="block h-[90vh] w-full p-3">
       {/* <div className="flex flex-col items-center justify-center">
@@ -44,10 +46,11 @@ async function HomePage() {
       <br />
       <div>
          <p className="text-lg font-semibold text-slate-700">My Coupon</p>
-        
-        <Coupon percent={10}/>
-        <Coupon percent={5}/>
-        <Coupon percent={20}/>
+        {coupons.map((coupon) =>(
+          <div key={coupon.id}>
+            <Coupon percent={coupon.percent}/>
+          </div>
+        ))}
       </div>
 
     </div>

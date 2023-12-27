@@ -9,40 +9,73 @@ type SpinningWheelProps={
 }
 const SpinningWheel = ({userId}:SpinningWheelProps) => {
   const [spinning, setSpinning] = useState(false);
-  const {postCoupon}=useCoupons()
+  // const [rotationAngle, setRotationAngle] = useState(0);
+  const {postCoupon}=useCoupons();
   const handleSpin = async() => {
     if (!spinning) {
       // Generate a random angle for spinning
-      const randomAngle = Math.floor(Math.random() * 360) + 720; // Spins 2 times
+      const randomAngle = Math.floor(Math.random() *360) // Spins 3 times +360*50;
+      const rotationAngle = randomAngle+360*50;
       setSpinning(true);
-
+      console.log(randomAngle);
       // Rotate the wheel
       const wheel = document.getElementById('wheel');
       if (wheel!==null){
-        wheel.style.transition = 'transform 3s ease-out';
-        wheel.style.transform = `rotate(${randomAngle}deg)`;
+        // setRotationAngle(rotationAngle + randomAngle); // Update the rotation angle dynamically
+        // wheel.style.transition = 'transform 4s ease-out';
+        wheel.style.transform = `rotate(${rotationAngle}deg)`;
       }
       // Reset spinning state after the animation completes
-      setTimeout(() => {
+      setTimeout(async() => {
         setSpinning(false);
         if (wheel!==null){
         wheel.style.transition = 'none';
-        wheel.style.transform = 'rotate(0deg)';
         }
-      }, 3000);
-      await postCoupon({
-        owner:userId,
-        percent:10,//TODO:getpercent
-      });
+        
+        if(wheel!==null){ 
+          if((0<=randomAngle && randomAngle<108)){
+            await postCoupon({
+              owner:userId,
+              percent:20,//TODO:getpercent
+            });
+          wheel.style.transform = 'rotate(0deg)';
+        }
+        if((108<=randomAngle && randomAngle<252)){
+          await postCoupon({
+            owner:userId,
+            percent:10,//TODO:getpercent
+          });
+          wheel.style.transform = 'rotate(0deg)';
+        }
+        if((252<=randomAngle && randomAngle<=360)){
+          await postCoupon({
+            owner:userId,
+            percent:5,//TODO:getpercent
+          });
+          wheel.style.transform = 'rotate(0deg)';
+        }
+      }
+        // setRotationAngle(rotationAngle + randomAngle)
+      }, 5000);
+      
     }
   };
 
   return (
     <div className={styles.container}>
+      <div className={styles.arrow}>↓</div>
       <div id="wheel" className={`${styles.wheel} ${spinning ? styles.spin : ''}`} />
-      <Button onClick={handleSpin} disabled={spinning}>
+        
+      <Button onClick={handleSpin} disabled={spinning} className='my-2'>
         Spin
       </Button>
+
+      <div className="my-2 flex flex-col">
+        <div className="text-white my-2 ml-auto" style={{ background: '#1f3b4e', display: 'inline-block', width: '70px'}}>5%OFF</div>
+        <div className="text-black my-2 ml-auto" style={{ background: '#ffaa0d', display: 'inline-block', width: '70px'}}>10%OFF</div>
+        <div className="text-white my-2 ml-auto" style={{ background: 'rgb(26, 70, 230)',display: 'inline-block', width: '70px' }}>20%OFF</div>
+      </div>
+
     </div>
   );
 };

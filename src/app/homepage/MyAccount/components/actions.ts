@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { usersTable } from "@/db/schema";
+import { usersTable,coupons } from "@/db/schema";
 import { eq } from "drizzle-orm";
 export const getUserProfile = async(userDisplayId:string) =>{
   "use server";
@@ -19,4 +19,15 @@ export const getUserProfile = async(userDisplayId:string) =>{
     }
   });
   return user;
+}
+export const getMyCoupon=async(userId:string)=>{
+  const Coupons=await db
+    .select({
+      id:coupons.id,
+      percent:coupons.percent,
+    })
+    .from(coupons)
+    .where(eq(coupons.owner,userId))
+    .execute()
+  return Coupons;
 }

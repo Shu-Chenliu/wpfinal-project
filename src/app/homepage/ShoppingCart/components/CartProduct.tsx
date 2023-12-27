@@ -15,10 +15,11 @@ export type CartProductProps = {
   seller:string;
   left: number,
   userId: string,
+  coupons:{id:number,percent:number}[],
 };
 
 export default function CartProduct(
-  {id, displayId,title, category, price,username,seller,left,userId}:CartProductProps
+  {id, displayId,title, category, price,username,seller,left,userId,coupons}:CartProductProps
   ) {
   // const [open, setOpen] = useState(false);
   const router = useRouter();
@@ -78,6 +79,7 @@ export default function CartProduct(
               postId={displayId}
               left={left}
               userId={userId}
+              coupons={coupons}
             />
           </div>
           <Button

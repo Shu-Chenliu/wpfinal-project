@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast"
 
 type Props = {
   userDisplayId:string;
@@ -24,18 +25,30 @@ function AddProductDialog({userDisplayId}:Props) {
   const inputRefProductNumber = useRef<HTMLInputElement>(null);
   const [openNewAddProductDialog,setOpenAddProductDialog]=useState(false);
   const {postProduct}=usePost();
+  const { toast } = useToast()
+
   function isNumeric(value:string) {
     return /^\d+$/.test(value);
   }
   const handlePostProduct = async()=>{
     if(!inputRefProductName.current||!inputRefProductDescription.current||!inputRefProductCategory.current||!inputRefProductPrice.current||!inputRefProductNumber.current) {
-      alert("不ok喔");
+      // alert("不ok喔");
+      toast({
+        variant: "destructive",
+        title: " Fail to Add Product",
+        description: "Please enter product name",
+      })
       return;
     }
     const title=inputRefProductName.current.value;
     const description=inputRefProductDescription.current.value;
     if(!isNumeric(inputRefProductPrice.current.value)||!isNumeric(inputRefProductNumber.current.value)){
-      alert("要是數字");
+      // alert("要是數字");
+      toast({
+        variant: "destructive",
+        title: " Fail to Add Product",
+        description: "Product price must be a number",
+      })
       return;
     }
     const category = inputRefProductCategory.current.value;

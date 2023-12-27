@@ -14,6 +14,8 @@ import useNotifications from "@/hooks/useNotifications"
 import useCart from "@/hooks/useCart";
 import Coupon from "@/app/homepage/MyAccount/components/Coupon";
 import useCoupons from "@/hooks/useCoupon";
+import { useToast } from "@/components/ui/use-toast"
+
 type Props = {
   title:string,
   username:string,
@@ -30,6 +32,8 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons}:
   const {postNotification}=useNotifications();
   const {deleteCart}=useCart();
   const {deleteCoupons}=useCoupons();
+  const { toast } = useToast()
+
   const inputRefProductNumber = useRef<HTMLInputElement>(null); 
   const inputRefAddress = useRef<HTMLInputElement>(null);
   const [showCouponDialog,setShowCouponDialog]=useState(false);
@@ -52,11 +56,21 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons}:
       return;
     }
     if(inputRefAddress.current.value===""){
-      alert("enter something");
+      // alert("enter something");
+      toast({
+        variant: "destructive",
+        title: " Fail to Buy Product",
+        description: "Please enter your address.",
+      })
       return;
     }
     if(left<parseInt(inputRefProductNumber.current.value)){
-      alert("you buy too many");
+      // alert("you buy too many");
+      toast({
+        variant: "destructive",
+        title: " Fail to Buy Product",
+        description: "You buy too many.",
+      })
       return;
     }
     await postNotification({

@@ -1,5 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast"
+
 type AddToCartButtonProps={
   addToCart:(userId:string,postId:string)=>void,
   userId:string,
@@ -7,7 +9,8 @@ type AddToCartButtonProps={
   cartpostId:string[],
 }
 export default function AddToCartButton({addToCart,userId,postId,cartpostId}: AddToCartButtonProps){
-  const handleAddToCart=async(userId:string,postId:string)=>{
+    const { toast } = useToast()
+    const handleAddToCart=async(userId:string,postId:string)=>{
     if(userId===""){
       console.log("sign in");
       return;
@@ -15,7 +18,12 @@ export default function AddToCartButton({addToCart,userId,postId,cartpostId}: Ad
     for(const id of cartpostId){
       console.log(id);
       if(id===postId){
-        alert("this item is already in the cart");
+        // alert("this item is already in the cart");
+        toast({
+          variant: "destructive",
+          title: " Fail to add to cart ",
+          description: "this item is already in the cart",
+        })
         return;
       }
     }

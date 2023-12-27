@@ -3,6 +3,8 @@
 import React, { useState } from 'react';
 import styles from './SpinningWheel.module.css';
 import { Button } from '@/components/ui/button';
+import { useToast } from "@/components/ui/use-toast"
+
 import useCoupons from '@/hooks/useCoupon';
 type SpinningWheelProps={
   userId: string,
@@ -11,6 +13,7 @@ const SpinningWheel = ({userId}:SpinningWheelProps) => {
   const [spinning, setSpinning] = useState(false);
   // const [rotationAngle, setRotationAngle] = useState(0);
   const {postCoupon}=useCoupons();
+  const { toast } = useToast()
   const handleSpin = async() => {
     if (!spinning) {
       // Generate a random angle for spinning
@@ -34,6 +37,12 @@ const SpinningWheel = ({userId}:SpinningWheelProps) => {
         
         if(wheel!==null){ 
           if((0<=randomAngle && randomAngle<108)){
+            toast({
+              variant:"success",
+              title: "Congratulations!",
+              description: "You get a 20%OFF coupon! ",
+            })
+
             await postCoupon({
               owner:userId,
               percent:20,//TODO:getpercent
@@ -41,6 +50,13 @@ const SpinningWheel = ({userId}:SpinningWheelProps) => {
           wheel.style.transform = 'rotate(0deg)';
         }
         if((108<=randomAngle && randomAngle<252)){
+
+          toast({
+            variant:"success",
+            title: "Congratulations!",
+            description: "You get a 10%OFF coupon!",
+          })
+
           await postCoupon({
             owner:userId,
             percent:10,//TODO:getpercent
@@ -48,6 +64,11 @@ const SpinningWheel = ({userId}:SpinningWheelProps) => {
           wheel.style.transform = 'rotate(0deg)';
         }
         if((252<=randomAngle && randomAngle<=360)){
+          toast({
+            variant:"success",
+            title: "Congratulations!",
+            description: "You get a 5%OFF coupon!",
+          })
           await postCoupon({
             owner:userId,
             percent:5,//TODO:getpercent

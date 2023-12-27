@@ -8,9 +8,11 @@ import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 
 type Props = {
-
+  params: {
+    chatroomId: string;
+  };
 };
-async function NotificationPage() {
+async function NotificationPage({params:{chatroomId}}: Props) {
   const session = await auth();
   if (!session || !session?.user?.id) {
     redirect(publicEnv.NEXT_PUBLIC_BASE_URL);
@@ -21,7 +23,7 @@ async function NotificationPage() {
 
   return (
     <>
-    
+      <p>{chatroomId}</p>
     </>
   );
 }

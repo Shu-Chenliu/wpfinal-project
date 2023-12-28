@@ -32,5 +32,16 @@ export async function POST(request: NextRequest) {
       authorId,
       chatRoomId
     })
+    const pusher = new Pusher({
+      appId: privateEnv.PUSHER_ID,
+      key: publicEnv.NEXT_PUBLIC_PUSHER_KEY,
+      secret: privateEnv.PUSHER_SECRET,
+      cluster: publicEnv.NEXT_PUBLIC_PUSHER_CLUSTER,
+      useTLS: true,
+    });
+    // Private channels are in the format: private-...
+    await pusher.trigger(`private-${chatRoomId}`, "chatRoom:update", {
+      senderId:authorId,
+    });
   return new NextResponse("OK", { status: 200 });
 }

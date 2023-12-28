@@ -13,3 +13,19 @@ export const getMessages=async (chatRoomId:string)=>{
   });
   return Messages;
 }
+export const getOtherPeople=async(username:string,chatRoomId:string)=>{
+  const chatRoom=await db.query.chatRoom.findFirst({
+    where:(chatRoom, { eq }) => eq(chatRoom.displayId, chatRoomId),
+    columns:{
+      sellerName:true,
+      buyerName:true,
+    }
+  });
+  if(!chatRoom) return;
+  else if(username===chatRoom.buyerName){
+    return chatRoom.sellerName;
+  }
+  else {
+    return chatRoom.buyerName;
+  }
+}

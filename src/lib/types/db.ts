@@ -4,4 +4,6 @@ export type User = {
   email: string;
   provider: "github" | "credentials";
 };
-
+export type chatRoom={
+  id: string;
+}

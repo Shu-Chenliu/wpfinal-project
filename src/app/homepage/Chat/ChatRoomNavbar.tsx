@@ -40,7 +40,6 @@ async function ChatRoomNavbar() {
       
       <section className="flex bg-slate-700  flex-col pt-3  justify-center item-center">
         
-        
         {chatOfSeller.map((chat)=>(
           <div key={chat.chatRoomId.displayId}>
             <Link href={`/homepage/Chat/${chat.chatRoomId.displayId}`}> 

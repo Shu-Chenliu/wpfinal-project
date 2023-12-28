@@ -18,7 +18,6 @@ async function HomePage() {
         <p className="text-2xl m-2 p-2 font-semibold text-slate-700">
           Welcome to My Market
         </p>
-        
         <AddProductDialog userDisplayId={userDisplayId} />
       </div>
 
@@ -32,6 +31,7 @@ async function HomePage() {
             category={product.category}
             price={product.price}
             likes={product.likes}
+            left={product.left}
           />
         ))}
       </div>

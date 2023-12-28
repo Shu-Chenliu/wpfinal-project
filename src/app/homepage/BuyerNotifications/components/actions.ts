@@ -3,7 +3,7 @@ import { notifications } from "@/db/schema";
 export const getAllNotificationsOfBuyer = async(username:string) =>{
   "use server";
   const notifications= await db.query.notifications.findMany({
-    where:(notifications, { eq }) => (eq(notifications.buyer, username), eq(notifications.shipped,true)),
+    where:(notifications, { eq,and }) => and(eq(notifications.buyer, username), eq(notifications.shipped,true)),
     columns:{
       id:true,
       text:true,

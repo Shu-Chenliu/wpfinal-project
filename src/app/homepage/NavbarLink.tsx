@@ -22,8 +22,7 @@ function NavbarLink({sellerUnread,buyerUnread}:NavbarLinkProp) {
 
   const[nowPage,setNowPage]=useState("View All product");
   const handleChangeNowPage=(page:string)=>{
-      setNowPage(page);
-      console.log(nowPage);
+    setNowPage(page);
   }
 
   return (

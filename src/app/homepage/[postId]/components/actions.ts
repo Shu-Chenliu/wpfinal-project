@@ -19,6 +19,7 @@ export const getProduct=async (postId:string)=>{
           displayId:true,
           username:true,
           sellername:true,
+          selleraddress:true,
         }
       }
     }

@@ -19,6 +19,7 @@ export const getMyShoppingCart = async(userId:string) => {
           author:{
             columns:{
               username:true,
+              sellername:true,
             }
           }
         }

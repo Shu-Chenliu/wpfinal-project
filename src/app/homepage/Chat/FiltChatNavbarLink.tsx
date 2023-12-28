@@ -12,7 +12,6 @@ function FiltChatNavbarLink() {
   const[nowPage,setNowPage]=useState("Personal");
   const handleChangeNowPage=(page:string)=>{
       setNowPage(page);
-      console.log(nowPage);
   }
   return (
     <nav className="flex  flex-col bg-slate-100 pb-10 bg-slate-800 no-scrollbar">

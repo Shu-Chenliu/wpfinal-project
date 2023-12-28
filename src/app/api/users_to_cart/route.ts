@@ -25,7 +25,7 @@ export async function DELETE(request: NextRequest) {
   const { userId,postId } = data as deleteCartRequest;
   await db
     .delete(usersToCart)
-    .where((
+    .where(and(
       eq(usersToCart.userId, userId),
       eq(usersToCart.postId, postId)
     ))

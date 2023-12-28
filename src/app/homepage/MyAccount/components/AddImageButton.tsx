@@ -15,10 +15,8 @@ export default function AddImageButton({userId}:Props) {
   const [selectedFile, setSelectedFile] = useState(null);
   const {updateUser}=useUsers();
   const handleUploadImage=async()=>{
-    console.log("uploadImage");
     if(!imageRef.current)return;
     if(!imageRef.current.files)return;
-    console.log("reader");
     const reader = new FileReader();
     let imageSrc="";
     try {
@@ -28,8 +26,6 @@ export default function AddImageButton({userId}:Props) {
       }
       reader.onload = async function (e) {
         if(typeof e.target?.result==="string"){
-          console.log("string");
-          console.log(e.target.result);
           imageSrc=e.target.result;
           await updateUser({
             id:userId,

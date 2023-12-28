@@ -23,7 +23,6 @@ const SpinningWheel = ({userId}:SpinningWheelProps) => {
       const randomAngle = Math.floor(Math.random() *360) // Spins 3 times +360*50;
       const rotationAngle = randomAngle+360*50;
       setSpinning(true);
-      console.log(randomAngle);
       // Rotate the wheel
       const wheel = document.getElementById('wheel');
       if (wheel!==null){

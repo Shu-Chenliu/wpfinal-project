@@ -121,8 +121,8 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
             <div className="flex">
               <Store className=" mx-2 mr-5" size={40}/>
               <div className="block">
-                <p className="flex w-full font-semibold text-slate-900 ">Market: {Product?.author.username}</p>
-                <p className="flex w-full font-semibold text-slate-900 ">Market Address: {"address"}</p>
+                <p className="flex w-full font-semibold text-slate-900 ">Market: {Product?.author.sellername}</p>
+                <p className="flex w-full font-semibold text-slate-900 ">Market Address: {Product?.author.selleraddress}</p>
 
                 
               </div>

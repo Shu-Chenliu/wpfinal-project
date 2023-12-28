@@ -33,7 +33,7 @@ async function ShoppingCartPage() {
             price={product.posts.price}
             username={username}
             userId={userId}
-            seller={product.posts.author.username} 
+            seller={product.posts.author.sellername} 
             left={product.posts.left} 
             coupons={Coupons}
             getCoupon={handleGetCoupon}

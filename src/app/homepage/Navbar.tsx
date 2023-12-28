@@ -24,8 +24,8 @@ async function Navbar() {
   }
   const username=session.user.username;
   const userId=session.user.id;
-  const unreadNotificationOfSeller=await getUnreadNotificationsOfSeller(userId);
-  const unreadNotificationOfBuyer=await getUnreadNotificationsOfBuyer(userId);
+  const unreadNotificationOfSeller=await getUnreadNotificationsOfSeller(username);
+  const unreadNotificationOfBuyer=await getUnreadNotificationsOfBuyer(username);
 
   return (
     <nav className="flex w-full flex-col bg-slate-100 pb-10 bg-slate-900">

@@ -12,11 +12,9 @@ export default function AddToCartButton({addToCart,userId,postId,cartpostId}: Ad
     const { toast } = useToast()
     const handleAddToCart=async(userId:string,postId:string)=>{
     if(userId===""){
-      console.log("sign in");
       return;
     }
     for(const id of cartpostId){
-      console.log(id);
       if(id===postId){
         // alert("this item is already in the cart");
         toast({

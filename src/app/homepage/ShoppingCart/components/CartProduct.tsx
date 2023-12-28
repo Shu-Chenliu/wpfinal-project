@@ -70,7 +70,7 @@ export default function CartProduct(
           <div className="px-4">
             <p className="flex font-semibold text-yellow-500 text-xl">{title}</p>
             <p className="flex text-slate-900 mx-1 my-1">Price: ${price} /each</p>
-            <p className="flex text-slate-900 mx-1 my-1">Number left: {"left"}</p> //TODO
+            <p className="flex text-slate-900 mx-1 my-1">Number left: {left}</p>
           </div>
 
           <div className="ml-auto">

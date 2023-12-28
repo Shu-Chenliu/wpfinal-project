@@ -1,13 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-import { and, eq } from "drizzle-orm";
-import Pusher from "pusher";
+import {  eq } from "drizzle-orm";
+
 
 import { db } from "@/db";
 import { chatRoom} from "@/db/schema";
-import { auth } from "@/lib/auth";
-import { privateEnv } from "@/lib/env/private";
-import { publicEnv } from "@/lib/env/public";
+
 
 import { z } from "zod";
 const postChatSchema = z.object({
@@ -29,6 +27,10 @@ export async function POST(request: NextRequest) {
   const {sellerName,buyerName } = data as PostChatRequest;
   await db
     .insert(chatRoom)
+    .values({
+      sellerName:sellerName,
+      buyerName:buyerName,
+    })
   return new NextResponse("OK", { status: 200 });
 }
 export async function DELETE(request: NextRequest) {

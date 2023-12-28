@@ -37,7 +37,7 @@ export async function PUT(request: NextRequest) {
   const { id,address,imageURL,username,email,sellername,selleraddress,marketDescription,marketMessage,marketUrl,userChatRoomState } = data as updateUserRequest;
   await db
     .update(usersTable)
-    .set({address,imageURL,username,email,sellername,selleraddress,marketDescription,marketMessage,marketUrl})
+    .set({address,imageURL,username,email,sellername,selleraddress,marketDescription,marketMessage,marketUrl,userChatRoomState})
     .where(eq(usersTable.displayId, id))
   return new NextResponse("OK", { status: 200 });
 }

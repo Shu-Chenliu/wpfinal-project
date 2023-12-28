@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast"
+import { ShoppingCart } from "lucide-react"
 
 type AddToCartButtonProps={
   addToCart:(userId:string,postId:string)=>void,
@@ -31,7 +32,7 @@ export default function AddToCartButton({addToCart,userId,postId,cartpostId}: Ad
     <Button
       className="flex font-semibold bg-slate-600  hover:bg-yellow-500 hover:text-slate-700 ml-auto"
       onClick={()=>handleAddToCart(userId,postId)}
-    >
+    ><ShoppingCart className="mr-1"/>
       Add to cart
     </Button>
   );

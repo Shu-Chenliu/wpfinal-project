@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { usersToCart,comments,chatRoom,usersToChatofSeller,usersToChatofBuyer,messagesTable} from "@/db/schema";
+
 
 export const getMessages=async (chatRoomId:string)=>{
   const Messages=await db.query.messagesTable.findMany({

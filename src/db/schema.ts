@@ -21,13 +21,13 @@ export const usersTable = pgTable("users",{
     id: serial("id").primaryKey(),
     displayId: uuid("display_id").defaultRandom().notNull().unique(),
     username: varchar("username", { length: 100 }).notNull().unique(),
-    address:varchar('address', { length: 280 }),
+    address:varchar('address', { length: 280 }).notNull().default("unknown"),
     sellername: varchar("sellername", { length: 100 }).notNull().unique(),
-    selleraddress:varchar('selleraddress', { length: 280 }).notNull().default("unKnown"),
+    selleraddress:varchar('selleraddress', { length: 280 }).notNull().default("unknown"),
     imageURL: varchar('imageURL'),
     email: varchar("email", { length: 100 }).notNull().unique(),
-    marketDescription: varchar('marketDescription', { length:100}).notNull().default("unKnown"),
-    marketMessage: varchar('marketMessage', { length: 100 }).notNull().default("Hello! How can I help you"),
+    marketDescription: varchar('marketDescription', { length:100}).notNull().default("unknown"),
+    marketMessage: varchar('marketMessage', { length: 100 }).notNull().default("Hello! How can I help you?"),
     marketUrl: varchar('marketUrl'),
     userChatRoomState: varchar('userChatRoomState').notNull().default("personal"),
     hashedPassword: varchar("hashed_password", { length: 100 }),
@@ -136,7 +136,7 @@ export const notifications = pgTable('notifications', {
     })
     .notNull(),
   seller: varchar('seller')
-    .references(()=>usersTable.username,{
+    .references(()=>usersTable.sellername,{
       onDelete: 'cascade',
       onUpdate: 'cascade'
     })
@@ -184,7 +184,7 @@ export const couponsRelations = relations(coupons, ({ one }) => ({
 export const chatRoom = pgTable('chatRoom', {
   id: serial('id').primaryKey(),
   displayId: uuid("display_id").defaultRandom().notNull().unique(),
-  sellerName:varchar('seller_name').notNull()
+  sellerName:varchar('seller').notNull()
     .references(() => usersTable.username,{
       onDelete: 'cascade',
       onUpdate: 'cascade'

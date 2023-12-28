@@ -21,7 +21,7 @@ export default function AddChatRoomButton({
     <div>
       <Button
         onClick={handleAddChatRoom}
-        className="mx-20 flex font-semibold bg-slate-600  hover:bg-yellow-500 hover:text-slate-700 mx-10"
+        className="mt-3 flex font-semibold bg-slate-600  hover:bg-yellow-500 hover:text-slate-700"
       ><MessagesSquare className="m-2" />
         Chat with seller
       </Button>

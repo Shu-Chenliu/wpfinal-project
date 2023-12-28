@@ -86,12 +86,12 @@ export default function EditProfile(props: CardDialogProps) {
   return (
     <>
     {status === "personal" ? (
-      <div className="block items-center justify-top my-2 my-2 p-3 ">
-      <div className="flex">
+      <div className="block items-center justify-top my-2 my-2 p-3 font-semibold">
+      <div className="flex font-semibold">
         <p>Username: </p>
         {edittingTitle ? (
           <>
-        <ClickAwayListener
+        <ClickAwayListener    
           onClickAway={() => {
             if (variant === "edit") {
               setEdittingTitle(false);
@@ -112,7 +112,7 @@ export default function EditProfile(props: CardDialogProps) {
       ) : (
         <button
           onClick={() => setEdittingTitle(true)}
-          className="mx-2 w-40 flex"
+          className="mx-2 w-40 flex "
         >
           <Typography className="text-start">{newTitle}</Typography>
           <Pencil className="mx-1 " size={10} />
@@ -120,7 +120,7 @@ export default function EditProfile(props: CardDialogProps) {
 
       )}
       </div>
-      <div className="flex">
+      <div className="flex font-semibold">
         <p>User email: </p>
 
         {edittingDescription ? (
@@ -160,12 +160,7 @@ export default function EditProfile(props: CardDialogProps) {
         <p>Address: </p>
         {edittingAddress ? (
           <>
-          <ClickAwayListener onClickAway={() => { 
-            if (variant === "edit") {
-              setEdittingAddress(false);
-              handleClickAway();
-            }
-          }} >
+          <ClickAwayListener onClickAway={() => { if (variant === "edit") {setEdittingAddress(false); handleClickAway();}}} >
           <Input
             autoFocus
             defaultValue={address}
@@ -189,9 +184,11 @@ export default function EditProfile(props: CardDialogProps) {
 
     ) : (
       <>
-      <div className="block items-center justify-top my-2 my-2 p-3 ">
+      <div className="block w-1/3 items-center justify-top my-2 my-2 p-3 ">
       <div className="flex">
-        <p>Market Name: </p>
+        
+        <p className="font-semibold">Market Name: </p>
+        
         {edittingMarketName ? (
           <>
         <ClickAwayListener
@@ -223,8 +220,34 @@ export default function EditProfile(props: CardDialogProps) {
 
       )}
       </div>
+
       <div className="flex">
-        <p>Market description: </p>
+        <p className="font-semibold">Market address: </p>
+        {edittingMarketAddress ? (
+          <>
+          <ClickAwayListener onClickAway={() => { if (variant === "edit") {setEdittingMarketAddress(false); handleClickAway();}}} >
+          <Input
+            autoFocus
+            defaultValue={marketAddress}
+            onChange={(e) => setNewMarketAddress(e.target.value)}
+            className="grow mx-2"
+            placeholder="Enter market address"
+          /> 
+        </ClickAwayListener> <Pencil className="mx-1 " size={10} />
+          </>
+      ) : (
+        <button
+          onClick={() => setEdittingMarketAddress(true) }
+          className="mx-2 w-40 flex"
+        >
+          <Typography className="text-start">{newMarketAddress}</Typography>
+          <Pencil className="mx-1 " size={10} />
+        </button>
+      )}
+      </div>
+      
+      <div className="block">
+        <p className="font-semibold">Market description: </p>
         {edittingMarketDescription ? (
           <>
         <ClickAwayListener
@@ -248,79 +271,60 @@ export default function EditProfile(props: CardDialogProps) {
       ) : (
         <button
           onClick={() => setEdittingMarketDescription(true)}
-          className="mx-2 w-50 flex"
+          className="mx-2 w-50 flex "
         >
           <Typography className="text-start">{newMarketDescription}</Typography>
           <Pencil className="mx-1 " size={10} />
         </button>
       )}
+  
+      </div>
+
       
-
-      </div>
-
-      <div className="flex">
-        <p>Market address: </p>
-        {edittingMarketAddress ? (
-          <>
-          <ClickAwayListener onClickAway={() => { 
-            if (variant === "edit") {
-              setEdittingMarketAddress(false);
-              handleClickAway();
-              }
-            }} 
+      <br />
+      <div className="block ">
+        <p className="font-semibold"> Market's chatroom default message</p>
+        
+        <div className="flex">
+          {/* <p className="font-semibold">Market message: </p> */}
+          {edittingMarketMessage ? (
+            <>
+            <ClickAwayListener onClickAway={() => { if (variant === "edit") {setEdittingMarketMessage(false); handleClickAway();}}} >
+            <Input
+              autoFocus
+              defaultValue={marketMessage}
+              onChange={(e) => setNewMarketMessage(e.target.value)}
+              className="grow mx-2"
+              placeholder="Enter market message"
+            /> 
+          </ClickAwayListener> <Pencil className="mx-1 " size={10} />
+            </>
+        ) : (
+          <button
+            onClick={() => setEdittingMarketMessage(true)}
+            className="mx-2  flex font-semibold"
           >
-          <Input
-            autoFocus
-            defaultValue={marketAddress}
-            onChange={(e) => setNewMarketAddress(e.target.value)}
-            className="grow mx-2"
-            placeholder="Enter market address"
-          /> 
-        </ClickAwayListener> <Pencil className="mx-1 " size={10} />
-          </>
-      ) : (
-        <button
-          onClick={() => setEdittingMarketAddress(true)}
-          className="mx-2 w-40 flex"
-        >
-          <Typography className="text-start">{newMarketAddress}</Typography>
-          <Pencil className="mx-1 " size={10} />
-        </button>
-      )}
+            <Typography className="text-start">{newMarketMessage}</Typography>
+            <Pencil className="mx-1 " size={10} />
+          </button>
+        )}
+        
+        <br /><br />
+        </div>
+        <p className="text-slate-500 text-sm ml-3">If you did not set your market name, we will deafault which as your username. </p>
+        <p className="text-slate-500 text-sm ml-3"> The default message you set will be send to buyers when the chatroom is created.</p>
+
       </div>
-      <div className="flex">
-        <p>Market message: </p>
-        {edittingMarketMessage ? (
-          <>
-          <ClickAwayListener onClickAway={() => { if (variant === "edit") {setEdittingMarketMessage(false);}}} >
-          <Input
-            autoFocus
-            defaultValue={marketMessage}
-            onChange={(e) => setNewMarketMessage(e.target.value)}
-            className="grow mx-2"
-            placeholder="Enter market message"
-          /> 
-        </ClickAwayListener> <Pencil className="mx-1 " size={10} />
-          </>
-      ) : (
-        <button
-          onClick={() => setEdittingMarketMessage(true)}
-          className="mx-2 w-40 flex"
-        >
-          <Typography className="text-start">{newMarketMessage}</Typography>
-          <Pencil className="mx-1 " size={10} />
-        </button>
-      )}
-      </div>
-
-
-
-
+      
+      
     </div>
       
-      </>
+    </>
 
     )}
+
     </>
+    
+
   );
 }

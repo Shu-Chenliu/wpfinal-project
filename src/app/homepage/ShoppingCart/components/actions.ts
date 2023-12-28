@@ -1,6 +1,6 @@
 import { db } from "@/db";
 import { eq } from 'drizzle-orm';
-import { usersTable,posts,postsRelations,usersToCart,coupons } from "@/db/schema";
+import { coupons } from "@/db/schema";
 export const getMyShoppingCart = async(userId:string) => {
   const Cart=await db.query.usersToCart.findMany({
     where:(usersToCart, { eq }) => eq(usersToCart.userId, userId),

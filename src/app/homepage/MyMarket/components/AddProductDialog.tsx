@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast"
-import { Plus } from 'lucide-react';
+import { ShoppingBag } from 'lucide-react';
 
 type Props = {
   userDisplayId:string;
@@ -73,7 +73,7 @@ function AddProductDialog({userDisplayId}:Props) {
           variant={"outline"}
           onClick={() => setOpenAddProductDialog(true)}
           >
-            <Plus/>Add Product
+            <ShoppingBag size={20} className="mr-1"/>Add Product
       </Button>
       <Dialog open={openNewAddProductDialog}>
         {/* <DialogTrigger asChild>

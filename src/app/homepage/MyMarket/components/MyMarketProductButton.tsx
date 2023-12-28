@@ -2,14 +2,12 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import type { EventHandler, MouseEvent } from "react";
+
 import { Star, StarHalf } from "lucide-react";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Input from "@mui/material/Input";
+
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
+
 
 export type MyMarketProductButtonProps = {
   id: number;

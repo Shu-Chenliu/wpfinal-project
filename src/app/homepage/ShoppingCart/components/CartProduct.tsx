@@ -23,7 +23,7 @@ export default function CartProduct(
   {id, displayId,title, category, price,username,seller,left,userId,coupons,getCoupon}:CartProductProps
   ) {
   // const [open, setOpen] = useState(false);
-  const router = useRouter();
+  
   // const handleClickOpen = () => {
   //   setOpen(true);
   // };
@@ -38,9 +38,7 @@ export default function CartProduct(
       postId:displayId,
     });
   }
-  const GetCoupon=()=>{
-    getCoupon();
-  }
+  
   let imageSrc;
   switch (category) {
     case "Clothing":

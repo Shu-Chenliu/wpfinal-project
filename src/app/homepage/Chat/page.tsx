@@ -1,7 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Star } from "lucide-react";
+
 
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";

@@ -1,18 +1,24 @@
 import { useState } from "react";
-import { useRouter,useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function useChatrooms() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
   const postChatroom = async ({
+    sellerName,
+    buyerName,
   }: {
+    sellerName: string,
+    buyerName: string,
   }) => {
     setLoading(true);
 
     const res = await fetch("/api/chatRoom", {
       method: "POST",
       body: JSON.stringify({
+        sellerName,
+        buyerName,
       }),
     });
 

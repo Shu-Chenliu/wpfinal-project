@@ -1,11 +1,10 @@
 
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { useSession } from "next-auth/react";
 
 
-import { useDebounce } from "use-debounce";
 
 import { pusherClient } from "@/lib/pusher/client";
 import type { chatRoom, User } from "@/lib/types/db";

@@ -3,7 +3,7 @@ type Props = {
   params: { postId: string };
 };
 
-function DocEditorLayout({ children, params }: Props) {
+function DocEditorLayout({ children }: Props) {
   return (
     <div className="w-full">
       <div className="fixed right-2 top-1 z-50">

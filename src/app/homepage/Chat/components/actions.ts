@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { usersToChatofSeller,usersToChatofBuyer } from "@/db/schema";
+import { usersToChatofSeller,usersToChatofBuyer,usersTable } from "@/db/schema";
 export const getAllChatOfSeller = async(userId:string) =>{
   "use server";
   const ChatOfSeller= await db.query.usersToChatofSeller.findMany({
@@ -29,4 +29,14 @@ export const getAllChatOfBuyer = async(userId:string) =>{
     }
   })
   return ChatOfBuyer;
+}
+export const getUserState=async(userId:string)=>{
+  "use server";
+  const ChatRoomState=await db.query.usersTable.findFirst({
+    where:(usersTable, { eq }) => eq(usersTable.displayId, userId),
+    columns:{
+      userChatRoomState:true,
+    }
+  })
+  return ChatRoomState;
 }

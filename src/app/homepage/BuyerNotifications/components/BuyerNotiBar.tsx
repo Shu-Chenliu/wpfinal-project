@@ -1,9 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useState,useRef } from "react";
-import { Input } from "@/components/ui/input";
-import { Star } from "lucide-react";
+
 import ConfirmDialog from "./ConfirmDialog";
 import AddCommentDialog from "./AddCommentDialog"
 
@@ -61,8 +59,8 @@ export default function BuyerNotiBar({
   }
   const contentToRender = (
     <>
-      <div>
-        <img src={imageSrc} alt="Product" className="w-32 h-auto" />
+      <div className="w-40 h-40">
+        <img src={imageSrc} alt="Product" className="h-32 w-auto" />
       </div>
       <div className="px-4">
         <div className="mb-4 ">

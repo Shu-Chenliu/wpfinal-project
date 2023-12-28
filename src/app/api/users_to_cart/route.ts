@@ -1,13 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { and, eq } from "drizzle-orm";
-import Pusher from "pusher";
+
 
 import { db } from "@/db";
 import { usersToCart } from "@/db/schema";
-import { auth } from "@/lib/auth";
-import { privateEnv } from "@/lib/env/private";
-import { publicEnv } from "@/lib/env/public";
+
 
 import { z } from "zod";
 const deleteCartSchema=z.object({

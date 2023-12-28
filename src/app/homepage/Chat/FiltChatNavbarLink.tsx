@@ -5,13 +5,21 @@ import { UserRound } from 'lucide-react';
 import { useState } from "react";
 
 import { Store } from 'lucide-react';
+import useUser from "@/hooks/userUsers";
+type Props={
+  userstate:string,
+  userId:string,
+}
 
-
-function FiltChatNavbarLink() {
-
-  const[nowPage,setNowPage]=useState("Personal");
-  const handleChangeNowPage=(page:string)=>{
-      setNowPage(page);
+function FiltChatNavbarLink({userstate,userId}:Props) {
+  const {updateUser}=useUser();
+  const[nowPage,setNowPage]=useState(userstate);
+  const handleChangeNowPage=async(page:string)=>{
+    setNowPage(page);
+    await updateUser({
+      id:userId,
+      userChatRoomState:page,
+    });
   }
   return (
     <nav className="flex  flex-col bg-slate-100 pb-10 bg-slate-800 no-scrollbar">
@@ -20,8 +28,8 @@ function FiltChatNavbarLink() {
 
           <Link href={"/homepage/Chat"}>
             <Button
-            className={`flex my-2 bg-slate-800 hover:bg-slate-800 hover:text-orange-500 m-2 ${nowPage === "Personal" ? 'text-orange-500' : ''}`}
-            onClick={() => handleChangeNowPage("Personal")}
+            className={`flex my-2 bg-slate-800 hover:bg-slate-800 hover:text-orange-500 m-2 ${nowPage === "personal" ? 'text-orange-500' : ''}`}
+            onClick={() => handleChangeNowPage("personal")}
             >
                 <UserRound className="m-2" />
             </Button>
@@ -29,8 +37,8 @@ function FiltChatNavbarLink() {
 
           <Link href={"/homepage/Chat"}>
             <Button
-            className={`flex my-2 bg-slate-800 hover:bg-slate-800 hover:text-orange-500 m-2 ${nowPage === "Market" ? 'text-orange-500' : ''}`}
-            onClick={() => handleChangeNowPage("Market")}            
+            className={`flex my-2 bg-slate-800 hover:bg-slate-800 hover:text-orange-500 m-2 ${nowPage === "market" ? 'text-orange-500' : ''}`}
+            onClick={() => handleChangeNowPage("market")}            
             >
               <Store className="m-2" /> 
             </Button>

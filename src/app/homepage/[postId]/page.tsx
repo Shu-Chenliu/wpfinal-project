@@ -11,7 +11,7 @@ import { getComments,getMyShoppingCart,getChatRoom } from "./components/actions"
 import { publicEnv } from "@/lib/env/public";
 import { ArrowLeft } from 'lucide-react';
 import AddChatRoomButton from "./components/AddChatRoomButton";
-import { Store } from 'lucide-react';
+import { Store, ShoppingCart } from 'lucide-react';
 type ProductPageProps = {
   params: {
     postId: string;
@@ -43,7 +43,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
         redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/Chat/${chatRoom.displayId}`);
       }
     }
-    const newChatRoomId = await createChatRoom(userId,sellerId,Product?.author.username!,username);
+    const newChatRoomId = await createChatRoom(userId,sellerId,Product?.author.sellername!,username);
     revalidatePath("/homepage/Chat");
     redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/Chat/${newChatRoomId}`);
   }
@@ -71,12 +71,13 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
       <div className="flex">
         <Link href={"/homepage"}>
           <Button
-            className="flex font-semibold bg-slate-300 hover:bg-slate-400 text-slate-900 hover:text-slate-100"
+            className="flex font-semibold bg-slate-200 hover:bg-slate-100 text-slate-900 hover:text-slate-900"
           ><ArrowLeft />
           </Button>
         </Link>
         {Product?.left!==0 ? (
         <>
+        
         <AddToCartButton 
           addToCart={handleAddToCart} 
           userId={userId?userId:""} 
@@ -90,7 +91,8 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
           <Button
             className="flex font-semibold bg-slate-200 text-slate-100 hover:bg-slate-200 hover:text-slate-100 ml-auto"
     
-          >
+          ><ShoppingCart className="mr-1"/>
+
             Add to cart
           </Button>
 
@@ -119,17 +121,16 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
             <p className="flex w-full font-semibold text-slate-900 ">Number left: {Product?.left}</p>
             <br /> <br />
             <div className="flex">
-              <Store className=" mx-2 mr-5" size={40}/>
+              <Store className=" mx-2 mr-5" size={100}/>
               <div className="block">
-                <p className="flex w-full font-semibold text-slate-900 ">Market: {Product?.author.sellername}</p>
-                <p className="flex w-full font-semibold text-slate-900 ">Market Address: {Product?.author.selleraddress}</p>
-
-                
+                <p className=" flex w-full font-semibold text-slate-900 ">Market: {Product?.author.sellername}</p>
+                <p className=" flex w-full font-semibold text-slate-900 ">Market Address: {Product?.author.selleraddress}</p>
+                <AddChatRoomButton userId={userId} seller={Product?.author.displayId!} addChatRoom={handleAddChatRoom}/>
               </div>
-              <AddChatRoomButton userId={userId} seller={Product?.author.displayId!} addChatRoom={handleAddChatRoom}/>
               
-
+              
             </div>
+            
             
           </div>
           

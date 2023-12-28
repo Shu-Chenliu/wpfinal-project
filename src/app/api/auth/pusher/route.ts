@@ -1,6 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 
-import { or,and, eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 
 import { db } from "@/db";
 import { usersToChatofSeller,usersToChatofBuyer, usersToChatofBuyerRelations } from "@/db/schema";

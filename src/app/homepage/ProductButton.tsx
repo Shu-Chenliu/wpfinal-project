@@ -2,15 +2,10 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
-import type { EventHandler, MouseEvent } from "react";
 import { Star, StarHalf } from "lucide-react";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import Input from "@mui/material/Input";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
+
 
 export type ProductButtonProps = {
   id: number;
@@ -64,7 +59,7 @@ export default function ProductButton({id, displayId,title, category, price,like
             </div>
             
           {/* 圖片 */}
-          <div className="grid place-items-center" style={{ width: '200px', height: '200px' }}>
+          <div className="grid place-items-center" style={{ width: '200px', height: '250px' }}>
             <p className="flex font-semibold text-slate-900">
               <img src={imageSrc} alt="Product" className="w-auto h-auto" />
             </p>

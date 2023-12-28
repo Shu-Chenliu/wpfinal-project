@@ -1,16 +1,13 @@
 // CouponDrawRule.tsx
 "use client"
 import React, { useState } from 'react';
-import styles from './SpinningWheel.module.css';
-import { Button } from '@/components/ui/button';
-import { useToast } from "@/components/ui/use-toast"
-import Coupon from '../../MyAccount/components/Coupon';
+
 import useCoupons from '@/hooks/useCoupon';
 type SpinningWheelProps={
   userId: string,
 }
 const CouponDrawRule = () => {
-  const {postCoupon}=useCoupons();
+  
 
   return (
     <div className="flex gap-4 p-2 mx-2 my-2 font-semibold border border-orange-600 rounded-md text-slate-900 w-3/5">

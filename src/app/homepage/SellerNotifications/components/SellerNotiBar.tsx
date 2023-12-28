@@ -1,8 +1,8 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useState } from "react";
-import { Input } from "@/components/ui/input";
+
 import useNotifications from "@/hooks/useNotifications";
 type SellerNotiBarProps = {
   id:number,
@@ -53,13 +53,14 @@ export default function SellerNotiBar({
   }
   const contentToRender = (
     <>
-      <div>
-        <img src={imageSrc} alt="Product" className="w-32 h-auto" />
+      <div className="w-40 h-40">
+        <img src={imageSrc} alt="Product" className="w-auto h-32" />
       </div>
       <div className="px-4">
         <div className="mb-4 ">
           {/* <p className="flex w-full font-semibold text-slate-900"> Product Name: {text} </p> */}
-          <p className="flex font-semibold text-orange-700 text-xl">{text}</p>
+          <p className="flex font-semibold text-orange-700 text-xl">Order recieved!</p>
+          <p className="flex w-full font-bold text-slate-900"> {text}</p>
           <p className="flex w-full font-semibold text-slate-900"> Buyer: {buyer}</p>
           <p className="flex w-full font-semibold text-slate-900"> Buyer Address: {address}</p>
           <p className="flex w-full font-semibold text-slate-900"> Payment recieve: {money}</p>

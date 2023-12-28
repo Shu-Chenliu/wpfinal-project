@@ -1,17 +1,3 @@
-
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { UserRound } from 'lucide-react';
-    
-import { BellRing, Ticket, LogOut, MessageCircle, MessagesSquare } from 'lucide-react';
-    
-import { ShoppingCart } from 'lucide-react';
-    
-import { Store } from 'lucide-react';
-    
-import { BellPlus } from 'lucide-react';
-    
-import { Eye } from 'lucide-react';
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";

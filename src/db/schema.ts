@@ -62,6 +62,7 @@ export const posts = pgTable('posts', {
       onUpdate: 'cascade'
     })
     .notNull(),
+  imageUrl:varchar('imageUrl'),
   category: varchar('category').notNull(),
   price: integer('price').notNull(),
   left: integer('left').notNull(),
@@ -185,7 +186,7 @@ export const chatRoom = pgTable('chatRoom', {
   id: serial('id').primaryKey(),
   displayId: uuid("display_id").defaultRandom().notNull().unique(),
   sellerName:varchar('seller').notNull()
-    .references(() => usersTable.username,{
+    .references(() => usersTable.sellername,{
       onDelete: 'cascade',
       onUpdate: 'cascade'
     }),

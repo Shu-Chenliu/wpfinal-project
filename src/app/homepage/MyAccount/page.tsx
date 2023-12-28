@@ -7,6 +7,7 @@ import { Ghost , Store } from 'lucide-react';
 import { useState } from "react";
 import EditProfile from "./components/EditProfile";
 import AddImageButton from "./components/AddImageButton";
+import Link from "next/link";
 async function HomePage() {
   const session = await auth();
 
@@ -20,7 +21,7 @@ async function HomePage() {
   return (
     <div className="block h-[90vh] w-full p-3">
       
-      <h1 className="text-2xl font-semibold text-slate-700">
+      <h1 className="text-2xl font-semibold text-slate-700 hover:text-slate-500">
           My Profile
       </h1>
       <br />
@@ -41,7 +42,7 @@ async function HomePage() {
               />
             </div>
           ):(
-            <><Ghost className="w-40 h-40" /></>
+            <><Ghost className="w-40 h-40 hover:text-yellow-500" /></>
           )}
 
 
@@ -64,7 +65,7 @@ async function HomePage() {
       </div>
       <br/><br/>
       <div>
-         <p className="text-lg font-semibold text-slate-700">My Coupon</p>
+         <p className="text-lg font-semibold text-slate-700 hover:text-slate-600">My Coupon</p>
         {coupons.map((coupon) =>(
           <div key={coupon.id}>
             <Coupon percent={coupon.percent}/>
@@ -75,7 +76,9 @@ async function HomePage() {
       <br/><br/>
       
       <div className="block items-center justify-top">
-        <p className="text-xl font-semibold text-slate-700">My Market</p>
+        <Link href={"/homepage/MyMarket"}>
+          <p className="text-xl font-semibold text-slate-700 hover:text-orange-500">My Market</p>
+        </Link>
         <div className="flex">
           <div className="block">
             {userProfile?.marketUrl ?(
@@ -86,7 +89,7 @@ async function HomePage() {
                 />
               </div>
             ):(
-              <><Store className="w-40 h-40" /></>
+              <><Store className="w-40 h-40 hover:text-yellow-500" /></>
             )}
             <AddImageButton userId={userId} status="market"/>
           </div>

@@ -42,6 +42,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
   const [selectedCoupon, setSelectedCoupon] = useState(0);
   const [finalSelectedCoupon, setFinalSelectedCoupon] = useState(0);
   const [selectedId,setSelectedId]=useState(0);
+  const [showPlaceOrderDialog, setShowPlaceOrderDialog] = useState(false);
 
 
 
@@ -210,11 +211,32 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
 
         <Button 
           className="flex font-semibold hover:bg-orange-700 hover:text-black "
-          onClick={handleBuy}
+          // onClick={handleBuy}
+          onClick={()=>{setShowPlaceOrderDialog(true)}}
         >
             Place order
         </Button>
         </div>      
+      </DialogContent>
+    </Dialog>
+    <Dialog open={showPlaceOrderDialog}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Final confirmation</DialogTitle>
+        </DialogHeader>
+        <p>You are going to pay {Math.round(totalPrice*(100-finalSelectedCoupon)/100)} to {seller}.</p>
+        
+        <div className="flex justify-end ml-auto">
+          <Button
+            className="text-sm font-semibold text-slate-900 border bg-slate-200 hover:bg-slate-100 mx-2"
+            onClick={async() => {setShowPlaceOrderDialog(false)}} 
+          >Close</Button>
+          <Button
+            className="flex font-semibold hover:bg-orange-700 hover:text-black "
+            onClick={handleBuy} 
+          >Confirm</Button>
+        </div>
+        
       </DialogContent>
     </Dialog>
 

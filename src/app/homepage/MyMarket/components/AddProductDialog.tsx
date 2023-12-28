@@ -26,6 +26,7 @@ function AddProductDialog({userDisplayId}:Props) {
   const inputRefProductNumber = useRef<HTMLInputElement>(null);
   const [openNewAddProductDialog,setOpenAddProductDialog]=useState(false);
   const {postProduct}=usePost();
+  const imageRef = useRef<HTMLInputElement>(null);
   const { toast } = useToast()
 
   function isNumeric(value:string) {
@@ -55,14 +56,58 @@ function AddProductDialog({userDisplayId}:Props) {
     const category = inputRefProductCategory.current.value;
     const price=parseInt(inputRefProductPrice.current.value);
     const left =parseInt(inputRefProductNumber.current.value);
-    await postProduct({
-      title:title,
-      description:description,
-      authorId:userDisplayId,
-      category:category,
-      price:price,
-      left:left,
-    });
+    if(!imageRef.current)return;
+    if(!imageRef.current.files){
+      await postProduct({
+        title:title,
+        description:description,
+        authorId:userDisplayId,
+        category:category,
+        price:price,
+        left:left,
+      });
+    }
+    else{
+      const reader = new FileReader();
+      let imageSrc="";
+      try {
+        if (imageRef.current.files[0].size/1024 > 70) {
+          // alert("Image size must be less than 70KB");
+          toast({
+            variant: "destructive",
+            // title: " Fail to Upload",
+            description: "Image size must be less than 70KB",
+          })
+          throw new Error();
+        }
+        reader.onload = async function (e) {
+          if(typeof e.target?.result==="string"){
+            imageSrc=e.target.result;
+            await postProduct({
+              title:title,
+              description:description,
+              authorId:userDisplayId,
+              category:category,
+              price:price,
+              left:left,
+              imageURL:imageSrc,
+            });
+          } 
+        };
+        reader.readAsDataURL(imageRef.current.files[0]);
+      }
+      catch {
+        // alert("Failed to upload image");
+        toast({
+          variant: "destructive",
+          // title: " Fail to Add Product",
+          description: "Failed to upload image",
+        })
+        imageRef.current.value = "";
+        return;
+      }
+      imageRef.current.value = "";
+    }
     setOpenAddProductDialog(false);
   }
   
@@ -163,7 +208,14 @@ function AddProductDialog({userDisplayId}:Props) {
 
           </div>
           </div>
-
+          <div id="image-box">
+            <input 
+              type="file" 
+              accept="image/*"
+              id="upload-image"
+              ref={imageRef}
+            />
+          </div>
           <div className="flex w-full justify-end ">
           <Button
             className="text-sm font-semibold text-slate-900 border bg-slate-200 hover:bg-slate-100 mx-2"

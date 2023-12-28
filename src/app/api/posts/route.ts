@@ -15,6 +15,7 @@ const postProductSchema = z.object({
   category: z.string(),
   price:z.number().positive(),
   left:z.number().nonnegative(),
+  image: z.string().optional(),
 });
 const updateProductSchema=z.object({
   id:z.string(),
@@ -32,7 +33,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
-  const { title,description,authorId,price,left,category} = data as PostProductRequest;
+  const { title,description,authorId,price,left,category,image} = data as PostProductRequest;
   await db
     .insert(posts)
     .values({
@@ -42,6 +43,7 @@ export async function POST(request: NextRequest) {
       category: category,
       price: price,
       left: left,
+      imageUrl:image,
     })
 
   return new NextResponse("OK", { status: 200 });

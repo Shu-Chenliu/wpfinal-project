@@ -10,6 +10,7 @@ export default async function Home() {
   const userId = session.user.id;
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      <p className="mr-auto text-3xl m-2 p-2 font-bold text-slate-700"> Lucky Spin Wheel!!! </p>
       <SpinningWheel userId={userId}/>
     </main>
   );

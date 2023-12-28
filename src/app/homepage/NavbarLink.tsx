@@ -12,6 +12,9 @@ import { Store } from 'lucide-react';
 import { BellPlus } from 'lucide-react';
     
 import { Eye } from 'lucide-react';
+import { Dialog } from "@/components/ui/dialog";
+import { DialogContent } from "@/components/ui/dialog";
+
 
 import { useState } from 'react';
 type NavbarLinkProp={
@@ -21,7 +24,8 @@ type NavbarLinkProp={
 }
 function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp) {
 
-  const[nowPage,setNowPage]=useState("View All product");
+  const [nowPage,setNowPage]=useState("View All product");
+  const [open, setOpen] = useState(false);
   const handleChangeNowPage=(page:string)=>{
     setNowPage(page);
   }
@@ -99,17 +103,49 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp
             ><UserRound className="m-2" />My account</Button>
           </Link> 
           
-          <Link href={`/auth/signout`}>
+          <div className="mr-auto">
             <Button
               // variant={"ghost"}
-              type={"submit"}
+              // type={"submit"}
               className={`my-2 hover:text-orange-500 m-2 ${nowPage === "Sign Out" ? 'text-orange-500' : ''}`}
-              onClick={() => {handleChangeNowPage("Sign Out")}}
+              onClick={() => setOpen(true)}
             >
               <LogOut className="m-2"/>
               Sign Out
+              {open}
             </Button>
-          </Link>
+            </div>
+
+            <Dialog open={open}>
+            <DialogContent>
+              <p className="font-semibold text-lg">Are you sure to sign out?</p>
+              <div className="flex w-full justify-end ">
+                <Button
+                  className="text-sm font-semibold text-slate-900 border bg-slate-200 hover:bg-slate-100 mx-2"
+                  onClick={() => setOpen(false)}
+                >
+                  Close
+                </Button>
+                
+                <Link href={`/auth/signout`}>
+                  <Button
+                    // variant={"ghost"}
+                    type={"submit"}
+                    className={` bg-slate-800 text-slate-100 hover:text-orange-500  ${nowPage === "Sign Out" ? 'text-orange-500' : ''}`}
+                    onClick={() => {handleChangeNowPage("Sign Out")}}
+                  >
+                    <LogOut className="m-2"/>
+                    Sign Out
+                  </Button>
+                </Link>
+
+              </div>
+              
+            </DialogContent>
+          </Dialog>
+
+
+
       </>
       
   );

@@ -28,6 +28,7 @@ async function Notification() {
             address={notification.address}
             category={notification.post.category}
             read={notification.readBySeller}
+            left={notification.post.left}
           />
         </div>
       ))}

@@ -3,6 +3,7 @@ import { Ticket } from 'lucide-react';
 import {Button} from "@/components/ui/button";
 import{useRef,useState,useEffect}from "react";
 import useUsers from "@/hooks/userUsers"
+import { useToast } from '@/components/ui/use-toast';
 // note that the Tweet component is also a server component
 // all client side things are abstracted away in other components
 
@@ -14,6 +15,7 @@ export default function AddImageButton({userId}:Props) {
   // const [imageSrc,setImageSrc]=useState("");
   const [selectedFile, setSelectedFile] = useState(null);
   const {updateUser}=useUsers();
+  const {toast}=useToast();
   const handleUploadImage=async()=>{
     if(!imageRef.current)return;
     if(!imageRef.current.files)return;
@@ -21,7 +23,12 @@ export default function AddImageButton({userId}:Props) {
     let imageSrc="";
     try {
       if (imageRef.current.files[0].size/1024 > 70) {
-        alert("Image size must be less than 70KB");
+        // alert("Image size must be less than 70KB");
+        toast({
+          variant: "destructive",
+          // title: " Fail to Upload",
+          description: "Image size must be less than 70KB",
+        })
         throw new Error();
       }
       reader.onload = async function (e) {
@@ -37,7 +44,12 @@ export default function AddImageButton({userId}:Props) {
       reader.readAsDataURL(imageRef.current.files[0]);
     }
     catch {
-      alert("Failed to upload image");
+      // alert("Failed to upload image");
+      toast({
+        variant: "destructive",
+        // title: " Fail to Add Product",
+        description: "Failed to upload image",
+      })
       imageRef.current.value = "";
       return;
     }

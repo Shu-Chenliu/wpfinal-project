@@ -15,6 +15,7 @@ export default function useUsers() {
     marketDescription,
     marketMessage,
     marketUrl,
+    userChatRoomState,
   }: {
     id: string,
     address?: string,
@@ -26,6 +27,7 @@ export default function useUsers() {
     marketDescription?:string,
     marketMessage?:string,
     marketUrl?:string,
+    userChatRoomState?:string,
   }) => {
     setLoading(true);
 
@@ -42,6 +44,7 @@ export default function useUsers() {
         marketDescription,
         marketMessage,
         marketUrl,
+        userChatRoomState,
       }),
     });
 

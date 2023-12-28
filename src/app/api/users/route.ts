@@ -22,6 +22,7 @@ const updateUserSchema=z.object({
   marketDescription:z.string().optional(),
   marketMessage:z.string().optional(),
   marketUrl:z.string().optional(),
+  userChatRoomState:z.string().optional(),
 });
 
 type updateUserRequest = z.infer<typeof updateUserSchema>;
@@ -33,7 +34,7 @@ export async function PUT(request: NextRequest) {
   } catch (error) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
-  const { id,address,imageURL,username,email,sellername,selleraddress,marketDescription,marketMessage,marketUrl } = data as updateUserRequest;
+  const { id,address,imageURL,username,email,sellername,selleraddress,marketDescription,marketMessage,marketUrl,userChatRoomState } = data as updateUserRequest;
   await db
     .update(usersTable)
     .set({address,imageURL,username,email,sellername,selleraddress,marketDescription,marketMessage,marketUrl})

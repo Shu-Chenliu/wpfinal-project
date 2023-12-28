@@ -29,6 +29,7 @@ export const usersTable = pgTable("users",{
     marketDescription: varchar('marketDescription', { length:100}).notNull().default(""),
     marketMessage: varchar('marketMessage', { length: 100 }).notNull().default(""),
     marketUrl: varchar('marketUrl'),
+    userChatRoomState: varchar('userChatRoomState').notNull().default("personal"),
     hashedPassword: varchar("hashed_password", { length: 100 }),
     provider: varchar("provider", {
       length: 100,

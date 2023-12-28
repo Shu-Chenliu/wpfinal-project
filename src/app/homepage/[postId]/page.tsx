@@ -71,7 +71,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
       <div className="flex">
         <Link href={"/homepage"}>
           <Button
-            className="flex font-semibold bg-slate-100 hover:bg-slate-200 text-slate-900 hover:text-slate-100"
+            className="flex font-semibold bg-slate-300 hover:bg-slate-400 text-slate-900 hover:text-slate-100"
           ><ArrowLeft />
           </Button>
         </Link>

@@ -90,6 +90,7 @@ export default function BuyerNotiBar({
         <Button
           className="ml-auto text-sm my-2 font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
           onClick={handleAddComment}
+          disabled={!read}
         >
           Comment
         </Button>

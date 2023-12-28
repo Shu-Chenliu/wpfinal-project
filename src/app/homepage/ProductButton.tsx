@@ -113,8 +113,7 @@ export default function ProductButton({id, displayId,title, category, price,like
             )}
           </button>
         </div>
-        <Button className="font-bold bg-slate-600  hover:bg-yellow-500 hover:text-slate-700" onClick={viewProduct}>Show more</Button>
-      </div>
+        <Button className="font-bold bg-slate-800  hover:bg-yellow-500 hover:text-slate-800" onClick={viewProduct}>Show more</Button>      </div>
       {/* <ViewProductDialog
         onClose={() => setOpen(false)}        
       /> */}

@@ -68,7 +68,7 @@ function AddProductDialog({userDisplayId}:Props) {
   return (
     <>
       <Button 
-          className="ml-auto font-semibold text-slate-100 bg-slate-900 "
+          className="ml-auto font-semibold text-slate-100 bg-slate-900 hover:bg-yellow-500 hover:text-slate-700 "
           variant={"outline"}
           onClick={() => setOpenAddProductDialog(true)}
           >add product

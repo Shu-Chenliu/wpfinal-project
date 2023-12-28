@@ -116,7 +116,7 @@ export default function MyMarketProductButton({id, displayId,title, category, pr
             )}
           </button>
         </div>
-        <Button onClick={viewProduct}>Show more</Button>
+        <Button className="font-bold bg-slate-800  hover:bg-yellow-500 hover:text-slate-800" onClick={viewProduct}>Show more</Button>
       </div>
       {/* <ViewProductDialog
         onClose={() => setOpen(false)}        

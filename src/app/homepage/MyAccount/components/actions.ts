@@ -12,6 +12,9 @@ export const getUserProfile = async(userDisplayId:string) =>{
       address:true,
       sellername:true,
       selleraddress:true,
+      marketDescription:true,
+      marketMessage:true,
+      marketUrl:true,
     },
     with:{
       posts:{

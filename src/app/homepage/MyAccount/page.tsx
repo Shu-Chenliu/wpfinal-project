@@ -46,7 +46,7 @@ async function HomePage() {
 
 
 
-          <AddImageButton userId={userId}/>
+          <AddImageButton userId={userId} status="market"/>
         </div>
         {/* <div className="my-2 my-2 p-3">
           <p>Username: {userProfile?.username}</p>
@@ -55,8 +55,11 @@ async function HomePage() {
         <EditProfile
           variant="edit"
           status="personal"
+          userId={userId}
           title={userProfile?.username}
           description={userProfile?.email}
+          address={userProfile?.address!}
+          
         />
       </div>
       <br/><br/>
@@ -75,27 +78,27 @@ async function HomePage() {
         <p className="text-xl font-semibold text-slate-700">My Market</p>
         <div className="flex">
           <div className="block">
-            {userProfile?.imageURL ?(
+            {userProfile?.marketUrl ?(
               <div className="flex">
                 <img
-                  src={userProfile?.imageURL!}
+                  src={userProfile?.marketUrl!}
                   className="w-40 h-40  border-2 my-2 my-2 "           
                 />
               </div>
             ):(
               <><Store className="w-40 h-40" /></>
             )}
-            <AddImageButton userId={userId}/>
+            <AddImageButton userId={userId} status="market"/>
           </div>
           
           <EditProfile
               variant="edit"
               status="market"
-              // marketName={userProfile?.marketName}
-              // marketDescription={userProfile?.marketDescription}
-              // marketAddress={userProfile?.marketAddress}
-              // marketMessage={userProfile?.marketMessage}
-
+              userId={userId}
+              marketName={userProfile?.sellername}
+              marketAddress={userProfile?.selleraddress!}
+              marketDescription={userProfile?.marketDescription!}
+              marketMessage={userProfile?.marketMessage!}
             />
         </div>   
           

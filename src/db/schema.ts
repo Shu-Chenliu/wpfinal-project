@@ -26,6 +26,9 @@ export const usersTable = pgTable("users",{
     selleraddress:varchar('selleraddress', { length: 280 }),
     imageURL: varchar('imageURL'),
     email: varchar("email", { length: 100 }).notNull().unique(),
+    marketDescription: varchar('marketDescription', { length:100}).notNull().default(""),
+    marketMessage: varchar('marketMessage', { length: 100 }).notNull().default(""),
+    marketUrl: varchar('marketUrl'),
     hashedPassword: varchar("hashed_password", { length: 100 }),
     provider: varchar("provider", {
       length: 100,

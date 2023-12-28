@@ -5,7 +5,7 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
 import { Pencil } from 'lucide-react';
-
+import useUsers from "@/hooks/userUsers";
 
 
 // this pattern is called discriminated type unions
@@ -13,11 +13,13 @@ import { Pencil } from 'lucide-react';
 // or see it in action: https://www.typescriptlang.org/play#example/discriminate-types
 type NewCardDialogProps = {
   variant: "new";
+  userId:string,
   status?: string;
 };
 
 type EditCardDialogProps = {
   variant: "edit";
+  userId:string,
   status: string; 
   title?: string; //user name
   description?: string; 
@@ -26,15 +28,13 @@ type EditCardDialogProps = {
   marketAddress?:string;
   marketDescription?: string;
   marketMessage?: string;
-  
-  
-  
 };
 
 type CardDialogProps = NewCardDialogProps | EditCardDialogProps;
 
 export default function EditProfile(props: CardDialogProps) {
   const { variant, status} = props;
+  const userId=props.userId;
   const title = variant === "edit" ? props.title : "";
   const description = variant === "edit" ? props.description : "";
   const address = variant === "edit" ? props.address : "";
@@ -42,7 +42,7 @@ export default function EditProfile(props: CardDialogProps) {
   const marketAddress = variant === "edit" ? props.marketAddress : "";
   const marketDescription = variant === "edit" ? props.marketDescription : "";
   const marketMessage = variant === "edit" ? props.marketMessage : "";
-
+  const {updateUser}=useUsers();
 
   const [edittingTitle, setEdittingTitle] = useState(variant === "new");
   const [edittingDescription, setEdittingDescription] = useState(variant === "new");
@@ -62,7 +62,26 @@ export default function EditProfile(props: CardDialogProps) {
   const [newMarketAddress, setNewMarketAddress] = useState(marketAddress);
   const [newMarketDescription, setNewMarketDescription] = useState(marketDescription);
   const [newMarketMessage, setNewMarketMessage] = useState(marketMessage);
-
+  const handleClickAway=async()=>{
+    if(status==="personal"){
+      await updateUser({
+        id:userId,
+        username:newTitle,
+        email:newDescription,
+        address:newAddress,
+      });
+    }
+    else{
+      console.log(newMarketMessage);
+      await updateUser({
+        id:userId,
+        sellername:newMarketName,
+        selleraddress:newMarketAddress,
+        marketDescription:newMarketDescription,
+        marketMessage:newMarketMessage,
+      });
+    }
+  }
 
   return (
     <>
@@ -76,6 +95,7 @@ export default function EditProfile(props: CardDialogProps) {
           onClickAway={() => {
             if (variant === "edit") {
               setEdittingTitle(false);
+              handleClickAway();
             }
           }}
         >
@@ -109,6 +129,7 @@ export default function EditProfile(props: CardDialogProps) {
           onClickAway={() => {
             if (variant === "edit") {
               setEdittingDescription(false);
+              handleClickAway();
             }
           }}
         >
@@ -139,7 +160,12 @@ export default function EditProfile(props: CardDialogProps) {
         <p>Address: </p>
         {edittingAddress ? (
           <>
-          <ClickAwayListener onClickAway={() => { if (variant === "edit") {setEdittingAddress(false);}}} >
+          <ClickAwayListener onClickAway={() => { 
+            if (variant === "edit") {
+              setEdittingAddress(false);
+              handleClickAway();
+            }
+          }} >
           <Input
             autoFocus
             defaultValue={address}
@@ -172,6 +198,7 @@ export default function EditProfile(props: CardDialogProps) {
           onClickAway={() => {
             if (variant === "edit") {
               setEdittingMarketName(false);
+              handleClickAway();
             }
           }}
         >
@@ -204,6 +231,7 @@ export default function EditProfile(props: CardDialogProps) {
           onClickAway={() => {
             if (variant === "edit") {
               setEdittingMarketDescription(false);
+              handleClickAway();
             }
           }}
         >
@@ -234,7 +262,13 @@ export default function EditProfile(props: CardDialogProps) {
         <p>Market address: </p>
         {edittingMarketAddress ? (
           <>
-          <ClickAwayListener onClickAway={() => { if (variant === "edit") {setEdittingMarketAddress(false);}}} >
+          <ClickAwayListener onClickAway={() => { 
+            if (variant === "edit") {
+              setEdittingMarketAddress(false);
+              handleClickAway();
+              }
+            }} 
+          >
           <Input
             autoFocus
             defaultValue={marketAddress}
@@ -287,13 +321,6 @@ export default function EditProfile(props: CardDialogProps) {
       </>
 
     )}
-
-    
-
-      
-
     </>
-    
-
   );
 }

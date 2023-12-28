@@ -10,12 +10,22 @@ export default function useUsers() {
     imageURL,
     username,
     email,
+    sellername,
+    selleraddress,
+    marketDescription,
+    marketMessage,
+    marketUrl,
   }: {
     id: string,
     address?: string,
     imageURL?: string,
     username?:string,
     email?:string,
+    sellername?:string,
+    selleraddress?:string,
+    marketDescription?:string,
+    marketMessage?:string,
+    marketUrl?:string,
   }) => {
     setLoading(true);
 
@@ -27,6 +37,11 @@ export default function useUsers() {
         imageURL,
         username,
         email,
+        sellername,
+        selleraddress,
+        marketDescription,
+        marketMessage,
+        marketUrl,
       }),
     });
 

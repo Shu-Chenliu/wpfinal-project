@@ -7,10 +7,12 @@ import { useToast } from '@/components/ui/use-toast';
 // note that the Tweet component is also a server component
 // all client side things are abstracted away in other components
 
-type Props={
+type Props = {
   userId:string,
-}
-export default function AddImageButton({userId}:Props) {
+  status: string;
+};
+
+export default function AddImageButton({userId,status}:Props) {
   const imageRef = useRef<HTMLInputElement>(null);
   // const [imageSrc,setImageSrc]=useState("");
   const [selectedFile, setSelectedFile] = useState(null);
@@ -34,11 +36,18 @@ export default function AddImageButton({userId}:Props) {
       reader.onload = async function (e) {
         if(typeof e.target?.result==="string"){
           imageSrc=e.target.result;
-          await updateUser({
-            id:userId,
-            imageURL:imageSrc,
-          });
-          
+          if(status==="personal"){
+            await updateUser({
+              id:userId,
+              imageURL:imageSrc,
+            });
+          }
+          else{
+            await updateUser({
+              id:userId,
+              marketUrl:imageSrc,
+            });
+          }
         } 
       };
       reader.readAsDataURL(imageRef.current.files[0]);
@@ -66,8 +75,6 @@ export default function AddImageButton({userId}:Props) {
             accept="image/*"
             id="upload-image"
             ref={imageRef}
-
-    
           />
         </div>
       {/* <Button

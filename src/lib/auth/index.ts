@@ -23,6 +23,7 @@ export const {
           username: usersTable.username,
           provider: usersTable.provider,
           email: usersTable.email,
+          sellerName: usersTable.sellername,
         })
         .from(usersTable)
         .where(eq(usersTable.email, email.toLowerCase()))
@@ -35,6 +36,7 @@ export const {
           username: user.username,
           email: user.email,
           provider: user.provider,
+          sellerName:user.sellerName,
         },
       };
     },

@@ -36,6 +36,7 @@ export default CredentialsProvider({
         email: usersTable.email,
         provider: usersTable.provider,
         hashedPassword: usersTable.hashedPassword,
+        sellerName: usersTable.sellername,
       })
       .from(usersTable)
       .where(eq(usersTable.email, validatedCredentials.email.toLowerCase()))
@@ -61,6 +62,7 @@ export default CredentialsProvider({
         email: createdUser.email,
         name: createdUser.username,
         id: createdUser.displayId,
+        sellerName: createdUser.sellername,
       };
     }
 
@@ -83,6 +85,7 @@ export default CredentialsProvider({
       email: existedUser.email,
       name: existedUser.username,
       id: existedUser.id,
+      sellerName: existedUser.sellerName,
     };
   },
 });

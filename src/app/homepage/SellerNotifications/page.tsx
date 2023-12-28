@@ -14,7 +14,7 @@ async function Notification() {
   if (!session || !session?.user?.id) {
     redirect(publicEnv.NEXT_PUBLIC_BASE_URL);
   }
-  const username = session.user.username;
+  const username = session.user.sellerName;
   const notifications=await getAllNotificationsOfSeller(username);
   return (
     <>

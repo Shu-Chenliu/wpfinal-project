@@ -109,7 +109,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
       </div>
 
       <div className="flex">
-          <img src={imageSrc} alt="Product" className="w-1/4 h-auto" /> 
+          <img src={imageSrc} alt="Product" className="w-1/4 ml-5 h-auto" /> 
 
           {/* <div className="w-full rounded-md p-2 hover:bg-white/10 ">
             {Product?.description}

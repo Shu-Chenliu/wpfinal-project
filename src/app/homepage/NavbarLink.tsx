@@ -17,8 +17,9 @@ import { useState } from 'react';
 type NavbarLinkProp={
   sellerUnread:number,
   buyerUnread:number,
+  shoppingCartLength:number,
 }
-function NavbarLink({sellerUnread,buyerUnread}:NavbarLinkProp) {
+function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp) {
 
   const[nowPage,setNowPage]=useState("View All product");
   const handleChangeNowPage=(page:string)=>{
@@ -43,6 +44,7 @@ function NavbarLink({sellerUnread,buyerUnread}:NavbarLinkProp) {
             onClick={() => {handleChangeNowPage("Shopping Cart")}}
             >
               <ShoppingCart className="m-2" /> Shopping Cart
+              <span className="border border-red-600 border-2 m-2 px-1 rounded-full">{shoppingCartLength}</span>
             </Button>
           </Link>
 

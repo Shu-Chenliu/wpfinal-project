@@ -17,10 +17,11 @@ export type CartProductProps = {
   userId: string,
   coupons:{id:number,percent:number}[],
   getCoupon:()=>void,
+  useraddress: string,
 };
 
 export default function CartProduct(
-  {id, displayId,title, category, price,username,seller,left,userId,coupons,getCoupon}:CartProductProps
+  {id, displayId,title, category, price,username,seller,left,userId,coupons,getCoupon, useraddress}:CartProductProps
   ) {
   // const [open, setOpen] = useState(false);
   
@@ -82,6 +83,7 @@ export default function CartProduct(
               userId={userId}
               coupons={coupons}
               handleGetCoupon={getCoupon}
+              useraddress={useraddress}
             />
           </div>
           <Button

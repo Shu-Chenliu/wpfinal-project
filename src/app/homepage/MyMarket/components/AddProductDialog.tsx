@@ -34,7 +34,6 @@ function AddProductDialog({userDisplayId}:Props) {
   }
   const handlePostProduct = async()=>{
     if(!inputRefProductName.current||!inputRefProductDescription.current||!inputRefProductCategory.current||!inputRefProductPrice.current||!inputRefProductNumber.current) {
-      // alert("不ok喔");
       toast({
         variant: "destructive",
         title: " Fail to Add Product",
@@ -57,8 +56,7 @@ function AddProductDialog({userDisplayId}:Props) {
     const price=parseInt(inputRefProductPrice.current.value);
     const left =parseInt(inputRefProductNumber.current.value);
     if(!imageRef.current)return;
-    if(!imageRef.current.files)return;
-    if(imageRef.current.files.length===0){
+    if(!imageRef.current.files){
       await postProduct({
         title:title,
         description:description,
@@ -71,6 +69,7 @@ function AddProductDialog({userDisplayId}:Props) {
     else{
       const reader = new FileReader();
       let imageSrc="";
+      console.log("image");
       try {
         if (imageRef.current.files[0].size/1024 > 70) {
           // alert("Image size must be less than 70KB");
@@ -91,7 +90,7 @@ function AddProductDialog({userDisplayId}:Props) {
               category:category,
               price:price,
               left:left,
-              imageURL:imageSrc,
+              imageUrl:imageSrc,
             });
           } 
         };

@@ -11,7 +11,7 @@ export const getAllProducts = async() =>{
       left:true,
       category:true,
       likes:true,
-      imageUrl:true,
+      imageUrl:true,      
     },
     with:{
       author: {

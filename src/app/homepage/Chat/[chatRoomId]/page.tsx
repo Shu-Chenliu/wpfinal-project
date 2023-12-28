@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import Message from "./components/Message";
 import InputBar from "./components/InputBar";
-import { getMessages,getOtherPeople } from "./components/actions";
+import { getMessages,getOtherPeople,getChatRoom,getOtherPeopleInfo } from "./components/actions";
 import { publicEnv } from "@/lib/env/public";
 import { redirect } from "next/navigation";
 type DocPageProps = {
@@ -19,11 +19,13 @@ async function DocPage({params: {chatRoomId}}: DocPageProps) {
   const userId = session.user.id;
   const messages=await getMessages(chatRoomId);
   const otherPeople=await getOtherPeople(username,chatRoomId);
+  const isFirstMessage=await getChatRoom(chatRoomId);
+  console.log(isFirstMessage);
+  const otherPeopleInfo=await getOtherPeopleInfo(otherPeople?otherPeople[0]:"");
+  console.log(otherPeopleInfo);
   return (
     <div className="w-full">
-      <p className="font-bold py-2 mg-2 flex w-full justify-between p-2 shadow-sm px-2 py-1 border-b text-cyan-700">{otherPeople}</p>
-
-      
+      <p className="font-bold py-2 mg-2 flex w-full justify-between p-2 shadow-sm px-2 py-1 border-b text-cyan-700">{otherPeople?otherPeople[0]:""}</p>
       <div 
         id="messages container"
         className="h-[80vh] overflow-y-auto w-[110vh]">
@@ -36,10 +38,16 @@ async function DocPage({params: {chatRoomId}}: DocPageProps) {
            />
           </div>
         ))}
-
       </div>
-      <InputBar userId={userId} chatRoomId={chatRoomId}/>
-
+      
+      <InputBar 
+        userId={userId} 
+        chatRoomId={chatRoomId} 
+        isFirstMessage={isFirstMessage?.sendFirstMessage!}
+        isBuyer={otherPeople?otherPeople[1]==="seller":false}
+        marketMessage={otherPeopleInfo?.marketMessage!}
+        sellerId={otherPeopleInfo?.displayId!}
+      />
       
     </div>
   );

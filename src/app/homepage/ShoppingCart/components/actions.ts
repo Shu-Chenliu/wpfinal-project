@@ -39,3 +39,13 @@ export const getMyCoupon=async(userId:string)=>{
     .execute()
   return Coupons;
 }
+
+export const getAddress=async(userId:string)=>{
+  const userAddress=await db.query.usersTable.findFirst({
+    where:(usersTable,{eq})=>eq(usersTable.displayId,userId),
+    columns:{
+      address:true,
+    }
+  });
+  return userAddress;
+}

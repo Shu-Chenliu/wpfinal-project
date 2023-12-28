@@ -48,7 +48,7 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp
             onClick={() => {handleChangeNowPage("Shopping Cart")}}
             >
               <ShoppingCart className="m-2" /> Shopping Cart
-              <span className="border border-red-600 border-2 m-2 px-1 rounded-full">{shoppingCartLength}</span>
+              <span className=" text-orange-500 hover:text-orange-500  m-2 px-1  rounded-full">{shoppingCartLength}</span>
             </Button>
           </Link>
 
@@ -67,7 +67,7 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp
             onClick={() => {handleChangeNowPage("Market Notifications")}}
 
             ><BellPlus className="m-2" />Market Notifications 
-            <span className="border border-red-600 border-2 m-2 px-1 rounded-full">{sellerUnread}</span>
+            <span className=" text-orange-500 hover:text-orange-500  m-2 px-1  rounded-full">{sellerUnread}</span>
             </Button>
           </Link>
         
@@ -77,7 +77,7 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp
             className={`my-2 hover:text-orange-500 m-2 ${nowPage === "Buying Notifications" ? 'text-orange-500' : ''}`}
             onClick={() => {handleChangeNowPage("Buying Notifications")}}
             ><BellRing className="m-2" />Buying Notifications
-            <span className="border border-red-600 border-2 m-2 px-1 rounded-full">{buyerUnread}</span>
+            <span className=" text-orange-500 hover:text-orange-500  m-2 px-1  rounded-full">{buyerUnread}</span>
             </Button>
           </Link>
 

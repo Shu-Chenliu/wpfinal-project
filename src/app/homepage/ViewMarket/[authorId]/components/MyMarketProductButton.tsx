@@ -66,9 +66,9 @@ export default function MyMarketProductButton({id, displayId,title, category, pr
               </div>
               
             {/* 圖片 */}
-            <div className="grid place-items-center" style={{ width: '200px', height: '250px' }}>
+            <div className="grid place-items-center w-60 h-60" >
               <p className="flex font-semibold text-slate-900">
-                <img src={imageSrc} alt="Product" className="w-96 h-auto" />
+                <img src={imageSrc} alt="Product" className="w-auto h-52 " />
               </p>
             </div>
 

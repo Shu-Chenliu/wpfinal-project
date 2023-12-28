@@ -72,7 +72,6 @@ export default function EditProfile(props: CardDialogProps) {
       });
     }
     else{
-      console.log(newMarketMessage);
       await updateUser({
         id:userId,
         sellername:newMarketName,

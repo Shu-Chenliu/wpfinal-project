@@ -3,6 +3,7 @@
 
 import React from "react";
 import { useState } from "react";
+import { Ghost } from "lucide-react";
 
 import {
   Dialog,
@@ -24,8 +25,6 @@ export default function Message({
   isSender,
   content,
 }: MessageProps) {
-  
-  
   return (
     <>
     {/* {content} */}
@@ -34,16 +33,20 @@ export default function Message({
           isSender && "ml-auto mx-4"
         }`}
       >
+      
+      {!isSender&&<Ghost className="text-blue-400"/>}
+
         <div
           className={` rounded-2xl px-3 py-1 leading-6 ${
             isSender ? "bg-purple-300 text-white" : " bg-blue-300 text-white"
           }`}
         >
+          
           {content}
         </div>
+        {isSender&&<Ghost className="text-purple-400"/>}
       </div>
 
     </>
   );
 }
-

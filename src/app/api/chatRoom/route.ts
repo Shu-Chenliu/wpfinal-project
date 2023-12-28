@@ -12,10 +12,15 @@ const postChatSchema = z.object({
   sellerName:z.string().max(100),
   buyerName:z.string().max(100),
 });
+const updateChatRoomSchema=z.object({
+  id:z.string(),
+  isFirstMessage:z.boolean(),
+});
 const deleteChatSchema = z.object({
   id:z.string(),
 });
 type PostChatRequest = z.infer<typeof postChatSchema>;
+type updateChatRequest = z.infer<typeof updateChatRoomSchema>;
 type deleteChatRequest = z.infer<typeof deleteChatSchema>;
 export async function POST(request: NextRequest) {
   const data = await request.json();
@@ -31,6 +36,23 @@ export async function POST(request: NextRequest) {
       sellerName:sellerName,
       buyerName:buyerName,
     })
+  return new NextResponse("OK", { status: 200 });
+}
+export async function PUT(request: NextRequest) {
+  const data = await request.json();
+  try {
+    updateChatRoomSchema.parse(data);
+  } catch (error) {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
+  const { id,isFirstMessage } = data as updateChatRequest;
+  await db
+    .update(chatRoom)
+    .set({
+      sendFirstMessage: isFirstMessage,
+    })
+    .where(eq(chatRoom.displayId, id))
+    .execute()
   return new NextResponse("OK", { status: 200 });
 }
 export async function DELETE(request: NextRequest) {

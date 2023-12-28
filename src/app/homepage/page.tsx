@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import {getAllProducts} from "./actions"
 async function HomePage() {
   const Products=await getAllProducts();
+
   return (
     <>
 
@@ -22,6 +23,8 @@ async function HomePage() {
           price={product.price}
           likes={product.likes}
           left={product.left}
+          imageUrl={product.imageUrl!}
+  
         />
       </div>
       ))}

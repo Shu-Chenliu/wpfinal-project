@@ -26,8 +26,9 @@ type Props = {
   userId:string,
   coupons:{id:number,percent:number}[],
   handleGetCoupon:()=>void,
+  useraddress: string,
 };
-function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,handleGetCoupon}:Props) {
+function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,handleGetCoupon, useraddress}:Props) {
   const [openBuyNowDialog,setOpenBuyNowDialog]=useState(false);
   const [totalPrice,setTotalPrice]=useState(money);
   const {postNotification}=useNotifications();
@@ -114,6 +115,11 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
     const uniqueCoupons = Array.from(new Set(coupons.map((coupon) => coupon.percent)))
     .map((percent) => coupons.find((coupon) => coupon.percent === percent));
 
+    const count_5=coupons.filter((coupon)=>coupon.percent===5).length; 
+    const count_10=coupons.filter((coupon)=>coupon.percent===10).length;
+    const count_20=coupons.filter((coupon)=>coupon.percent===20).length;
+
+
   return (
     <>
     <Button 
@@ -174,6 +180,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
             autoFocus
             className="grow"
             placeholder="address"
+            defaultValue={useraddress}
             ref={inputRefAddress}
           />
         </div>
@@ -275,7 +282,25 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
                   checked={selectedCoupon === coupon.percent}
                 />
                 <Coupon percent={coupon.percent} />
-              </>
+                {(coupon.percent===5)?(
+          <div className="flex items-center justify-end font-bold w-full">
+            {coupon.percent}% OFF coupon left: {count_5}
+          </div>
+          ):null
+          }
+          {(coupon.percent===10)?(
+          <div className="flex items-center justify-end  font-bold w-full">
+            {coupon.percent}%OFF coupon left:{count_10}
+          </div>
+          ):null
+          }
+          {(coupon.percent===20)?(
+          <div className="flex items-center justify-end font-bold w-full">
+            {coupon.percent}%OFF coupon left:{count_20}
+          </div>
+          ):null
+          }
+        </>
             )}
 
           </div>

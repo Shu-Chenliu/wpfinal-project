@@ -12,6 +12,7 @@ export const getAllProductsPostedByUser = async(userId:string) =>{
       category:true,
       displayId:true,
       likes:true,
+      imageUrl:true,
     },
     with:{
       author: {

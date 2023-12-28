@@ -16,6 +16,7 @@ async function ChatRoomNavbar() {
   }
   const userId=session.user.id;
   const username=session.user.username;
+  const sellerName=session.user.sellerName;
   const chatOfSeller=await getAllChatOfSeller(userId);
   const chatOfBuyer=await getAllChatOfBuyer(userId);
   const userstate=await getUserState(userId);
@@ -25,7 +26,7 @@ async function ChatRoomNavbar() {
         <div className="flex w-full items-center justify-between px-3 py-1 ">
           <div className="flex items-center gap-2">
             {/* <RxAvatar  /> */}
-            <p className="text-slate-100 font-semibold mx-2 p-2">{userstate?.userChatRoomState==="personal"?"Personal":"Market"} message</p>
+            <p className="text-slate-100 font-semibold mx-2 p-2">{userstate?.userChatRoomState==="personal"?(username):(sellerName)}'s Chatroom</p>
           </div>
           
         </div>

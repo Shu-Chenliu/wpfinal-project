@@ -32,6 +32,7 @@ async function HomePage() {
             price={product.price}
             likes={product.likes}
             left={product.left}
+            imageUrl={product.imageUrl!}
           />
         ))}
       </div>

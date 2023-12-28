@@ -1,12 +1,18 @@
 "use client";
 import {useState,useRef,useCallback,useEffect}from "react"
 import useMessage from "@/hooks/useMessage";
+import useChatRoom from "@/hooks/useChatroom";
 type Props={
   userId:string,
   chatRoomId:string,
+  isFirstMessage:boolean,
+  isBuyer:boolean,
+  marketMessage:string,
+  sellerId:string,
 }
-function InputBar({userId,chatRoomId}:Props) {
+function InputBar({userId,chatRoomId,isFirstMessage,isBuyer,marketMessage,sellerId}:Props) {
   const {postMessage}=useMessage();
+  const {updateChatroom}=useChatRoom();
   const inputRef = useRef<HTMLInputElement>(null);
   const handleSend=async()=>{
     if(inputRef.current&&inputRef.current.value.length>0){
@@ -15,8 +21,24 @@ function InputBar({userId,chatRoomId}:Props) {
         authorId:userId,
         chatRoomId,
       });
+      if((!isFirstMessage)&&isBuyer){
+        await updateChatroom({
+          id:chatRoomId,
+          isFirstMessage:false,
+        });
+        await postMessage({
+          text:marketMessage,
+          authorId:sellerId,
+          chatRoomId,
+        });
+      }
       // setLatestText(inputRef.current.value);
       inputRef.current.value="";
+      const messageContainer = window.document.getElementById("messages container");
+      console.log(messageContainer);
+      if (messageContainer) {
+        messageContainer.scrollTop = messageContainer.scrollHeight-messageContainer.clientHeight+10;
+      }
     }
   }
   const handleUserKeyPress = useCallback(async(e: KeyboardEvent) => {

@@ -12,7 +12,7 @@ export default function usePosts() {
     category,
     price,
     left,
-    imageURL,
+    imageUrl,
   }: {
     title: string;
     description?: string;
@@ -20,7 +20,7 @@ export default function usePosts() {
     category: string;
     price: number;
     left: number;
-    imageURL?: string,
+    imageUrl?: string,
   }) => {
     setLoading(true);
 
@@ -33,7 +33,7 @@ export default function usePosts() {
         category,
         price,
         left,
-        imageURL,
+        imageUrl,
       }),
     });
 

@@ -121,7 +121,9 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
             <p className="flex w-full font-semibold text-slate-900 ">Number left: {Product?.left}</p>
             <br /> <br />
             <div className="flex">
-              <Store className=" mx-2 mr-5" size={100}/>
+            <Link href={`/homepage/ViewMarket/${Product?.author.displayId}`}>
+                <Store className=" mx-2 mr-5 hover:text-orange-500" size={100}/>
+              </Link>
               <div className="block">
                 <p className=" flex w-full font-semibold text-slate-900 ">Market: {Product?.author.sellername}</p>
                 <p className=" flex w-full font-semibold text-slate-900 ">Market Address: {Product?.author.selleraddress}</p>

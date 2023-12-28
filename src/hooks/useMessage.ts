@@ -22,17 +22,17 @@ export default function useMessages() {
     if (!chatRoomId) return;
     // Private channels are in the format: private-...
     const channelName = `private-${chatRoomId}`;
-    console.log("channelname",channelName);
     try {
       const channel = pusherClient.subscribe(channelName);
-      console.log("channel",channel);
       channel.bind("chatRoom:update", ({ senderId }: PusherPayload) => {
         if (senderId === userId) {
-          console.log("return");
           return;
         }
         router.refresh();
-        console.log("refresh");
+        const messageContainer = window.document.getElementById("messages container");
+        if (messageContainer) {
+          messageContainer.scrollTop = messageContainer.scrollHeight-messageContainer.clientHeight+10;
+        }
       });
     } catch (error) {
       console.error(error);
@@ -72,6 +72,7 @@ export default function useMessages() {
     // reloading the page. This is useful for when we want to update the UI
     // from server components.
     router.refresh();
+
     setLoading(false);
     
   };

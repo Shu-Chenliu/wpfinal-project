@@ -15,9 +15,10 @@ export type ProductButtonProps = {
   price: number;
   likes:number;
   left: number;
+  imageUrl: string;
 };
 
-export default function ProductButton({id, displayId,title, category, price,likes, left}:ProductButtonProps) {
+export default function ProductButton({id, displayId,title, category, price,likes, left,imageUrl}:ProductButtonProps) {
   // const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -26,24 +27,29 @@ export default function ProductButton({id, displayId,title, category, price,like
   }
 
   let imageSrc;
-
-  switch (category) {
-    case "Clothing":
-      imageSrc = "./Clothing.jpg";
-      break;
-    case "Food":
-      imageSrc = "./Food.jpg";
-      break;
-    case "Electronics":
-      imageSrc = "./Electronics.jpg";
-      break;
-    case "EE related":
-      imageSrc = "./EE_related.jpg";
-      break;
-    case "Others":
-      imageSrc = "./Others.jpg";
-      break;
+  if(!imageUrl){
+    switch (category) {
+      case "Clothing":
+        imageSrc = "./Clothing.jpg";
+        break;
+      case "Food":
+        imageSrc = "./Food.jpg";
+        break;
+      case "Electronics":
+        imageSrc = "./Electronics.jpg";
+        break;
+      case "EE related":
+        imageSrc = "./EE_related.jpg";
+        break;
+      case "Others":
+        imageSrc = "./Others.jpg";
+        break;
+    }
   }
+  else{
+    imageSrc = imageUrl;
+  }
+  
   
 
   return (
@@ -59,9 +65,12 @@ export default function ProductButton({id, displayId,title, category, price,like
             </div>
             
           {/* 圖片 */}
-          <div className="grid place-items-center" style={{ width: '200px', height: '250px' }}>
+          <div 
+            className="grid place-items-center h-60 w-60" 
+            // style={{ width: '200px', height: '250px' }}
+          >
             <p className="flex font-semibold text-slate-900">
-              <img src={imageSrc} alt="Product" className="w-auto h-auto" />
+              <img src={imageSrc} alt="Product" className="w-auto h-56" />
             </p>
           </div>
 

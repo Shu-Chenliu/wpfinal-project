@@ -21,7 +21,7 @@ export const usersTable = pgTable("users",{
     id: serial("id").primaryKey(),
     displayId: uuid("display_id").defaultRandom().notNull().unique(),
     username: varchar("username", { length: 100 }).notNull().unique(),
-    address:varchar('address', { length: 280 }).notNull().default("unknown"),
+    address:varchar('address', { length: 280 }).notNull().default(""),
     sellername: varchar("sellername", { length: 100 }).notNull().unique(),
     selleraddress:varchar('selleraddress', { length: 280 }).notNull().default("unknown"),
     imageURL: varchar('imageURL'),
@@ -195,6 +195,7 @@ export const chatRoom = pgTable('chatRoom', {
       onDelete: 'cascade',
       onUpdate: 'cascade'
     }),  
+  sendFirstMessage:boolean('send').notNull().default(false),
 }, (t) => ({
   
 }));

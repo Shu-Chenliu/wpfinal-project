@@ -57,7 +57,8 @@ function AddProductDialog({userDisplayId}:Props) {
     const price=parseInt(inputRefProductPrice.current.value);
     const left =parseInt(inputRefProductNumber.current.value);
     if(!imageRef.current)return;
-    if(!imageRef.current.files){
+    if(!imageRef.current.files)return;
+    if(imageRef.current.files.length===0){
       await postProduct({
         title:title,
         description:description,

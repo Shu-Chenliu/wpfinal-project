@@ -4,11 +4,11 @@ import { db } from "@/db";
 export const getMessages=async (chatRoomId:string)=>{
   const Messages=await db.query.messagesTable.findMany({
     where:(messagesTable, { eq }) => eq(messagesTable.chatRoomId, chatRoomId),
+    orderBy: (messagesTable, { asc }) => [asc(messagesTable.sendAt)],
     columns:{
       id:true,
       text:true,
       authorId:true,
-      sendAt:true,
     }
   });
   return Messages;

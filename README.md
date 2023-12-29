@@ -85,7 +85,7 @@
    - Click `OAuth Apps` on the left sidebar
    - Click `New OAuth App` or `Registr a new application`
    - Enter the following information:
-     - `Application name`: `Notion Clone` (or any name you like)
+     - `Application name`: `shopEE` (or any name you like)
      - `Homepage URL`: `http://localhost:3000`
      - `Authorization callback URL`: `http://localhost:3000/api/auth/callback/github`
    - Click `Register application`

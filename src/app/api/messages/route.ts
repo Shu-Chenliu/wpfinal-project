@@ -32,7 +32,8 @@ export async function POST(request: NextRequest) {
     .values({
       text,
       authorId,
-      chatRoomId
+      chatRoomId,
+      read:false,
     })
     .returning({
       id:messagesTable.id,

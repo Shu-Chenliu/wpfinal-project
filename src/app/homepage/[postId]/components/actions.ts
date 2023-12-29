@@ -88,6 +88,7 @@ export const createChatRoom = async (userId: string,sellerId:string,sellerName:s
       text:userMessage.marketMessage,
       authorId:sellerId,
       chatRoomId:newChatroomId,
+      read:true,
     })
   }
   

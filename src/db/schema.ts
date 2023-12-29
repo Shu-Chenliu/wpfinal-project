@@ -268,7 +268,7 @@ export const messagesTable = pgTable(
         onDelete: "cascade",
         onUpdate: "cascade",
       }),
-    read:boolean('read').notNull().default(false),
+    read:boolean('read').notNull(),
   },
   (table) => ({
     authorIndex: index("author_index").on(table.authorId),

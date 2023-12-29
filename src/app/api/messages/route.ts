@@ -27,24 +27,28 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
   const { text,authorId,chatRoomId} = data as PostMessageRequest;
-  await db
+  const [messageId]=await db
     .insert(messagesTable)
     .values({
       text,
       authorId,
       chatRoomId
     })
-    const pusher = new Pusher({
-      appId: privateEnv.PUSHER_ID,
-      key: publicEnv.NEXT_PUBLIC_PUSHER_KEY,
-      secret: privateEnv.PUSHER_SECRET,
-      cluster: publicEnv.NEXT_PUBLIC_PUSHER_CLUSTER,
-      useTLS: true,
-    });
-    // Private channels are in the format: private-...
-    await pusher.trigger(`private-${chatRoomId}`, "chatRoom:update", {
-      senderId:authorId,
-    });
+    .returning({
+      id:messagesTable.id,
+    })
+  const pusher = new Pusher({
+    appId: privateEnv.PUSHER_ID,
+    key: publicEnv.NEXT_PUBLIC_PUSHER_KEY,
+    secret: privateEnv.PUSHER_SECRET,
+    cluster: publicEnv.NEXT_PUBLIC_PUSHER_CLUSTER,
+    useTLS: true,
+  });
+  // Private channels are in the format: private-...
+  await pusher.trigger(`private-${chatRoomId}`, "chatRoom:update", {
+    senderId:authorId,
+    messageId:messageId.id,
+  });
   return new NextResponse("OK", { status: 200 });
 }
 export async function PUT(request: NextRequest) {

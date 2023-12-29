@@ -1,16 +1,13 @@
 
 import { useParams, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useCallback } from "react";
 
 import { useSession } from "next-auth/react";
-
-
-
 import { pusherClient } from "@/lib/pusher/client";
-import type { chatRoom, User } from "@/lib/types/db";
+import type { User } from "@/lib/types/db";
 type PusherPayload = {
   senderId: User["id"];
-  chatRoom: chatRoom;
+  messageId:number,
 };
 export default function useMessages() {
   const [loading, setLoading] = useState(false);
@@ -18,31 +15,7 @@ export default function useMessages() {
   const { chatRoomId } = useParams();
   const { data: session } = useSession();
   const userId = session?.user?.id;
-  useEffect(()=>{
-    if (!chatRoomId) return;
-    // Private channels are in the format: private-...
-    const channelName = `private-${chatRoomId}`;
-    try {
-      const channel = pusherClient.subscribe(channelName);
-      channel.bind("chatRoom:update", ({ senderId }: PusherPayload) => {
-        if (senderId === userId) {
-          return;
-        }
-        router.refresh();
-        const messageContainer = window.document.getElementById("messages container");
-        if (messageContainer) {
-          messageContainer.scrollTop = messageContainer.scrollHeight-messageContainer.clientHeight+10;
-        }
-      });
-    } catch (error) {
-      console.error(error);
-      router.push("/homepage/Chat");
-    }
-    return () => {
-      pusherClient.unsubscribe(channelName);
-    };
-    // Unsubscribe from pusher events when the component unmounts
-  },[router,chatRoomId,userId]);
+  
   const postMessage = async ({
     text,
     authorId,
@@ -76,7 +49,7 @@ export default function useMessages() {
     setLoading(false);
     
   };
-  const updateMessage = async ({
+  const updateMessage = useCallback(async ({
     id,
     read,
   }: {
@@ -101,8 +74,36 @@ export default function useMessages() {
     // from server components.
     router.refresh();
     setLoading(false);
-  };
-
+  },[router])
+  useEffect(()=>{
+    if (!chatRoomId) return;
+    // Private channels are in the format: private-...
+    const channelName = `private-${chatRoomId}`;
+    try {
+      const channel = pusherClient.subscribe(channelName);
+      channel.bind("chatRoom:update", async({ senderId,messageId }: PusherPayload) => {
+        if (senderId === userId) {
+          return;
+        }
+        router.refresh();
+        await updateMessage({
+          id:messageId,
+          read: true,
+        });
+        const messageContainer = window.document.getElementById("messages container");
+        if (messageContainer) {
+          messageContainer.scrollTop = messageContainer.scrollHeight-messageContainer.clientHeight+10;
+        }
+      });
+    } catch (error) {
+      console.error(error);
+      router.push("/homepage/Chat");
+    }
+    return () => {
+      pusherClient.unsubscribe(channelName);
+    };
+    // Unsubscribe from pusher events when the component unmounts
+  },[router,chatRoomId,userId,updateMessage]);
   return {
     postMessage,
     updateMessage,

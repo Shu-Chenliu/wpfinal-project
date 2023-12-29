@@ -30,9 +30,9 @@ type Props = {
 function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,handleGetCoupon, useraddress}:Props) {
   const [openBuyNowDialog,setOpenBuyNowDialog]=useState(false);
   const [totalPrice,setTotalPrice]=useState(money);
-  const {postNotification}=useNotifications();
-  const {deleteCart}=useCart();
-  const {deleteCoupons}=useCoupons();
+  const {loadingN,postNotification}=useNotifications();
+  const {loading,deleteCart}=useCart();
+  const {loadingD,deleteCoupons}=useCoupons();
   const { toast } = useToast()
 
   const inputRefProductNumber = useRef<HTMLInputElement>(null); 
@@ -47,19 +47,14 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
 
 
   const handleCouponChange = (percentValue:number,id:number) => {
-
-    if (selectedCoupon === percentValue) {
-      // 如果当前已选中，则取消选择
-      setSelectedCoupon(0);
-      setSelectedId(id);
-    } else {
       // 否则，选择当前项
-      setSelectedCoupon(percentValue);
-    }
+    setSelectedCoupon(percentValue);
+    setSelectedId(id);
   };
   const handleCancelSelection = () => {
     // 点击 "取消选择" 时清除选择
     setSelectedCoupon(0);
+    setSelectedId(0);
   };
   const handleCouponSelect = () => {
     setFinalSelectedCoupon(selectedCoupon);
@@ -250,6 +245,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
           <Button
             className="flex font-semibold hover:bg-yellow-500 hover:text-black "
             onClick={handleBuy} 
+            disabled={(loading||loadingD||loadingN)}
           >Confirm</Button>
         </div>
         

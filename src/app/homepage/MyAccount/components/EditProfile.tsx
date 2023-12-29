@@ -46,7 +46,6 @@ export default function EditProfile(props: CardDialogProps) {
   const {updateUser}=useUsers();
 
   const [edittingTitle, setEdittingTitle] = useState(variant === "new");
-  const [edittingDescription, setEdittingDescription] = useState(variant === "new");
   const [edittingAddress, setEdittingAddress] = useState(variant === "new");
   const [edittingMarketName, setEdittingMarketName] = useState(variant === "new");
   const [edittingMarketAddress, setEdittingMarketAddress] = useState(variant === "new");
@@ -59,7 +58,6 @@ export default function EditProfile(props: CardDialogProps) {
   // however, this method is not recommended for large forms, as it will cause a re-render on every change
   // you can read more about it here: https://react.dev/reference/react-dom/components/input#controlling-an-input-with-a-state-variable
   const [newTitle, setNewTitle] = useState(title);
-  const [newDescription, setNewDescription] = useState(description);
   const [newAddress, setNewAddress] = useState(address);
   const [newMarketName, setNewMarketName] = useState(marketName);
   const [newMarketAddress, setNewMarketAddress] = useState(marketAddress);
@@ -70,7 +68,6 @@ export default function EditProfile(props: CardDialogProps) {
       await updateUser({
         id:userId,
         username:newTitle,
-        email:newDescription,
         address:newAddress,
       });
     }
@@ -124,36 +121,11 @@ export default function EditProfile(props: CardDialogProps) {
       </div>
       <div className="flex font-semibold">
         <p>User email: </p>
-
-        {edittingDescription ? (
-          <>
-        <ClickAwayListener
-          onClickAway={() => {
-            if (variant === "edit") {
-              setEdittingDescription(false);
-              handleClickAway();
-            }
-          }}
-        >
-          <Input
-            autoFocus
-            defaultValue={description}
-            placeholder="Enter your email"
-            className="grow mx-2"
-            onChange={(e) => setNewDescription(e.target.value)}
-          />
-        </ClickAwayListener>
-        <Pencil className="mx-1 " size={10} />
-        </>
-      ) : (
         <button
-          onClick={() => setEdittingDescription(true)}
           className="mx-2 w-50 flex"
         >
-          <Typography className="text-start">{newDescription}</Typography>
-          <Pencil className="mx-1 " size={10} />
+          <Typography className="text-start">{description}</Typography>
         </button>
-      )}
       
 
       </div>

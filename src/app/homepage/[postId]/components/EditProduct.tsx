@@ -4,7 +4,7 @@ import { useState } from "react";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
-import { Pencil , Lightbulb } from 'lucide-react';
+import { Pencil  } from 'lucide-react';
 import usePosts from "@/hooks/usePosts";
 
 
@@ -27,8 +27,6 @@ export default function EditProfile({postId,editThing,left,title,description}:Pr
   const [editting, setEditting] = useState(false);
   const toEdit=editThing==="title"?title:editThing==="left"?left:description;
   const [content,setContent]=useState(toEdit);
-
-  const [showHint, setShowHint] = useState(false);
 
   // using a state variable to store the value of the input, and update it on change is another way to get the value of a input
   // however, this method is not recommended for large forms, as it will cause a re-render on every change
@@ -94,11 +92,7 @@ export default function EditProfile({postId,editThing,left,title,description}:Pr
 
         >
           <Typography 
-          className={`text-start mx-2 w-40 flex  font-semibold ${editThing==="title"? "flex font-semibold text-cyan-500 p-2 text-4xl":" text-cyan-900"}`}
-
-          
-          
-          
+          className={`text-start mx-2 w-40 flex font-semibold ${editThing==="title"? "flex font-semibold text-cyan-500 p-2 text-4xl":" text-cyan-900"}`}      
           >{content}</Typography>
           <Pencil className="mx-1 " size={10} />
         </button>

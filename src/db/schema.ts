@@ -67,6 +67,7 @@ export const posts = pgTable('posts', {
   sold: integer('sold').notNull().default(0),
   buyerNumber: integer('buyerNumber').notNull().default(0),
   likes: doublePrecision('likes').notNull().default(0.00),
+  createdAt: timestamp("createAt").default(sql`now()`).notNull(),
   },
   (table)=>({
     displayIdIndexOfPosts: index("display_id_index_of_posts").on(table.displayId),
@@ -141,6 +142,7 @@ export const notifications = pgTable('notifications', {
       onUpdate: 'cascade'
     })
     .notNull(),
+  sendAt: timestamp("createAt").default(sql`now()`).notNull(),
   number:integer('number').notNull(),
   money:integer('money').notNull(),
   address:varchar('address').notNull(),

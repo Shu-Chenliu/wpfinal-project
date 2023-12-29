@@ -3,7 +3,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { useState } from "react";
 import AddCommentDialog from "./AddCommentDialog";
 import useNotifications from "@/hooks/useNotifications";
-import  usePost from "@/hooks/usePosts";
 import ImpossibleDialog from "./ImpossibleDialog";
 type ConfirmDialogProps={
   open: boolean,

@@ -37,16 +37,16 @@ async function DocPage({params: {chatRoomId}}: DocPageProps) {
           </div>
         ))}
       </div>
-      
+
       <InputBar 
         userId={userId} 
         chatRoomId={chatRoomId} 
-        isFirstMessage={isFirstMessage?.sendFirstMessage?isFirstMessage?.sendFirstMessage:true}
-        isBuyer={otherPeople?otherPeople[1]==="seller":false}
+        isFirstMessage={isFirstMessage}
+        isBuyer={otherPeople[1]==="buyer"}
         marketMessage={otherPeopleInfo?.marketMessage?otherPeopleInfo?.marketMessage:""}
         sellerId={otherPeopleInfo?.displayId?otherPeopleInfo?.displayId:"null"}
       />
-      
+
     </div>
   );
 }

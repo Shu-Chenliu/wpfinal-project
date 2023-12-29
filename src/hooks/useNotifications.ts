@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter} from "next/navigation";
 
 export default function useNotifications() {
-  const [loading, setLoading] = useState(false);
+  const [loadingN, setLoading] = useState(false);
   const router = useRouter();
 
   const postNotification = async ({
@@ -92,6 +92,6 @@ export default function useNotifications() {
   return {
     postNotification,
     updateNotification,
-    loading,
+    loadingN,
   };
 }

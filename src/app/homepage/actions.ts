@@ -2,6 +2,7 @@ import { db } from "@/db";
 export const getAllProducts = async() =>{
   "use server";
   const Products= await db.query.posts.findMany({
+    orderBy: (posts, { desc }) => [desc(posts.createdAt)],
     columns:{
       id:true,
       displayId:true,
@@ -10,7 +11,8 @@ export const getAllProducts = async() =>{
       left:true,
       category:true,
       likes:true,
-      imageUrl:true,      
+      imageUrl:true,   
+
     },
     with:{
       author: {

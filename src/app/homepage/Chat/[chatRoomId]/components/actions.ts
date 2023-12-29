@@ -19,7 +19,7 @@ export const getOtherPeople=async(username:string,chatRoomId:string)=>{
       buyerName:true,
     },
   });
-  if(!chatRoom) return;
+  if(!chatRoom) return["0",""];
   else if(username===chatRoom.buyerName){
     return [chatRoom.sellerName,"buyer"];
   }
@@ -34,7 +34,12 @@ export const getChatRoom=async(chatRoomId:string)=>{
       sendFirstMessage:true,
     }
   });
-  return chatRoom;
+  if(!chatRoom){
+    return true;
+  }
+  else{
+    return chatRoom.sendFirstMessage;
+  }
 }
 export const getOtherPeopleInfo = async(username:string)=>{
   const otherPeople=await db.query.usersTable.findFirst({

@@ -3,6 +3,7 @@ export const getAllNotificationsOfBuyer = async(username:string) =>{
   "use server";
   const notifications= await db.query.notifications.findMany({
     where:(notifications, { eq,and }) => and(eq(notifications.buyer, username), eq(notifications.shipped,true)),
+    orderBy: (notifications, { desc }) => [desc(notifications.sendAt)],
     columns:{
       id:true,
       text:true,

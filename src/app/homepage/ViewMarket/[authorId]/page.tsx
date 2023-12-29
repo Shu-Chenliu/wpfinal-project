@@ -3,8 +3,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 import { Store } from 'lucide-react';
-import {getAllproductOfUser,getSellerInfo} from "./components/actions"
-import MyMarketProductButton from "./components/MyMarketProductButton";
+import {getAllproductOfUser,getSellerInfo} from "./components/actions";
 import ProductButton from "../../ProductButton";
 import Image from "next/image";
 type Props = {

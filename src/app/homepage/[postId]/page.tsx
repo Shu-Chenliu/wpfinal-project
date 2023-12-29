@@ -157,7 +157,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
           {Product?.description}
         </p> */}
         {userId===Product?.author.displayId?
-          <EditProduct editThing="description" description={Product?.description!} postId={postId}/>
+          <EditProduct editThing="description" description={Product?.description?Product?.description:""} postId={postId}/>
           :<p className="w-full rounded-md p-2 hover:bg-white/10 overflow-wrap-normal mx-3">{Product?.description}</p>
         }
         

@@ -37,6 +37,7 @@ export default function BuyerNotiBar({
   const handleAddComment = ()=>{
     if(commented){
       toPostId(postId);
+      return;
     }
     setOpenNewCommentDialog(true);
   }

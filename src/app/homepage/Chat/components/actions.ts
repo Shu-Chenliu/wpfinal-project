@@ -1,5 +1,4 @@
 import { db } from "@/db";
-import { equal } from "assert";
 
 export const getAllChatOfSeller = async(userId:string) =>{
   "use server";
@@ -13,7 +12,7 @@ export const getAllChatOfSeller = async(userId:string) =>{
         },
         with:{
           messages:{
-            where:(messages, { eq }) => eq(messages.read, false),
+            where:(messages, { eq,and,ne }) => and(eq(messages.read, false), ne(messages.authorId,userId)),
           },
         }
       },
@@ -33,7 +32,7 @@ export const getAllChatOfBuyer = async(userId:string) =>{
         },
         with:{
           messages:{
-            where:(messages, { eq }) => eq(messages.read, false),
+            where:(messages, { eq,and,ne }) => and(eq(messages.read, false), ne(messages.authorId,userId)),
           },
         }
       }

@@ -21,17 +21,17 @@ function InputBar({userId,chatRoomId,isFirstMessage,isBuyer,marketMessage,seller
         authorId:userId,
         chatRoomId,
       });
-      if((!isFirstMessage)&&isBuyer){
-        await updateChatroom({
-          id:chatRoomId,
-          isFirstMessage:true,
-        });
-        await postMessage({
-          text:marketMessage,
-          authorId:sellerId,
-          chatRoomId,
-        });
-      }
+      // if((!isFirstMessage)&&isBuyer){
+      //   await updateChatroom({
+      //     id:chatRoomId,
+      //     isFirstMessage:true,
+      //   });
+      //   await postMessage({
+      //     text:marketMessage,
+      //     authorId:sellerId,
+      //     chatRoomId,
+      //   });
+      // }
       // setLatestText(inputRef.current.value);
       inputRef.current.value="";
       const messageContainer = window.document.getElementById("messages container");

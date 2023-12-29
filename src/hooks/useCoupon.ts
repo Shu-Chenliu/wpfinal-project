@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function useCoupons() {
-  const [loading, setLoading] = useState(false);
+  const [loadingD, setLoading] = useState(false);
   const router = useRouter();
 
   const postCoupon = async ({
@@ -62,6 +62,6 @@ export default function useCoupons() {
   return {
     postCoupon,
     deleteCoupons,
-    loading,
+    loadingD,
   };
 }

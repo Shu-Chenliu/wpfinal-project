@@ -2,12 +2,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
-
+import { useState } from "react";
 import { Star, StarHalf } from "lucide-react";
 import Divider from "@mui/material/Divider";
 import Image from 'next/image';
 import Paper from "@mui/material/Paper";
 import { Trash2 } from 'lucide-react';
+import { Dialog , DialogContent } from "@/components/ui/dialog";
 import usePosts from "@/hooks/usePosts";
 export type MyMarketProductButtonProps = {
   id: number;
@@ -27,6 +28,7 @@ export default function MyMarketProductButton({ displayId,title, category, price
   const viewProduct=()=>{
     router.push(`/homepage/${displayId}`);
   }
+  const [open, setOpen] = useState(false);
   const handleDeletePost=async()=>{
     await deleteProduct({
       id:displayId,
@@ -74,6 +76,34 @@ export default function MyMarketProductButton({ displayId,title, category, price
                 {/* {left === 0 && <p className="ml-auto font-bold flex text-4xl text-red-700" > Sold out!!! </p>} */}
 
               </div>
+            <Trash2 className="my-2 hover:text-yellow-500 m-2" onClick={()=>{setOpen(true)}}/>
+            <Dialog open={open}>
+            <DialogContent>
+              <p className="font-semibold text-lg">Do you want to remove this post? </p>
+              <div className="flex w-full justify-end ">
+                <Button
+                  className="text-sm font-semibold text-slate-900 border bg-slate-200 hover:bg-slate-100 mx-2"
+                  onClick={() => setOpen(false)}
+                >
+                  Close
+                </Button>
+                
+                
+                  <Button
+                    // variant={"ghost"}
+                    type={"submit"}
+                    className="bg-slate-800 text-slate-100 hover:text-orange-500"
+                    onClick={handleDeletePost}
+                  >
+                    <Trash2 className="m-2"/>
+                    Delete
+                  </Button>
+                
+
+              </div>
+              
+            </DialogContent>
+          </Dialog>
               
             {/* 圖片 */}
             <div className="grid relative" style={{ width: '200px', height: '250px' }}>

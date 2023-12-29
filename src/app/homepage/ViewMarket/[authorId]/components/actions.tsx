@@ -3,6 +3,7 @@ export const getAllproductOfUser=async(authorId:string)=>{
   "use server";
   const products=await db.query.posts.findMany({
     where:(posts,{eq})=>(eq(posts.authorId,authorId)),
+    orderBy: (posts, { desc }) => [desc(posts.createdAt)],
     columns:{
       id:true,
       displayId:true,

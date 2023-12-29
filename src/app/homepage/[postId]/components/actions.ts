@@ -1,9 +1,10 @@
 import { db } from "@/db";
-import { usersToCart,chatRoom,usersToChatofSeller,usersToChatofBuyer} from "@/db/schema";
+import { usersToCart,chatRoom,usersToChatofSeller,usersToChatofBuyer, messagesTable} from "@/db/schema";
 
 export const getProduct=async (postId:string)=>{
   const Product=await db.query.posts.findFirst({
     where:(posts, { eq }) => eq(posts.displayId, postId),
+    orderBy: (posts, { desc }) => [desc(posts.createdAt)],
     columns: {
       title:true,
       description:true,
@@ -58,7 +59,12 @@ export const getMyShoppingCart = async(userId:string) => {
 }
 export const createChatRoom = async (userId: string,sellerId:string,sellerName:string,buyerName:string) => {
   "use server";
-
+  const userMessage=await db.query.usersTable.findFirst({
+    where:(usersTable,{eq})=>eq(usersTable.displayId,userId),
+    columns:{
+      marketMessage:true,
+    }
+  });
   const newChatroomId = await db.transaction(async (tx) => {
     const [newChatroom] = await tx
       .insert(chatRoom)
@@ -77,6 +83,14 @@ export const createChatRoom = async (userId: string,sellerId:string,sellerName:s
     });
     return newChatroom.displayId;
   });
+  if(userMessage){
+    await db.insert(messagesTable).values({
+      text:userMessage.marketMessage,
+      authorId:sellerId,
+      chatRoomId:newChatroomId,
+    })
+  }
+  
   return newChatroomId;
 };
 export const getChatRoom=async()=>{

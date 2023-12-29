@@ -50,7 +50,7 @@ export default function ConfirmDialog({open,onClose,id,postId,title,left,author,
           <div className="flex w-full flex-col gap-1">
           <div className="flex items-center">
  
-            <p className="flex w-full  text-slate-900"> {author} has delivered {number} {title}(s) to {address}</p>
+            <p className="flex w-full  text-slate-900"> {author} has delivered {number} {title} to {address}</p>
           </div>
           </div>
 

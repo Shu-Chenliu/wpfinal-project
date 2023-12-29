@@ -132,7 +132,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
               <div className="block">
                 <p className=" flex w-full font-semibold text-slate-900 ">Market: {Product?.author.sellername}</p>
                 <p className=" flex w-full font-semibold text-slate-900 ">Market Address: {Product?.author.selleraddress}</p>
-                <AddChatRoomButton userId={userId} seller={Product?.author.displayId!} addChatRoom={handleAddChatRoom}/>
+                <AddChatRoomButton userId={userId} seller={Product?.author.displayId?Product?.author.displayId:""} addChatRoom={handleAddChatRoom}/>
               </div>
               
               

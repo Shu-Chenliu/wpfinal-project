@@ -1,6 +1,5 @@
 // import { useRef, useState } from "react";
 "use client";
-import { Button } from "@/components/ui/button";
 import BuyNowDialog from "./BuyNowDialog";
 import { Trash2 } from 'lucide-react';
 import useCart from "@/hooks/useCart";

@@ -1,6 +1,6 @@
 "use client";
 import {Button} from "@/components/ui/button";
-import{useRef,useState}from "react";
+import{useRef}from "react";
 import useUsers from "@/hooks/userUsers"
 import { useToast } from '@/components/ui/use-toast';
 // note that the Tweet component is also a server component

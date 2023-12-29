@@ -1,7 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 import { eq } from "drizzle-orm";
-import Pusher from "pusher";
 
 import { db } from "@/db";
 import { notifications} from "@/db/schema";

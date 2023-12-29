@@ -10,8 +10,6 @@ import { ShoppingCart } from 'lucide-react';
 import { Store } from 'lucide-react';
     
 import { BellPlus } from 'lucide-react';
-    
-import { Eye } from 'lucide-react';
 import { Dialog } from "@/components/ui/dialog";
 import { DialogContent } from "@/components/ui/dialog";
 import { Home } from 'lucide-react';

@@ -14,7 +14,7 @@ function InputBar({userId,chatRoomId,isFirstMessage,isBuyer,marketMessage,seller
   const {postMessage}=useMessage();
   const {updateChatroom}=useChatRoom();
   const inputRef = useRef<HTMLInputElement>(null);
-  const handleSend=async()=>{
+  const handleSend=useCallback(async()=>{
     if(inputRef.current&&inputRef.current.value.length>0){
       await postMessage({
         text:inputRef.current.value,
@@ -40,7 +40,7 @@ function InputBar({userId,chatRoomId,isFirstMessage,isBuyer,marketMessage,seller
         messageContainer.scrollTop = messageContainer.scrollHeight-messageContainer.clientHeight+10;
       }
     }
-  }
+  },[isFirstMessage,sellerId,isBuyer,userId,marketMessage,chatRoomId,postMessage,updateChatroom]);
   const handleUserKeyPress = useCallback(async(e: KeyboardEvent) => {
     if (e.key === "Enter") {
       handleSend();

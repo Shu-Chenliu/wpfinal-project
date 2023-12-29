@@ -1,5 +1,4 @@
 import { getProduct,addToCart,createChatRoom } from "./components/actions";
-import {db}from "@/db";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
@@ -12,6 +11,7 @@ import { publicEnv } from "@/lib/env/public";
 import { ArrowLeft } from 'lucide-react';
 import AddChatRoomButton from "./components/AddChatRoomButton";
 import { Store, ShoppingCart } from 'lucide-react';
+import Image from 'next/image';
 type ProductPageProps = {
   params: {
     postId: string;
@@ -28,7 +28,6 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
   const comments=await getComments(postId);
   const shoppingCart=await getMyShoppingCart(userId);
   const chatRooms=await getChatRoom();
-  const liked = false;
   const handleAddToCart = async (userId:string,postId:string)=>{
     "use server";
     await addToCart(userId,postId);
@@ -43,28 +42,31 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
         redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/Chat/${chatRoom.displayId}`);
       }
     }
-    const newChatRoomId = await createChatRoom(userId,sellerId,Product?.author.sellername!,username);
+    const newChatRoomId = await createChatRoom(userId,sellerId,Product?.author.sellername?Product?.author.sellername:"",username);
     revalidatePath("/homepage/Chat");
     redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/Chat/${newChatRoomId}`);
   }
   let imageSrc;
-
+  if(!Product?.imageUrl){
   switch (Product?.category) {
     case "Clothing":
-      imageSrc = "../../Clothing.jpg";
+      imageSrc = "/../../Clothing.jpg";
       break;
     case "Food":
-      imageSrc = "../../Food.jpg";
+      imageSrc = "/../../Food.jpg";
       break;
     case "Electronics":
-      imageSrc = "../../Electronics.jpg";
+      imageSrc = "/../../Electronics.jpg";
       break;
     case "EE related":
-      imageSrc = "../../EE_related.jpg";
+      imageSrc = "/../../EE_related.jpg";
       break;
     case "Others":
-      imageSrc = "../../Others.jpg";
+      imageSrc = "/../../Others.jpg";
       break;
+  }}
+  else{
+    imageSrc = Product?.imageUrl;
   }
   return (
     <div className="w-full">
@@ -98,9 +100,6 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
 
         ) 
         }
-        
-        
-
       </div>
       
       <div className="flex gap-4">
@@ -109,8 +108,14 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
       </div>
 
       <div className="flex">
-          <img src={imageSrc} alt="Product" className="w-1/4 ml-5 h-auto" /> 
-
+          <div className="w-1/4 ml-5 h-auto relative">
+            <Image
+              src={imageSrc!}
+              alt="Product"
+              fill={true}
+              className="object-contain"
+            />
+          </div>
           {/* <div className="w-full rounded-md p-2 hover:bg-white/10 ">
             {Product?.description}
           </div> */}

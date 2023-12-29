@@ -1,14 +1,11 @@
 import {getAllNotificationsOfSeller} from "./components/actions"
-import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+
 import SellerNotiBar from "./components/SellerNotiBar"
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
-type Props = {
+import Hint from "./components/Hint";
 
-};
 async function Notification() {
   const session = await auth();
   if (!session || !session?.user?.id) {
@@ -18,6 +15,10 @@ async function Notification() {
   const notifications=await getAllNotificationsOfSeller(username);
   return (
     <>
+      <div className="flex w-full">
+        <p className="text-2xl m-2 p-2 font-semibold text-slate-700">Market Notifications</p>
+        <Hint/>
+      </div>
       {notifications.map((notification)=>(
         <div key={notification.id}>
           <SellerNotiBar 
@@ -29,6 +30,7 @@ async function Notification() {
             category={notification.post.category}
             read={notification.readBySeller}
             left={notification.post.left}
+            imageUrl={notification.post.imageUrl!}
           />
         </div>
       ))}

@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle} from "@/components/ui/dialog";
 import { useState,useRef } from "react";
-import { Input } from "@/components/ui/input";
 import { Star } from "lucide-react";
 import  usePost from "@/hooks/usePosts";
 import useComments from "@/hooks/useComments";
@@ -17,7 +16,7 @@ type ConfirmDialogProps={
   username: string,
   buyerNumber: number,
 }
-export default function ConfirmDialog({open,onClose,id,postId,left,sold,likes,userId,username,buyerNumber}:ConfirmDialogProps){
+export default function ConfirmDialog({open,onClose,postId,likes,username,buyerNumber}:ConfirmDialogProps){
   const inputRefProductComment = useRef<HTMLTextAreaElement>(null);
   const [liked,setLiked]=useState(0);
   const {updateProduct}=usePost();

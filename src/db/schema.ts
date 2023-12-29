@@ -12,8 +12,6 @@ import {
   integer,
   doublePrecision,
   boolean,
-  primaryKey,
-
 } from "drizzle-orm/pg-core";
 //使用者可以是買家兼賣家
 //使用者需要
@@ -87,10 +85,7 @@ export const usersToCart = pgTable('users_to_cart', {
   id: serial('id').primaryKey(),
   userId: uuid('user_id').notNull().references(() => usersTable.displayId),
   postId: uuid('group_id').notNull().references(() => posts.displayId),
-}, (t) => ({
-  
-}),
-);
+});
 export const usersToCartRelations = relations(usersToCart, ({ one }) => ({
   posts: one(posts, {
     fields: [usersToCart.postId],
@@ -118,9 +113,7 @@ export const comments = pgTable('comments', {
     })
     .notNull(),
   stars:integer('stars').notNull(),
-  },(table)=>({
-    
-}));
+});
 export const commentsRelations = relations(comments, ({ one }) => ({
   post: one(posts, {
     fields: [comments.postId],
@@ -155,9 +148,7 @@ export const notifications = pgTable('notifications', {
   received:boolean('received').notNull().default(false),
   readBySeller:boolean('readBySeller').notNull().default(false),
   readByBuyer:boolean('readByBuyer').notNull().default(false),
-  },(table)=>({
-    
-}));
+});
 export const notificationsRelations = relations(notifications, ({ one }) => ({
   post: one(posts, {
     fields: [notifications.postId],
@@ -173,9 +164,7 @@ export const coupons = pgTable('coupons', {
   })
   .notNull(),
   percent:integer('percent').notNull(),
-  },(table)=>({
-    
-}));
+});
 export const couponsRelations = relations(coupons, ({ one }) => ({
   owner: one(usersTable, {
     fields: [coupons.owner],
@@ -196,9 +185,7 @@ export const chatRoom = pgTable('chatRoom', {
       onUpdate: 'cascade'
     }),  
   sendFirstMessage:boolean('send').notNull().default(false),
-}, (t) => ({
-  
-}));
+});
 export const chatroomRelations = relations(chatRoom, ({ many }) => ({
   sellerId:many(usersToChatofSeller),
   buyerId:many(usersToChatofBuyer),

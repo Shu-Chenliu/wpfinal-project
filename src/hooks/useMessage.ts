@@ -42,7 +42,7 @@ export default function useMessages() {
       pusherClient.unsubscribe(channelName);
     };
     // Unsubscribe from pusher events when the component unmounts
-  },[router,chatRoomId]);
+  },[router,chatRoomId,userId]);
   const postMessage = async ({
     text,
     authorId,

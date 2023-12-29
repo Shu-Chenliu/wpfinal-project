@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { UserRound } from 'lucide-react';
     
-import { BellRing, Ticket, LogOut, MessageCircle, MessagesSquare } from 'lucide-react';
+import { BellRing, Ticket, LogOut, MessagesSquare } from 'lucide-react';
     
 import { ShoppingCart } from 'lucide-react';
     
@@ -14,6 +14,8 @@ import { BellPlus } from 'lucide-react';
 import { Eye } from 'lucide-react';
 import { Dialog } from "@/components/ui/dialog";
 import { DialogContent } from "@/components/ui/dialog";
+import { Home } from 'lucide-react';
+
 
 
 import { useState } from 'react';
@@ -38,7 +40,7 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp
             className={`my-2 hover:text-orange-500 m-2 ${nowPage === "View All products" ? 'text-orange-500' : ''}`}
             onClick={() => handleChangeNowPage("View All products")}
             >
-            <Eye className="m-2" /> View All products
+            <Home className="m-2" /> <span className="max-[1000px]:hidden">View All products</span>
             </Button>
           </Link>
 
@@ -47,7 +49,7 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp
             className={`my-2 hover:text-orange-500 m-2 ${nowPage === "Shopping Cart" ? 'text-orange-500' : ''}`}
             onClick={() => {handleChangeNowPage("Shopping Cart")}}
             >
-              <ShoppingCart className="m-2" /> Shopping Cart
+              <ShoppingCart className="m-2" /> <span className="max-[1000px]:hidden">Shopping Cart</span>
               <span className=" text-orange-500 hover:text-orange-500  m-2 px-1  rounded-full">{shoppingCartLength}</span>
             </Button>
           </Link>
@@ -57,7 +59,7 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp
             className={`my-2 hover:text-orange-500 m-2 ${nowPage === "My market" ? 'text-orange-500' : ''}`}
             onClick={() => {handleChangeNowPage("My market")}}
             >
-              <Store className="m-2" /> My market
+              <Store className="m-2" /> <span className="max-[1000px]:hidden">My market</span>
             </Button>
           </Link>
 
@@ -66,7 +68,7 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp
             className={`my-2 hover:text-orange-500 m-2 ${nowPage === "Market Notifications" ? 'text-orange-500' : ''}`}
             onClick={() => {handleChangeNowPage("Market Notifications")}}
 
-            ><BellPlus className="m-2" />Market Notifications 
+            ><BellPlus className="m-2" /> <span className="max-[1000px]:hidden">Market Notifications</span>
             <span className=" text-orange-500 hover:text-orange-500  m-2 px-1  rounded-full">{sellerUnread}</span>
             </Button>
           </Link>
@@ -76,7 +78,7 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp
             <Button
             className={`my-2 hover:text-orange-500 m-2 ${nowPage === "Buying Notifications" ? 'text-orange-500' : ''}`}
             onClick={() => {handleChangeNowPage("Buying Notifications")}}
-            ><BellRing className="m-2" />Buying Notifications
+            ><BellRing className="m-2" /><span className="max-[1000px]:hidden">Buying Notifications</span>
             <span className=" text-orange-500 hover:text-orange-500  m-2 px-1  rounded-full">{buyerUnread}</span>
             </Button>
           </Link>
@@ -85,22 +87,23 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp
             <Button
             className={`my-2 hover:text-orange-500 m-2 ${nowPage === "Get Coupon" ? 'text-orange-500' : ''}`}
             onClick={() => {handleChangeNowPage("Get Coupon")}}
-            ><Ticket className="m-2"/>
-              Get Coupon</Button>
+            ><Ticket className="m-2"/><span className="max-[1000px]:hidden">Get Coupon</span>
+              </Button>
           </Link> 
 
           <Link href={"/homepage/Chat"}>
             <Button
             className={`my-2 hover:text-orange-500 m-2 ${nowPage === "Chatroom" ? 'text-orange-500' : ''}`}
             onClick={() => {handleChangeNowPage("Chatroom")}}
-            ><MessagesSquare className="m-2" />Chatroom</Button>
+            ><MessagesSquare className="m-2" /><span className="max-[1000px]:hidden">Chatroom</span>
+            </Button>
           </Link> 
 
           <Link href={"/homepage/MyAccount"}>
             <Button
             className={`my-2 hover:text-orange-500 m-2 ${nowPage === "My account" ? 'text-orange-500' : ''}`}
             onClick={() => {handleChangeNowPage("My account")}}
-            ><UserRound className="m-2" />My account</Button>
+            ><UserRound className="m-2" /><span className="max-[1000px]:hidden">My account</span></Button>
           </Link> 
           
           <div className="mr-auto">
@@ -111,7 +114,7 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp
               onClick={() => setOpen(true)}
             >
               <LogOut className="m-2"/>
-              Sign Out
+              <span className="max-[1000px]:hidden">Sign Out</span>
               {open}
             </Button>
             </div>

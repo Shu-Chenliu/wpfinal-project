@@ -15,7 +15,7 @@ async function FiltChatNavbar() {
       
       <section className="flex  flex-col pt-3 ">
 
-          <FiltChatNavbarLink userstate={userstate?.userChatRoomState!} userId={userId}/>
+          <FiltChatNavbarLink userstate={userstate?.userChatRoomState?(userstate?.userChatRoomState):"personal"} userId={userId}/>
           
       </section>
       

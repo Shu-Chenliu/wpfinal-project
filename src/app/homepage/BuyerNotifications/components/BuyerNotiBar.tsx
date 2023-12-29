@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { useState,useRef } from "react";
-
+import Image from 'next/image';
 import ConfirmDialog from "./ConfirmDialog";
 import AddCommentDialog from "./AddCommentDialog"
 
@@ -20,47 +20,54 @@ type BuyerNotiBarProps = {
   buyerNumber:number,
   category:string,
   read:boolean,
+  imageUrl:string,
 };
 
 
 // note that the Tweet component is also a server component
 // all client side things are abstracted away in other components
 export default function BuyerNotiBar({
-  id, postId,title, left, author,sold,likes,userId,username,number,address,buyerNumber,category,read
+  id, postId,title, left, author,sold,likes,userId,username,number,address,buyerNumber,category,read,imageUrl
 }: BuyerNotiBarProps) {
-  const [openNewCheckDialog, setOpenNewCheckDialog] = useState(false);
   const [openNewReceiveDialog, setOpenNewReceiveDialog] = useState(false);
   const [openNewCommentDialog, setOpenNewCommentDialog] = useState(false);
-  const inputRefProductComment = useRef<HTMLTextAreaElement>(null);
-  const [liked,setLiked]=useState(0);
 
   const handleAddComment = ()=>{
     setOpenNewCommentDialog(true);
   }
   
   let imageSrc;
-
+  if(!imageUrl){
   switch (category) {
     case "Clothing":
-      imageSrc = "../../Clothing.jpg";
+      imageSrc = "/../../Clothing.jpg";
       break;
     case "Food":
-      imageSrc = "../../Food.jpg";
+      imageSrc = "/../../Food.jpg";
       break;
     case "Electronics":
-      imageSrc = "../../Electronics.jpg";
+      imageSrc = "/../../Electronics.jpg";
       break;
     case "EE related":
-      imageSrc = "../../EE_related.jpg";
+      imageSrc = "/../../EE_related.jpg";
       break;
     case "Others":
-      imageSrc = "../../Others.jpg";
+      imageSrc = "/../../Others.jpg";
       break;
+  }}
+  else{
+    imageSrc = imageUrl;
   }
   const contentToRender = (
     <>
-      <div className="w-40 h-40">
-        <img src={imageSrc} alt="Product" className="h-32 w-auto" />
+      <div className="w-36 h-32 relative">
+        <Image
+          src={imageSrc!}
+          alt="Product"
+          fill={true}
+          className="object-contain"
+        />
+        {/* <img src={imageSrc} alt="Product" className="h-32 w-auto" /> */}
       </div>
       <div className="px-4">
         <div className="mb-4 ">
@@ -101,12 +108,11 @@ export default function BuyerNotiBar({
   return (
     <>
     {read?
-    <div className="border w-full mr-4 p-4 flex h-40 bg-slate-200">
+    <div className="w-full flex flex-row gap-4  border rounded-md p-2 mx-2 my-2 bg-slate-200">
       {contentToRender}
     </div>
     :   
-    <div className="border w-full mr-4 p-4 flex h-40 ">
-      {/* <div className="flex w-full bg-slate-100 text-slate-900 font-semibold p-2">New Notification!</div> */}
+    <div className="w-full flex flex-row gap-4  border rounded-md p-2 mx-2 my-2 ">
       {contentToRender}
     </div>    
     }

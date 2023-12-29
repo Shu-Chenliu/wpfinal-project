@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 import { Star, StarHalf } from "lucide-react";
 import Divider from "@mui/material/Divider";
-
+import Image from "next/image";
 import Paper from "@mui/material/Paper";
 
 
@@ -20,7 +20,7 @@ export type MyMarketProductButtonProps = {
   imageUrl: string;
 };
 
-export default function MyMarketProductButton({id, displayId,title, category, price,likes,left,imageUrl}:MyMarketProductButtonProps) {
+export default function MyMarketProductButton({displayId,title, category, price,likes,left,imageUrl}:MyMarketProductButtonProps) {
   // const [open, setOpen] = useState(false);
   const router = useRouter();
 
@@ -32,19 +32,19 @@ export default function MyMarketProductButton({id, displayId,title, category, pr
   if(!imageUrl){
     switch (category) {
       case "Clothing":
-        imageSrc = "../../Clothing.jpg";
+        imageSrc = "/../../Clothing.jpg";
         break;
       case "Food":
-        imageSrc = "../../Food.jpg";
+        imageSrc = "/../../Food.jpg";
         break;
       case "Electronics":
-        imageSrc = "../../Electronics.jpg";
+        imageSrc = "/../../Electronics.jpg";
         break;
       case "EE related":
-        imageSrc = "../../EE_related.jpg";
+        imageSrc = "/../../EE_related.jpg";
         break;
       case "Others":
-        imageSrc = "../../Others.jpg";
+        imageSrc = "/../../Others.jpg";
         break;
     }
   }
@@ -54,7 +54,7 @@ export default function MyMarketProductButton({id, displayId,title, category, pr
 
   return (
       <>
-        <Paper className={`rounded-md p-2 mx-2 my-2 w-80 flex flex-col  ${left === 0 ? 'bg-slate-200' : ''}`}>
+        <Paper className={`rounded-md p-2 mx-2 my-2 w-60 flex flex-col  ${left === 0 ? 'bg-slate-200' : ''}`}>
           
           {/* <div className="flex w-full gap-4"> */}
             {/* 標題 */}
@@ -66,10 +66,14 @@ export default function MyMarketProductButton({id, displayId,title, category, pr
               </div>
               
             {/* 圖片 */}
-            <div className="grid place-items-center w-60 h-60" >
-              <p className="flex font-semibold text-slate-900">
-                <img src={imageSrc} alt="Product" className="w-auto h-52 " />
-              </p>
+            <div className="grid place-items-center w-full h-32 relative" >
+              <Image
+                src={imageSrc!}
+                alt="Product"
+                fill={true}
+                className="object-contain"
+              />
+              {/* <img src={imageSrc} alt="Product" className="w-auto h-52 " /> */}
             </div>
 
 

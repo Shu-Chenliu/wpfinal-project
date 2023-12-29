@@ -27,21 +27,21 @@ function FiltChatNavbarLink({userstate,userId}:Props) {
       <section className="flex  flex-col pt-3 ">
 
           <Link href={"/homepage/Chat"}>
-            <Button
+            {/* <Button
             className={`flex my-2 bg-slate-800 hover:bg-slate-800 hover:text-orange-500 m-2 ${nowPage === "personal" ? 'text-orange-500' : ''}`}
             onClick={() => handleChangeNowPage("personal")}
-            >
-                <UserRound className="m-2" />
-            </Button>
+            > */}
+                <UserRound className={`flex bg-slate-800 text-slate-100 hover:bg-slate-800 hover:text-orange-500 m-4 ${nowPage === "personal" ? 'text-orange-500' : ''}`}
+            onClick={() => handleChangeNowPage("personal")} />
+            {/* </Button> */}
           </Link> 
 
           <Link href={"/homepage/Chat"}>
-            <Button
-            className={`flex my-2 bg-slate-800 hover:bg-slate-800 hover:text-orange-500 m-2 ${nowPage === "market" ? 'text-orange-500' : ''}`}
-            onClick={() => handleChangeNowPage("market")}            
-            >
-              <Store className="m-2" /> 
-            </Button>
+            
+              <Store 
+              className={`flex bg-slate-800 text-slate-100 hover:bg-slate-800 hover:text-orange-500 m-4 ${nowPage === "market" ? 'text-orange-500' : ''}`}
+            onClick={() => handleChangeNowPage("market")}   /> 
+       
           </Link>
           
       </section>

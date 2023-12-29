@@ -1,10 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { useState,useRef } from "react";
-import { Input } from "@/components/ui/input";
-import { Star } from "lucide-react";
-import  usePost from "@/hooks/usePosts";
-import useComments from "@/hooks/useComments";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+
 type ImpossibleDialogProps={
   open: boolean,
   onClose: ()=>void,
@@ -18,7 +14,7 @@ export default function ImpossibleDialog({open,onClose}:ImpossibleDialogProps){
         style={{ width: "500px" }}
       >
         <DialogHeader>
-          <DialogTitle className="text-white">Impossible :)</DialogTitle>
+          <DialogTitle className="text-white">{"Impossible :)"}</DialogTitle>
           
         </DialogHeader>
         

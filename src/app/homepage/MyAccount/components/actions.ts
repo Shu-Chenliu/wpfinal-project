@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { usersTable,coupons } from "@/db/schema";
+import { coupons } from "@/db/schema";
 import { eq } from "drizzle-orm";
 export const getUserProfile = async(userDisplayId:string) =>{
   "use server";

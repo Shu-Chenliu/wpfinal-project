@@ -4,10 +4,10 @@ import { publicEnv } from "@/lib/env/public";
 import {getUserProfile,getMyCoupon} from "./components/actions"
 import Coupon from "./components/Coupon";
 import { Ghost , Store } from 'lucide-react';
-import { useState } from "react";
 import EditProfile from "./components/EditProfile";
 import AddImageButton from "./components/AddImageButton";
 import Link from "next/link";
+import Image from "next/image";
 async function HomePage() {
   const session = await auth();
 
@@ -35,10 +35,16 @@ async function HomePage() {
           <Ghost className="w-40 h-40" /> */}
 
           {userProfile?.imageURL ?(
-            <div className="flex">
-              <img
-                src={userProfile?.imageURL!}
+            <div className="flex w-40 h-40 relative">
+              {/* <img
+                src={userProfile?.imageURL}
                 className="w-40 h-40  border-2 my-2 my-2 "           
+              /> */}
+              <Image
+                src={userProfile?.imageURL}
+                alt="user Photo"
+                fill={true}
+                
               />
             </div>
           ):(
@@ -59,8 +65,7 @@ async function HomePage() {
           userId={userId}
           title={userProfile?.username}
           description={userProfile?.email}
-          address={userProfile?.address!}
-          
+          address={userProfile?.address?userProfile?.address:""}
         />
       </div>
       <br/><br/>
@@ -82,10 +87,15 @@ async function HomePage() {
         <div className="flex">
           <div className="block">
             {userProfile?.marketUrl ?(
-              <div className="flex">
-                <img
-                  src={userProfile?.marketUrl!}
+              <div className="flex w-40 h-40 relative">
+                {/* <img
+                  src={userProfile?.marketUrl}
                   className="w-40 h-40  border-2 my-2 my-2 "           
+                /> */}
+                <Image
+                  src={userProfile?.marketUrl}
+                  alt='market Photo'
+                  fill={true}
                 />
               </div>
             ):(
@@ -99,9 +109,9 @@ async function HomePage() {
               status="market"
               userId={userId}
               marketName={userProfile?.sellername}
-              marketAddress={userProfile?.selleraddress!}
-              marketDescription={userProfile?.marketDescription!}
-              marketMessage={userProfile?.marketMessage!}
+              marketAddress={userProfile?.selleraddress}
+              marketDescription={userProfile?.marketDescription}
+              marketMessage={userProfile?.marketMessage}
             />
         </div>   
           

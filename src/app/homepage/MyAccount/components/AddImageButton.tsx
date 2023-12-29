@@ -1,7 +1,6 @@
 "use client";
-import { Ticket } from 'lucide-react';
 import {Button} from "@/components/ui/button";
-import{useRef,useState,useEffect}from "react";
+import{useRef,useState}from "react";
 import useUsers from "@/hooks/userUsers"
 import { useToast } from '@/components/ui/use-toast';
 // note that the Tweet component is also a server component
@@ -15,7 +14,6 @@ type Props = {
 export default function AddImageButton({userId,status}:Props) {
   const imageRef = useRef<HTMLInputElement>(null);
   // const [imageSrc,setImageSrc]=useState("");
-  const [selectedFile, setSelectedFile] = useState(null);
   const {updateUser}=useUsers();
   const {toast}=useToast();
   const handleUploadImage=async()=>{

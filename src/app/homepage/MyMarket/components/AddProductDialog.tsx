@@ -8,7 +8,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { useToast } from "@/components/ui/use-toast"
@@ -120,7 +119,7 @@ function AddProductDialog({userDisplayId}:Props) {
           variant={"outline"}
           onClick={() => setOpenAddProductDialog(true)}
           >
-            <ShoppingBag size={20} className="mr-1"/>Add Product
+            <ShoppingBag size={20} className="mr-1"/><span className="max-[475px]:hidden">Add Product</span>
       </Button>
       <Dialog open={openNewAddProductDialog}>
         {/* <DialogTrigger asChild>

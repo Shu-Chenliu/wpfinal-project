@@ -1,8 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { useState,useRef } from "react";
-import { Input } from "@/components/ui/input";
-import { Star } from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { useState } from "react";
 import AddCommentDialog from "./AddCommentDialog";
 import useNotifications from "@/hooks/useNotifications";
 import  usePost from "@/hooks/usePosts";

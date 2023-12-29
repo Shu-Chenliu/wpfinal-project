@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useState } from "react";
-
+import Image from "next/image";
 import useNotifications from "@/hooks/useNotifications";
 type SellerNotiBarProps = {
   id:number,
@@ -13,13 +13,14 @@ type SellerNotiBarProps = {
   category:string,
   read:boolean,
   left:number,
+  imageUrl:string,
 };
 
 
 // note that the Tweet component is also a server component
 // all client side things are abstracted away in other components
 export default function SellerNotiBar({
-  id,text,buyer,money,address,category,read,left
+  id,text,buyer,money,address,category,read,left,imageUrl
 }: SellerNotiBarProps) {
   const [openNewCheckDialog, setOpenNewCheckDialog] = useState(false);
   const {updateNotification}=useNotifications();
@@ -33,28 +34,37 @@ export default function SellerNotiBar({
     setOpenNewCheckDialog(false);
   }
   let imageSrc;
-
+  if(!imageUrl){
   switch (category) {
     case "Clothing":
-      imageSrc = "../../Clothing.jpg";
+      imageSrc = "/../../Clothing.jpg";
       break;
     case "Food":
-      imageSrc = "../../Food.jpg";
+      imageSrc = "/../../Food.jpg";
       break;
     case "Electronics":
-      imageSrc = "../../Electronics.jpg";
+      imageSrc = "/../../Electronics.jpg";
       break;
     case "EE related":
-      imageSrc = "../../EE_related.jpg";
+      imageSrc = "/../../EE_related.jpg";
       break;
     case "Others":
-      imageSrc = "../../Others.jpg";
+      imageSrc = "/../../Others.jpg";
       break;
+  }}
+  else{
+    imageSrc = imageUrl;
   }
   const contentToRender = (
     <>
-      <div className="w-40 h-40">
-        <img src={imageSrc} alt="Product" className="w-auto h-32" />
+      <div className="w-40 h-40 relative">
+        <Image
+          src={imageSrc!}
+          alt="Product"
+          fill={true}
+          className="object-contain"
+        />
+        {/* <img src={imageSrc} alt="Product" className="w-auto h-32" /> */}
       </div>
       <div className="px-4">
         <div className="mb-4 ">
@@ -87,11 +97,11 @@ export default function SellerNotiBar({
   return (
     <>
     {read?
-    (<div className="border rounded my-2 w-full mr-4 p-4 flex h-40 bg-slate-200">
+    (<div className="w-full flex flex-row gap-4  border rounded-md p-2 mx-2 my-2 bg-slate-200">
       {contentToRender}
     </div>)
     :
-    (<div className="border rounded my-2 w-full mr-4 p-4 flex h-40">
+    (<div className="w-full flex flex-row gap-4  border rounded-md p-2 mx-2 my-2">
       {contentToRender}
     </div>
 

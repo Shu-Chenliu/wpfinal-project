@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { usersToChatofSeller,usersToChatofBuyer,usersTable } from "@/db/schema";
+
 export const getAllChatOfSeller = async(userId:string) =>{
   "use server";
   const ChatOfSeller= await db.query.usersToChatofSeller.findMany({

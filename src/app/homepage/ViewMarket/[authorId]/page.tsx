@@ -2,9 +2,10 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
-import { ArrowLeft, Store } from 'lucide-react';
+import { Store } from 'lucide-react';
 import {getAllproductOfUser,getSellerInfo} from "./components/actions"
 import MyMarketProductButton from "./components/MyMarketProductButton";
+import Image from "next/image";
 type Props = {
   params: {
     authorId: string;
@@ -33,10 +34,16 @@ async function HomePage({params:{authorId}}: Props) {
         <div className="flex">
           <div className="block">
             {userInfo?.marketUrl ?(
-              <div className="flex">
-                <img
+              <div className="flex relative w-40 h-40">
+                {/* <img
                   src={userInfo?.marketUrl!}
                   className="w-40 h-40  border-2 my-2 my-2 "           
+                /> */}
+                <Image
+                  src={userInfo?.marketUrl}
+                  alt="market Photo"
+                  fill={true}
+                  className="object-contain"
                 />
               </div>
             ):(

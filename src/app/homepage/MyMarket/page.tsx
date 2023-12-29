@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 import {getAllProductsPostedByUser} from "./components/actions"
 import MyMarketProductButton from "./components/MyMarketProductButton";
+import MyMarketHint from "./components/MyMarketHint";
 async function HomePage() {
   const session = await auth();
   if (!session || !session?.user?.id) {
@@ -14,10 +15,9 @@ async function HomePage() {
   return (
 
     <div className="flex flex-col h-[90vh] w-full">
-      <div className="flex items-center justify-top ">
-        <p className="text-2xl m-2 p-2 font-semibold text-slate-700">
-          Welcome to My Market
-        </p>
+      <div className="flex justify-top ">
+        <p className=" text-2xl m-2 p-2 font-semibold text-slate-700">My Market</p>
+        <MyMarketHint/>
         <AddProductDialog userDisplayId={userDisplayId} />
       </div>
 

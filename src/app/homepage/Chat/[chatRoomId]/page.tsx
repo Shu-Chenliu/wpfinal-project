@@ -23,10 +23,10 @@ async function DocPage({params: {chatRoomId}}: DocPageProps) {
   const otherPeopleInfo=await getOtherPeopleInfo(otherPeople?otherPeople[0]:"");
   return (
     <div className="w-full">
-      <p className="font-bold py-2 mg-2 flex w-full justify-between p-2 shadow-sm px-2 py-1 border-b text-cyan-700">{otherPeople?otherPeople[0]:""}</p>
+      <p className="font-bold py-2 mg-2 flex justify-between p-2 shadow-sm px-2 py-1 border-b text-cyan-700">{otherPeople?otherPeople[0]:""}</p>
       <div 
         id="messages container"
-        className="h-[80vh] overflow-y-auto w-[110vh]">
+        className="h-[80vh] overflow-y-auto ">
         {messages.map((message) => (
           <div key={message.id} className="flex w-full justify-between p-2 ">
            <Message
@@ -41,10 +41,10 @@ async function DocPage({params: {chatRoomId}}: DocPageProps) {
       <InputBar 
         userId={userId} 
         chatRoomId={chatRoomId} 
-        isFirstMessage={isFirstMessage?.sendFirstMessage!}
+        isFirstMessage={isFirstMessage?.sendFirstMessage?isFirstMessage?.sendFirstMessage:true}
         isBuyer={otherPeople?otherPeople[1]==="seller":false}
-        marketMessage={otherPeopleInfo?.marketMessage!}
-        sellerId={otherPeopleInfo?.displayId!}
+        marketMessage={otherPeopleInfo?.marketMessage?otherPeopleInfo?.marketMessage:""}
+        sellerId={otherPeopleInfo?.displayId?otherPeopleInfo?.displayId:"null"}
       />
       
     </div>

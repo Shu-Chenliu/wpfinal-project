@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 import { getMyShoppingCart,getMyCoupon , getAddress }from "./components/actions"
 import { revalidatePath } from "next/cache";
+import ShoppingCartHint from "./components/ShoppingCartHint";
 
 
 async function ShoppingCartPage() {
@@ -24,7 +25,10 @@ async function ShoppingCartPage() {
   const address=await getAddress(userId);
   return (
     <div className="h-[100vh]">
-      <p className="flex font-semibold text-slate-900 text-2xl p-3">My Shopping Cart</p>
+      <div className="flex w-full">
+        <p className="text-2xl m-2 p-2 font-semibold text-slate-700">My ShoppingCart</p>
+          <ShoppingCartHint/>
+      </div>
       {Cart.map((product) =>(
         <div key={product.postId}>
           <CartProduct 
@@ -39,7 +43,8 @@ async function ShoppingCartPage() {
             left={product.posts.left} 
             coupons={Coupons}
             getCoupon={handleGetCoupon}
-            useraddress={address?.address!}
+            useraddress={address?.address?address?.address:""}
+            imageUrl={product.posts.imageUrl!}
           />
         </div>
       ))}

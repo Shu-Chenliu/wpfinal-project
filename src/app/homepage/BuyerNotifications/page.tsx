@@ -5,9 +5,8 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 import { getAllNotificationsOfBuyer } from "./components/actions";
-type Props = {
+import Hint from "./components/Hint";
 
-};
 async function NotificationPage() {
   const session = await auth();
   if (!session || !session?.user?.id) {
@@ -19,6 +18,10 @@ async function NotificationPage() {
   const notifications=await getAllNotificationsOfBuyer(username);
   return (
     <>
+      <div className="flex w-full border">
+          <p className="text-2xl m-2 p-2 font-semibold text-slate-700  w-1/2">Buying Notifications</p>
+          <Hint/>
+        </div>
       {notifications.map((notification)=>(
         <div key={notification.id}>
           <BuyerNotiBar
@@ -36,6 +39,7 @@ async function NotificationPage() {
             buyerNumber={notification.post.buyerNumber}
             category={notification.post.category}
             read={notification.readByBuyer}
+            imageUrl={notification.post.imageUrl!}
           />
         </div>
       ))}

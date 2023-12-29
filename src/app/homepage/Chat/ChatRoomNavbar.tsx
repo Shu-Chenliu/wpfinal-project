@@ -6,9 +6,7 @@ import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 import {getAllChatOfSeller,getAllChatOfBuyer}from "./components/actions";
 import {getUserState} from "./components/actions";
-type Props={
-  chatRoomState: string
-}
+
 async function ChatRoomNavbar() {
   const session = await auth();
   if (!session || !session?.user?.id) {
@@ -22,7 +20,7 @@ async function ChatRoomNavbar() {
   const userstate=await getUserState(userId);
   return (
     <nav className="flex  flex-col pb-10 no-scrollbar w-full">
-      <nav className="sticky top-0 flex flex-col items-center justify-between  bg-slate-800 pb-2 ">
+      <nav className="sticky w-full top-0 flex flex-col items-center justify-between  bg-slate-800 pb-2 ">
         <div className="flex w-full items-center justify-between px-3 py-1 ">
           <div className="flex items-center gap-2">
             {/* <RxAvatar  /> */}
@@ -33,7 +31,7 @@ async function ChatRoomNavbar() {
 
       </nav>
       
-      <section className="flex bg-slate-700  flex-col pt-3  justify-center item-center">
+      <section className="flex bg-slate-700 w-full flex-col pt-3  justify-center item-center">
       {userstate?.userChatRoomState==="market"?    
         (chatOfSeller.map((chat)=>(
           <div key={chat.chatRoomId.displayId}>

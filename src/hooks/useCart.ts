@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useRouter,useSearchParams } from "next/navigation";
+import { useRouter} from "next/navigation";
 
 export default function useCart() {
   const [loading, setLoading] = useState(false);

@@ -1,5 +1,4 @@
 import { db } from "@/db";
-import { posts,postsRelations,notifications } from "@/db/schema";
 export const getAllproductOfUser=async(authorId:string)=>{
   "use server";
   const products=await db.query.posts.findMany({

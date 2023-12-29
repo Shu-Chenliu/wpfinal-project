@@ -3,13 +3,13 @@ import AuthForm from "../_components/AuthForm";
 import { PlugZap   } from 'lucide-react';
 
 
-const Title = () => {
+function Title () {
 
   return (
 
-    <div className="relative h-[100vh] bg-slate-900 font-bold text-4xl flex justify-center">
+    <div className="relative h-[100vh] bg-slate-900 text-4xl flex justify-center">
       <div className="relative flex flex-col items-center text-slate text-lg">
-        <div className={`font-serif my-16 w-full ${styles.text}`} style={{ height: '100px', display: 'flex', alignItems: 'center', marginTop: '50px' }}>
+        <div className={`font-serif my-16 w-full font-bold ${styles.text}`} style={{ height: '100px', display: 'flex', alignItems: 'center', marginTop: '50px' }}>
           <PlugZap className="text-yellow-500  " size={80}/>shopEE
         </div>
         <AuthForm />

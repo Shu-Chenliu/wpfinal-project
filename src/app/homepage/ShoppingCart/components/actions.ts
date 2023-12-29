@@ -14,6 +14,7 @@ export const getMyShoppingCart = async(userId:string) => {
           price:true,
           left:true,
           likes:true,
+          imageUrl:true,
         },
         with:{
           author:{

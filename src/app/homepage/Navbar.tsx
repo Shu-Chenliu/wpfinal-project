@@ -16,7 +16,7 @@ async function Navbar() {
   const unreadNotificationOfBuyer=await getUnreadNotificationsOfBuyer(username);
   const shoppingCart=await getShoppingCart(userId);
   return (
-    <nav className="flex w-full flex-col bg-slate-100 pb-10 bg-slate-900">
+    <nav className="flex w-full  flex-col bg-slate-100 pb-10 bg-slate-900">
       <nav className="sticky top-0 flex flex-col items-center justify-between bg-slate-800 pb-2 ">
         <div className="flex w-full items-center justify-between px-3 py-1">
           <div className="flex items-center gap-2">

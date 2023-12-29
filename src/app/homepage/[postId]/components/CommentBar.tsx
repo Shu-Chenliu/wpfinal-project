@@ -1,8 +1,5 @@
-import Link from "next/link";
+
 import { Star, StarHalf } from "lucide-react";
-
-import { MessageCircle } from "lucide-react";
-
 
 type CommentBarProps = {
   text:string,

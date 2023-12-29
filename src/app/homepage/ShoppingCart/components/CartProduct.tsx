@@ -1,10 +1,10 @@
 // import { useRef, useState } from "react";
 "use client";
 import { Button } from "@/components/ui/button";
-import { useRouter } from "next/navigation";
 import BuyNowDialog from "./BuyNowDialog";
 import { Trash2 } from 'lucide-react';
 import useCart from "@/hooks/useCart";
+import Image from "next/image";
 export type CartProductProps = {
   id: number;
   displayId:string;
@@ -18,10 +18,11 @@ export type CartProductProps = {
   coupons:{id:number,percent:number}[],
   getCoupon:()=>void,
   useraddress: string,
+  imageUrl:string
 };
 
 export default function CartProduct(
-  {id, displayId,title, category, price,username,seller,left,userId,coupons,getCoupon, useraddress}:CartProductProps
+  {displayId,title, category, price,username,seller,left,userId,coupons,getCoupon, useraddress,imageUrl}:CartProductProps
   ) {
   // const [open, setOpen] = useState(false);
   
@@ -29,9 +30,6 @@ export default function CartProduct(
   //   setOpen(true);
   // };
  
-  const viewProduct=()=>{
-    // router.push(`/homepage/${displayId}`);
-  }
   const {deleteCart}=useCart();
   const handleDelete=async()=>{
     await deleteCart({
@@ -41,29 +39,39 @@ export default function CartProduct(
   }
   
   let imageSrc;
+  if(!imageUrl){
   switch (category) {
     case "Clothing":
-      imageSrc = "../../Clothing.jpg";
+      imageSrc = "/../../Clothing.jpg";
       break;
     case "Food":
-      imageSrc = "../../Food.jpg";
+      imageSrc = "/../../Food.jpg";
       break;
     case "Electronics":
-      imageSrc = "../../Electronics.jpg";
+      imageSrc = "/../../Electronics.jpg";
       break;
     case "EE related":
-      imageSrc = "../../EE_related.jpg";
+      imageSrc = "/../../EE_related.jpg";
       break;
     case "Others":
-      imageSrc = "../../Others.jpg";
+      imageSrc = "/../../Others.jpg";
       break;
+  }}
+  else{
+    imageSrc = imageUrl;
   }
   return (
     <>
       <div className="w-full flex flex-row gap-4  border rounded-md p-2 mx-2 my-2" >
         <div className=" w-full mr-4 p-4 flex h-[1/4]">
-          <div>
-          <img src={imageSrc} alt="Product" className="w-48 h-auto" />
+          <div className="w-48 h-48 relative">
+            <Image
+              src={imageSrc!}
+              alt="Product"
+              fill={true}
+              className="object-contain"
+            />
+            {/* <img src={imageSrc} alt="Product" className="w-48 h-auto" /> */}
           </div>
 
           <div className="px-4">
@@ -86,11 +94,12 @@ export default function CartProduct(
               useraddress={useraddress}
             />
           </div>
-          <Button
+
+            <Trash2 
+            
             onClick={handleDelete}
-          >
-            <Trash2 />
-          </Button>
+            />
+
         </div>
       </div>
     </>

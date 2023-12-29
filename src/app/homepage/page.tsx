@@ -1,6 +1,5 @@
-import { BiError } from "react-icons/bi";
+
 import ProductButton from "./ProductButton";
-import { auth } from "@/lib/auth";
 import {getAllProducts} from "./actions"
 async function HomePage() {
   const Products=await getAllProducts();

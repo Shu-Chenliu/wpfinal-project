@@ -1,5 +1,4 @@
 import { db } from "@/db";
-import { posts,postsRelations,notifications } from "@/db/schema";
 export const getAllProducts = async() =>{
   "use server";
   const Products= await db.query.posts.findMany({
@@ -40,7 +39,7 @@ export const getUnreadNotificationsOfBuyer = async(userId:string) =>{
 export const getShoppingCart=async(userId:string)=>{
   "use server";
   const shoppingCart=await db.query.usersToCart.findMany({
-    where:(usersToCart, { eq,and }) => eq(usersToCart.userId,userId),
+    where:(usersToCart, { eq}) => eq(usersToCart.userId,userId),
   });
   return shoppingCart;
 }

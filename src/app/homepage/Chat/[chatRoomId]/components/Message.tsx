@@ -1,18 +1,6 @@
 "use client";
-
-
 import React from "react";
-import { useState } from "react";
 import { Ghost } from "lucide-react";
-
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-
 
 type MessageProps = {
   id: number;
@@ -21,7 +9,6 @@ type MessageProps = {
 };
 
 export default function Message({
-  id,
   isSender,
   content,
 }: MessageProps) {

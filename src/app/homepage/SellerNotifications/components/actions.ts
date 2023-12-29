@@ -1,6 +1,4 @@
 import { db } from "@/db";
-import { notifications } from "@/db/schema";
-import { eq } from 'drizzle-orm';
 export const getAllNotificationsOfSeller = async(username:string) =>{
   "use server";
   const notification= await db.query.notifications.findMany({
@@ -25,6 +23,7 @@ export const getAllNotificationsOfSeller = async(username:string) =>{
           likes:true,
           buyerNumber:true,
           category:true,
+          imageUrl:true,
         }
       }
     }

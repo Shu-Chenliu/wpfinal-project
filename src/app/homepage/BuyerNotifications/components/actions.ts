@@ -1,5 +1,4 @@
 import { db } from "@/db";
-import { notifications } from "@/db/schema";
 export const getAllNotificationsOfBuyer = async(username:string) =>{
   "use server";
   const notifications= await db.query.notifications.findMany({
@@ -25,6 +24,7 @@ export const getAllNotificationsOfBuyer = async(username:string) =>{
           likes:true,
           buyerNumber:true,
           category:true,
+          imageUrl:true,
         }
       }
     }

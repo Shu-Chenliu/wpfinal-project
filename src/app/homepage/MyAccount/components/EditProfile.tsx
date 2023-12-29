@@ -4,8 +4,9 @@ import { useState } from "react";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Input from "@mui/material/Input";
 import Typography from "@mui/material/Typography";
-import { Pencil } from 'lucide-react';
+import { Pencil , Lightbulb } from 'lucide-react';
 import useUsers from "@/hooks/userUsers";
+
 
 
 // this pattern is called discriminated type unions
@@ -51,6 +52,8 @@ export default function EditProfile(props: CardDialogProps) {
   const [edittingMarketAddress, setEdittingMarketAddress] = useState(variant === "new");
   const [edittingMarketDescription, setEdittingMarketDescription] = useState(variant === "new");
   const [edittingMarketMessage, setEdittingMarketMessage] = useState(variant === "new");
+
+  const [showHint, setShowHint] = useState(false);
 
   // using a state variable to store the value of the input, and update it on change is another way to get the value of a input
   // however, this method is not recommended for large forms, as it will cause a re-render on every change
@@ -310,9 +313,13 @@ export default function EditProfile(props: CardDialogProps) {
         
         <br /><br />
         </div>
-        <p className="text-slate-500 text-sm ml-3">If you did not set your market name, we will deafault which as your username. </p>
-        <p className="text-slate-500 text-sm ml-3"> The default message you set will be send to buyers when the chatroom is created.</p>
-
+        <Lightbulb onClick={()=>{setShowHint(!showHint);}} className="ml-auto" size={20}/>
+          {showHint &&
+          <>
+            <p className="text-slate-500 text-sm ml-3">If you did not set your market name, we will deafault which as your username. </p>
+            <p className="text-slate-500 text-sm ml-3"> The default message you set will be send to buyers when the chatroom is created.</p>
+          </>
+          }
       </div>
       
       

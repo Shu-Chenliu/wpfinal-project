@@ -1,13 +1,10 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-import { and, eq } from "drizzle-orm";
-import Pusher from "pusher";
+import {eq } from "drizzle-orm";
 
 import { db } from "@/db";
 import { coupons} from "@/db/schema";
-import { auth } from "@/lib/auth";
-import { privateEnv } from "@/lib/env/private";
-import { publicEnv } from "@/lib/env/public";
+
 
 import { z } from "zod";
 const postCouponSchema = z.object({

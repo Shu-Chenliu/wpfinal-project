@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from "next/server";
 import { and, eq } from "drizzle-orm";
 
 import { db } from "@/db";
-import { usersToChatofSeller,usersToChatofBuyer, usersToChatofBuyerRelations } from "@/db/schema";
+import { usersToChatofSeller,usersToChatofBuyer} from "@/db/schema";
 import { auth } from "@/lib/auth";
 import { pusherServer } from "@/lib/pusher/server";
 

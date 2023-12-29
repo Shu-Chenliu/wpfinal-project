@@ -1,5 +1,5 @@
 import { db } from "@/db";
-import { usersTable,posts,postsRelations,usersToCart,comments,chatRoom,usersToChatofSeller,usersToChatofBuyer} from "@/db/schema";
+import { usersToCart,chatRoom,usersToChatofSeller,usersToChatofBuyer} from "@/db/schema";
 
 export const getProduct=async (postId:string)=>{
   const Product=await db.query.posts.findFirst({
@@ -12,6 +12,7 @@ export const getProduct=async (postId:string)=>{
       left:true,
       sold:true,
       likes:true,
+      imageUrl:true,
     },
     with:{
       author:{

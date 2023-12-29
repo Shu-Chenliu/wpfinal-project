@@ -5,6 +5,8 @@ import { useState } from "react";
 import Image from "next/image";
 import useNotifications from "@/hooks/useNotifications";
 import usePosts from "@/hooks/usePosts";
+import { useToast } from "@/components/ui/use-toast";
+
 type SellerNotiBarProps = {
   id:number,
   text:string,
@@ -30,6 +32,8 @@ export default function SellerNotiBar({
   const [openNewCheckDialog, setOpenNewCheckDialog] = useState(false);
   const {updateNotification}=useNotifications();
   const {updateProduct}=usePosts();
+  const { toast } = useToast();
+
   const handleCheckOrder = async()=>{
     await updateProduct({
       id:postId,
@@ -43,7 +47,16 @@ export default function SellerNotiBar({
       readBySeller:true,
     });
 
+    if(left-number===0){ 
+      toast({
+        variant:"destructive",
+        title: "No Product Left!",
+        description: "Please restock your product! (go to my market to edit your product number)",
+      })
+    }
+
     setOpenNewCheckDialog(false);
+    
   }
   let imageSrc;
   if(!imageUrl){
@@ -105,6 +118,7 @@ export default function SellerNotiBar({
     </>
 
   );
+  
 
   return (
     <>

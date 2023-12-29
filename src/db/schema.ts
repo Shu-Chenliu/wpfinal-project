@@ -148,6 +148,7 @@ export const notifications = pgTable('notifications', {
   received:boolean('received').notNull().default(false),
   readBySeller:boolean('readBySeller').notNull().default(false),
   readByBuyer:boolean('readByBuyer').notNull().default(false),
+  commented:boolean('commented').notNull().default(false),
 });
 export const notificationsRelations = relations(notifications, ({ one }) => ({
   post: one(posts, {

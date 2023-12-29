@@ -4,6 +4,7 @@ import { useState,useRef } from "react";
 import { Star } from "lucide-react";
 import  usePost from "@/hooks/usePosts";
 import useComments from "@/hooks/useComments";
+import useNotification from "@/hooks/useNotifications";
 type ConfirmDialogProps={
   open: boolean,
   onClose: ()=>void,
@@ -16,11 +17,12 @@ type ConfirmDialogProps={
   username: string,
   buyerNumber: number,
 }
-export default function ConfirmDialog({open,onClose,postId,likes,username,buyerNumber}:ConfirmDialogProps){
+export default function ConfirmDialog({open,onClose,id,postId,likes,username,buyerNumber}:ConfirmDialogProps){
   const inputRefProductComment = useRef<HTMLTextAreaElement>(null);
   const [liked,setLiked]=useState(0);
   const {updateProduct}=usePost();
   const {postComment}=useComments();
+  const {updateNotification}=useNotification();
   const handleAddComment = async()=>{
     await updateProduct({
       id:postId,
@@ -32,6 +34,10 @@ export default function ConfirmDialog({open,onClose,postId,likes,username,buyerN
       postId,
       stars:liked,
     })
+    await updateNotification({
+      id,
+      commented:true,
+    });
     onClose();
   }
   return(

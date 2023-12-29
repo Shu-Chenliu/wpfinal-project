@@ -96,7 +96,6 @@ export default function CartProduct(
           </div>
 
             <Trash2 
-            
             onClick={handleDelete}
             />
 

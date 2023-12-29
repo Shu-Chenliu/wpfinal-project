@@ -1,7 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { MessagesSquare } from "lucide-react";
-import useMessages from "@/hooks/useMessage";
 type AddChatRoomButtonProps = {
   userId:string,
   seller:string,
@@ -13,7 +12,6 @@ type AddChatRoomButtonProps = {
 export default function AddChatRoomButton({
   userId,seller,addChatRoom
 }: AddChatRoomButtonProps) {
-  const {postMessage} = useMessages();
   const handleAddChatRoom =async()=>{
     addChatRoom(userId,seller);
   }

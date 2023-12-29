@@ -56,7 +56,8 @@ function AddProductDialog({userDisplayId}:Props) {
     const price=parseInt(inputRefProductPrice.current.value);
     const left =parseInt(inputRefProductNumber.current.value);
     if(!imageRef.current)return;
-    if(!imageRef.current.files){
+    if(!imageRef.current.files)return;
+    if(imageRef.current.files.length===0){
       await postProduct({
         title:title,
         description:description,
@@ -70,6 +71,7 @@ function AddProductDialog({userDisplayId}:Props) {
       const reader = new FileReader();
       let imageSrc="";
       console.log("image");
+      console.log(imageRef.current.files);
       try {
         if (imageRef.current.files[0].size/1024 > 70) {
           // alert("Image size must be less than 70KB");

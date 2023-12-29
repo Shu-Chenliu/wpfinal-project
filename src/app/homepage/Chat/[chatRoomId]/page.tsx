@@ -20,9 +20,7 @@ async function DocPage({params: {chatRoomId}}: DocPageProps) {
   const messages=await getMessages(chatRoomId);
   const otherPeople=await getOtherPeople(username,chatRoomId);
   const isFirstMessage=await getChatRoom(chatRoomId);
-  console.log(isFirstMessage);
   const otherPeopleInfo=await getOtherPeopleInfo(otherPeople?otherPeople[0]:"");
-  console.log(otherPeopleInfo);
   return (
     <div className="w-full">
       <p className="font-bold py-2 mg-2 flex w-full justify-between p-2 shadow-sm px-2 py-1 border-b text-cyan-700">{otherPeople?otherPeople[0]:""}</p>

@@ -24,7 +24,7 @@ function InputBar({userId,chatRoomId,isFirstMessage,isBuyer,marketMessage,seller
       if((!isFirstMessage)&&isBuyer){
         await updateChatroom({
           id:chatRoomId,
-          isFirstMessage:false,
+          isFirstMessage:true,
         });
         await postMessage({
           text:marketMessage,

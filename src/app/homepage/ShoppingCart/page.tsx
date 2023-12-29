@@ -5,6 +5,7 @@ import { publicEnv } from "@/lib/env/public";
 import { getMyShoppingCart,getMyCoupon , getAddress }from "./components/actions"
 import { revalidatePath } from "next/cache";
 import ShoppingCartHint from "./components/ShoppingCartHint";
+import { ShoppingCart } from "lucide-react";
 
 
 async function ShoppingCartPage() {
@@ -25,9 +26,11 @@ async function ShoppingCartPage() {
   const address=await getAddress(userId);
   return (
     <div className="h-[100vh]">
-      <div className="flex w-full">
-        <p className="text-2xl m-2 p-2 font-semibold text-slate-700">My ShoppingCart</p>
-          <ShoppingCartHint/>
+      
+      <div className="flex items-center justify-top text-3xl m-2 p-2  text-yellow-500 hover:text-yellow-600 ">
+        <ShoppingCart size={32}/>
+        <p className="text-2xl m-2  font-bold text-yellow-500 hover:text-yellow-600">My Shopping Cart</p>
+        <ShoppingCartHint/>
       </div>
       {Cart.map((product) =>(
         <div key={product.postId}>

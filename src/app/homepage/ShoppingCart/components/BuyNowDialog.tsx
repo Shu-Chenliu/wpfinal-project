@@ -90,6 +90,15 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
       })
       return;
     }
+    if(Math.round(totalPrice*(100-finalSelectedCoupon)/100)>2**31-1){
+      // alert("you buy too many");
+      toast({
+        variant: "destructive",
+        title: " Fail to Buy Product",
+        description: "You don't have so much money.",
+      })
+      return;
+    }
     await postNotification({
       text:title,
       buyer:username,
@@ -138,13 +147,14 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
         style={{ width: "500px" }}
       >
         <DialogHeader>
-          <DialogTitle>View My Order</DialogTitle>
-          <DialogDescription>Place your order now. </DialogDescription>
+          <DialogTitle className="text-yellow-500">View My Order</DialogTitle>
+          <DialogDescription >Place your order now. </DialogDescription>
         </DialogHeader>
 
         <div className="flex w-full flex-col gap-1">
         <div className="flex items-center">
-          <p className="flex w-full font-semibold text-slate-900 text-2xl"> {title}</p>
+          <p className="flex w-full font-semibold text-slate-900">Your order</p>
+          <p className="mr-2 ml-auto flex font-semibold text-yellow-500 text-2xl"> {title}</p>
         </div>
         <div className="flex items-center">
 
@@ -157,7 +167,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
 
         </div>
         <div className="flex items-center">
-            <p className="flex w-full font-semibold text-slate-900 " >Price (for each): </p>
+            <p className="flex w-full font-semibold text-slate-900 " >Price (for each) </p>
             <p>{money}</p>
         </div>
 
@@ -216,7 +226,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
         </Button>
 
         <Button 
-          className="flex font-semibold hover:bg-orange-700 hover:text-black "
+          className="flex font-semibold hover:bg-yellow-500 hover:text-black "
           // onClick={handleBuy}
           onClick={()=>{setShowPlaceOrderDialog(true)}}
         >
@@ -238,7 +248,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
             onClick={async() => {setShowPlaceOrderDialog(false)}} 
           >Close</Button>
           <Button
-            className="flex font-semibold hover:bg-orange-700 hover:text-black "
+            className="flex font-semibold hover:bg-yellow-500 hover:text-black "
             onClick={handleBuy} 
           >Confirm</Button>
         </div>
@@ -313,7 +323,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
               onChange={handleCancelSelection}
               checked={selectedCoupon === 0}
             />
-            <span className="text-slate-900 m-4">Cancel selection</span>
+            <span className="text-slate-900 m-4">Clear all</span>
           </>
         )}
 
@@ -338,14 +348,14 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
 
           {uniqueCoupons.length!==0&&
           <Button
-            className="flex font-semibold hover:bg-orange-700 hover:text-black "
+            className="flex font-semibold hover:bg-yellow-500 hover:text-slate-700 "
             onClick={() => {handleCouponSelect()}} 
           >Select</Button>         
           }
 
           {uniqueCoupons.length===0&&
           <Button
-            className="flex font-semibold hover:bg-orange-700 hover:text-black "
+            className="flex font-semibold hover:bg-yellow-500 hover:text-slate-700 "
             onClick={getCoupon} 
           >Get Coupon</Button>         
           }

@@ -8,6 +8,7 @@ import EditProfile from "./components/EditProfile";
 import AddImageButton from "./components/AddImageButton";
 import Link from "next/link";
 import Image from "next/image";
+import {UserRound} from "lucide-react"
 async function HomePage() {
   const session = await auth();
 
@@ -21,9 +22,18 @@ async function HomePage() {
   return (
     <div className="block h-[90vh] w-full p-3">
       
-      <h1 className="text-2xl font-semibold text-slate-700 hover:text-slate-500">
+      
+
+      <div className="flex items-center font-bold justify-top text-3xl m-2 p-2  text-yellow-500 hover:text-yellow-600 ">
+        <UserRound size={32}/>
+        <h1 className="ml-2 text-3xl font-bold text-yellow-500 hover:text-yellow-600">
           My Profile
       </h1>
+
+  
+      </div>
+
+      
       <br />
       <div className="flex flex-row max-[1000px]:flex-col items-start justify-top">
 
@@ -82,7 +92,7 @@ async function HomePage() {
       
       <div className="block ">
         <Link href={"/homepage/MyMarket"}>
-          <p className="text-xl font-semibold text-slate-700 hover:text-orange-500">My Market</p>
+          <p className="text-xl font-semibold text-slate-700 hover:text-cyan-500">My Market</p>
         </Link>
         <br />
         <div className="flex flex-row max-[1000px]:flex-col items-start justify-top">

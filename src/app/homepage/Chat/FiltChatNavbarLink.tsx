@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { UserRound } from 'lucide-react';
 import { useState } from "react";
-
+import { Button } from "@/components/ui/button";
 import { Store } from 'lucide-react';
 import useUser from "@/hooks/userUsers";
 type Props={
@@ -27,22 +27,22 @@ function FiltChatNavbarLink({userstate,userId,sellerUnread,buyerUnread}:Props) {
       <section className="flex  flex-col pt-3 ">
 
           <Link href={"/homepage/Chat"}>
-            {/* <Button
-            className={`flex my-2 bg-slate-800 hover:bg-slate-800 hover:text-orange-500 m-2 ${nowPage === "personal" ? 'text-orange-500' : ''}`}
+            <Button
+            className={`flex my-2 bg-slate-800 hover:bg-slate-800 hover:text-orange-500  ${nowPage === "personal" ? 'text-orange-500' : ''}`}
             onClick={() => handleChangeNowPage("personal")}
-            > */}
-                <UserRound className={`flex bg-slate-800 text-slate-100 hover:bg-slate-800 hover:text-orange-500 m-4 ${nowPage === "personal" ? 'text-orange-500' : ''}`}
-            onClick={() => handleChangeNowPage("personal")} />
+            >
+                <UserRound/>
             <span className=" text-orange-500 hover:text-orange-500  m-2 px-1  rounded-full">{buyerUnread}</span>
-            {/* </Button> */}
+            </Button>
           </Link> 
 
           <Link href={"/homepage/Chat"}>
-            
-              <Store 
-              className={`flex bg-slate-800 text-slate-100 hover:bg-slate-800 hover:text-orange-500 m-4 ${nowPage === "market" ? 'text-orange-500' : ''}`}
-            onClick={() => handleChangeNowPage("market")}   /> 
+            <Button className={`flex bg-slate-800 text-slate-100 hover:bg-slate-800 hover:text-orange-500 ${nowPage === "market" ? 'text-orange-500' : ''}`}
+            onClick={() => handleChangeNowPage("market")}>
+
+            <Store /> 
               <span className=" text-orange-500 hover:text-orange-500  m-2 px-1  rounded-full">{sellerUnread}</span>
+            </Button>
           </Link>
           
       </section>

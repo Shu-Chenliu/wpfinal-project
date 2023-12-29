@@ -17,8 +17,9 @@ type ConfirmDialogProps={
   userId: string,
   username: string,
   buyerNumber: number,
+  title: string,
 }
-export default function ConfirmDialog({open,onClose,id,postId,likes,username,buyerNumber}:ConfirmDialogProps){
+export default function ConfirmDialog({open,onClose,id,postId,likes,username,buyerNumber, title}:ConfirmDialogProps){
   const inputRefProductComment = useRef<HTMLTextAreaElement>(null);
   const [liked,setLiked]=useState(0);
   const {updateProduct}=usePost();
@@ -58,13 +59,13 @@ export default function ConfirmDialog({open,onClose,id,postId,likes,username,buy
         style={{ width: "500px" }}
       >
         <DialogHeader>
-          <DialogTitle>Comment Product (optional)</DialogTitle>
+          <DialogTitle className="text-yellow-500 text-xl ">Comment Product* (optional)</DialogTitle>
           <DialogDescription>Woud you like to leave a comment?</DialogDescription>
         </DialogHeader>
         <div className="flex w-full flex-col gap-1">
         <div className="flex items-center">
           <p className="flex w-full font-semibold text-slate-900">
-            What you've bought: {"title"}
+            What you've bought: {title}
           </p>
         </div>
 
@@ -107,7 +108,7 @@ export default function ConfirmDialog({open,onClose,id,postId,likes,username,buy
         </Button>
         <Link href={`/homepage/${postId}`}>
           <Button
-            className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
+            className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-yellow-500 mx-2 hover:text-slate-900"
             onClick={handleAddComment}
           >
             Comment

@@ -34,7 +34,6 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength,unread}:NavbarL
   return (
     <>
           <Link href={"/homepage"}>
-
             <Button
             className={`my-2 hover:text-orange-500 m-2 ${nowPage === "View All products" ? 'text-orange-500' : ''}`}
             onClick={() => handleChangeNowPage("View All products")}
@@ -53,25 +52,13 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength,unread}:NavbarL
             </Button>
           </Link>
 
-          <Link href={"/homepage/MyMarket"}>
+          <Link href={"/homepage/getCoupon"}>
             <Button
-            className={`my-2 hover:text-orange-500 m-2 ${nowPage === "My market" ? 'text-orange-500' : ''}`}
-            onClick={() => {handleChangeNowPage("My market")}}
-            >
-              <Store className="m-2" /> <span className="max-[1000px]:hidden">My market</span>
-            </Button>
-          </Link>
-
-          <Link href={"/homepage/SellerNotifications"}>
-            <Button
-            className={`my-2 hover:text-orange-500 m-2 ${nowPage === "Market Notifications" ? 'text-orange-500' : ''}`}
-            onClick={() => {handleChangeNowPage("Market Notifications")}}
-
-            ><BellPlus className="m-2" /> <span className="max-[1000px]:hidden">Market Notifications</span>
-            <span className=" text-orange-500 hover:text-orange-500  m-2 px-1  rounded-full">{sellerUnread}</span>
-            </Button>
-          </Link>
-        
+            className={`my-2 hover:text-orange-500 m-2 ${nowPage === "Get Coupon" ? 'text-orange-500' : ''}`}
+            onClick={() => {handleChangeNowPage("Get Coupon")}}
+            ><Ticket className="m-2"/><span className="max-[1000px]:hidden">Get Coupon</span>
+              </Button>
+          </Link> 
 
           <Link href={"/homepage/BuyerNotifications"}>
             <Button
@@ -82,13 +69,26 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength,unread}:NavbarL
             </Button>
           </Link>
 
-          <Link href={"/homepage/getCoupon"}>
+          
+
+          <Link href={"/homepage/MyMarket"}>
             <Button
-            className={`my-2 hover:text-orange-500 m-2 ${nowPage === "Get Coupon" ? 'text-orange-500' : ''}`}
-            onClick={() => {handleChangeNowPage("Get Coupon")}}
-            ><Ticket className="m-2"/><span className="max-[1000px]:hidden">Get Coupon</span>
-              </Button>
-          </Link> 
+            className={`my-2 hover:text-cyan-500 m-2 ${nowPage === "My market" ? 'text-cyan-500' : ''}`}
+            onClick={() => {handleChangeNowPage("My market")}}
+            >
+              <Store className="m-2" /> <span className="max-[1000px]:hidden">My market</span>
+            </Button>
+          </Link>
+
+          <Link href={"/homepage/SellerNotifications"}>
+            <Button
+            className={`my-2 hover:text-cyan-500 m-2 ${nowPage === "Market Notifications" ? 'text-cyan-500' : ''}`}
+            onClick={() => {handleChangeNowPage("Market Notifications")}}
+
+            ><BellPlus className="m-2" /> <span className="max-[1000px]:hidden">Market Notifications</span>
+            <span className=" text-orange-500 hover:text-cyan-500  m-2 px-1  rounded-full">{sellerUnread}</span>
+            </Button>
+          </Link>
 
           <Link href={"/homepage/Chat"}>
             <Button

@@ -7,6 +7,7 @@ import { revalidatePath } from "next/cache";
 import { publicEnv } from "@/lib/env/public";
 import { getAllNotificationsOfBuyer } from "./components/actions";
 import Hint from "./components/Hint";
+import { BellRing } from "lucide-react";
 
 async function NotificationPage() {
   const session = await auth();
@@ -24,10 +25,17 @@ async function NotificationPage() {
   }
   return (
     <>
-      <div className="flex w-full border">
-          <p className="text-2xl m-2 p-2 font-semibold text-slate-700  w-1/2">Buying Notifications</p>
-          <Hint/>
-        </div>
+    
+
+      <div className="flex items-center justify-top text-3xl m-2 p-2  text-yellow-500 hover:text-yellow-600 ">
+        <BellRing size={32}/>
+        <p className="text-2xl m-2  font-bold text-yellow-500 hover:text-yellow-600">Buying Notifications</p>
+        <Hint/>
+      </div>
+
+      
+
+
       {notifications.map((notification)=>(
         <div key={notification.id}>
           <BuyerNotiBar

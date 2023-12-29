@@ -5,6 +5,7 @@ import { publicEnv } from "@/lib/env/public";
 import { Store } from 'lucide-react';
 import {getAllproductOfUser,getSellerInfo} from "./components/actions"
 import MyMarketProductButton from "./components/MyMarketProductButton";
+import ProductButton from "../../ProductButton";
 import Image from "next/image";
 type Props = {
   params: {
@@ -72,7 +73,7 @@ async function HomePage({params:{authorId}}: Props) {
 
       <div className="ml-8 flex flex-wrap gap-4 ">
         {ProductsPostedByUser.map((product) => (
-          <MyMarketProductButton
+          <ProductButton
             key={product.id}
             id={product.id}
             displayId={product.displayId}

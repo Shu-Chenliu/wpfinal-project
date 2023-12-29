@@ -4,6 +4,10 @@ import BuyNowDialog from "./BuyNowDialog";
 import { Trash2 } from 'lucide-react';
 import useCart from "@/hooks/useCart";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Dialog , DialogContent } from "@/components/ui/dialog";
+import { useState } from "react";
+
 export type CartProductProps = {
   id: number;
   displayId:string;
@@ -23,11 +27,9 @@ export type CartProductProps = {
 export default function CartProduct(
   {displayId,title, category, price,username,seller,left,userId,coupons,getCoupon, useraddress,imageUrl}:CartProductProps
   ) {
-  // const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   
-  // const handleClickOpen = () => {
-  //   setOpen(true);
-  // };
+  
  
   const {deleteCart}=useCart();
   const handleDelete=async()=>{
@@ -41,19 +43,19 @@ export default function CartProduct(
   if(!imageUrl){
   switch (category) {
     case "Clothing":
-      imageSrc = "/../../Clothing.jpg";
+      imageSrc = "/Clothing.jpg";
       break;
     case "Food":
-      imageSrc = "/../../Food.jpg";
+      imageSrc = "/Food.jpg";
       break;
     case "Electronics":
-      imageSrc = "/../../Electronics.jpg";
+      imageSrc = "/Electronics.jpg";
       break;
     case "EE related":
-      imageSrc = "/../../EE_related.jpg";
+      imageSrc = "/EE_related.jpg";
       break;
     case "Others":
-      imageSrc = "/../../Others.jpg";
+      imageSrc = "/Others.jpg";
       break;
   }}
   else{
@@ -94,9 +96,34 @@ export default function CartProduct(
             />
           </div>
 
-            <Trash2 
-            onClick={handleDelete}
-            />
+          <Trash2 className="my-2 hover:text-yellow-500 m-2" onClick={()=>{setOpen(true)}}/>
+            <Dialog open={open}>
+            <DialogContent>
+              <p className="font-semibold text-lg">Do you want to remove this item? </p>
+              <div className="flex w-full justify-end ">
+                <Button
+                  className="text-sm font-semibold text-slate-900 border bg-slate-200 hover:bg-slate-100 mx-2"
+                  onClick={() => setOpen(false)}
+                >
+                  Close
+                </Button>
+                
+                
+                  <Button
+                    // variant={"ghost"}
+                    type={"submit"}
+                    className="bg-slate-800 text-slate-100 hover:text-orange-500"
+                    onClick={handleDelete}
+                  >
+                    <Trash2 className="m-2"/>
+                    Delete
+                  </Button>
+                
+
+              </div>
+              
+            </DialogContent>
+          </Dialog>
 
         </div>
       </div>

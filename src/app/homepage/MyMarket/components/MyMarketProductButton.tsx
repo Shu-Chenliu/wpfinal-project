@@ -36,19 +36,19 @@ export default function MyMarketProductButton({ displayId,title, category, price
   if(!imageUrl){
     switch (category) {
       case "Clothing":
-        imageSrc = "/../../Clothing.jpg";
+        imageSrc = "/Clothing.jpg";
         break;
       case "Food":
-        imageSrc = "/../../Food.jpg";
+        imageSrc = "/Food.jpg";
         break;
       case "Electronics":
-        imageSrc = "/../../Electronics.jpg";
+        imageSrc = "/Electronics.jpg";
         break;
       case "EE related":
-        imageSrc = "/../../EE_related.jpg";
+        imageSrc = "/EE_related.jpg";
         break;
       case "Others":
-        imageSrc = "/../../Others.jpg";
+        imageSrc = "/Others.jpg";
         break;
     }
   }
@@ -69,7 +69,7 @@ export default function MyMarketProductButton({ displayId,title, category, price
                 {left>0&&<Trash2 onClick={handleDeletePost}/>}
               </div> */}
               <div className="flex items-center justify-center w-60 h-20">
-                <p className="flex-grow text-2xl font-semibold text-yellow-500" > {title} </p>
+                <p className="flex-grow text-2xl font-semibold text-cyan-500" > {title} </p>
 
                 {/* {left === 0 && <p className="ml-auto font-bold flex text-4xl text-red-700" > Sold out!!! </p>} */}
 
@@ -93,7 +93,14 @@ export default function MyMarketProductButton({ displayId,title, category, price
             <div className="flex flex-col gap-4 w-full">
             <p className="flex w-full font-semibold text-slate-900" > Category: {category}</p>
             <p className="flex w-full font-semibold text-slate-900" >Price: {price}</p>
-            <p className="flex w-full font-semibold text-slate-900" >left: {left}</p>
+            {left<=0 && (
+              <p className="flex w-full font-semibold text-red-500" >left: {left}</p>
+            )
+            }
+            {left>0 && (
+            <p className="flex w-full font-semibold text-slate-900 " >left: {left}</p>
+            )
+            }
 
             <div className="flex">
               <button className="flex">
@@ -142,7 +149,7 @@ export default function MyMarketProductButton({ displayId,title, category, price
                 )}
               </button>
             </div>
-            <Button className="font-bold bg-slate-800  hover:bg-yellow-500 hover:text-slate-800" onClick={viewProduct}>Show more</Button>
+            <Button className="font-bold bg-slate-800  hover:bg-cyan-500 hover:text-slate-800" onClick={viewProduct}>Show more</Button>
             
             </div>
           </div>

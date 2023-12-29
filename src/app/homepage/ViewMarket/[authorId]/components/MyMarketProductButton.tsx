@@ -32,19 +32,19 @@ export default function MyMarketProductButton({displayId,title, category, price,
   if(!imageUrl){
     switch (category) {
       case "Clothing":
-        imageSrc = "/../../Clothing.jpg";
+        imageSrc = "/Clothing.jpg";
         break;
       case "Food":
-        imageSrc = "/../../Food.jpg";
+        imageSrc = "/Food.jpg";
         break;
       case "Electronics":
-        imageSrc = "/../../Electronics.jpg";
+        imageSrc = "/Electronics.jpg";
         break;
       case "EE related":
-        imageSrc = "/../../EE_related.jpg";
+        imageSrc = "/EE_related.jpg";
         break;
       case "Others":
-        imageSrc = "/../../Others.jpg";
+        imageSrc = "/Others.jpg";
         break;
     }
   }
@@ -60,7 +60,7 @@ export default function MyMarketProductButton({displayId,title, category, price,
             {/* 標題 */}
             <div className={`flex gap-2 flex-col  rounded-md p-2 mx-2 my-2  ${left === 0 ? 'bg-slate-200' : ''}`} >
               <div className="flex">
-                <p className="flex text-2xl font-semibold text-yellow-500" > {title} </p>
+                <p className="flex text-2xl font-semibold text-cyan-500" > {title} </p>
                 {left === 0 && <p className="ml-auto font-bold flex text-4xl text-red-700" > Sold out!!! </p>}
 
               </div>
@@ -132,7 +132,7 @@ export default function MyMarketProductButton({displayId,title, category, price,
                 )}
               </button>
             </div>
-            <Button className="font-bold bg-slate-800  hover:bg-yellow-500 hover:text-slate-800" onClick={viewProduct}>Show more</Button>
+            <Button className="font-bold bg-slate-800  hover:bg-cyan-500 hover:text-slate-800" onClick={viewProduct}>Show more</Button>
             
             </div>
           </div>

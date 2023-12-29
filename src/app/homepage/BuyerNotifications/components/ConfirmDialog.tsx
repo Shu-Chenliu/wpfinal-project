@@ -46,13 +46,10 @@ export default function ConfirmDialog({open,onClose,id,postId,title,left,author,
         >
           <DialogHeader>
             <DialogTitle>Have you recieved your package? </DialogTitle>
-            {/* <DialogDescription>Have you recieved your package? </DialogDescription> */}
           </DialogHeader>
           <div className="flex w-full flex-col gap-1">
           <div className="flex items-center">
-            {/* <p className="flex w-full font-semibold text-slate-900"> Product Name:{"title"}</p>   
-            <p className="flex w-full font-semibold text-slate-900"> Product number:{"orderNumber"}</p>
-            <p className="flex w-full font-semibold text-slate-900"> Product Seller:{"seller"} </p> */}
+ 
             <p className="flex w-full  text-slate-900"> {author} has delivered {number} {title}(s) to {address}</p>
           </div>
           </div>
@@ -66,7 +63,6 @@ export default function ConfirmDialog({open,onClose,id,postId,title,left,author,
         </Button>
         <Button
           className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-red-400 mx-2 hover:text-slate-900"
-          // onClick={async() => {onClose();}} 
           onClick={handleHaventReceive}
         >
           Haven't Receive?
@@ -91,6 +87,7 @@ export default function ConfirmDialog({open,onClose,id,postId,title,left,author,
         userId={userId}
         username={username}
         buyerNumber={buyerNumber}
+        title={title}
       />
       <ImpossibleDialog 
         open={openImpossibleDialog} 

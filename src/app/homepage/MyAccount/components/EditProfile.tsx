@@ -313,7 +313,7 @@ export default function EditProfile(props: CardDialogProps) {
         
         <br /><br />
         </div>
-        <Lightbulb onClick={()=>{setShowHint(!showHint);}} className="ml-auto" size={20}/>
+        <Lightbulb onClick={()=>{setShowHint(!showHint)}}  className={`ml-auto mt-1 mr-1 text-${showHint ? 'cyan' : 'slate'}-500`} size={20}/>
           {showHint &&
           <>
             <p className="text-slate-500 text-sm ml-3">If you did not set your market name, we will deafault which as your username. </p>

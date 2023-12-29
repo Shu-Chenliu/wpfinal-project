@@ -94,7 +94,7 @@ function SpinningWheel({userId}:SpinningWheelProps) {
             <CouponDrawRule/>
 
             <div className="m-4">
-              <Button onClick={handleSpin} disabled={spinning} className='bg-slate-700 hover:text-yellow-500'>
+              <Button onClick={handleSpin} disabled={spinning} className='font-semibold bg-slate-700 text-slate-100 hover:bg-yellow-500 hover:text-slate-700 '>
                 Spin
               </Button>
             </div>        

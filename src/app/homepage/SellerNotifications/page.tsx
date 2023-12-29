@@ -5,6 +5,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 import Hint from "./components/Hint";
+import { BellPlus } from "lucide-react";
 
 async function Notification() {
   const session = await auth();
@@ -15,8 +16,9 @@ async function Notification() {
   const notifications=await getAllNotificationsOfSeller(username);
   return (
     <>
-      <div className="flex w-full">
-        <p className="text-2xl m-2 p-2 font-semibold text-slate-700">Market Notifications</p>
+      <div className="flex items-center justify-top text-3xl m-2 p-2  text-cyan-500 hover:text-cyan-600 ">
+        <BellPlus size={32}/>
+        <p className="text-2xl m-2  font-bold text-cyan-500 hover:text-cyan-600">Market Notifications</p>
         <Hint/>
       </div>
       {notifications.map((notification)=>(

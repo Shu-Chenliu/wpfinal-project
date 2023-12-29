@@ -49,19 +49,19 @@ export default function SellerNotiBar({
   if(!imageUrl){
   switch (category) {
     case "Clothing":
-      imageSrc = "/../../Clothing.jpg";
+      imageSrc = "/Clothing.jpg";
       break;
     case "Food":
-      imageSrc = "/../../Food.jpg";
+      imageSrc = "/Food.jpg";
       break;
     case "Electronics":
-      imageSrc = "/../../Electronics.jpg";
+      imageSrc = "/Electronics.jpg";
       break;
     case "EE related":
-      imageSrc = "/../../EE_related.jpg";
+      imageSrc = "/EE_related.jpg";
       break;
     case "Others":
-      imageSrc = "/../../Others.jpg";
+      imageSrc = "/Others.jpg";
       break;
   }}
   else{
@@ -81,7 +81,7 @@ export default function SellerNotiBar({
       <div className="px-4">
         <div className="mb-4 ">
           {/* <p className="flex w-full font-semibold text-slate-900"> Product Name: {text} </p> */}
-          <p className="flex font-semibold text-orange-700 text-xl">Order recieved!</p>
+          <p className="flex font-semibold text-cyan-500 text-xl">Order recieved!</p>
           <p className="flex w-full font-bold text-slate-900"> {text}</p>
           <p className="flex w-full font-semibold text-slate-900"> Buyer: {buyer}</p>
           <p className="flex w-full font-semibold text-slate-900"> Buyer Address: {address}</p>
@@ -90,7 +90,7 @@ export default function SellerNotiBar({
       </div>
 
       <Button
-        className={!read?"ml-auto bg-slate-700 hover:text-yellow-400 text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100":"ml-auto bg-slate-200 hover:bg-slate-200 text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100"}
+        className={!read?"ml-auto bg-slate-700 hover:bg-cyan-500 hover:text-slate-900 text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100":"ml-auto bg-slate-200 hover:bg-slate-200 text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100"}
         onClick={() => {
           if(read){
             return;
@@ -121,26 +121,6 @@ export default function SellerNotiBar({
 
       
     }
-      {/* <div className="border rounded my-2 w-full mr-4 p-4 flex h-40"> */}
-        {/* <div>
-          <img src={imageSrc} alt="Product" className="w-32 h-auto" />
-        </div>
-        <div className="px-4">
-          <div className="mb-4 ">
-            <p className="flex w-full font-semibold text-slate-900"> Product Name: {text} </p>
-            <p className="flex w-full font-semibold text-slate-900"> Buyer: {buyer}</p>
-            <p className="flex w-full font-semibold text-slate-900"> Buyer Address: {address}</p>
-            <p className="flex w-full font-semibold text-slate-900"> Payment recieve: {money}</p>
-          </div>
-        </div>
-
-        <Button
-          className="ml-auto bg-slate-700 hover:bg-orange-500 text-white font-bold py-1 px-2 rounded-md text-sm transition duration-100"
-          onClick={() => setOpenNewCheckDialog(true)}
-        >
-          Check Order
-        </Button> */}
-      {/* </div> */}
       <Dialog open={openNewCheckDialog}>
 
         <DialogContent
@@ -149,8 +129,10 @@ export default function SellerNotiBar({
           onInteractOutside={()=>{setOpenNewCheckDialog(false);}}
         >
           <DialogHeader>
-            <DialogTitle className="text-orange-600">Check Order</DialogTitle>
-            <DialogDescription>Are you sure to ship your product?</DialogDescription>
+            <DialogTitle className="text-cyan-600">Are you sure to ship your product?</DialogTitle>
+            <br />
+            <DialogDescription className="ml-3"> {text} will be send to {buyer} immediately.</DialogDescription>
+            
           </DialogHeader>
        
           <div className="flex w-full justify-end ">
@@ -162,7 +144,7 @@ export default function SellerNotiBar({
           </Button>
 
           <Button
-            className="text-sm font-semibold bg-slate-600  hover:text-yellow-500 hover:bg-slate-700"
+            className="text-sm font-semibold bg-slate-600  hover:text-slate-900 hover:bg-cyan-500"
             onClick={handleCheckOrder}
           >
             Check

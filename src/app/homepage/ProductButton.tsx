@@ -30,19 +30,19 @@ export default function ProductButton({ displayId,title, category, price,likes, 
   if(!imageUrl){
     switch (category) {
       case "Clothing":
-        imageSrc = "/./Clothing.jpg";
+        imageSrc = "/Clothing.jpg";
         break;
       case "Food":
-        imageSrc = "/./Food.jpg";
+        imageSrc = "/Food.jpg";
         break;
       case "Electronics":
-        imageSrc = "/./Electronics.jpg";
+        imageSrc = "/Electronics.jpg";
         break;
       case "EE related":
-        imageSrc = "/./EE_related.jpg";
+        imageSrc = "/EE_related.jpg";
         break;
       case "Others":
-        imageSrc = "/./Others.jpg";
+        imageSrc = "/Others.jpg";
         break;
     }
   }
@@ -86,7 +86,14 @@ export default function ProductButton({ displayId,title, category, price,likes, 
           <div className="flex flex-col gap-4 w-full">
           <p className="flex w-full font-semibold text-slate-900" > Category: {category}</p>
           <p className="flex w-full font-semibold text-slate-900" >Price: {price}</p>
-          <p className="flex w-full font-semibold text-slate-900" >left: {left}</p>
+          {left<=0&&(
+            <p className="flex w-full font-semibold text-red-500" >left: {left}</p>
+          )
+          }
+          {left>0&&(
+          <p className="flex w-full font-semibold text-slate-900 " >left: {left}</p>
+          )
+          }
 
           <div className="flex">
             <button className="flex">

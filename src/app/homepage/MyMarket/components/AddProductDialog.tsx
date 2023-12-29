@@ -42,7 +42,7 @@ function AddProductDialog({userDisplayId}:Props) {
     }
     const title=inputRefProductName.current.value;
     const description=inputRefProductDescription.current.value;
-    if(!isNumeric(inputRefProductPrice.current.value)||!isNumeric(inputRefProductNumber.current.value)){
+    if(!isNumeric(inputRefProductPrice.current.value)){
       // alert("要是數字");
       toast({
         variant: "destructive",
@@ -51,6 +51,16 @@ function AddProductDialog({userDisplayId}:Props) {
       })
       return;
     }
+    if(!isNumeric(inputRefProductNumber.current.value)){
+      // alert("要是數字");
+      toast({
+        variant: "destructive",
+        title: " Fail to Add Product",
+        description: "Product number must be a number",
+      })
+      return;
+    }
+    
     const category = inputRefProductCategory.current.value;
     const price=parseInt(inputRefProductPrice.current.value);
     const left =parseInt(inputRefProductNumber.current.value);
@@ -115,7 +125,7 @@ function AddProductDialog({userDisplayId}:Props) {
   return (
     <>
       <Button 
-          className="ml-auto font-semibold text-slate-100 bg-slate-900 hover:bg-yellow-500 hover:text-slate-700 "
+          className="ml-auto font-semibold text-slate-100 bg-slate-900 hover:bg-cyan-500 hover:text-slate-700 "
           variant={"outline"}
           onClick={() => setOpenAddProductDialog(true)}
           >
@@ -134,7 +144,7 @@ function AddProductDialog({userDisplayId}:Props) {
           style={{ width: "500px" }}
         >
           <DialogHeader>
-            <DialogTitle>Add Product</DialogTitle>
+            <DialogTitle className="text-cyan-500">Add Product</DialogTitle>
             <DialogDescription>Post what you want to sell. </DialogDescription>
           </DialogHeader>
           <div className="flex w-full flex-col gap-1">
@@ -224,7 +234,7 @@ function AddProductDialog({userDisplayId}:Props) {
           >
             Close
           </Button>
-            <Button className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-orange-400"
+            <Button className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-cyan-500 hover:text-slate-700"
               onClick={handlePostProduct}
             >
               Post

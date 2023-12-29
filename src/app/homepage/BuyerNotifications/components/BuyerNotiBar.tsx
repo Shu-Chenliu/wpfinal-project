@@ -45,19 +45,19 @@ export default function BuyerNotiBar({
   if(!imageUrl){
   switch (category) {
     case "Clothing":
-      imageSrc = "/../../Clothing.jpg";
+      imageSrc = "/Clothing.jpg";
       break;
     case "Food":
-      imageSrc = "/../../Food.jpg";
+      imageSrc = "/Food.jpg";
       break;
     case "Electronics":
-      imageSrc = "/../../Electronics.jpg";
+      imageSrc = "/Electronics.jpg";
       break;
     case "EE related":
-      imageSrc = "/../../EE_related.jpg";
+      imageSrc = "/EE_related.jpg";
       break;
     case "Others":
-      imageSrc = "/../../Others.jpg";
+      imageSrc = "/Others.jpg";
       break;
   }}
   else{
@@ -77,7 +77,7 @@ export default function BuyerNotiBar({
       <div className="px-4">
         <div className="mb-4 ">
           {/* <p className="flex w-full font-semibold text-slate-900"> Package Delivered!</p> */}
-          <p className="flex font-semibold text-orange-700 text-xl">Package Delivered!</p>
+          <p className="flex font-semibold text-yellow-500 text-xl">Package Delivered!</p>
           <p className="flex w-full font-semibold text-slate-900">  {title}</p>   
           <p className="flex w-full text-slate-900"> Product number: {number}</p>
           <p className="flex w-full text-slate-900"> Product Seller: {author} </p>
@@ -86,7 +86,7 @@ export default function BuyerNotiBar({
       <div className="flex flex-col ml-auto">
         <Button
           className={read?"ml-auto text-sm my-2 font-semibold text-slate-300 bg-slate-100 hover:bg-slate-100 mx-2 hover:text-slate-300"
-            :"ml-auto text-sm my-2 font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
+            :"ml-auto text-sm my-2 font-semibold text-slate-100 bg-slate-700 hover:bg-yellow-500 mx-2 hover:text-slate-900"
           }
           onClick={() => {
             if(read){
@@ -98,7 +98,7 @@ export default function BuyerNotiBar({
           Receive Product
         </Button>
         <Button
-          className="ml-auto text-sm my-2 font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
+          className="ml-auto text-sm my-2 font-semibold text-slate-100 bg-slate-700 hover:bg-yellow-500 mx-2 hover:text-slate-900"
           onClick={handleAddComment}
           disabled={!read}
         >
@@ -121,38 +121,7 @@ export default function BuyerNotiBar({
       {contentToRender}
     </div>    
     }
-    
-      {/* <div className="border w-full mr-4 p-4 flex h-40 ">
-        <div>
-          <img src={imageSrc} alt="Product" className="w-32 h-auto" />
-        </div>
-        <div className="px-4">
-          <div className="mb-4 ">
-            <p className="flex w-full font-semibold text-slate-900"> Package Delivered!</p>
-            <p className="flex w-full text-slate-900"> Product Name: {title}</p>   
-            <p className="flex w-full text-slate-900"> Product number: {number}</p>
-            <p className="flex w-full text-slate-900"> Product Seller: {author} </p>
-          </div>
-        </div>
-        <div className="flex flex-col ml-auto">
-          <Button
-            className="ml-auto text-sm my-2 font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
-            onClick={() => setOpenNewReceiveDialog(true)}
-          >
-            Receive Product
-          </Button>
-          <Button
-            className="ml-auto text-sm my-2 font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
-            onClick={()=>{setOpenNewCommentDialog(true);}}
-          >
-            Comment
-          </Button>
-
-        </div>
-        
-
-      </div> */}
-
+  
       <ConfirmDialog 
         open={openNewReceiveDialog} 
         onClose={()=>setOpenNewReceiveDialog(false)}
@@ -180,6 +149,7 @@ export default function BuyerNotiBar({
         userId={userId}
         username={username}
         buyerNumber={buyerNumber}
+        title={title}
       />
     </>
   );

@@ -12,7 +12,7 @@ return(
                 After checking orders, your products will be send to buyers immediately. 
             </p>
         }
-        <Lightbulb onClick={()=>{setShowHint(!showHint)}} className="  ml-auto mt-1 mr-1 text-slate-500" size={20}/>
+        <Lightbulb onClick={()=>{setShowHint(!showHint)}}  className={`ml-auto mt-1 mr-1 text-${showHint ? 'cyan' : 'slate'}-500`} size={20}/>
     </div>
     </>
     )

@@ -51,26 +51,26 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
   if(!Product?.imageUrl){
   switch (Product?.category) {
     case "Clothing":
-      imageSrc = "/../../Clothing.jpg";
+      imageSrc = "/Clothing.jpg";
       break;
     case "Food":
-      imageSrc = "/../../Food.jpg";
+      imageSrc = "/Food.jpg";
       break;
     case "Electronics":
-      imageSrc = "/../../Electronics.jpg";
+      imageSrc = "/Electronics.jpg";
       break;
     case "EE related":
-      imageSrc = "/../../EE_related.jpg";
+      imageSrc = "/EE_related.jpg";
       break;
     case "Others":
-      imageSrc = "/../../Others.jpg";
+      imageSrc = "/Others.jpg";
       break;
   }}
   else{
     imageSrc = Product?.imageUrl;
   }
   return (
-    <div className="w-full">
+    <div className={`w-full h-screen ${Product?.left === 0 && "bg-slate-200"}`}      >
       <div className="flex">
         <Link href={"/homepage"}>
           <Button
@@ -103,13 +103,13 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
         }
       </div>
       
-      <div className="flex gap-4">
+      <div className="flex w-full">
         {userId===Product?.author.displayId?
           <EditProduct editThing="title" title={Product?.title} postId={postId}/>
           :<p className="flex font-semibold text-yellow-500 p-2 text-4xl">{Product?.title}</p>
         }
         {/* <p className="flex font-semibold text-yellow-500 p-2 text-4xl">{Product?.title}</p> */}
-        {Product?.left ===0 && <p className="flex text-4xl font-bold text-red-700" > Sold out!!! </p>}
+        {Product?.left ===0 && <p className="ml-auto w-1/4  flex text-4xl font-bold text-red-700" > Sold out!!! </p>}
       </div>
 
       <div className="flex">
@@ -121,23 +121,23 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
               className="object-contain"
             />
           </div>
-          {/* <div className="w-full rounded-md p-2 hover:bg-white/10 ">
-            {Product?.description}
-          </div> */}
+          
           <div className="block mx-5">
             
             <p className="flex w-full font-semibold text-slate-900 ">Category: {Product?.category}</p>
             <p className="flex w-full font-semibold text-slate-900 ">Price: {Product?.price}</p>
-            <p className="flex w-full font-semibold text-slate-900 ">Number left: </p>
-            {userId===Product?.author.displayId?
-              <EditProduct editThing="left" left={Product?.left} postId={postId}/>
-              :<p className="flex w-full font-semibold text-slate-900 ">{Product?.left}</p>
-            }
-            {/*  */}
+            <div className="flex">
+            <p className="w-40 font-semibold text-slate-900 ">Number left: </p>
+              {userId===Product?.author.displayId?
+                <EditProduct editThing="left" left={Product?.left} postId={postId}/>
+                :<p className=" font-semibold text-slate-900 ">{Product?.left}</p>
+              }
+            </div>
+            
             <br /> <br />
             <div className="flex">
             <Link href={`/homepage/ViewMarket/${Product?.author.displayId}`}>
-              <Store className=" mx-2 mr-5 hover:text-orange-500" size={100}/>
+              <Store className=" mx-2 mr-5 hover:text-yellow-500" size={100}/>
             </Link>
             <div className="block">
               <p className=" flex w-full font-semibold text-slate-900 ">Market: {Product?.author.sellername}</p>

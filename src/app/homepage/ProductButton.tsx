@@ -85,7 +85,7 @@ export default function ProductButton({ displayId,title, category, price,likes, 
 
           <div className="flex flex-col gap-4 w-full">
           <p className="flex w-full font-semibold text-slate-900" > Category: {category}</p>
-          <p className="flex w-full font-semibold text-slate-900" >Price: {price}</p>
+          <p className="flex w-full font-semibold text-slate-900" >Price: $ {price}</p>
           {left<=0&&(
             <p className="flex w-full font-semibold text-red-500" >left: {left}</p>
           )

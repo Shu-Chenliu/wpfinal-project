@@ -126,9 +126,10 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
   return (
     <>
     <Button 
-        className="flex font-semibold hover:bg-yellow-500 hover:text-black "
+        className="flex font-semibold bg-slate-900 text-white hover:bg-yellow-500 hover:text-black "
         variant={"outline"}
         onClick={() => setOpenBuyNowDialog(true)}
+        disabled={left===0}
         >Buy Now
     </Button>
 
@@ -163,7 +164,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
         </div>
         <div className="flex items-center">
             <p className="flex w-full font-semibold text-slate-900 " >Price (for each) </p>
-            <p>{money}</p>
+            <p>${money}</p>
         </div>
 
         <div className="flex items-center">
@@ -207,7 +208,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
       
         <div className="flex items-center">
           <p className="flex w-full font-semibold text-slate-900">Total Payment</p>
-          <p>{Math.round(totalPrice*(100-finalSelectedCoupon)/100)}</p>
+          <p>${Math.round(totalPrice*(100-finalSelectedCoupon)/100)}</p>
         </div>
 
         </div>

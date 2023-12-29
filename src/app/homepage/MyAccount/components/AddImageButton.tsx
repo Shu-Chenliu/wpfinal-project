@@ -76,12 +76,19 @@ export default function AddImageButton({userId,status}:Props) {
           />
         </div>
 
-      <Button
+
+      {status==="personal"&&<Button
         onClick={handleUploadImage}
         className="flex font-semibold bg-slate-600 mt-2 hover:bg-yellow-500 hover:text-slate-700"
       >
         Press to upload image
-      </Button>
+      </Button>}
+      {status==="market"&&<Button
+        onClick={handleUploadImage}
+        className="flex font-semibold bg-slate-600 mt-2 hover:bg-cyan-500 hover:text-slate-700"
+      >
+        Press to upload image
+      </Button>}
     </div>
     </>
 

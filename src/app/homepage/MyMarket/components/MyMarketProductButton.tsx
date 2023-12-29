@@ -65,18 +65,12 @@ export default function MyMarketProductButton({ displayId,title, category, price
           {/* <div className="flex w-full gap-4"> */}
             {/* 標題 */}
             <div className={`flex gap-2 flex-col  rounded-md p-2 mx-2 my-2  ${left === 0 ? 'bg-slate-200' : ''}`} >
-              {/* <div className="flex">
-                <p className="flex text-2xl font-semibold text-yellow-500" > {title} </p>
-                {left === 0 && <p className="ml-auto font-bold flex text-4xl text-red-700" > Sold out!!! </p>}
-                {left>0&&<Trash2 onClick={handleDeletePost}/>}
-              </div> */}
-              <div className="flex items-center justify-center w-60 h-20">
-                <p className="flex-grow text-2xl font-semibold text-cyan-500" > {title} </p>
 
-                {/* {left === 0 && <p className="ml-auto font-bold flex text-4xl text-red-700" > Sold out!!! </p>} */}
-
+              <div className="flex items-center justify-top text-3xl m-2 p-2 font-bold text-cyan-600 hover:text-cyan-700 ">
+                <p className="text-3xl m-2  font-bold text-cyan-600 hover:text-cyan-700">{title}</p>
+                <Trash2 className=" hover:text-cyan-700" onClick={()=>{setOpen(true)}}/>
               </div>
-            <Trash2 className="my-2 hover:text-yellow-500 m-2" onClick={()=>{setOpen(true)}}/>
+
             <Dialog open={open}>
             <DialogContent>
               <p className="font-semibold text-lg">Do you want to remove this post? </p>

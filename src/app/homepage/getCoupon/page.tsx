@@ -13,8 +13,8 @@ export default async function Home() {
   return (
     <main className="flex flex-col  justify-between pt-5 pl-8">
       <div className="flex items-center">
-        <Radius className="text-yellow-500" size={32}/>
-        <p className="text-3xl m-2 p-2 font-bold text-yellow-500">Lucky Spin Wheel</p>
+        <Radius className="text-yellow-500 hover:text-yellow-600" size={32}/>
+        <p className="text-3xl m-2 p-2 font-bold text-yellow-500 hover:text-yellow-600">Lucky Spin Wheel</p>
         
       </div>
       <br/><br/>

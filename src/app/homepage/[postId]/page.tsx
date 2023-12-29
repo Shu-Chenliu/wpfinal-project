@@ -125,15 +125,17 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
           <div className="block mx-5">
             
             <p className="flex w-full font-semibold text-slate-900 ">Category: {Product?.category}</p>
-            <p className="flex w-full font-semibold text-slate-900 ">Price: {Product?.price}</p>
+            <p className="flex w-full font-semibold text-slate-900 ">Price:${Product?.price}/each</p>
             <div className="flex">
             <p className="w-40 font-semibold text-slate-900 ">Number left: </p>
+
               {userId===Product?.author.displayId?
                 <EditProduct editThing="left" left={Product?.left} postId={postId}/>
                 :<p className=" font-semibold text-slate-900 ">{Product?.left}</p>
               }
             </div>
-            
+            <p className="flex w-full font-semibold text-slate-900 ">Sold: {Product?.sold}</p>
+
             <br /> <br />
             <div className="flex">
             <Link href={`/homepage/ViewMarket/${Product?.author.displayId}`}>

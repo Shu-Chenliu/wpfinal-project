@@ -98,7 +98,7 @@ export default function SellerNotiBar({
           <p className="flex w-full font-bold text-slate-900"> {text}</p>
           <p className="flex w-full font-semibold text-slate-900"> Buyer: {buyer}</p>
           <p className="flex w-full font-semibold text-slate-900"> Buyer Address: {address}</p>
-          <p className="flex w-full font-semibold text-slate-900"> Payment recieve: {money}</p>
+          <p className="flex w-full font-semibold text-slate-900"> Payment recieve: $ {money}</p>
         </div>
       </div>
 

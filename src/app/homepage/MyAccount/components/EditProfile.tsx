@@ -130,7 +130,7 @@ export default function EditProfile(props: CardDialogProps) {
 
       </div>
 
-      <div className="flex">
+      <div className="flex font-semibold">
         <p>Address: </p>
         {edittingAddress ? (
           <>

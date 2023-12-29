@@ -38,18 +38,9 @@ async function HomePage() {
       <div className="flex flex-row max-[1000px]:flex-col items-start justify-top">
 
         <div className="flex flex-col mr-8">
-          {/* <img
-            src={userProfile?.imageURL!}
-            className="w-40 h-40  border-2 my-2 my-2 "           
-          />
-          <Ghost className="w-40 h-40" /> */}
 
           {userProfile?.imageURL ?(
             <div className="w-40 h-40 relative">
-              {/* <img
-                src={userProfile?.imageURL}
-                className="w-40 h-40  border-2 my-2 my-2 "           
-              /> */}
               <Image
                 src={userProfile?.imageURL}
                 alt="user Photo"
@@ -110,7 +101,7 @@ async function HomePage() {
                 />
               </div>
             ):(
-              <><Store className="w-40 h-40 hover:text-yellow-500" /></>
+              <><Store className="w-40 h-40 hover:text-cyan-500" /></>
             )}
             <AddImageButton userId={userId} status="market"/>
           </div>

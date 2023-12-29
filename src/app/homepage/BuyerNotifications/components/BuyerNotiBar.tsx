@@ -80,8 +80,8 @@ export default function BuyerNotiBar({
           {/* <p className="flex w-full font-semibold text-slate-900"> Package Delivered!</p> */}
           <p className="flex font-semibold text-yellow-500 text-xl">Package Delivered!</p>
           <p className="flex w-full font-semibold text-slate-900">  {title}</p>   
-          <p className="flex w-full text-slate-900"> Product number: {number}</p>
-          <p className="flex w-full text-slate-900"> Product Seller: {author} </p>
+          <p className="flex w-full font-semibold text-slate-900"> Product number: {number}</p>
+          <p className="flex w-full font-semibold text-slate-900"> Product Seller: {author} </p>
         </div>
       </div>
       <div className="flex flex-col ml-auto">

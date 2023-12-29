@@ -25,14 +25,7 @@ export default function ConfirmDialog({open,onClose,id,postId,title,left,author,
   const [openNewCommentDialog, setOpenNewCommentDialog] = useState(false);
   const [openImpossibleDialog, setOpenImpossibleDialog] = useState(false);
   const {updateNotification}=useNotifications();
-  const {updateProduct}=usePost();
   const handleReceive=async()=>{
-    await updateProduct({
-      id:postId,
-      left:left-number,
-      sold:sold+number,
-      buyerNumber:buyerNumber+1,
-    })
     await updateNotification({
       id,
       received:true,
@@ -102,7 +95,6 @@ export default function ConfirmDialog({open,onClose,id,postId,title,left,author,
       <ImpossibleDialog 
         open={openImpossibleDialog} 
         onClose={()=>setOpenImpossibleDialog(false)}
-        
       />
     </>
   );

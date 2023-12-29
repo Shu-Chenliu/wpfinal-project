@@ -31,6 +31,10 @@ async function Notification() {
             read={notification.readBySeller}
             left={notification.post.left}
             imageUrl={notification.post.imageUrl!}
+            number={notification.number}
+            postId={notification.post.displayId}
+            sold={notification.post.sold}
+            buyerNumber={notification.post.buyerNumber}
           />
         </div>
       ))}

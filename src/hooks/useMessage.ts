@@ -76,9 +76,36 @@ export default function useMessages() {
     setLoading(false);
     
   };
-  
+  const updateMessage = async ({
+    id,
+    read,
+  }: {
+    id: number,
+    read: boolean,
+  }) => {
+    setLoading(true);
+
+    const res = await fetch("/api/messages", {
+      method: "PUT",
+      body: JSON.stringify({
+        id,
+        read,
+      }),
+    });
+
+    if (!res.ok) {
+      const body = await res.json();
+      throw new Error(body.error);
+    }   // router.refresh() is a Next.js function that refreshes the page without
+    // reloading the page. This is useful for when we want to update the UI
+    // from server components.
+    router.refresh();
+    setLoading(false);
+  };
+
   return {
     postMessage,
+    updateMessage,
     loading,
   };
 }

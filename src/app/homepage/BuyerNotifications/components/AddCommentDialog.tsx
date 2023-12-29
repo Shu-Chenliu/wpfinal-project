@@ -5,6 +5,7 @@ import { Star } from "lucide-react";
 import  usePost from "@/hooks/usePosts";
 import useComments from "@/hooks/useComments";
 import useNotification from "@/hooks/useNotifications";
+import Link from "next/link";
 type ConfirmDialogProps={
   open: boolean,
   onClose: ()=>void,
@@ -24,16 +25,26 @@ export default function ConfirmDialog({open,onClose,id,postId,likes,username,buy
   const {postComment}=useComments();
   const {updateNotification}=useNotification();
   const handleAddComment = async()=>{
+    if(!inputRefProductComment.current)return;
     await updateProduct({
       id:postId,
       likes:(likes*(buyerNumber-1)+liked)/(buyerNumber),
     });
-    await postComment({
-      text:inputRefProductComment.current?.value,
-      author:username,
-      postId,
-      stars:liked,
-    })
+    if(inputRefProductComment.current.value){
+      await postComment({
+        text:inputRefProductComment.current.value,
+        author:username,
+        postId,
+        stars:liked,
+      })
+    }
+    else{
+      await postComment({
+        author:username,
+        postId,
+        stars:liked,
+      })
+    }
     await updateNotification({
       id,
       commented:true,
@@ -94,13 +105,14 @@ export default function ConfirmDialog({open,onClose,id,postId,likes,username,buy
         >
           Close
         </Button>
-        <Button
-          className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
-          onClick={handleAddComment}
-        >
-          Comment
-        </Button>
-
+        <Link href={`/homepage/${postId}`}>
+          <Button
+            className="text-sm font-semibold text-slate-100 bg-slate-700 hover:bg-orange-700 mx-2 hover:text-slate-900"
+            onClick={handleAddComment}
+          >
+            Comment
+          </Button>
+        </Link>
         </div>      
       </DialogContent>
     </Dialog>

@@ -4,6 +4,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { useState } from "react";
 import Image from "next/image";
 import useNotifications from "@/hooks/useNotifications";
+import usePosts from "@/hooks/usePosts";
 type SellerNotiBarProps = {
   id:number,
   text:string,
@@ -14,23 +15,34 @@ type SellerNotiBarProps = {
   read:boolean,
   left:number,
   imageUrl:string,
+  number:number,
+  postId:string,
+  sold:number,
+  buyerNumber:number,
 };
 
 
 // note that the Tweet component is also a server component
 // all client side things are abstracted away in other components
 export default function SellerNotiBar({
-  id,text,buyer,money,address,category,read,left,imageUrl
+  id,text,buyer,money,address,category,read,left,imageUrl,number,postId,sold,buyerNumber
 }: SellerNotiBarProps) {
   const [openNewCheckDialog, setOpenNewCheckDialog] = useState(false);
   const {updateNotification}=useNotifications();
+  const {updateProduct}=usePosts();
   const handleCheckOrder = async()=>{
-    
+    await updateProduct({
+      id:postId,
+      left:left-number,
+      sold:sold+number,
+      buyerNumber:buyerNumber+1,
+    })
     await updateNotification({
       id,
       shipped:true,
       readBySeller:true,
     });
+
     setOpenNewCheckDialog(false);
   }
   let imageSrc;

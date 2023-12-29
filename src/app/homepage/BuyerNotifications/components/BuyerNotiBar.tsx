@@ -21,18 +21,23 @@ type BuyerNotiBarProps = {
   category:string,
   read:boolean,
   imageUrl:string,
+  commented:boolean,
+  toPostId:(postId:string)=>void,
 };
 
 
 // note that the Tweet component is also a server component
 // all client side things are abstracted away in other components
 export default function BuyerNotiBar({
-  id, postId,title, left, author,sold,likes,userId,username,number,address,buyerNumber,category,read,imageUrl
+  id, postId,title, left, author,sold,likes,userId,username,number,address,buyerNumber,category,read,imageUrl,commented,toPostId
 }: BuyerNotiBarProps) {
   const [openNewReceiveDialog, setOpenNewReceiveDialog] = useState(false);
   const [openNewCommentDialog, setOpenNewCommentDialog] = useState(false);
 
   const handleAddComment = ()=>{
+    if(commented){
+      toPostId(postId);
+    }
     setOpenNewCommentDialog(true);
   }
   
@@ -97,7 +102,7 @@ export default function BuyerNotiBar({
           onClick={handleAddComment}
           disabled={!read}
         >
-          Comment
+          {commented?"View Your Comment":"Comment"}
         </Button>
 
       </div>

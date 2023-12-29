@@ -8,9 +8,11 @@ import useUser from "@/hooks/userUsers";
 type Props={
   userstate:string,
   userId:string,
+  sellerUnread:number,
+  buyerUnread:number,
 }
 
-function FiltChatNavbarLink({userstate,userId}:Props) {
+function FiltChatNavbarLink({userstate,userId,sellerUnread,buyerUnread}:Props) {
   const {updateUser}=useUser();
   const[nowPage,setNowPage]=useState(userstate);
   const handleChangeNowPage=async(page:string)=>{
@@ -22,7 +24,6 @@ function FiltChatNavbarLink({userstate,userId}:Props) {
   }
   return (
     <nav className="flex  flex-col bg-slate-100 pb-10 bg-slate-800 no-scrollbar">
-      
       <section className="flex  flex-col pt-3 ">
 
           <Link href={"/homepage/Chat"}>
@@ -32,6 +33,7 @@ function FiltChatNavbarLink({userstate,userId}:Props) {
             > */}
                 <UserRound className={`flex bg-slate-800 text-slate-100 hover:bg-slate-800 hover:text-orange-500 m-4 ${nowPage === "personal" ? 'text-orange-500' : ''}`}
             onClick={() => handleChangeNowPage("personal")} />
+            <span className=" text-orange-500 hover:text-orange-500  m-2 px-1  rounded-full">{buyerUnread}</span>
             {/* </Button> */}
           </Link> 
 
@@ -40,7 +42,7 @@ function FiltChatNavbarLink({userstate,userId}:Props) {
               <Store 
               className={`flex bg-slate-800 text-slate-100 hover:bg-slate-800 hover:text-orange-500 m-4 ${nowPage === "market" ? 'text-orange-500' : ''}`}
             onClick={() => handleChangeNowPage("market")}   /> 
-       
+              <span className=" text-orange-500 hover:text-orange-500  m-2 px-1  rounded-full">{sellerUnread}</span>
           </Link>
           
       </section>

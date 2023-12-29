@@ -21,8 +21,9 @@ type NavbarLinkProp={
   sellerUnread:number,
   buyerUnread:number,
   shoppingCartLength:number,
+  unread:number,
 }
-function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp) {
+function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength,unread}:NavbarLinkProp) {
 
   const [nowPage,setNowPage]=useState("View All product");
   const [open, setOpen] = useState(false);
@@ -94,6 +95,7 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength}:NavbarLinkProp
             className={`my-2 hover:text-orange-500 m-2 ${nowPage === "Chatroom" ? 'text-orange-500' : ''}`}
             onClick={() => {handleChangeNowPage("Chatroom")}}
             ><MessagesSquare className="m-2" /><span className="max-[1000px]:hidden">Chatroom</span>
+            <span className=" text-orange-500 hover:text-orange-500  m-2 px-1  rounded-full">{unread}</span>
             </Button>
           </Link> 
 

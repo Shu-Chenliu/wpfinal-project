@@ -3,6 +3,7 @@
 import BuyerNotiBar from "./components/BuyerNotiBar";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { publicEnv } from "@/lib/env/public";
 import { getAllNotificationsOfBuyer } from "./components/actions";
 import Hint from "./components/Hint";
@@ -16,6 +17,11 @@ async function NotificationPage() {
   
   const userId=session.user.id;
   const notifications=await getAllNotificationsOfBuyer(username);
+  const toPostId=async(postId:string)=>{
+    "use server";
+    revalidatePath("/homepage");
+    redirect(`${publicEnv.NEXT_PUBLIC_BASE_URL}/homepage/${postId}`);
+  }
   return (
     <>
       <div className="flex w-full border">
@@ -40,6 +46,8 @@ async function NotificationPage() {
             category={notification.post.category}
             read={notification.readByBuyer}
             imageUrl={notification.post.imageUrl!}
+            commented={notification.commented}
+            toPostId={toPostId}
           />
         </div>
       ))}

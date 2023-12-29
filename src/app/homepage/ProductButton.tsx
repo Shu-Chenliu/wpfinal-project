@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Star, StarHalf } from "lucide-react";
 import Divider from "@mui/material/Divider";
 import Paper from "@mui/material/Paper";
-import Image from 'next/image'
+import Image from 'next/image';
 
 export type ProductButtonProps = {
   id: number;
@@ -50,24 +50,26 @@ export default function ProductButton({ displayId,title, category, price,likes, 
     imageSrc = imageUrl;
   }
   
-  
 
   return (
     <>
-      <Paper className={`rounded-md p-2 mx-2 my-2 w-60 flex flex-col  ${left === 0 ? 'bg-slate-200' : ''}`}>
+      <Paper className={`rounded-md p-2 mx-2 my-2 w-60 flex flex-grow flex-col  ${left === 0 ? 'bg-slate-200' : ''}`}>
         {/* <div className="flex w-full gap-4"> */}
           {/* 標題 */}
           <div className={`flex gap-2 flex-col  rounded-md p-2  ${left === 0 ? 'bg-slate-200' : ''}`} >
-            <div className="flex">
-              <p className="flex text-2xl font-semibold text-yellow-500" > {title} </p>
-              {left ===0 && <p className="ml-auto font-bold flex text-4xl text-red-700" > Sold out!!! </p>}
+            <div className="flex items-center justify-center w-60 h-20">
+              <p className="flex-grow text-2xl font-semibold text-yellow-500 " > {title} </p>
 
             </div>
+
+              {/* {left ===0 && <p className="ml-auto font-bold flex text-4xl text-red-700" > Sold out!!! </p>} */}
+
+            {/* </div> */}
             
           {/* 圖片 */}
           <div 
             className="grid place-items-center w-full h-32 relative" 
-            // style={{ width: '200px', height: '250px' }}
+            style={{ width: '200px', height: '250px' }}
           >
             {/* <img src={imageSrc} alt="Product" className="w-auto h-56" /> */}
             <Image

@@ -54,12 +54,16 @@ export default function usePosts() {
     sold,
     likes,
     buyerNumber,
+    title,
+    description,
   }: {
     id: string,
     left?: number,
     sold?: number,
     likes?: number,
     buyerNumber?: number,
+    title?: string,
+    description?: string,
   }) => {
     setLoading(true);
 
@@ -71,6 +75,33 @@ export default function usePosts() {
         sold:sold,
         likes:likes,
         buyerNumber:buyerNumber,
+        title,
+        description,
+      }),
+    });
+
+    if (!res.ok) {
+      const body = await res.json();
+      throw new Error(body.error);
+    }
+
+    // router.refresh() is a Next.js function that refreshes the page without
+    // reloading the page. This is useful for when we want to update the UI
+    // from server components.
+    router.refresh();
+    setLoading(false);
+  };
+  const deleteProduct = async ({
+    id,
+  }: {
+    id: string,
+  }) => {
+    setLoading(true);
+
+    const res = await fetch("/api/posts", {
+      method: "DELETE",
+      body: JSON.stringify({
+        id,
       }),
     });
 
@@ -86,9 +117,11 @@ export default function usePosts() {
     setLoading(false);
   };
 
+
   return {
     postProduct,
     updateProduct,
+    deleteProduct,
     loading,
   };
 }

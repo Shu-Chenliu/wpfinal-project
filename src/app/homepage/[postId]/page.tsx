@@ -12,6 +12,7 @@ import { ArrowLeft } from 'lucide-react';
 import AddChatRoomButton from "./components/AddChatRoomButton";
 import { Store, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
+import EditProduct from "./components/EditProduct";
 type ProductPageProps = {
   params: {
     postId: string;
@@ -103,7 +104,11 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
       </div>
       
       <div className="flex gap-4">
-        <p className="flex font-semibold text-yellow-500 p-2 text-4xl">{Product?.title}</p>
+        {userId===Product?.author.displayId?
+          <EditProduct editThing="title" title={Product?.title} postId={postId}/>
+          :<p className="flex font-semibold text-yellow-500 p-2 text-4xl">{Product?.title}</p>
+        }
+        {/* <p className="flex font-semibold text-yellow-500 p-2 text-4xl">{Product?.title}</p> */}
         {Product?.left ===0 && <p className="flex text-4xl font-bold text-red-700" > Sold out!!! </p>}
       </div>
 
@@ -123,33 +128,38 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
             
             <p className="flex w-full font-semibold text-slate-900 ">Category: {Product?.category}</p>
             <p className="flex w-full font-semibold text-slate-900 ">Price: {Product?.price}</p>
-            <p className="flex w-full font-semibold text-slate-900 ">Number left: {Product?.left}</p>
+            <p className="flex w-full font-semibold text-slate-900 ">Number left: </p>
+            {userId===Product?.author.displayId?
+              <EditProduct editThing="left" left={Product?.left} postId={postId}/>
+              :<p className="flex w-full font-semibold text-slate-900 ">{Product?.left}</p>
+            }
+            {/*  */}
             <br /> <br />
             <div className="flex">
             <Link href={`/homepage/ViewMarket/${Product?.author.displayId}`}>
-                <Store className=" mx-2 mr-5 hover:text-orange-500" size={100}/>
-              </Link>
-              <div className="block">
-                <p className=" flex w-full font-semibold text-slate-900 ">Market: {Product?.author.sellername}</p>
-                <p className=" flex w-full font-semibold text-slate-900 ">Market Address: {Product?.author.selleraddress}</p>
-                <AddChatRoomButton userId={userId} seller={Product?.author.displayId?Product?.author.displayId:""} addChatRoom={handleAddChatRoom}/>
-              </div>
+              <Store className=" mx-2 mr-5 hover:text-orange-500" size={100}/>
+            </Link>
+            <div className="block">
+              <p className=" flex w-full font-semibold text-slate-900 ">Market: {Product?.author.sellername}</p>
+              <p className=" flex w-full font-semibold text-slate-900 ">Market Address: {Product?.author.selleraddress}</p>
+              <AddChatRoomButton userId={userId} seller={Product?.author.displayId?Product?.author.displayId:""} addChatRoom={handleAddChatRoom}/>
+            </div>
               
               
             </div>
             
             
           </div>
-          
-
-          
-
       </div>
 
       <div className="p-2">
-        <p className="w-full rounded-md p-2 hover:bg-white/10 overflow-wrap-normal mx-3">
+        {/* <p className="w-full rounded-md p-2 hover:bg-white/10 overflow-wrap-normal mx-3">
           {Product?.description}
-        </p>
+        </p> */}
+        {userId===Product?.author.displayId?
+          <EditProduct editThing="description" description={Product?.description!} postId={postId}/>
+          :<p className="w-full rounded-md p-2 hover:bg-white/10 overflow-wrap-normal mx-3">{Product?.description}</p>
+        }
         
 
       </div>

@@ -25,9 +25,9 @@ async function HomePage() {
           My Profile
       </h1>
       <br />
-      <div className="flex items-center justify-top">
-        
-      <div>
+      <div className="flex flex-row max-[1000px]:flex-col items-start justify-top">
+
+        <div className="flex flex-col mr-8">
           {/* <img
             src={userProfile?.imageURL!}
             className="w-40 h-40  border-2 my-2 my-2 "           
@@ -35,7 +35,7 @@ async function HomePage() {
           <Ghost className="w-40 h-40" /> */}
 
           {userProfile?.imageURL ?(
-            <div className="flex w-40 h-40 relative">
+            <div className="w-40 h-40 relative">
               {/* <img
                 src={userProfile?.imageURL}
                 className="w-40 h-40  border-2 my-2 my-2 "           
@@ -44,7 +44,7 @@ async function HomePage() {
                 src={userProfile?.imageURL}
                 alt="user Photo"
                 fill={true}
-                
+                className="object-contain"
               />
             </div>
           ):(
@@ -53,7 +53,7 @@ async function HomePage() {
 
 
 
-          <AddImageButton userId={userId} status="market"/>
+          <AddImageButton userId={userId} status="personal"/>
         </div>
         {/* <div className="my-2 my-2 p-3">
           <p>Username: {userProfile?.username}</p>
@@ -80,22 +80,23 @@ async function HomePage() {
 
       <br/><br/>
       
-      <div className="block items-center justify-top">
+      <div className="block ">
         <Link href={"/homepage/MyMarket"}>
           <p className="text-xl font-semibold text-slate-700 hover:text-orange-500">My Market</p>
         </Link>
-        <div className="flex">
-          <div className="block">
+        <br />
+        <div className="flex flex-row max-[1000px]:flex-col items-start justify-top">
+
+          <div className=" flex flex-col mr-8">
+
             {userProfile?.marketUrl ?(
               <div className="flex w-40 h-40 relative">
-                {/* <img
-                  src={userProfile?.marketUrl}
-                  className="w-40 h-40  border-2 my-2 my-2 "           
-                /> */}
                 <Image
                   src={userProfile?.marketUrl}
                   alt='market Photo'
                   fill={true}
+                  className="object-contain"
+
                 />
               </div>
             ):(

@@ -6,15 +6,19 @@ import { db } from "@/db";
 import { messagesTable} from "@/db/schema";
 import { privateEnv } from "@/lib/env/private";
 import { publicEnv } from "@/lib/env/public";
-
+import {eq } from "drizzle-orm";
 import { z } from "zod";
 const postMessageSchema = z.object({
   text:z.string().max(100),
   authorId:z.string(),
   chatRoomId:z.string(),
 });
-
+const updateMessageSchema =z.object({
+  id:z.number(),
+  read:z.boolean(),
+});
 type PostMessageRequest = z.infer<typeof postMessageSchema>;
+type updateMessageRequest = z.infer<typeof updateMessageSchema>;
 export async function POST(request: NextRequest) {
   const data = await request.json();
   try {
@@ -41,5 +45,19 @@ export async function POST(request: NextRequest) {
     await pusher.trigger(`private-${chatRoomId}`, "chatRoom:update", {
       senderId:authorId,
     });
+  return new NextResponse("OK", { status: 200 });
+}
+export async function PUT(request: NextRequest) {
+  const data = await request.json();
+  try {
+    updateMessageSchema.parse(data);
+  } catch (error) {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
+  const { id,read } = data as updateMessageRequest;
+  await db
+    .update(messagesTable)
+    .set({read})
+    .where(eq(messagesTable.id, id))
   return new NextResponse("OK", { status: 200 });
 }

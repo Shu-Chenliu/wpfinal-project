@@ -65,8 +65,8 @@ export default function AddImageButton({userId,status}:Props) {
   
   return (
     <>
-    <div className='flex'>
-      
+    <div className='flex flex-col mt-1'>
+
         <div id="image-box">
           <input 
             type="file" 
@@ -75,13 +75,10 @@ export default function AddImageButton({userId,status}:Props) {
             ref={imageRef}
           />
         </div>
-      {/* <Button
-        onClick={handleUploadImage}
-      >
-      </Button> */}
+
       <Button
         onClick={handleUploadImage}
-        className="flex font-semibold bg-slate-600  hover:bg-yellow-500 hover:text-slate-700"
+        className="flex font-semibold bg-slate-600 mt-2 hover:bg-yellow-500 hover:text-slate-700"
       >
         Press to upload image
       </Button>

@@ -190,6 +190,7 @@ export const chatRoom = pgTable('chatRoom', {
 export const chatroomRelations = relations(chatRoom, ({ many }) => ({
   sellerId:many(usersToChatofSeller),
   buyerId:many(usersToChatofBuyer),
+  messages:many(messagesTable),
 }));
 export const usersToChatofSeller = pgTable('users_to_chat_of_seller', {
   id: serial('id').primaryKey(),
@@ -265,6 +266,7 @@ export const messagesTable = pgTable(
         onDelete: "cascade",
         onUpdate: "cascade",
       }),
+    read:boolean('read').notNull().default(false),
   },
   (table) => ({
     authorIndex: index("author_index").on(table.authorId),

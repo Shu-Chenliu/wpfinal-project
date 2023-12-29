@@ -7,8 +7,8 @@ import { Star, StarHalf } from "lucide-react";
 import Divider from "@mui/material/Divider";
 import Image from 'next/image';
 import Paper from "@mui/material/Paper";
-
-
+import { Trash2 } from 'lucide-react';
+import usePosts from "@/hooks/usePosts";
 export type MyMarketProductButtonProps = {
   id: number;
   displayId:string;
@@ -23,11 +23,15 @@ export type MyMarketProductButtonProps = {
 export default function MyMarketProductButton({ displayId,title, category, price,likes,left,imageUrl}:MyMarketProductButtonProps) {
   // const [open, setOpen] = useState(false);
   const router = useRouter();
-
+  const {deleteProduct}=usePosts();
   const viewProduct=()=>{
     router.push(`/homepage/${displayId}`);
   }
-
+  const handleDeletePost=async()=>{
+    await deleteProduct({
+      id:displayId,
+    });
+  }
   let imageSrc;
   if(!imageUrl){
     switch (category) {
@@ -59,9 +63,15 @@ export default function MyMarketProductButton({ displayId,title, category, price
           {/* <div className="flex w-full gap-4"> */}
             {/* 標題 */}
             <div className={`flex gap-2 flex-col  rounded-md p-2 mx-2 my-2  ${left === 0 ? 'bg-slate-200' : ''}`} >
-              <div className="flex">
+              {/* <div className="flex">
                 <p className="flex text-2xl font-semibold text-yellow-500" > {title} </p>
                 {left === 0 && <p className="ml-auto font-bold flex text-4xl text-red-700" > Sold out!!! </p>}
+                {left>0&&<Trash2 onClick={handleDeletePost}/>}
+              </div> */}
+              <div className="flex items-center justify-center w-60 h-20">
+                <p className="flex-grow text-2xl font-semibold text-yellow-500" > {title} </p>
+
+                {/* {left === 0 && <p className="ml-auto font-bold flex text-4xl text-red-700" > Sold out!!! </p>} */}
 
               </div>
               

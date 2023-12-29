@@ -19,13 +19,19 @@ const postProductSchema = z.object({
 });
 const updateProductSchema=z.object({
   id:z.string(),
+  title:z.string().optional(),
+  description:z.string().optional(),
   left:z.number().nonnegative().optional(),
   sold:z.number().nonnegative().optional(),
   likes:z.number().optional(),
   buyerNumber:z.number().nonnegative().optional(),
 });
+const deleteProductSchema=z.object({
+  id:z.string(),
+});
 type PostProductRequest = z.infer<typeof postProductSchema>;
 type updateProductRequest = z.infer<typeof updateProductSchema>;
+type deleteProductRequest = z.infer<typeof deleteProductSchema>;
 export async function POST(request: NextRequest) {
   const data = await request.json();
   try {
@@ -55,10 +61,23 @@ export async function PUT(request: NextRequest) {
   } catch (error) {
     return NextResponse.json({ error: "Invalid request" }, { status: 400 });
   }
-  const { id,left,sold,likes,buyerNumber } = data as updateProductRequest;
+  const { id,left,sold,likes,buyerNumber,title,description } = data as updateProductRequest;
   await db
     .update(posts)
-    .set({left,sold,likes,buyerNumber})
+    .set({left,sold,likes,buyerNumber,title,description})
+    .where(eq(posts.displayId, id))
+  return new NextResponse("OK", { status: 200 });
+}
+export async function DELETE(request: NextRequest) {
+  const data = await request.json();
+  try {
+    deleteProductSchema.parse(data);
+  } catch (error) {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
+  const { id } = data as deleteProductRequest;
+  await db
+    .delete(posts)
     .where(eq(posts.displayId, id))
   return new NextResponse("OK", { status: 200 });
 }

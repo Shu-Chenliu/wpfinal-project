@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 import {getAllChatOfSeller,getAllChatOfBuyer}from "./components/actions";
 import {getUserState} from "./components/actions";
-
+import LinkButton from "./components/LinkButton";
 async function ChatRoomNavbar() {
   const session = await auth();
   if (!session || !session?.user?.id) {
@@ -36,9 +36,10 @@ async function ChatRoomNavbar() {
         (chatOfSeller.map((chat)=>(
           <div key={chat.chatRoomId.displayId}>
             <Link href={`/homepage/Chat/${chat.chatRoomId.displayId}`}> 
-              <Button className="flex my-2 bg-slate-700 hover:bg-slate-700 hover:text-orange-500 m-2" >
-                  {chat.chatRoomId.buyerName}
-              </Button>  
+              <LinkButton
+                buyerName={chat.chatRoomId.buyerName}
+                messagesId={chat.chatRoomId.messages.map((message)=>(message.id))}
+              /> 
             </Link>
           </div>
           
@@ -47,9 +48,10 @@ async function ChatRoomNavbar() {
         (chatOfBuyer.map((chat)=>(
           <div key={chat.chatRoomId.displayId}>
             <Link href={`/homepage/Chat/${chat.chatRoomId.displayId}`}> 
-              <Button className="flex my-2 bg-slate-700 hover:bg-slate-700 hover:text-orange-500 m-2" >
-                  {chat.chatRoomId.sellerName}
-              </Button>  
+            <LinkButton
+                buyerName={chat.chatRoomId.sellerName}
+                messagesId={chat.chatRoomId.messages.map((message)=>(message.id))}
+              />  
             </Link>
           </div>
         )))

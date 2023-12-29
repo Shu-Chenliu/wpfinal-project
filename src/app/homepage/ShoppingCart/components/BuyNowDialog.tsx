@@ -122,7 +122,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
   return (
     <>
     <Button 
-        className="flex font-semibold hover:bg-orange-700 hover:text-black "
+        className="flex font-semibold hover:bg-yellow-500 hover:text-black "
         variant={"outline"}
         onClick={() => setOpenBuyNowDialog(true)}
         >Buy Now

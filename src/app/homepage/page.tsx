@@ -1,4 +1,3 @@
-
 import ProductButton from "./ProductButton";
 import {getAllProducts} from "./actions"
 async function HomePage() {
@@ -6,8 +5,7 @@ async function HomePage() {
 
   return (
     <>
-
-      <p className="text-3xl m-2 p-2 font-bold text-slate-700"> Welcome to shopEE! </p>
+      {/* <p className="text-3xl m-2 p-2 font-bold text-slate-700"> Welcome to shopEE! </p>
 
     <div className="flex h-[90vh] w-full mg-2 pd-2 flex-wrap">
 
@@ -23,15 +21,39 @@ async function HomePage() {
           likes={product.likes}
           left={product.left}
           imageUrl={product.imageUrl!}
-  
+
         />
       </div>
       ))}
 
+      </div> */}
+
+      <div className="flex flex-col h-[90vh] w-full">
+      <div className="flex justify-top ">
+        <p className="text-3xl m-2 p-2 font-bold text-slate-700"> Welcome to shopEE! </p>
+      </div>
+
+      <div className="flex flex-wrap gap-4 ">
+          {Products.map((product)=>(
+            <div key={product.id}>
+              <ProductButton 
+                id={product.id} 
+                displayId={product.displayId} 
+                title={product.title}
+                category={product.category}
+                price={product.price}
+                likes={product.likes}
+                left={product.left}
+                imageUrl={product.imageUrl!}
+
+              />
+            </div>
+            ))}
+      </div>
       </div>
 
     </>
-    
+
   );
 }
 export default HomePage;

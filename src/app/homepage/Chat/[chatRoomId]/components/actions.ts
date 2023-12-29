@@ -17,15 +17,14 @@ export const getOtherPeople=async(username:string,chatRoomId:string)=>{
     columns:{
       sellerName:true,
       buyerName:true,
-      sendFirstMessage:true,
-    }
+    },
   });
   if(!chatRoom) return;
   else if(username===chatRoom.buyerName){
-    return [chatRoom.sellerName,"seller"];
+    return [chatRoom.sellerName,"buyer"];
   }
   else {
-    return [chatRoom.buyerName,"buyer"];
+    return [chatRoom.sellerName,"seller"];
   }
 }
 export const getChatRoom=async(chatRoomId:string)=>{

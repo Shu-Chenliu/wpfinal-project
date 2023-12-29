@@ -88,9 +88,9 @@ export default function EditProfile(props: CardDialogProps) {
   return (
     <>
     {status === "personal" ? (
-      <div className="block items-center justify-top my-2 my-2 p-3 font-semibold">
+      <div className="block justify-top my-2 my-2 p-3 font-semibol">
       <div className="flex font-semibold">
-        <p>Username: </p>
+        <p> Username: </p>
         {edittingTitle ? (
           <>
         <ClickAwayListener    

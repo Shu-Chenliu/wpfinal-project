@@ -25,7 +25,7 @@ async function Notification() {
         <div className="flex w-full items-center justify-center h-[75vh]">
           <div className="flex flex-col items-center justify-center">
             <p className="text-lg font-semibold text-slate-700">
-              No Market Notification!!!
+              No Market Notification
             </p>
           </div>
         </div>

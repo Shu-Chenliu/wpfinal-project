@@ -14,7 +14,7 @@ async function NotificationPage() {
       <div className="flex w-full items-center justify-center h-screen">
         <div className="flex flex-col items-center justify-center">
           <p className="text-lg font-semibold text-slate-700">
-            Select a chatroom to chat!!!
+            Select a chatroom to chat
           </p>
         </div>
       </div>

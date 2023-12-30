@@ -24,7 +24,7 @@ async function HomePage() {
 
       <div className="flex items-center justify-top text-3xl m-2 p-2  text-cyan-500 hover:text-cyan-600 ">
         <Store size={32}/>
-        <p className=" text-2xl m-2 p-2 font-semibold text-cyan-500 hover:text-cyan-600">My Market</p>
+        <p className="text-2xl m-2 font-bold text-cyan-500 hover:text-cyan-600">My Market</p>
         <MyMarketHint/>
         <AddProductDialog userDisplayId={userDisplayId} />
       </div>
@@ -34,7 +34,7 @@ async function HomePage() {
           <div className="flex w-full items-center justify-center h-[75vh]">
             <div className="flex flex-col items-center justify-center">
               <p className="text-lg font-semibold text-slate-700">
-                You haven't posted anything yet!!!
+                You haven't posted anything yet
               </p>
             </div>
           </div>

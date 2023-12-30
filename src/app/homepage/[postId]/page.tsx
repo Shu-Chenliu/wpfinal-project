@@ -13,6 +13,7 @@ import AddChatRoomButton from "./components/AddChatRoomButton";
 import { Store, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import EditProduct from "./components/EditProduct";
+import DeleteButton from "./components/deleteButton";
 type ProductPageProps = {
   params: {
     postId: string;
@@ -82,7 +83,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
           <div className="flex w-full items-center justify-center h-screen">
             <div className="flex flex-col items-center justify-center">
               <p className="text-lg font-semibold text-slate-700">
-                Post has been deleted!!!
+                Post has been deleted
               </p>
             </div>
           </div>
@@ -119,6 +120,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
         }
         {/* <p className="flex font-semibold text-yellow-500 p-2 text-4xl">{Product?.title}</p> */}
         {Product?.left ===0 && <p className="ml-auto w-1/4  flex text-4xl font-bold text-red-700" > Sold out!!! </p>}
+        <DeleteButton displayId={postId}/>
       </div>
 
       <div className="flex">

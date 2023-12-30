@@ -26,7 +26,7 @@ async function DocPage({params: {chatRoomId}}: DocPageProps) {
       <p className="font-bold py-2 mg-2 flex justify-between p-2 shadow-sm px-2 py-1 border-b text-cyan-700">{otherPeople?otherPeople[0]:""}</p>
       <div 
         id="messages container"
-        className="h-screen overflow-y-auto ">
+        className="h-[86vh] overflow-y-auto ">
         {messages.map((message) => (
           <div key={message.id} className="flex w-full justify-between p-2 ">
            <Message

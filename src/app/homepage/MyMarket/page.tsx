@@ -30,6 +30,15 @@ async function HomePage() {
       </div>
 
       <div className="flex flex-wrap gap-4 ">
+        {ProductsPostedByUser.length===0&&
+          <div className="flex w-full items-center justify-center h-[75vh]">
+            <div className="flex flex-col items-center justify-center">
+              <p className="text-lg font-semibold text-slate-700">
+                You haven't posted anything yet!!!
+              </p>
+            </div>
+          </div>
+        }
         {ProductsPostedByUser.map((product) => (
           <MyMarketProductButton
             key={product.id}

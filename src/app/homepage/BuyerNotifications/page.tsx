@@ -32,10 +32,15 @@ async function NotificationPage() {
         <p className="text-2xl m-2  font-bold text-yellow-500 hover:text-yellow-600">Buying Notifications</p>
         <Hint/>
       </div>
-
-      
-
-
+      {notifications.length===0&&
+        <div className="flex w-full items-center justify-center h-[75vh]">
+          <div className="flex flex-col items-center justify-center">
+            <p className="text-lg font-semibold text-slate-700">
+              No Notification!!!
+            </p>
+          </div>
+        </div>
+      }
       {notifications.map((notification)=>(
         <div key={notification.id}>
           <BuyerNotiBar

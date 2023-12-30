@@ -21,6 +21,15 @@ async function Notification() {
         <p className="text-2xl m-2  font-bold text-cyan-500 hover:text-cyan-600">Market Notifications</p>
         <Hint/>
       </div>
+      {notifications.length===0&&
+        <div className="flex w-full items-center justify-center h-[75vh]">
+          <div className="flex flex-col items-center justify-center">
+            <p className="text-lg font-semibold text-slate-700">
+              No Market Notification!!!
+            </p>
+          </div>
+        </div>
+      }
       {notifications.map((notification)=>(
         <div key={notification.id}>
           <SellerNotiBar 

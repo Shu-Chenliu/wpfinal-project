@@ -25,14 +25,23 @@ async function ShoppingCartPage() {
   const Coupons=await getMyCoupon(userId);
   const address=await getAddress(userId);
   return (
-    <div className="h-[100vh]">
+    <div className="h-auto">
       
       <div className="flex items-center justify-top text-3xl m-2 p-2  text-yellow-500 hover:text-yellow-600 ">
         <ShoppingCart size={32}/>
         <p className="text-2xl m-2  font-bold text-yellow-500 hover:text-yellow-600">My Shopping Cart</p>
         <ShoppingCartHint/>
       </div>
-      {Cart.map((product) =>(
+      {Cart.length===0?
+        <div className="flex w-full items-center justify-center h-[75vh]">
+          <div className="flex flex-col items-center justify-center">
+            <p className="text-lg font-semibold text-slate-700">
+              Empty Shopping Cart!!!
+            </p>
+          </div>
+        </div>
+        :
+      (Cart.map((product) =>(
         <div key={product.postId}>
           <CartProduct 
             id={product.posts.id} 
@@ -50,7 +59,7 @@ async function ShoppingCartPage() {
             imageUrl={product.posts.imageUrl!}
           />
         </div>
-      ))}
+      )))}
     </div>
   );
 }

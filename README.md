@@ -1,4 +1,7 @@
-# Run the project
+# [112-1] Web Programming Final
+Group 4 shopEE
+
+## Run the project
 
 1. Install dependencies
    ```bash
@@ -103,3 +106,38 @@
    ```text
    AUTH_SECRET=any-random-string
    ```
+
+## 簡介
+
+1. Demo 影片連結：
+2. 系統描述：我們的期末專題是一個完整的購物網站。操作者能夠以買家、賣家的身分，執行所有購物網站的基本功能，包括買賣東西、評論商品以及與商家聊聊等。
+3. Deployed 連結：https://wpfinal-project.vercel.app/
+
+4. 系統使用方式：進入網址後，要先註冊並登入。在首頁中，使用者可以瀏覽所有商品。並在點擊 “Show more” 進到瀏覽商品的個別頁面。也可在 “My Market” 頁面的 “Add Product” 上傳自己要出售的商品；您亦可檢視自己的商場，包含商店的地址等資訊，以及所有自己已經上傳的上品。對商品有任何疑問也可以跟賣家聊聊。
+
+更多資訊可參考:
+
+https://hackmd.io/@chtzhsn/ry_ul_3v6
+
+5. 使用與參考之框架/模組/原始碼：無
+6. 使用之第三方套件、框架
+
+前端：typescript/next.js/react/radix-ui/tailwindcss/shadcn UI/MUI
+
+後端：drizzle orm/postgresql/next-auth/pusher
+
+7. 專題製作心得
+
+劉書辰：
+因為我們星期一才考完電磁學 所以我們只有5天可以做 但我覺得我們做的很完整 而且我做的很開心 我跟我組員產生了革命情感 我很慶幸我有修網服 學到了好多
+
+邱梓瑄：
+
+陳冠孜：
+
+## 組內分工
+劉書辰:
+
+邱梓瑄:
+
+陳冠孜:

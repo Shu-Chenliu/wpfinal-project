@@ -45,7 +45,7 @@ export default function Message({
           width={16}
           height={16}
         />
-        :<Ghost className="text-blue-400"/>)}
+        :<Ghost className="text-purple-400"/>)}
       </div>
 
     </>

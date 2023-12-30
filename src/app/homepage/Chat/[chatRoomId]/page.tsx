@@ -34,7 +34,7 @@ async function DocPage({params: {chatRoomId}}: DocPageProps) {
               id={message.id}
               isSender={message.authorId === userId}
               content={message.text}
-              imageUrl={message.authorId === userId?(otherPeople[1]==="buyer"?userInfo?.marketUrl!:userInfo?.imageURL!):(otherPeople[1]==="buyer"?otherPeopleInfo?.marketUrl!:otherPeopleInfo?.imageURL!)}
+              imageUrl={message.authorId === userId?(otherPeople[1]==="buyer"?(userInfo?.marketUrl)?userInfo?.marketUrl:"":(userInfo?.imageURL)?userInfo?.imageURL:""):(otherPeople[1]==="buyer"?(otherPeopleInfo?.marketUrl)?otherPeopleInfo?.marketUrl:"":(otherPeopleInfo?.imageURL)?otherPeopleInfo?.imageURL:"")}
            />
           </div>
         ))}

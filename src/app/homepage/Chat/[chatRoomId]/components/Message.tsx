@@ -23,7 +23,7 @@ export default function Message({
         }`}
       >
       
-      {!isSender&&(imageUrl?<Image
+      {!isSender&&(imageUrl&&imageUrl!==""?<Image
         src={imageUrl}
         alt="Photo"
         width={16}
@@ -39,7 +39,7 @@ export default function Message({
           
           {content}
         </div>
-        {isSender&&(imageUrl?<Image
+        {isSender&&(imageUrl&&imageUrl!==""?<Image
           src={imageUrl}
           alt="Photo"
           width={16}

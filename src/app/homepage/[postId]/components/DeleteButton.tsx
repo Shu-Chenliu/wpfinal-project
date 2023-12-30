@@ -9,7 +9,7 @@ export type MyMarketProductButtonProps = {
   displayId:string;
 };
 
-export default function deleteButton({ displayId}:MyMarketProductButtonProps) {
+export default function DeleteButton({ displayId}:MyMarketProductButtonProps) {
   // const [open, setOpen] = useState(false);
   const {deleteProduct}=usePosts();
   const [open, setOpen] = useState(false);

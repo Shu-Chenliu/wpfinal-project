@@ -88,7 +88,7 @@ export default function EditProfile({postId,editThing,left,title,description}:Pr
         <button
           onClick={() => setEditting(true)}
           // className="mx-2 w-40 flex w-full font-semibold text-slate-900"
-          className={`mx-2 flex w-full font-semibold text-slate-900 ${editThing==="title"? "flex font-semibold text-cyan-500 p-2 text-4xl":""}`}
+          className={`mx-2 flex w-full font-semibold text-slate-900 ${editThing==="title"? "flex font-semibold text-cyan-500 p-2 text-2xl":""}`}
 
         >
           <Typography 

@@ -2,7 +2,8 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { publicEnv } from "@/lib/env/public";
 import NavbarLink from "./NavbarLink";
-import Link from "next/link";
+
+import HeaderLink from "./HeaderLink";
 import {getUnreadNotificationsOfSeller,getUnreadNotificationsOfBuyer, getShoppingCart,getUnreadMessages}from "./actions"
 async function Navbar() {
   const session = await auth();
@@ -22,11 +23,7 @@ async function Navbar() {
         <div className="flex w-full items-center justify-between px-3 py-1">
           <div className="flex items-center gap-2">
             {/* <RxAvatar  /> */}
-            <Link href={"/homepage"}>
-              <p className="text-slate-100 hover:text-orange-500 font-semibold m-2 p-2 max-[760px]:hidden">Welcome to shopEE, {username}.</p>
-              <p className="text-slate-100 hover:text-orange-500 font-semibold m-2 p-2 hidden max-[760px]:block">shopEE</p>
-            </Link>
-            
+            <HeaderLink username={username}/>
           </div>
           
         </div>

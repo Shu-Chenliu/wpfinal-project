@@ -28,6 +28,7 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength,unread}:NavbarL
   const [nowPage,setNowPage]=useState("View All product");
   const [open, setOpen] = useState(false);
   const handleChangeNowPage=(page:string)=>{
+    
     setNowPage(page);
   }
 
@@ -36,7 +37,7 @@ function NavbarLink({sellerUnread,buyerUnread,shoppingCartLength,unread}:NavbarL
           <Link href={"/homepage"}>
             <Button
             className={`my-2 hover:text-orange-500 m-2 ${nowPage === "View All products" ? 'text-orange-500' : ''}`}
-            onClick={() => handleChangeNowPage("View All products")}
+            onClick={() => {handleChangeNowPage("View All products");}}
             >
             <Home className="m-2" /> <span className="max-[1000px]:hidden">View All products</span>
             </Button>

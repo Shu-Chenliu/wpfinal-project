@@ -120,7 +120,7 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
         }
         {/* <p className="flex font-semibold text-yellow-500 p-2 text-4xl">{Product?.title}</p> */}
         {Product?.left ===0 && <p className="ml-auto w-1/4  flex text-4xl font-bold text-red-700" > Sold out!!! </p>}
-        <DeleteButton displayId={postId}/>
+        {userId===Product?.author.displayId?<DeleteButton displayId={postId}/>:<></>}
       </div>
 
       <div className="flex">

@@ -78,7 +78,7 @@ export default function EditProfile({postId,editThing,left,title,description}:Pr
             type={editThing==="left"?"number":"text"}
             defaultValue={content}
             onChange={(e) => setContent(e.target.value)}
-            className={`mx-2 flex w-full font-semibold  ${editThing==="title"? "flex font-semibold text-cyan-500 p-2 text-4xl":"text-cyan-900"}`}
+            className={`mx-2 flex w-full font-semibold  ${editThing==="title"? "flex font-semibold text-cyan-500 p-2 text-2xl":"text-cyan-900"}`}
             placeholder={"Enter your "+(editThing==="title"?"title":editThing==="left"?"product number":"description")}
           />
         </ClickAwayListener>
@@ -92,7 +92,7 @@ export default function EditProfile({postId,editThing,left,title,description}:Pr
 
         >
           <Typography 
-          className={`text-start mx-2 w-40 flex font-semibold ${editThing==="title"? "flex font-semibold text-cyan-500 p-2 text-4xl":" text-cyan-900"}`}      
+          className={`text-start mx-2 w-full flex font-semibold ${editThing==="title"? "flex font-semibold text-cyan-500 p-2 text-4xl":" text-cyan-900"}`}      
           >{content}</Typography>
           <Pencil className="mx-1 " size={10} />
         </button>

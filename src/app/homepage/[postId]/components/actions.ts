@@ -12,7 +12,6 @@ export const getProduct=async (postId:string)=>{
       price:true,
       left:true,
       sold:true,
-      likes:true,
       imageUrl:true,
     },
     with:{

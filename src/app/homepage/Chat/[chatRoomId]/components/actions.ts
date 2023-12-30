@@ -21,10 +21,10 @@ export const getOtherPeople=async(username:string,chatRoomId:string)=>{
   });
   if(!chatRoom) return["0",""];
   else if(username===chatRoom.buyerName){
-    return [chatRoom.sellerName,"buyer"];
+    return [chatRoom.sellerName,"seller"];
   }
   else {
-    return [chatRoom.sellerName,"seller"];
+    return [chatRoom.buyerName,"buyer"];
   }
 }
 export const getChatRoom=async(chatRoomId:string)=>{

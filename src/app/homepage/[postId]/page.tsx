@@ -78,7 +78,16 @@ async function ProductPage({params:{postId}}: ProductPageProps) {
           ><ArrowLeft />
           </Button>
         </Link>
-        {Product?.left!==0 ? (
+        {!Product&&
+          <div className="flex w-full items-center justify-center h-screen">
+            <div className="flex flex-col items-center justify-center">
+              <p className="text-lg font-semibold text-slate-700">
+                Post has been deleted!!!
+              </p>
+            </div>
+          </div>
+        }
+        {Product&&Product.left!==0 ? (
         <>
         
         <AddToCartButton 

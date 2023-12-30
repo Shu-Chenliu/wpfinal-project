@@ -13,7 +13,7 @@ import AddChatRoomButton from "./components/AddChatRoomButton";
 import { Store, ShoppingCart } from 'lucide-react';
 import Image from 'next/image';
 import EditProduct from "./components/EditProduct";
-import DeleteButton from "./components/deleteButton";
+import DeleteButton from "./components/DeleteButton";
 type ProductPageProps = {
   params: {
     postId: string;

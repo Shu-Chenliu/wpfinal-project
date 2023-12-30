@@ -1,7 +1,7 @@
 import { auth } from "@/lib/auth";
 import Message from "./components/Message";
 import InputBar from "./components/InputBar";
-import { getMessages,getOtherPeople,getChatRoom,getOtherPeopleInfo } from "./components/actions";
+import { getMessages,getOtherPeople,getChatRoom,getOtherPeopleInfo,getUserInfo } from "./components/actions";
 import { publicEnv } from "@/lib/env/public";
 import { redirect } from "next/navigation";
 type DocPageProps = {
@@ -18,6 +18,7 @@ async function DocPage({params: {chatRoomId}}: DocPageProps) {
   const username = session.user.username;
   const userId = session.user.id;
   const messages=await getMessages(chatRoomId);
+  const userInfo=await getUserInfo(username);
   const otherPeople=await getOtherPeople(username,chatRoomId);
   const isFirstMessage=await getChatRoom(chatRoomId);
   const otherPeopleInfo=await getOtherPeopleInfo(otherPeople?otherPeople[0]:"");
@@ -33,6 +34,7 @@ async function DocPage({params: {chatRoomId}}: DocPageProps) {
               id={message.id}
               isSender={message.authorId === userId}
               content={message.text}
+              imageUrl={message.authorId === userId?(otherPeople[1]==="buyer"?userInfo?.marketUrl!:userInfo?.imageURL!):(otherPeople[1]==="buyer"?otherPeopleInfo?.marketUrl!:otherPeopleInfo?.imageURL!)}
            />
           </div>
         ))}

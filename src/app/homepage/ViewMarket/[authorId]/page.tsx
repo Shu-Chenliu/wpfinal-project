@@ -16,9 +16,8 @@ async function HomePage({params:{authorId}}: Props) {
   if (!session || !session?.user?.id) {
     redirect(publicEnv.NEXT_PUBLIC_BASE_URL);
   }
-  const userDisplayId = session.user.id;
   const ProductsPostedByUser = await getAllproductOfUser(authorId);
-  const userInfo = await getSellerInfo(userDisplayId);
+  const userInfo = await getSellerInfo(authorId);
   return (
 
     <div className="flex flex-col h-[90vh] w-full">

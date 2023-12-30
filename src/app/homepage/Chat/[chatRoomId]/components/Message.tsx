@@ -1,16 +1,18 @@
 "use client";
 import React from "react";
 import { Ghost } from "lucide-react";
-
+import Image from 'next/image';
 type MessageProps = {
   id: number;
   isSender: boolean;
   content: string;
+  imageUrl?: string,
 };
 
 export default function Message({
   isSender,
   content,
+  imageUrl,
 }: MessageProps) {
   return (
     <>
@@ -21,7 +23,13 @@ export default function Message({
         }`}
       >
       
-      {!isSender&&<Ghost className="text-blue-400"/>}
+      {!isSender&&(imageUrl?<Image
+        src={imageUrl}
+        alt="Photo"
+        width={16}
+        height={16}
+      />
+      :<Ghost className="text-blue-400"/>)}
 
         <div
           className={` rounded-2xl px-3 py-1 leading-6 ${
@@ -31,7 +39,13 @@ export default function Message({
           
           {content}
         </div>
-        {isSender&&<Ghost className="text-purple-400"/>}
+        {isSender&&(imageUrl?<Image
+          src={imageUrl}
+          alt="Photo"
+          width={16}
+          height={16}
+        />
+        :<Ghost className="text-blue-400"/>)}
       </div>
 
     </>

@@ -47,7 +47,21 @@ export const getOtherPeopleInfo = async(username:string)=>{
     columns:{
       displayId:true,
       marketMessage:true,
+      imageURL:true,
+      marketUrl:true,
     }
   });
   return otherPeople;
+}
+export const getUserInfo=async(username:string)=>{
+  const userInfo=await db.query.usersTable.findFirst({
+    where:(usersTable,{eq,or})=>or(eq(usersTable.sellername,username),eq(usersTable.username,username)),
+    columns:{
+      displayId:true,
+      marketMessage:true,
+      imageURL:true,
+      marketUrl:true,
+    }
+  });
+  return userInfo;
 }

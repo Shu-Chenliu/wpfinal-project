@@ -78,7 +78,7 @@ export default function EditProfile({postId,editThing,left,title,description}:Pr
             type={editThing==="left"?"number":"text"}
             defaultValue={content}
             onChange={(e) => setContent(e.target.value)}
-            className={`mx-2 flex w-full font-semibold  ${editThing==="title"? "flex font-semibold text-cyan-500 p-2 text-2xl":"text-cyan-900"}`}
+            className={`mx-2 flex w-full ${editThing==="title"? "font-semibold text-cyan-500 p-2 text-2xl":"text-cyan-900"}`}
             placeholder={"Enter your "+(editThing==="title"?"title":editThing==="left"?"product number":"description")}
           />
         </ClickAwayListener>

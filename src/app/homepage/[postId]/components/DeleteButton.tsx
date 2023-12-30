@@ -1,5 +1,6 @@
 // import { useRef, useState } from "react";
 "use client";
+import { useRouter } from 'next/navigation'
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Trash2 } from 'lucide-react';
@@ -13,10 +14,14 @@ export default function DeleteButton({ displayId}:MyMarketProductButtonProps) {
   // const [open, setOpen] = useState(false);
   const {deleteProduct}=usePosts();
   const [open, setOpen] = useState(false);
+  const router=useRouter();
   const handleDeletePost=async()=>{
     await deleteProduct({
       id:displayId,
     });
+    setOpen(false);
+    router.refresh();
+    router.push('/homepage');
   }
 
   return (

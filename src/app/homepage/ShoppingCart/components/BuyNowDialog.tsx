@@ -236,7 +236,7 @@ function BuyNowDialog({ title,username,seller,money,postId,left,userId,coupons,h
         <DialogHeader>
           <DialogTitle>Final confirmation</DialogTitle>
         </DialogHeader>
-        <p>You are going to pay {Math.round(totalPrice*(100-finalSelectedCoupon)/100)} to {seller}.</p>
+        <p>You are going to pay ${Math.round(totalPrice*(100-finalSelectedCoupon)/100)} to {seller}.</p>
         
         <div className="flex justify-end ml-auto">
           <Button

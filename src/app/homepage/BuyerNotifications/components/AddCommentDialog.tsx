@@ -29,7 +29,8 @@ export default function ConfirmDialog({open,onClose,id,postId,likes,username,buy
     if(!inputRefProductComment.current)return;
     await updateProduct({
       id:postId,
-      likes:(likes*(buyerNumber-1)+liked)/(buyerNumber),
+      buyerNumber:buyerNumber+1,
+      likes:(likes*(buyerNumber)+liked)/(buyerNumber+1),
     });
     if(inputRefProductComment.current.value){
       await postComment({
